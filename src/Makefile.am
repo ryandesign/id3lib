@@ -37,11 +37,14 @@ id3lib_sources =                \
   header.cpp                    \
   header_frame.cpp              \
   header_tag.cpp                \
+  helpers.cpp                   \
   misc_support.cpp              \
+  readers.cpp                   \
   spec.cpp                      \
   tag.cpp                       \
   tag_file.cpp                  \
   tag_find.cpp                  \
+  tag_impl.cpp                  \
   tag_parse.cpp                 \
   tag_parse_lyrics3.cpp         \
   tag_parse_musicmatch.cpp      \
