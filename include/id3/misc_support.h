@@ -67,13 +67,22 @@ void   ucsncpy(unicode_t *dest, const unicode_t *src, size_t len);
 int    ucscmp(const unicode_t *s1, const unicode_t *s2);
 int    ucsncmp(const unicode_t *s1, const unicode_t *s2, size_t len);
 
-char *ID3_GetString(const ID3_Frame *frame, const ID3_FieldID fldName);
+char *ID3_GetString(const ID3_Frame *frame, const ID3_FieldID fldName,
+                    const size_t nItems = 1);
 // in 'id3_tag_parse_v1.cpp'
 void ID3_RemoveTrailingSpaces(char *buffer, luint length);
 
 #endif
 
 // $Log$
+// Revision 1.4  1999/12/05 05:34:41  scott
+// Updated the Add functions so that they accept an option boolean
+// parameter which indicates if the function should replace the current
+// frame, if any.  Made any char * parameters const, if appropriate.
+// Added a Remove function for each of the frame types handled in this
+// file.  Also generalized AddComment so that it now accepts a Description
+// string, which defaults to "".
+//
 // Revision 1.3  1999/12/02 22:45:28  scott
 // Changed all of the #include <id3/*> to #include "*" to help ensure that
 // the sources are searched for in the right places.
