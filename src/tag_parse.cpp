@@ -160,11 +160,8 @@ size_t ID3_Tag::Parse(const uchar header[ID3_TagHeader::SIZE],
     buffer = unsynced_data;
   }
 
-  size_t parsed = ID3_ParseFrames(*this, buffer, data_size);
+  ID3_ParseFrames(*this, buffer, data_size);
 
-  // reset the version parameters which were in effect before the parse
-  //SetSpec(prev_spec);
-  
   // set the flag which says that the tag hasn't changed
   __changed = false;
 
