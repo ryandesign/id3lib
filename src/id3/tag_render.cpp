@@ -325,7 +325,7 @@ void ID3_Tag::RenderV2ToHandle(void)
   }
   else
   {
-#if defined WIN32
+#if !defined HAVE_MKSTEMP
 
     FILE *tempOut = tmpfile();
     if (NULL == tempOut)
@@ -450,6 +450,10 @@ luint ID3_Tag::PaddingSize(luint curSize) const
 
 
 // $Log$
+// Revision 1.19  2000/04/08 04:44:37  eldamitri
+// Changed new ANSI-standard C++ include headers to old-style headers.
+// (RenderV2ToHandle): Added conditional code for rendering in windows.
+//
 // Revision 1.18  2000/04/05 05:21:15  eldamitri
 // Updated initial comment information to reflect license, copyright
 // change.
