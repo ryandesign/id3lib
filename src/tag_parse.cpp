@@ -276,6 +276,7 @@ void ID3_TagImpl::ParseFile()
     }
     cur = wr.getCur();
   } while (cur != last);
+  file.close();
   _appended_bytes = end - cur;
 }
 
