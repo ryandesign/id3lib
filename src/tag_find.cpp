@@ -111,7 +111,7 @@ ID3_Elem *ID3_Tag::Find(ID3_Frame *frame) const
   return elem;
 }
 
-ID3_Frame *ID3_Tag::Find(ID3_FrameID id)
+ID3_Frame *ID3_Tag::Find(ID3_FrameID id) const
 {
   ID3_Frame *frame = NULL;
   
@@ -148,7 +148,7 @@ ID3_Frame *ID3_Tag::Find(ID3_FrameID id)
   return frame;
 }
 
-ID3_Frame *ID3_Tag::Find(ID3_FrameID id, ID3_FieldID fld, char *data)
+ID3_Frame *ID3_Tag::Find(ID3_FrameID id, ID3_FieldID fld, char *data) const
 {
   ID3_Frame *frame = NULL;
   unicode_t *temp;
@@ -166,7 +166,7 @@ ID3_Frame *ID3_Tag::Find(ID3_FrameID id, ID3_FieldID fld, char *data)
   return frame;
 }
 
-ID3_Frame *ID3_Tag::Find(ID3_FrameID id, ID3_FieldID fld, unicode_t *data)
+ID3_Frame *ID3_Tag::Find(ID3_FrameID id, ID3_FieldID fld, unicode_t *data) const
 {
   ID3_Frame *frame = NULL;
   
@@ -218,7 +218,7 @@ ID3_Frame *ID3_Tag::Find(ID3_FrameID id, ID3_FieldID fld, unicode_t *data)
   return frame;
 }
 
-ID3_Frame *ID3_Tag::Find(ID3_FrameID id, ID3_FieldID fld, luint data)
+ID3_Frame *ID3_Tag::Find(ID3_FrameID id, ID3_FieldID fld, luint data) const
 {
   ID3_Frame *frame = NULL;
   
