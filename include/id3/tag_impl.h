@@ -77,7 +77,7 @@ namespace dami
   };
 };
 
-class ID3_TagImpl : public ID3_Speccable
+class ID3_TagImpl
 {
 public:
   ID3_TagImpl(const char *name = NULL);
