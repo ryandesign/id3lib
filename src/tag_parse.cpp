@@ -293,6 +293,45 @@ void ID3_Tag::ProcessBinaries(ID3_FrameID whichFrame, bool attach)
 }
 
 
+  /** Turns a binary tag into a series of ID3_Frame objects attached to the
+   ** tag.
+   ** 
+   ** \code
+   **   ID3_Tag myTag;
+   **   uchar header[ID3_TAGHEADERSIZE];
+   **   uchar *buffer;
+   **   luint tagSize;
+   ** 
+   **   // get ID3_TAGHEADERSIZE from a socket or somewhere
+   **   // ...
+   ** 
+   **   if ((tagSize = ID3_IsTagHeader(ourSourceBuffer)) > -1)
+   **   {
+   **     // read a further 'tagSize' bytes in
+   **     // from our data source
+   **     // ...
+   **   
+   **     if (buffer = new uchar[tagSize])
+   **     {
+   **       // now we will call ID3_Tag::Parse()
+   **       // with these values (explained later)
+   **       myTag.Parse(header, buffer);
+   **       
+   **       // do something with the objects,
+   **       // like look for titles, artists, etc.
+   **       // ...
+   **       
+   **       // free the buffer
+   **       delete [] buffer;
+   **     }
+   **   }
+   ** \endcode
+   ** 
+   ** @see ID3_Frame
+   ** @param header The byte header read in from the data source.
+   ** @param buffer The remainder of the tag (not including the data source) 
+   **               read in from the data source.
+   **/
 void ID3_Tag::Parse(uchar header[ID3_TAGHEADERSIZE], uchar *buffer)
 {
   luint tagSize = 0;
@@ -373,49 +412,51 @@ luint ID3_Tag::ParseFromHandle(void)
     ID3_THROW(ID3E_NoData);
   }
 
-  uchar header[ID3_TAGHEADERSIZE];
-  lsint tagSize;
-    
-  if (fseek(__fFileHandle, 0, SEEK_SET) != 0)
+  if (__ulTagsToParse & ID3TT_ID3V2)
   {
-    ID3_THROW_DESC(ID3E_NoFile, 
-                   "ID3_Tag::ParseFromHandle: Ack! Couldn't seek");
-  }
-      
-  if (fread(header, 1, sizeof(header), __fFileHandle) == 0)
-  {
-    ID3_THROW_DESC(ID3E_NoFile, 
-                   "ID3_Tag::ParseFromHandle: Ack! Couldn't read");
-  }
-
-  tagSize = ID3_IsTagHeader(header);
-  if (tagSize > 0)
-  {
-    uchar * bin;
-        
-    bin = new uchar[tagSize];
-    if (NULL == bin)
+    if (fseek(__fFileHandle, 0, SEEK_SET) != 0)
     {
-      ID3_THROW(ID3E_NoMemory);
+      ID3_THROW_DESC(ID3E_NoFile, 
+                     "ID3_Tag::ParseFromHandle: Ack! Couldn't seek");
     }
-
-    if (fread(bin, 1, tagSize, __fFileHandle) == 0)
+    
+    uchar header[ID3_TAGHEADERSIZE];
+    if (fread(header, 1, sizeof(header), __fFileHandle) == 0)
     {
       ID3_THROW_DESC(ID3E_NoFile, 
                      "ID3_Tag::ParseFromHandle: Ack! Couldn't read");
     }
-
-    Parse(header, bin);
-    size = tagSize;
-          
-    delete[] bin;
+    
+    lsint tagSize = ID3_IsTagHeader(header);
+    if (tagSize > 0)
+    {
+      uchar * bin;
+      
+      bin = new uchar[tagSize];
+      if (NULL == bin)
+      {
+        ID3_THROW(ID3E_NoMemory);
+      }
+      
+      if (fread(bin, 1, tagSize, __fFileHandle) == 0)
+      {
+        ID3_THROW_DESC(ID3E_NoFile, 
+                       "ID3_Tag::ParseFromHandle: Ack! Couldn't read");
+      }
+      
+      Parse(header, bin);
+      size = tagSize;
+      
+      delete[] bin;
+    }
   }
     
-  if (__bParseLyrics3)
+  if (__ulTagsToParse & ID3TT_LYRICS)
   {
     ParseLyrics3();
   }
-  if (__bParseID3v1)
+  
+  if (__ulTagsToParse & ID3TT_ID3V1)
   {
     ParseID3v1();
   }
@@ -425,6 +466,9 @@ luint ID3_Tag::ParseFromHandle(void)
 }
 
 // $Log$
+// Revision 1.2  2000/04/18 22:13:27  eldamitri
+// Moved tag_parse.cpp from src/id3/ to src/
+//
 // Revision 1.20  2000/04/10 20:57:57  eldamitri
 // * src/id3/tag_parse.cpp
 // (ProcessBinaries): Removed name of caught error since it isn't used.
