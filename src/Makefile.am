@@ -50,6 +50,9 @@ libid3_la_LIBADD  = -lz
 libid3_la_LDFLAGS = -version-info $(LTVERSION)
 
 # $Log$
+# Revision 1.9  2000/01/04 16:33:26  eldamitri
+# (the_sources): Moved dll_wrapper.cpp to EXTRA_DIST.
+#
 # Revision 1.8  1999/12/02 01:49:12  scott
 # Removed EXTRA_DIST (no more ChangeLog)
 #
