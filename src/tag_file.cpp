@@ -172,7 +172,7 @@ bool ID3_Tag::CloseFile(void)
   return bReturn;
 }
 
-luint ID3_Tag::Link(char *fileInfo, bool parseID3v1, bool parseLyrics3)
+luint ID3_Tag::Link(const char *fileInfo, bool parseID3v1, bool parseLyrics3)
 {
   luint tt = ID3TT_NONE;
   if (parseID3v1)
@@ -228,7 +228,7 @@ luint ID3_Tag::Link(char *fileInfo, bool parseID3v1, bool parseLyrics3)
  ** @see ID3_IsTagHeader
  ** @param fileInfo The filename of the file to link to.
  **/
-luint ID3_Tag::Link(char *fileInfo, const luint tag_types)
+luint ID3_Tag::Link(const char *fileInfo, const luint tag_types)
 {
   luint posn = 0;
   
