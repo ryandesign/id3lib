@@ -375,6 +375,7 @@ luint ID3_Tag::Strip(const luint ulTagFlag)
         size_t nBytesWritten = fwrite(aucBuffer, 1, nBytesRead, __fFileHandle);
         if (nBytesRead > nBytesWritten)
         {
+          // TODO: log this
           cerr << "--- attempted to write " << nBytesRead << " bytes, "
                << "only wrote " << nBytesWritten << endl;
         }
