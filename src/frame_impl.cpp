@@ -378,6 +378,8 @@ ID3_FrameImpl::operator=( const ID3_Frame &rFrame )
   this->SetCompression(rFrame.GetCompression());
   this->SetSpec(rFrame.GetSpec());
   _changed = false;
+  
+  return *this;
 }
 
 const char* ID3_FrameImpl::GetDescription(ID3_FrameID id)
