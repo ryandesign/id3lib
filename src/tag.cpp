@@ -551,7 +551,7 @@ size_t ID3_Tag::GetFileSize() const
 
 const char* ID3_Tag::GetFileName() const 
 { 
-  return _impl->GetFileName();
+  return _impl->GetFileName().c_str();
 }
 
 /// Finds frame with given frame id
