@@ -53,7 +53,7 @@ struct ID3_FrameDef
   char          sLongTextID[4 + 1];
   bool          bTagDiscard;
   bool          bFileDiscard;
-  ID3_FieldDef* aeFieldDefs;
+  const ID3_FieldDef* aeFieldDefs;
   const char *  sDescription;
 };
 
@@ -139,7 +139,7 @@ protected:
 };
 
 // Ack! Not for public use
-ID3_FrameDef *ID3_FindFrameDef(const ID3_FrameID id);
+ID3_FrameDef *ID3_FindFrameDef(ID3_FrameID id);
 ID3_FrameID   ID3_FindFrameID(const char *id);
 
 #endif /* __ID3LIB_FIELD_H__ */
