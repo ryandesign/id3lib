@@ -320,7 +320,7 @@ bool lyr3::v2::parse(ID3_TagImpl& tag, ID3_Reader& reader)
     else if (fldName == "EAL")
     {
       //tag.setAlbum(fldData);
-      id3::v2::setArtist(tag, fldData);
+      id3::v2::setAlbum(tag, fldData);
     }
           
     // the Lyrics/Music AUTHOR field
