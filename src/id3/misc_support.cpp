@@ -439,8 +439,8 @@ char *ID3_GetComment(ID3_Tag *tag)
   return sComment;
 }
 
-bool ID3_AddComment(ID3_Tag *tag, const char *sComment, const char *sDescription,
-                    bool bReplace)
+bool ID3_AddComment(ID3_Tag *tag, const char *sComment,
+                    const char *sDescription, bool bReplace)
 {
   bool bSuccess = false;
   if (NULL != tag          &&
@@ -483,7 +483,7 @@ bool ID3_AddComment(ID3_Tag *tag, const char *sComment, const char *sDescription
 
       frame->SetID(ID3FID_COMMENT);
       frame->Field(ID3FN_LANGUAGE) = "eng";
-      frame->Field(ID3FN_DESCRIPTION) = STR_V1_COMMENT_DESC;
+      frame->Field(ID3FN_DESCRIPTION) = sDescription;
       frame->Field(ID3FN_TEXT) = sComment;
       tag->AddNewFrame(frame);
     }
@@ -791,6 +791,13 @@ size_t ID3_RemoveLyrics(ID3_Tag *tag)
 }
 
 // $Log$
+// Revision 1.15  1999/12/09 03:32:22  scott
+// (ID3_GetString): Added implementation for new nIndex parameter, which
+// will pull out the nIndex'th string from the field, such as for the
+// involved people list frame.
+// (ID3_GetGenre): Fixed bug that wasn't finding the track num frame
+// rather than the genre frame (thanks Alexander Voronin).
+//
 // Revision 1.14  1999/12/05 05:34:34  scott
 // (ID3_AddArtist): Added extra boolean parameter (see changes for
 // misc_support.h above) as well as the functionality that implements the
