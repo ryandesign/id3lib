@@ -2,6 +2,7 @@
 
 #include <iostream.h>
 #include <id3/tag.h>
+#include <id3/error.h>
 
 int main( int argc, char *argv[])
 {
@@ -15,9 +16,9 @@ int main( int argc, char *argv[])
     tag.Clear();
 
     frame.SetID(ID3FID_USERTEXT);
-    frame.Field(ID3FN_DESCRIPTION).Set("example text frame");
-    frame.Field(ID3FN_TEXT).Set("This text and the description should be in Unicode.");
-    frame.Field(ID3FN_TEXTENC).Set(ID3TE_UNICODE);
+    frame.GetField(ID3FN_DESCRIPTION)->Set("example text frame");
+    frame.GetField(ID3FN_TEXT)->Set("This text and the description should be in Unicode.");
+    frame.GetField(ID3FN_TEXTENC)->Set(ID3TE_UNICODE);
     tag.AddFrame(frame);
 
     tag.SetPadding(false);
