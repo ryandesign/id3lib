@@ -136,7 +136,7 @@ dnl Check for c++ features
 AC_LANG_SAVE
 AC_LANG_CPLUSPLUS
 AC_CHECK_HEADERS(libcw/sys.h)
-AC_CHECK_HEADERS(cctype climits cstdio cstdlib cstring bitset)
+AC_CHECK_HEADERS(cctype climits cstdio cstdlib bitset cstring)
 AC_CHECK_HEADERS(fstream iostream iomanip vector \
 	,,AC_MSG_ERROR([Missing a vital header file for id3lib - download them here: http://gcc.gnu.org/libstdc++/ or better - compile a newer compiler like gcc3.x])
 )
