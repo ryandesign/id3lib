@@ -36,7 +36,6 @@ extern "C"
 #endif
 
   const char * const ID3LIB_NAME           = _ID3LIB_NAME;
-  const char * const ID3LIB_DATE           = _ID3LIB_DATE;
   const char * const ID3LIB_VERSION        = _ID3LIB_VERSION;
   const char * const ID3LIB_FULL_NAME      = _ID3LIB_FULLNAME;
   const int          ID3LIB_MAJOR_VERSION  = _ID3LIB_MAJOR_VERSION;
