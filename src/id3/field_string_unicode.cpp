@@ -186,13 +186,19 @@ luint ID3_Field::ParseUnicodeString(uchar *buffer, luint posn, luint buffSize)
       while ((posn + bytesUsed) < buffSize &&
              !(buffer[posn + bytesUsed] == 0 && 
                buffer[posn + bytesUsed + 1] == 0))
-        bytesUsed += 2;
+        bytesUsed += sizeof(wchar_t);
     else
       bytesUsed = buffSize - posn;
   }
   
   if (bytesUsed > 0)
   {
+    // Sanity check our indices and sizes before we start copying memory
+    if ((bytesUsed > buffSize) || (posn + bytesUsed > buffSize))
+    {
+      ID3_THROW_DESC(ID3E_BadData, "field information invalid");
+    }
+
     temp = new wchar_t[(bytesUsed / sizeof(wchar_t)) + 1];
     if (NULL == temp)
       ID3_THROW(ID3E_NoMemory);
@@ -220,7 +226,7 @@ luint ID3_Field::ParseUnicodeString(uchar *buffer, luint posn, luint buffSize)
   }
   
   if (__ulFlags & ID3FF_NULL)
-    bytesUsed += 2;
+    bytesUsed += sizeof(wchar_t);
     
   __bHasChanged = false;
   
@@ -264,8 +270,9 @@ luint ID3_Field::RenderUnicodeString(uchar *buffer)
     BOM[0] = 0xFEFF;
   }
   
-  if (bytesUsed == 2 && (__ulFlags & ID3FF_NULL))
-    buffer[0] = buffer[1] = 0;
+  if (bytesUsed == sizeof(wchar_t) && (__ulFlags & ID3FF_NULL))
+    for (size_t i = 0; i < sizeof(wchar_t); i++)
+      buffer[i] = 0;
     
   __bHasChanged = false;
   
@@ -273,6 +280,12 @@ luint ID3_Field::RenderUnicodeString(uchar *buffer)
 }
 
 // $Log$
+// Revision 1.5  1999/11/15 20:16:33  scott
+// Added include for config.h.  Minor code cleanup.  Removed
+// assignments from if checks; first makes assignment, then checks
+// for appropriate value.  Made private member variable names more
+// descriptive.
+//
 // Revision 1.4  1999/11/04 04:15:54  scott
 // Added cvs Id and Log tags to beginning and end of file, respectively.
 //
