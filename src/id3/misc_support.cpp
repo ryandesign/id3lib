@@ -20,6 +20,25 @@
 #include <stdlib.h>
 #include <ctype.h>
 
+// Extract a 32-bit number from a 4-byte character array
+size_t ParseNumber(const uchar *buffer, size_t size)
+{
+  size_t nSize = 0;
+  for (size_t nIndex = 0; nIndex < size; nIndex++)
+  {
+    nSize |= buffer[nIndex] << ((size - nIndex - 1) * 8);
+  }
+  return nSize;
+}
+
+void RenderNumber(uchar *buffer, size_t val, size_t size)
+{
+  for (size_t nIndex = 0; nIndex < size; nIndex++)
+  {
+    buffer[nIndex] = (uchar)((val >> ((size - nIndex - 1) * 8)) & MASK8);
+  }
+}
+
 // converts an ASCII string into a Unicode one
 
 void mbstoucs(unicode_t *unicode, const char *ascii, const luint len)
@@ -791,6 +810,9 @@ size_t ID3_RemoveLyrics(ID3_Tag *tag)
 }
 
 // $Log$
+// Revision 1.17  1999/12/17 16:13:04  scott
+// Updated opening comment block.
+//
 // Revision 1.16  1999/12/13 04:44:12  scott
 // (ID3_AddComment): Fixed bug that wasn't adding specified comment
 // description to comment.
