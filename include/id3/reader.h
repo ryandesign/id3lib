@@ -64,7 +64,7 @@ class ID3_Reader
    **/
   virtual int_type readChar() 
   {
-    if (this->peekChar() == END_OF_READER) 
+    if (this->atEnd())
     { 
       return END_OF_READER; 
     }
@@ -111,6 +111,11 @@ class ID3_Reader
     }
 
     return 0;
+  }
+
+  virtual bool atEnd()
+  {
+    return this->getCur() >= this->getEnd();
   }
 };
 
