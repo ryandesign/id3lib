@@ -827,3 +827,61 @@ int32 ID3_IsTagHeader(const uchar data[ID3_TAGHEADERSIZE])
 }
 
 
+namespace
+{
+  class IteratorImpl : public ID3_Tag::Iterator
+  {
+    ID3_TagImpl::iterator _cur;
+    ID3_TagImpl::iterator _end;
+  public:
+    IteratorImpl(ID3_TagImpl& tag)
+      : _cur(tag.begin()), _end(tag.end())
+    {
+    }
+
+    ID3_Frame* GetNext() 
+    { 
+      ID3_Frame* next = NULL;
+      while (next == NULL && _cur != _end)
+      {
+        next = *_cur;
+        ++_cur;
+      }
+      return next;
+    }
+  };
+
+  
+  class ConstIteratorImpl : public ID3_Tag::ConstIterator
+  {
+    ID3_TagImpl::const_iterator _cur;
+    ID3_TagImpl::const_iterator _end;
+  public:
+    ConstIteratorImpl(ID3_TagImpl& tag)
+      : _cur(tag.begin()), _end(tag.end())
+    {
+    }
+    const ID3_Frame* GetNext() 
+    { 
+      ID3_Frame* next = NULL;
+      while (next == NULL && _cur != _end)
+      {
+        next = *_cur;
+        ++_cur;
+      }
+      return next;
+    }
+  };
+}
+
+ID3_Tag::Iterator* 
+ID3_Tag::CreateIterator()
+{
+  return new IteratorImpl(*_impl);
+}
+
+ID3_Tag::ConstIterator* 
+ID3_Tag::CreateIterator() const
+{
+  return new ConstIteratorImpl(*_impl);
+}

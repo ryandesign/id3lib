@@ -75,13 +75,10 @@ namespace
 {
   void renderFrames(ID3_Writer& writer, const ID3_TagImpl& tag)
   {
-    for (size_t i = 0; i < tag.NumFrames(); ++i)
+    for (ID3_TagImpl::const_iterator iter = tag.begin(); iter != tag.end(); ++iter)
     {
-      ID3_Frame* frm = tag.GetFrameNum(i);
-      if (frm)
-      {
-        frm->Render(writer);
-      }
+      const ID3_Frame* frame = *iter;
+      if (frame) frame->Render(writer);
     }
   }
 }
@@ -148,7 +145,7 @@ void id3::v2::render(ID3_Writer& writer, const ID3_TagImpl& tag)
 
 size_t ID3_TagImpl::Size() const
 {
-  if (!this->NumFrames())
+  if (this->NumFrames() == 0)
   {
     return 0;
   }
