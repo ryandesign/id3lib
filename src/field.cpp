@@ -926,6 +926,10 @@ ID3_Field::operator=( const ID3_Field &rField )
 }
 
 // $Log$
+// Revision 1.20  2000/04/17 02:31:35  eldamitri
+// Updated parameters of certain methods with const modifier to match
+// declaration.
+//
 // Revision 1.19  2000/04/14 03:39:45  eldamitri
 // (ID3FD_LinkedInfo): Fixed bug in definition of LinkedInfo array.
 // (ID3FD_Registration): Renamed ID3FN_SYMBOL to ID3FN_ID
