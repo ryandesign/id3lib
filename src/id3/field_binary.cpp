@@ -23,7 +23,7 @@
 #include <id3/field.h>
 
 
-void ID3_Field::Set(uchar *newData, luint newSize)
+void ID3_Field::Set(const uchar *newData, luint newSize)
 {
   Clear();
   
@@ -60,7 +60,7 @@ void ID3_Field::Get(uchar *buffer, luint buffLength)
 }
 
 
-void ID3_Field::FromFile(char *info)
+void ID3_Field::FromFile(const char *info)
 {
   FILE *temp;
   luint fileSize;
@@ -93,7 +93,7 @@ void ID3_Field::FromFile(char *info)
 }
 
 
-void ID3_Field::ToFile(char *info)
+void ID3_Field::ToFile(const char *info)
 {
   if (NULL == info)
     ID3_THROW(ID3E_NoData);
@@ -114,7 +114,7 @@ void ID3_Field::ToFile(char *info)
 }
 
 
-luint ID3_Field::ParseBinary(uchar *buffer, luint posn, luint buffSize)
+luint ID3_Field::ParseBinary(const uchar *buffer, const luint posn, const luint buffSize)
 {
   luint bytesUsed = 0;
   
@@ -146,6 +146,12 @@ luint ID3_Field::RenderBinary(uchar *buffer)
 
 
 // $Log$
+// Revision 1.5  1999/11/15 20:15:50  scott
+// Added include for config.h.  Minor code cleanup.  Removed
+// assignments from if checks; first makes assignment, then checks
+// for appropriate value.  Made private member variable names more
+// descriptive.
+//
 // Revision 1.4  1999/11/04 04:15:54  scott
 // Added cvs Id and Log tags to beginning and end of file, respectively.
 //
