@@ -10,9 +10,9 @@
 # WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-LTVERSION = @lt_ver@:@lt_rev@:@lt_age@
+LT_VERSION = $(LT_CURRENT):$(LT_REVISION):$(LT_AGE)
 
-INCLUDES = -I$(top_srcdir)/include/id3
+INCLUDES = @ID3LIB_DEBUG_FLAGS@ -I$(top_srcdir)/include/id3
 
 the_sources =                   \
   error.cpp                     \
@@ -47,9 +47,15 @@ lib_LTLIBRARIES   = libid3.la
 
 libid3_la_SOURCES = $(the_sources)
 libid3_la_LIBADD  = -lz
-libid3_la_LDFLAGS = -version-info $(LTVERSION)
+libid3_la_LDFLAGS = \
+  -version-info $(LT_VERSION) \
+  -release $(LT_RELEASE) \
+  -export-dynamic
 
 # $Log$
+# Revision 1.9  2000/01/04 16:33:26  eldamitri
+# (the_sources): Moved dll_wrapper.cpp to EXTRA_DIST.
+#
 # Revision 1.8  1999/12/02 01:49:12  scott
 # Removed EXTRA_DIST (no more ChangeLog)
 #
