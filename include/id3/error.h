@@ -91,10 +91,10 @@ public:
   ID3_Error(const ID3_Err eID, const char *sFileName, const luint nLineNum, 
             const char *sDescription);
 private:
-  ID3_Err __eError;
-  luint   __nErrLine;
-  char   *__sErrFileName;
-  char   *__sErrDesc;
+  ID3_Err __error;
+  luint   __line_num;
+  char   *__file_name;
+  char   *__description;
 };
 
 /** Shortcut macro for throwing an error without a description

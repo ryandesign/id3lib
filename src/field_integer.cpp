@@ -43,10 +43,10 @@ void ID3_Field::Set(const luint newData)
 {
   Clear();
   
-  __sData = (uchar *) newData;
-  __ulSize = sizeof(luint);
-  __eType = ID3FTY_INTEGER;
-  __bHasChanged = true;
+  __data = (uchar *) newData;
+  __size = sizeof(luint);
+  __type = ID3FTY_INTEGER;
+  __changed = true;
   
   return ;
 }
@@ -54,7 +54,7 @@ void ID3_Field::Set(const luint newData)
 
 luint ID3_Field::Get(void) const
 {
-  return (luint) __sData;
+  return (luint) __data;
 }
 
 
@@ -66,13 +66,13 @@ size_t ID3_Field::ParseInteger(const uchar *buffer, luint posn, size_t nSize)
   {
     nBytes = sizeof(uint32);
     
-    if (__ulFixedLength > 0)
+    if (__length > 0)
     {
-      nBytes = MIN(__ulFixedLength, nBytes);
+      nBytes = MIN(__length, nBytes);
     }
 
     Set(ParseNumber(&buffer[posn], nBytes));
-    __bHasChanged = false;
+    __changed = false;
   }
   
   return nBytes;
@@ -84,10 +84,10 @@ luint ID3_Field::RenderInteger(uchar *buffer)
   luint bytesUsed = 0;
   luint length = BinSize();
 
-  RenderNumber(buffer, (uint32) __sData, length);
+  RenderNumber(buffer, (uint32) __data, length);
     
   bytesUsed = length;
-  __bHasChanged = false;
+  __changed = false;
   
   return bytesUsed;
 }

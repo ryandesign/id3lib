@@ -125,7 +125,7 @@ public:
   luint       Size();
   luint       Render(uchar *buffer);
   bool        Contains(ID3_FieldID fld)
-  { return BS_ISSET(__auiFieldBits, fld); }
+  { return BS_ISSET(__field_bitset, fld); }
   bool        SetSpec(ID3_V2Spec);
 
 protected:
@@ -137,13 +137,13 @@ protected:
   lsint       FindField(ID3_FieldID name) const;
 
 private:
-  char        __sEncryptionID[256]; // encryption method used with this frame
-  char        __sGroupingID[256];   // the group to which this frame belongs
-  bool        __bHasChanged;        // frame changed since last parse/render?
-  bitset      __auiFieldBits;       // which fields are present?
-  luint       __ulNumFields;        // how many fields are in this frame?
-  ID3_Field **__apFields;           // an array of field object pointers
-  ID3_FrameHeader __FrmHdr;         // 
+  char        __encryption_id[256]; // encryption method used with this frame
+  char        __grouping_id[256];   // the group to which this frame belongs
+  bool        __changed;            // frame changed since last parse/render?
+  bitset      __field_bitset;       // which fields are present?
+  luint       __num_fields;         // how many fields are in this frame?
+  ID3_Field **__fields;             // an array of field object pointers
+  ID3_FrameHeader __hdr;            // 
 }
 ;
 

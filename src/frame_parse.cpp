@@ -36,21 +36,21 @@ void ID3_Frame::Parse(uchar *buffer, luint size)
   luint i;
   luint posn = 0;
   
-  for (i = 0; i < __ulNumFields; i++)
+  for (i = 0; i < __num_fields; i++)
   {
-    __apFields[i]->SetSpec(__FrmHdr.GetSpec());
-    posn += __apFields[i]->Parse(buffer, posn, size);
+    __fields[i]->SetSpec(__hdr.GetSpec());
+    posn += __fields[i]->Parse(buffer, posn, size);
     
     // if we just parsed a TEXTENC field, we'd better tell the rest of the
     // concerned string fields in the frame what they are expected to parse
     // (ASCII or Unicode)
-    if (ID3FN_TEXTENC == __apFields[i]->__eName)
+    if (ID3FN_TEXTENC == __fields[i]->__id)
     {
       UpdateStringTypes();
     }
   }
   
-  __bHasChanged = false;
+  __changed = false;
   
   return ;
 }
