@@ -211,7 +211,7 @@ size_t ID3_TagImpl::PaddingSize(size_t curSize) const
   if (this->GetPrependedBytes() && (this->GetPrependedBytes() >= curSize) && 
       (this->GetPrependedBytes() - curSize) < ID3_PADMAX)
   {
-    newSize = this->GetPrependedBytes();
+    newSize = this->GetPrependedBytes()-ID3_TagHeader::SIZE;
   }
   else
   {
