@@ -54,7 +54,7 @@ String id3::v2::getString(const ID3_Frame* frame, ID3_FieldID fldName)
   ID3_TextEnc enc = fp->GetEncoding();
   fp->SetEncoding(ID3TE_ASCII);
   
-  String text(fp->GetText(), fp->Size());
+  String text(fp->GetRawText(), fp->Size());
   
   fp->SetEncoding(enc);
   return text;
@@ -74,7 +74,7 @@ String id3::v2::getStringAtIndex(const ID3_Frame* frame, ID3_FieldID fldName,
     ID3_TextEnc enc = fp->GetEncoding();
     fp->SetEncoding(ID3TE_ASCII);
 
-    text = fp->GetTextItem(nIndex);
+    text = fp->GetRawTextItem(nIndex);
     
     fp->SetEncoding(enc);
   }
@@ -438,7 +438,7 @@ ID3_Frame* id3::v2::setSyncLyrics(ID3_TagImpl& tag, BString data,
   return frame;
 }
 
-BString getSyncLyrics(const ID3_TagImpl& tag, String lang, String desc)
+BString id3::v2::getSyncLyrics(const ID3_TagImpl& tag, String lang, String desc)
 {
   // check if a SYLT frame of this language or descriptor exists
   ID3_Frame* frame = NULL;
@@ -448,6 +448,6 @@ BString getSyncLyrics(const ID3_TagImpl& tag, String lang, String desc)
   
   // get the lyrics size
   ID3_Field* fld = frame->GetField(ID3FN_DATA);
-  return BString(reinterpret_cast<const BString::value_type *>(fld->GetBinary()), fld->Size());
+  return BString(reinterpret_cast<const BString::value_type *>(fld->GetRawBinary()), fld->Size());
 }
 
