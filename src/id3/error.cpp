@@ -14,10 +14,12 @@
 //
 //  Mon Nov 23 18:34:01 1998
 
+#if defined HAVE_CONFIG_H
+#include <config.h>
+#endif
 
 #include <string.h>
 #include <id3/error.h>
-
 
 static char *ID3_ErrorDescs[] =
 {
@@ -34,37 +36,51 @@ static char *ID3_ErrorDescs[] =
 };
   
   
-ID3_Error::ID3_Error(ID3_Err code, char *file, luint line)
+ID3_Error::ID3_Error(const ID3_Err eCode, const char *sFileName, 
+                     const luint nLine, const char *sDesc)
 {
-  error = code;
-  errLine = line;
-  strncpy(errFile, file, 256);
+  __eError = eCode;
+  __nErrLine = nLine;
+  luint nFileNameLen = strlen(sFileName);
+  luint nDescLen = strlen(sDesc);
+  
+  __sErrFileName = new char[nFileNameLen+1];
+  __sErrDesc     = new char[nDescLen+1];
+  strncpy(__sErrFileName, sFileName, nFileNameLen);
+  strncpy(__sErrDesc, sDesc, nDescLen);
 }
 
 
-ID3_Err ID3_Error::GetErrorID(void)
+ID3_Err ID3_Error::GetErrorID(void) const
 {
-  return error;
+  return __eError;
 }
 
 
-char *ID3_Error::GetErrorDesc(void)
+char *ID3_Error::GetErrorType(void) const
 {
-  return ID3_ErrorDescs[error];
+  return ID3_ErrorDescs[__eError];
+}
+
+char *ID3_Error::GetErrorDesc(void) const
+{
+  return __sErrDesc;
+}
+
+char *ID3_Error::GetErrorFile(void) const
+{
+  return __sErrFileName;
 }
 
 
-char *ID3_Error::GetErrorFile(void)
+luint ID3_Error::GetErrorLine(void) const
 {
-  return errFile;
-}
-
-
-luint ID3_Error::GetErrorLine(void)
-{
-  return errLine;
+  return __nErrLine;
 }
 
 
 
 // $Log$
+// Revision 1.4  1999/11/04 04:15:54  scott
+// Added cvs Id and Log tags to beginning and end of file, respectively.
+//
