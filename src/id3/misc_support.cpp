@@ -14,9 +14,11 @@
 //
 //  Mon Nov 23 18:34:01 1998
 
+#if defined HAVE_CONFIG_H
+#include <config.h>
+#endif
 
 #include <id3/misc_support.h>
-
 
 // converts an ASCII string into a Unicode one
 
@@ -49,15 +51,14 @@ void ID3_AddArtist(ID3_Tag *tag, char *text)
       strlen(text) > 0)
   {
     ID3_Frame *artistFrame;
-    
-    if (artistFrame = new ID3_Frame)
-    {
-      artistFrame->SetID(ID3FID_LEADARTIST);
-      artistFrame->Field(ID3FN_TEXT) = text;
-      tag->AddFrame(artistFrame, true);
-    }
-    else
+
+    artistFrame = new ID3_Frame;
+    if (NULL == artistFrame)
       ID3_THROW(ID3E_NoMemory);
+
+    artistFrame->SetID(ID3FID_LEADARTIST);
+    artistFrame->Field(ID3FN_TEXT) = text;
+    tag->AddFrame(artistFrame, true);
   }
   
   return ;
@@ -66,18 +67,17 @@ void ID3_AddArtist(ID3_Tag *tag, char *text)
 
 void ID3_AddAlbum(ID3_Tag *tag, char *text)
 {
-  if (tag->Find(ID3FID_ALBUM) == NULL && strlen(text) > 0)
+  if (NULL == tag->Find(ID3FID_ALBUM) && strlen(text) > 0)
   {
     ID3_Frame *albumFrame;
     
-    if (albumFrame = new ID3_Frame)
-    {
-      albumFrame->SetID(ID3FID_ALBUM);
-      albumFrame->Field(ID3FN_TEXT) = text;
-      tag->AddFrame(albumFrame, true);
-    }
-    else
+    albumFrame = new ID3_Frame;
+    if (NULL == albumFrame)
       ID3_THROW(ID3E_NoMemory);
+
+    albumFrame->SetID(ID3FID_ALBUM);
+    albumFrame->Field(ID3FN_TEXT) = text;
+    tag->AddFrame(albumFrame, true);
   }
   
   return ;
@@ -86,18 +86,17 @@ void ID3_AddAlbum(ID3_Tag *tag, char *text)
 
 void ID3_AddTitle(ID3_Tag *tag, char *text)
 {
-  if (tag->Find(ID3FID_TITLE) == NULL && strlen(text) > 0)
+  if (NULL == tag->Find(ID3FID_TITLE) && strlen(text) > 0)
   {
     ID3_Frame *titleFrame;
     
-    if (titleFrame = new ID3_Frame)
-    {
-      titleFrame->SetID(ID3FID_TITLE);
-      titleFrame->Field(ID3FN_TEXT) = text;
-      tag->AddFrame(titleFrame, true);
-    }
-    else
+    titleFrame = new ID3_Frame;
+    if (NULL == titleFrame)
       ID3_THROW(ID3E_NoMemory);
+
+    titleFrame->SetID(ID3FID_TITLE);
+    titleFrame->Field(ID3FN_TEXT) = text;
+    tag->AddFrame(titleFrame, true);
   }
   
   return ;
@@ -106,22 +105,24 @@ void ID3_AddTitle(ID3_Tag *tag, char *text)
 
 void ID3_AddLyrics(ID3_Tag *tag, char *text)
 {
-  if (tag->Find(ID3FID_UNSYNCEDLYRICS) == NULL && strlen(text) > 0)
+  if (NULL == tag->Find(ID3FID_UNSYNCEDLYRICS) && strlen(text) > 0)
   {
     ID3_Frame *lyricsFrame;
     
-    if (lyricsFrame = new ID3_Frame)
-    {
-      lyricsFrame->SetID(ID3FID_UNSYNCEDLYRICS);
-      lyricsFrame->Field(ID3FN_LANGUAGE) = "eng";
-      lyricsFrame->Field(ID3FN_TEXT) = text;
-      tag->AddFrame(lyricsFrame, true);
-    }
-    else
+    lyricsFrame = new ID3_Frame;
+    if (NULL == lyricsFrame)
       ID3_THROW(ID3E_NoMemory);
+
+    lyricsFrame->SetID(ID3FID_UNSYNCEDLYRICS);
+    lyricsFrame->Field(ID3FN_LANGUAGE) = "eng";
+    lyricsFrame->Field(ID3FN_TEXT) = text;
+    tag->AddFrame(lyricsFrame, true);
   }
   
   return ;
 }
 
 // $Log$
+// Revision 1.5  1999/11/04 04:15:55  scott
+// Added cvs Id and Log tags to beginning and end of file, respectively.
+//

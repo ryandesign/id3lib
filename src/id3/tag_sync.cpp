@@ -14,6 +14,10 @@
 //
 //  Mon Nov 23 18:34:01 1998
 
+#if defined HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <id3/tag.h>
 
 // To be used when reading an ID3v2-tag
@@ -34,7 +38,8 @@ luint ID3_Tag::ReSync(uchar *binarySourceData, luint sourceSize)
     
     if (temp == 0xFF)
     {
-      if ((temp = *source++) == 0x00)
+      temp = *source++;
+      if (temp == 0x00)
         destinationSize--;
     }
   }
@@ -48,7 +53,8 @@ luint ID3_Tag::ReSync(uchar *binarySourceData, luint sourceSize)
     
     if (temp == 0xFF)
     {
-      if ((temp = *source++) != 0x00)
+      temp = *source++;
+      if (temp != 0x00)
         *dest++ = temp;
     }
   }
@@ -125,3 +131,6 @@ void ID3_Tag::UnSync(uchar *destData, luint destSize, uchar *sourceData, luint s
 
 
 // $Log$
+// Revision 1.4  1999/11/04 04:15:55  scott
+// Added cvs Id and Log tags to beginning and end of file, respectively.
+//
