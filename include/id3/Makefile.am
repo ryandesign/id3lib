@@ -11,9 +11,7 @@
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 the_headers =                   \
-  dll.h                         \
   error.h                       \
-  externals.h                   \
   field.h                       \
   frame.h                       \
   globals.h                     \
@@ -23,19 +21,7 @@ the_headers =                   \
   int28.h                       \
   misc_support.h                \
   sized_types.h                 \
-  tag.h                         \
-  types.h                       \
-  version.h
+  tag.h
 
 id3includedir      = $(includedir)/id3
 id3include_HEADERS = $(the_headers)
-
-# $Log$
-# Revision 1.1  1999/12/01 18:09:37  scott
-# Initial revision.
-#
-# Revision 1.6  1999/11/30 20:08:16  scott
-# (the_headers): Added sized_headers.h
-# (the_sources): Added version.cpp
-# (LTVERSION): Updated to make use of configure.in variables.
-#
