@@ -898,7 +898,7 @@ size_t ID3_Field::BinSize(bool withExtras) const
     // if we are an ASCII string, divide by sizeof(unicode_t) because
     // internally we store the string as Unicode, so the ASCII version will
     // only be half as long
-    if (__type == ID3FTY_TEXTSTRING && this->GetEncoding() == ID3TE_ASCII)
+    if (__type == ID3FTY_TEXTSTRING && this->GetEncoding() != ID3TE_UNICODE)
     {
       bytes /= sizeof(unicode_t);
     }
