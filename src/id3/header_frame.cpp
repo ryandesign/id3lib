@@ -201,6 +201,7 @@ ID3_FrameHeader& ID3_FrameHeader::operator=(const ID3_FrameHeader& hdr)
       __bDynFrameDef = true;
     }
   }
+  return *this;
 }
 
 ID3_FrameID ID3_FrameHeader::GetFrameID() const
@@ -231,6 +232,10 @@ void ID3_FrameHeader::Clear()
 }
 
 // $Log$
+// Revision 1.15  2000/04/10 16:57:28  eldamitri
+// (Copy): removed.
+// (operator=): Updated implementation so it isn't reliant on Copy.
+//
 // Revision 1.14  2000/04/09 22:42:19  eldamitri
 // (ID3_FrameHeader): Added implementation.
 // (SetUnknownFrame): Added implementation.
