@@ -101,6 +101,8 @@ public:
   ID3_Frame* operator[](index_t) const;
   ID3_Tag&   operator=( const ID3_Tag & );
 
+  bool       GetUnsync() const { return __hdr.GetUnsync(); }
+
   bool       HasTagType(uint16 tt) const { return __file_tags.test(tt); }
   ID3_V2Spec GetSpec() const;
 
