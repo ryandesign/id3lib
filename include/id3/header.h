@@ -67,8 +67,6 @@ public:
   ID3_Header &operator=( const ID3_Header & );
 
 protected:
-  virtual void   Copy(const ID3_Header &);
-
   uchar  __ucVersion;        // which version?
   uchar  __ucRevision;       // which revision?
   size_t __ulDataSize;       // how big is the data?
@@ -82,6 +80,10 @@ ID3_HeaderInfo *ID3_LookupHeaderInfo(uchar ver, uchar rev);
 #endif
 
 // $Log$
+// Revision 1.6  2000/04/05 05:20:52  eldamitri
+// Updated initial comment information to reflect license, copyright
+// change.
+//
 // Revision 1.5  1999/12/27 06:11:33  scott
 // (ID3_VERSION, ID3_REVISION): Renamed to ID3v2_*
 // (class ID3_Header): Added declarations for GetVersion, GetRevision,
