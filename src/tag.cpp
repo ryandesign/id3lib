@@ -117,7 +117,7 @@ size_t ID3_Tag::IsV2Tag(const uchar* const data)
   return tagSize;
 }
 
-lsint ID3_IsTagHeader(const uchar data[ID3_TAGHEADERSIZE])
+int32 ID3_IsTagHeader(const uchar data[ID3_TAGHEADERSIZE])
 {
   size_t size = ID3_Tag::IsV2Tag(data);
   
@@ -263,6 +263,7 @@ void ID3_Tag::Clear()
   __is_padded = true;
   
   __hdr.Clear();
+  __hdr.SetSpec(ID3V2_LATEST);
   
   strcpy(__file_name, "");
   __file_handle = NULL;
