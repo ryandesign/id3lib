@@ -48,10 +48,9 @@ public:
 
   ID3_FrameHeader() : _frame_def(NULL), _dyn_frame_def(false) { ; }
   virtual ~ID3_FrameHeader() { this->Clear(); }
-  
+
   /* */ size_t        Size() const;
-  /* */ size_t        Parse(const uchar*, size_t);
-  /* */ void          Parse(ID3_Reader&);
+  /* */ bool          Parse(ID3_Reader&);
   /* */ size_t        Render(uchar*) const;
   /* */ bool          SetFrameID(ID3_FrameID id);
   /* */ ID3_FrameID   GetFrameID() const;
