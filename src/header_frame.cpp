@@ -232,6 +232,9 @@ void ID3_FrameHeader::Clear()
 }
 
 // $Log$
+// Revision 1.16  2000/04/10 20:58:14  eldamitri
+// (operator=): Fixed bug - now returns *this.
+//
 // Revision 1.15  2000/04/10 16:57:28  eldamitri
 // (Copy): removed.
 // (operator=): Updated implementation so it isn't reliant on Copy.
