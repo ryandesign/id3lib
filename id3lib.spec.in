@@ -59,7 +59,12 @@ software library for ID3v1 and ID3v2 tag maniuplation.
 
 %build
 CXXFLAGS="$RPM_OPT_FLAGS -fexceptions" ./configure --prefix=%prefix
+
+%ifnarch noarch
+
 uname -a|grep SMP && make -j 2 || make
+
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -74,7 +79,7 @@ make docs
  
 # strip down the doc and examples directories so we can copy w/impunity
 for i in doc/ examples/; do \
-  find $i 
+  find $i                   \
   \(  -name 'Makefile*' -or \
       -name '*.ps.gz'   -or \
       -name '*.pdf'         \
