@@ -68,6 +68,7 @@ public:
   bool GetEncryption() const  { return _flags.test(ENCRYPTION); }
   bool GetGrouping() const    { return _flags.test(GROUPING); }
   bool GetReadOnly() const    { return _flags.test(READONLY); }
+  void                SetUnknownFrame(const char*);
 
 protected:
   bool                SetFlags(uint16 f, bool b)
@@ -76,7 +77,8 @@ protected:
     _changed = _changed || changed;
     return changed;
   }
-  void                SetUnknownFrame(const char*);
+// following is moved to public due to bug unknownframes corrupting a tag
+//  void                SetUnknownFrame(const char*);
 
 private:
   ID3_FrameDef*       _frame_def;
