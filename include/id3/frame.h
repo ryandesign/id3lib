@@ -112,6 +112,8 @@ public:
   */
   ID3_Field  &Field(ID3_FieldID name) const;
   
+  ID3_Frame  &operator=( const ID3_Frame &rFrame );
+
 private:
   char        __sEncryptionID[256]; // encryption method used with this frame
   char        __sGroupingID[256];   // the group to which this frame belongs
@@ -136,6 +138,10 @@ protected:
 ;
 
 // $Log$
+// Revision 1.2  1999/12/02 22:45:28  scott
+// Changed all of the #include <id3/*> to #include "*" to help ensure that
+// the sources are searched for in the right places.
+//
 // Revision 1.1  1999/12/01 17:16:02  scott
 // moved from src/id3 to include/id3
 //
