@@ -906,7 +906,7 @@ ID3_Frame *ID3_GetSyncLyrics(const ID3_Tag *tag, const char *lang,
   size = dami::min(size, frmExist->GetField(ID3FN_DATA)->Size());
 
   // get the lyrics data
-  pData = frmExist->GetField (ID3FN_DATA)->GetBinary();
+  pData = frmExist->GetField (ID3FN_DATA)->GetRawBinary();
 
   // return the frame pointer for further uses
   return frmExist;
