@@ -214,9 +214,10 @@ ID3_Tag& operator<<(ID3_Tag& tag, const ID3_Frame *frame)
  ** \param name The filename of the mp3 file to link to
  **/
 ID3_Tag::ID3_Tag(const char *name)
-  : __file_name(new char[ID3_PATH_LENGTH]),
-    __file_handle(NULL),
-    __frames(NULL)
+  : __frames(NULL),
+    __file_name(new char[ID3_PATH_LENGTH]),
+    __file_handle(NULL)
+    
 {
   this->Clear();
   if (name)
@@ -230,9 +231,9 @@ ID3_Tag::ID3_Tag(const char *name)
  ** \param tag What is copied into this tag
  **/
 ID3_Tag::ID3_Tag(const ID3_Tag &tag)
-  : __file_name(new char[ID3_PATH_LENGTH]),
-    __file_handle(NULL),
-    __frames(NULL)
+  : __frames(NULL),
+    __file_name(new char[ID3_PATH_LENGTH]),
+    __file_handle(NULL)
 {
   *this = tag;
 }
