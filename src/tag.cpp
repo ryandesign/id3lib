@@ -726,7 +726,7 @@ void ID3_Tag::AddFrames(const ID3_Frame *frames, size_t numFrames)
 
 size_t ID3_Tag::Link(const char *fileInfo, bool parseID3v1, bool parseLyrics3)
 {
-  _impl->Link(fileInfo, parseID3v1, parseLyrics3);
+  return _impl->Link(fileInfo, parseID3v1, parseLyrics3);
 }
 
 void ID3_Tag::SetCompression(bool b) 
