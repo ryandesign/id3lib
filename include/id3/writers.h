@@ -30,6 +30,7 @@
 
 #include <id3/writer.h>
 #include <fstream.h>
+#include <iostream.h>
 #include <string.h>
 
 class ID3_CPP_EXPORT ID3_OStreamWriter : public ID3_Writer

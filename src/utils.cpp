@@ -33,6 +33,16 @@
 # include <errno.h>
 #endif
 
+#include <ctype.h>
+#include <iostream.h>
+
+#ifdef macintosh
+#define NOCREATE ((std::ios_base::openmode)0)
+#define toascii(X) (X)
+#else
+#define NOCREATE ios::nocreate
+#endif
+
 #include "utils.h"
 
 using namespace dami;
@@ -206,7 +216,7 @@ namespace
 {
   bool exists(String name)
   {
-    ifstream file(name.c_str(), ios::nocreate);
+    ifstream file(name.c_str(), NOCREATE);
     return file.is_open() != 0;
   }
 };
@@ -277,7 +287,7 @@ ID3_Err dami::openWritableFile(String name, fstream& file)
   {
     file.close();
   }
-  file.open(name.c_str(), ios::in | ios::out | ios::binary | ios::nocreate);
+  file.open(name.c_str(), ios::in | ios::out | ios::binary | NOCREATE);
   if (!file)
   {
     return ID3E_ReadOnly;
@@ -297,7 +307,7 @@ ID3_Err dami::openWritableFile(String name, ofstream& file)
   {
     file.close();
   }
-  file.open(name.c_str(), ios::in | ios::out | ios::binary | ios::nocreate);
+  file.open(name.c_str(), ios::in | ios::out | ios::binary | NOCREATE);
   if (!file)
   {
     return ID3E_ReadOnly;
@@ -312,7 +322,7 @@ ID3_Err dami::openReadableFile(String name, fstream& file)
   {
     file.close();
   }
-  file.open(name.c_str(), ios::in | ios::binary | ios::nocreate);
+  file.open(name.c_str(), ios::in | ios::binary | NOCREATE);
   if (!file)
   {
     return ID3E_NoFile;
@@ -327,7 +337,7 @@ ID3_Err dami::openReadableFile(String name, ifstream& file)
   {
     file.close();
   }
-  file.open(name.c_str(), ios::in | ios::binary | ios::nocreate);
+  file.open(name.c_str(), ios::in | ios::binary | NOCREATE);
   if (!file)
   {
     return ID3E_NoFile;

@@ -29,6 +29,7 @@
 #define _ID3LIB_READERS_H_
 
 #include <fstream.h>
+#include <iostream.h>
 #include <id3/reader.h>
 
 class ID3_CPP_EXPORT ID3_IStreamReader : public ID3_Reader
@@ -52,7 +53,7 @@ class ID3_CPP_EXPORT ID3_IStreamReader : public ID3_Reader
   }
   virtual size_type readChars(char_type buf[], size_type len)
   {
-    _stream.read(buf, len);
+    _stream.read((char *)buf, len);
     return _stream.gcount();
   }
 

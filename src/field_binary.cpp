@@ -30,6 +30,7 @@
 #endif
 
 #include <stdio.h>
+#include <string.h>
 #include <memory.h>
 
 #include "field_impl.h"

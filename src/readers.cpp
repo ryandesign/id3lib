@@ -28,6 +28,8 @@
 #include <config.h>
 #endif
 
+#include <string.h>
+
 #include "readers.h"
 #include "utils.h"
 

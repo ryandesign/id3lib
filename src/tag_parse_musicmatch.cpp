@@ -29,7 +29,7 @@
 #endif
 
 
-
+#include <ctype.h>
 #include <stdlib.h>
 #include "tag_impl.h"
 #include "utils.h"
