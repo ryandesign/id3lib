@@ -11,6 +11,10 @@
 #include <id3/io_strings.h>
 #include <id3/utils.h>
 
+using std::cout;
+using std::endl;
+using std::cerr;
+
 using namespace dami;
 
 int

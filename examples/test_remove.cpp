@@ -9,6 +9,10 @@
 #include "id3/misc_support.h"
 #include "id3/id3lib_strings.h"
 
+using std::cout;
+using std::endl;
+using std::cerr;
+
 using namespace dami;
 
 typedef const char* LPCTSTR;
