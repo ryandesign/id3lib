@@ -37,9 +37,9 @@ struct ID3_VerInfo
 CDLLEXPORT
 void ID3_GetVersion(ID3_VerInfo *info)
 {
-  info->version = ID3LIB_VER;
-  info->revision = ID3LIB_REV;
-  strcpy(info->name, ID3LIB_NAME);
+  info->version = ID3LIB_VERSION;
+  info->revision = ID3LIB_REVISION;
+  strcpy(info->name, PACKAGE);
   
   return ;
 }
@@ -487,6 +487,11 @@ void ID3Field_ToFile(ID3_Field *field, char *fileName)
 #endif
 
 // $Log$
+// Revision 1.9  1999/12/01 18:00:59  scott
+// Changed all of the #include <id3/*> to #include "*" to help ensure that
+// the sources are searched for in the right places (and to make compiling under
+// windows easier).
+//
 // Revision 1.8  1999/11/29 19:26:18  scott
 // Updated the leading license information of the file to reflect new maintainer.
 //
