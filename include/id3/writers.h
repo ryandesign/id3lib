@@ -28,9 +28,9 @@
 #ifndef _ID3LIB_WRITERS_H_
 #define _ID3LIB_WRITERS_H_
 
+#include <id3/writer.h>
 #include <fstream.h>
 #include <string.h>
-#include "writer.h"
 
 class ID3_OStreamWriter : public ID3_Writer
 {

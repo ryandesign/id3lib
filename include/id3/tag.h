@@ -28,8 +28,8 @@
 #ifndef _ID3LIB_TAG_H_
 #define _ID3LIB_TAG_H_
 
-#include "frame.h"
-#include "field.h"
+#include <id3/frame.h>
+#include <id3/field.h>
 
 class ID3_Reader;
 class ID3_Writer;

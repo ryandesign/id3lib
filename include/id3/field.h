@@ -28,7 +28,7 @@
 #ifndef _ID3LIB_FIELD_H_
 #define _ID3LIB_FIELD_H_
 
-#include "globals.h"
+#include <id3/globals.h>
 
 class ID3_Reader;
 class ID3_Writer;

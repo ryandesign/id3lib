@@ -29,7 +29,7 @@
 #define _ID3LIB_READERS_H_
 
 #include <fstream.h>
-#include "reader.h"
+#include <id3/reader.h>
 
 class ID3_IStreamReader : public ID3_Reader
 {

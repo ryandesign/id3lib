@@ -28,7 +28,7 @@
 #ifndef _ID3LIB_ID3_H_
 #define _ID3LIB_ID3_H_
 
-#include "id3/globals.h"
+#include <id3/globals.h>
 
 #ifdef __cplusplus
 extern "C"
