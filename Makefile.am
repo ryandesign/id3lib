@@ -59,6 +59,7 @@ release: config.h.win32 id3lib.spec
 	-find $(distdir) -name "*~" -exec rm {} \;
 	-find $(distdir) -type d -name CVS -exec rm -r {} \;
 	-find $(distdir) -name .cvsignore -exec rm {} \;
+	-find $(distdir) \( -name "*.dsp" -or -name "*.dsw" \) -exec unix2dos {} \;
 	cd $(distdir) && cp config.h.win32 config.h
 	cd $(distdir) && zip -r ../$(distdir).zip *
 	cd $(distdir) && ./configure && $(MAKE) $(AM_MAKEFLAGS) docs-release
