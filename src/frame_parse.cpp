@@ -37,28 +37,32 @@ namespace
 {
   bool parseFields(ID3_Reader& rdr, ID3_FrameImpl& frame)
   {
+    int iLoop;
+    int iFields;
     io::ExitTrigger et(rdr);
     ID3_TextEnc enc = ID3TE_ASCII;  // set the default encoding 
     ID3_V2Spec spec = frame.GetSpec(); 
     // parse the frame's fields  
-    ID3D_NOTICE( "ID3_FrameImpl::Parse(): num_fields = " << 
-                 frame.NumFields() );
+    iFields = frame.NumFields();
+    ID3D_NOTICE( "ID3_FrameImpl::Parse(): num_fields = " << iFields );
+    iLoop = 0;
     for (ID3_FrameImpl::iterator fi = frame.begin(); fi != frame.end(); ++fi)
     {
       ID3_Field* fp = *fi;
+      ++iLoop;
 
       if (rdr.atEnd())
       { 
         // there's no remaining data to parse! 
         ID3D_WARNING( "ID3_FrameImpl::Parse(): out of data at postion " <<
                       rdr.getCur() );
-        if(fp->GetType() == ID3FTY_TEXTSTRING)  //correct handling of winamp-esque empty frames
-		{
-			// Exit the loop (don't just return true).
-			// This will set the current "pointer" of the reader to the correct value
-			break;
-		}
-
+        if (iLoop == iFields)
+        {
+          //if we are at the last field, (the 'data' field) it's apparently
+          //an empty tag used for filling up padding, it's no problem
+          //break will set the current 'cursor' to the right spot outside the for loop
+          break;
+        }
         return false;
       } 
       
