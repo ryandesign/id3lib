@@ -43,7 +43,7 @@ public:
   luint   GetErrorLine(void);
   
   // *** PRIVATE INTERNAL DATA - DO NOT USE ***
-  
+private:
   ID3_Error(ID3_Err id, char *file, luint lineNum);
 protected:
   ID3_Err error;
@@ -56,3 +56,6 @@ protected:
 #endif
 
 // $Log$
+// Revision 1.3  1999/11/04 04:15:54  scott
+// Added cvs Id and Log tags to beginning and end of file, respectively.
+//
