@@ -148,7 +148,10 @@ bool id3::v2::parse(ID3_TagImpl& tag, ID3_Reader& reader)
     ID3D_NOTICE( "id3::v2::parse(): parsing header failes" );
     return false;
   }
-  
+  if (hdr.GetExtended())
+  {
+    hdr.ParseExtended(reader);
+  }
   tag.SetSpec(hdr.GetSpec());
 
   size_t dataSize = hdr.GetDataSize();
@@ -283,7 +286,7 @@ void ID3_TagImpl::ParseFile()
   { //it has at least the size for a mp3 header (a mp3 header is 4 bytes)
     wr.setBeg(_prepended_bytes);
     wr.setCur(_prepended_bytes);
-	wr.setEnd(_file_size - _appended_bytes);
+    wr.setEnd(_file_size - _appended_bytes);
 
     _mp3_info = new Mp3Info;
     ID3D_NOTICE( "ID3_TagImpl::ParseFile(): mp3header? cur = " << wr.getCur() );
@@ -296,9 +299,8 @@ void ID3_TagImpl::ParseFile()
     {
       delete _mp3_info;
       _mp3_info = NULL;
-	}
-
+    }
   }
- file.close();
+  file.close();
 }
 

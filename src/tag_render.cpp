@@ -2,6 +2,7 @@
 
 // id3lib: a C++ library for creating and manipulating id3v1/v2 tags
 // Copyright 1999, 2000  Scott Thomas Haug
+// Copyright 2002  Thijmen Klok (thijmen@id3lib.org)
 
 // This library is free software; you can redistribute it and/or modify it
 // under the terms of the GNU Library General Public License as published by
@@ -88,6 +89,7 @@ void id3::v2::render(ID3_Writer& writer, const ID3_TagImpl& tag)
   hdr.SetSpec(tag.GetSpec());
   hdr.SetExtended(tag.GetExtended());
   hdr.SetExperimental(tag.GetExperimental());
+  hdr.SetFooter(tag.GetFooter());
     
   // set up the encryption and grouping IDs
 
@@ -119,7 +121,8 @@ void id3::v2::render(ID3_Writer& writer, const ID3_TagImpl& tag)
   // zero the remainder of the buffer so that our padding bytes are zero
   luint nPadding = tag.PaddingSize(frmSize);
   ID3D_NOTICE( "id3::v2::render(): padding size = " << nPadding );
-  hdr.SetDataSize(frmSize + nPadding);
+  
+  hdr.SetDataSize(frmSize + tag.GetExtendedBytes() + nPadding);
   
   hdr.Render(writer);
 

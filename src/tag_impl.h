@@ -94,6 +94,9 @@ public:
   bool       GetUnsync() const;
   bool       GetExtended() const;
   bool       GetExperimental() const;
+  bool       GetFooter() const;
+
+  size_t     GetExtendedBytes() const;
   
   void       AddFrame(const ID3_Frame&);
   void       AddFrame(const ID3_Frame*);

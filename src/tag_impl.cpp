@@ -141,7 +141,7 @@ void ID3_TagImpl::Clear()
   
   _tags_to_parse.clear();
   if (_mp3_info) 
-	  delete _mp3_info; // Also deletes _mp3_header
+    delete _mp3_info; // Also deletes _mp3_header
 
   _mp3_info = NULL;
 
@@ -266,6 +266,24 @@ bool ID3_TagImpl::GetExtended() const
 bool ID3_TagImpl::GetExperimental() const
 {
   return _hdr.GetExperimental();
+}
+
+bool ID3_TagImpl::GetFooter() const
+{
+  return _hdr.GetFooter();
+}
+
+size_t ID3_TagImpl::GetExtendedBytes() const
+{
+  if (this->GetExtended())
+    if (this->GetSpec() == ID3V2_4_0)
+      return 6; //minimal ID3v2.4 ext header size
+    else if (this->GetSpec() == ID3V2_3_0)
+      return 10; //minimal ID3v2.3 ext header size
+    else
+      return 0; //not implemented
+  else
+    return 0;;
 }
 
 bool ID3_TagImpl::SetPadding(bool pad)
