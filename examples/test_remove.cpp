@@ -31,7 +31,7 @@ size_t RemoveFrame(ID3_Tag& pTag, ID3_FrameID fID, LPCTSTR sDescription)
     if (frame)
     {
       ID3_Field* fld = frame->GetField(ID3FN_TEXT);
-      String text(fld->GetText(), fld->Size());
+      String text(fld->GetRawText(), fld->Size());
       cerr << "*** delete frame with text \"" << text << "\"" << endl;
       /* pTag is an ID3_Tag */
       delete pTag.RemoveFrame(frame);
