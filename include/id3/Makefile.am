@@ -21,6 +21,7 @@ the_headers =                   \
   int28.h                       \
   misc_support.h                \
   sized_types.h                 \
+  spec.h                        \
   tag.h
 
 id3includedir      = $(includedir)/id3
