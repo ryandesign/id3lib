@@ -27,6 +27,15 @@ the_headers =                   \
 id3includedir      = $(includedir)/id3
 id3include_HEADERS = $(the_headers)
 
-noinst_HEADERS = \
-  uint28.h       \
+noinst_HEADERS =                \
+  debug.h                       \
+  field_def.h                   \
+  field_impl.h                  \
+  frame_def.h                   \
+  frame_impl.h                  \
+  reader.h                      \
+  reader_decorators.h           \
+  readers.h                     \
+  strings.h                     \
+  uint28.h                      \
   utils.h
