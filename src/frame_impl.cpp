@@ -181,27 +181,34 @@ void ID3_FrameImpl::_InitFields()
   const ID3_FrameDef* info = _hdr.GetFrameDef();
   if (NULL == info)
   {
-    ID3_THROW(ID3E_InvalidFrameID);
+    // log this
+    _num_fields = 1;
+    _fields = new ID3_Field * [ 1 ];
+    _fields[0] = new ID3_FieldImpl(ID3_FieldDef::DEFAULT[0]);
+    BS_SET(_field_bitset, _fields[0]->GetID());
+    //ID3_THROW(ID3E_InvalidFrameID);
   }
-  
-  _num_fields = 0;
-  
-  while (info->aeFieldDefs[_num_fields]._id != ID3FN_NOFIELD)
+  else
   {
-    _num_fields++;
-  }
-  
-  _fields = new ID3_Field * [_num_fields];
-  
-  for (index_t i = 0; i < _num_fields; i++)
-  {
-    _fields[i] = new ID3_FieldImpl(info->aeFieldDefs[i]);
+    _num_fields = 0;
     
-    // tell the frame that this field is present
-    BS_SET(_field_bitset, _fields[i]->GetID());
+    while (info->aeFieldDefs[_num_fields]._id != ID3FN_NOFIELD)
+    {
+      _num_fields++;
+    }
+    
+    _fields = new ID3_Field * [_num_fields];
+    
+    for (index_t i = 0; i < _num_fields; i++)
+    {
+      _fields[i] = new ID3_FieldImpl(info->aeFieldDefs[i]);
+      
+      // tell the frame that this field is present
+      BS_SET(_field_bitset, _fields[i]->GetID());
+    }
+    
+    _changed = true;
   }
-  
-  _changed = true;
 }
 
 /** Establishes the internal structure of an ID3_FrameImpl object so
@@ -279,7 +286,8 @@ ID3_Field& ID3_FrameImpl::Field(ID3_FieldID fieldName) const
   ID3_Field* field = this->GetField(fieldName);
   if (!field)
   {
-    ID3_THROW(ID3E_FieldNotFound);
+    // log this
+    //ID3_THROW(ID3E_FieldNotFound);
   }
   return *field;
 }
