@@ -35,7 +35,7 @@
 #include "globals.h"
 #include "strings.h"
 
-namespace id3
+namespace dami
 {
 #ifdef  MAXPATHLEN
 #  define ID3_PATH_LENGTH   (MAXPATHLEN + 1)
@@ -68,11 +68,13 @@ namespace id3
   size_t CRLFtoLF(char *, size_t);
 
   void   removeTrailingSpaces(char*, size_t);
-  id3::string removeTrailingSpaces(id3::string);
+  String removeTrailingSpaces(String);
   
   uint32 parseNumber(const uchar *buffer, size_t size = sizeof(uint32));
   size_t renderNumber(uchar *buffer, uint32 val, size_t size = sizeof(uint32));
-  id3::string renderNumber(uint32 val, size_t size = sizeof(uint32));
+  String renderNumber(uint32 val, size_t size = sizeof(uint32));
+
+  String toString(uint32 val);
   
   void   mbstoucs(unicode_t *unicode, const char *ascii, const size_t len);
   void   ucstombs(char *ascii, const unicode_t *unicode, const size_t len);
