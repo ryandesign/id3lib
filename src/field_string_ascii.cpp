@@ -239,6 +239,22 @@ const char* ID3_FieldImpl::GetText() const
   return text;
 }
 
+const char* ID3_FieldImpl::GetTextItem(index_t index) const
+{
+  const char* text = NULL;
+  if (this->GetType() == ID3FTY_TEXTSTRING && 
+      this->GetEncoding() == ID3TE_ASCII &&
+      index < this->GetNumTextItems())
+  {
+    text = _ascii;
+    for (size_t i = 0; i < index; ++i)
+    {
+      text += strlen(text) + 1;
+    }
+  }
+  return text;
+}
+
 size_t ID3_FieldImpl::Get(char* buffer,     ///< Where to copy the data
                       size_t maxLength, ///< Max number of characters to copy
                       index_t itemNum   ///< The item number to retrieve
