@@ -352,6 +352,10 @@ char *ID3_GetComment(const ID3_Tag *tag, const char* desc)
   else
   {
     frame = tag->Find(ID3FID_COMMENT);
+    if(frame == tag->Find(ID3FID_COMMENT, ID3FN_DESCRIPTION, STR_V1_COMMENT_DESC))
+      {
+	frame = tag->Find(ID3FID_COMMENT);
+      }
   }
 
   if (frame)
