@@ -68,6 +68,7 @@ struct ID3_FieldDef
   ID3_VerCtl    eControl;
   luint         ulFlags;
   ID3_FieldID   eLinkedField;
+  static const ID3_FieldDef* DEFAULT;
 };
 
 class ID3_Frame;
@@ -77,8 +78,8 @@ class ID3_Tag;
 struct ID3_FrameDef
 {
   ID3_FrameID   eID;
-  char         *sShortTextID;
-  char         *sLongTextID;
+  char          sShortTextID[3 + 1];
+  char          sLongTextID[4 + 1];
   lsint         lPriority;    // currently unused
   bool          bTagDiscard;
   bool          bFileDiscard;
@@ -431,6 +432,9 @@ ID3_FrameID   ID3_FindFrameID(const char *id);
 #endif
 
 // $Log$
+// Revision 1.10  2000/04/08 04:32:36  eldamitri
+// Changed new ANSI-standard C++ include headers to old-style headers.
+//
 // Revision 1.9  2000/04/07 04:45:31  eldamitri
 // Minor cleanup for log comments.
 //
