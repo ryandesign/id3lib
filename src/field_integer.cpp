@@ -25,7 +25,7 @@
 // http://download.sourceforge.net/id3lib/
 
 #include "field.h"
-#include "misc_support.h"
+#include "utils.h"
 
 #if defined HAVE_CONFIG_H
 #include <config.h>
@@ -81,13 +81,7 @@ size_t ID3_Field::ParseInteger(const uchar *buffer, luint posn, size_t nSize)
 
 luint ID3_Field::RenderInteger(uchar *buffer)
 {
-  luint bytesUsed = 0;
-  luint length = BinSize();
-
-  RenderNumber(buffer, (uint32) __data, length);
-    
-  bytesUsed = length;
+  luint bytesUsed = RenderNumber(buffer, (uint32) __data, this->BinSize());
   __changed = false;
-  
   return bytesUsed;
 }
