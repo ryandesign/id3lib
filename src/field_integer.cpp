@@ -31,20 +31,20 @@
 #include <config.h>
 #endif
 
-ID3_Field& ID3_Field::operator=(const luint newData)
+ID3_Field& ID3_Field::operator=(uint32 newData)
 {
-  Set(newData);
-  
+  this->Set(newData);
   return *this;
 }
 
 
-void ID3_Field::Set(const luint newData)
+void ID3_Field::Set(uint32 newData)
 {
   Clear();
   
+  // Ack!  This is terrible!
   __data = (uchar *) newData;
-  __size = sizeof(luint);
+  __size = sizeof(uint32);
   __type = ID3FTY_INTEGER;
   __changed = true;
   
@@ -52,9 +52,9 @@ void ID3_Field::Set(const luint newData)
 }
 
 
-luint ID3_Field::Get(void) const
+uint32 ID3_Field::Get() const
 {
-  return (luint) __data;
+  return (uint32) __data;
 }
 
 
@@ -79,9 +79,9 @@ size_t ID3_Field::ParseInteger(const uchar *buffer, size_t nSize)
 }
 
 
-luint ID3_Field::RenderInteger(uchar *buffer)
+size_t ID3_Field::RenderInteger(uchar *buffer) const
 {
-  luint bytesUsed = RenderNumber(buffer, (uint32) __data, this->BinSize());
+  size_t bytesUsed = RenderNumber(buffer, (uint32) __data, this->BinSize());
   __changed = false;
   return bytesUsed;
 }

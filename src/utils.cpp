@@ -60,11 +60,11 @@ namespace id3
 
   // converts an ASCII string into a Unicode one
 
-  void mbstoucs(unicode_t *unicode, const char *ascii, const luint len)
+  void mbstoucs(unicode_t *unicode, const char *ascii, size_t len)
   {
     if (NULL != ascii && NULL != unicode)
     {
-      for (luint i = 0; i < len; i++)
+      for (index_t i = 0; i < len; i++)
       {
         unicode[i] = ascii[i] & 0xFF;
       }
@@ -73,11 +73,11 @@ namespace id3
 
   // converts a Unicode string into ASCII
 
-  void ucstombs(char *ascii, const unicode_t *unicode, const luint len)
+  void ucstombs(char *ascii, const unicode_t *unicode, size_t len)
   {
     if (NULL != unicode && NULL != ascii)
     {
-      for (luint i = 0; i < len; i++)
+      for (index_t i = 0; i < len; i++)
       {
         ascii[i] = unicode[i] & 0x00FF;
       }
