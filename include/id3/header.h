@@ -28,6 +28,7 @@
 #ifndef _ID3LIB_HEADER_H_
 #define _ID3LIB_HEADER_H_
 
+#include "globals.h"
 #include "flags.h"
 
 class ID3_Reader;
