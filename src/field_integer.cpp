@@ -78,13 +78,13 @@ void ID3_FieldImpl::Set(uint32 val)
  ** \return The value of the integer field
  **/
 
-void ID3_FieldImpl::ParseInteger(ID3_Reader& reader)
+bool ID3_FieldImpl::ParseInteger(ID3_Reader& reader)
 {
   ID3D_NOTICE( "ID3_FieldImpl::ParseInteger(): beg = " << reader.getBeg() );
   ID3D_NOTICE( "ID3_FieldImpl::ParseInteger(): cur = " << reader.getCur() );
   ID3D_NOTICE( "ID3_FieldImpl::ParseInteger(): end = " << reader.getEnd() );
-
-  if (reader.peekChar() != ID3_Reader::END_OF_READER)
+  bool success = false;
+  if (!reader.atEnd())
   {
     this->Clear();
     size_t fixed = this->Size();
@@ -92,7 +92,9 @@ void ID3_FieldImpl::ParseInteger(ID3_Reader& reader)
     id3::NumberReader nr(reader);
     this->Set(nr.readNumber(nBytes));
     _changed = false;
+    success = true;
   }
+  return success;
 }
 
 size_t ID3_FieldImpl::RenderInteger(uchar *buffer) const
