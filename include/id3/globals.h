@@ -338,7 +338,6 @@ ID3_ENUM(ID3_Err)
   ID3E_NoFile,                  /**< No file to parse */
   ID3E_ReadOnly,                /**< Attempting to write to a read-only file */
   ID3E_zlibError                /**< Error in compression/uncompression */
-
 };
 
 ID3_ENUM(ID3_ContentType)
