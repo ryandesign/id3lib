@@ -40,6 +40,8 @@ struct ID3_VerInfo
   luint revision;
 };
 
+extern "C"
+{
 
 void        ID3_GetVersion(ID3_VerInfo *info);
 // tag wrappers
@@ -86,9 +88,15 @@ void        ID3Field_GetBINARY(ID3_Field *field, uchar *buffer, luint buffLength
 void        ID3Field_FromFile(ID3_Field *field, char *fileName);
 void        ID3Field_ToFile(ID3_Field *field, char *fileName);
 
+}
+
 #endif
 
 // $Log$
+// Revision 1.4  2000/04/05 05:20:52  eldamitri
+// Updated initial comment information to reflect license, copyright
+// change.
+//
 // Revision 1.3  1999/12/17 16:05:02  scott
 // Updated opening comment block.
 //
