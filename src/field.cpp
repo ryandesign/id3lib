@@ -165,7 +165,7 @@ static ID3_FieldDef ID3FD_GeneralText[] =
   },
   {
     ID3FN_LANGUAGE,                     // FIELD NAME
-    ID3FTY_TEXTSTRING,                  // FIELD TYPE
+    ID3FTY_BINARY,                      // FIELD TYPE
     3,                                  // FIXED LEN
     ID3V2_EARLIEST,                     // INITIAL SPEC
     ID3V2_LATEST,                       // ENDING SPEC
@@ -206,7 +206,7 @@ static ID3_FieldDef ID3FD_TermsOfUse[] =
   },
   {
     ID3FN_LANGUAGE,                     // FIELD NAME
-    ID3FTY_TEXTSTRING,                  // FIELD TYPE
+    ID3FTY_BINARY,                      // FIELD TYPE
     3,                                  // FIXED LEN
     ID3V2_3_0,                          // INITIAL SPEC
     ID3V2_LATEST,                       // ENDING SPEC
@@ -549,7 +549,7 @@ static ID3_FieldDef ID3FD_SyncLyrics[] =
   },
   {
     ID3FN_LANGUAGE,                     // FIELD NAME
-    ID3FTY_TEXTSTRING,                  // FIELD TYPE
+    ID3FTY_BINARY,                      // FIELD TYPE
     3,                                  // FIXED LEN
     ID3V2_EARLIEST,                     // INITIAL SPEC
     ID3V2_LATEST,                       // ENDING SPEC
