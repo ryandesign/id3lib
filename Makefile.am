@@ -17,7 +17,7 @@ EXTRA_DIST =                    \
         reconf                  \
         config.h.win32          \
         config.h.win32.in 
-SUBDIRS = . m4 doc src include prj zlib
+SUBDIRS = . m4 doc src include prj zlib id3com libprj
 
 INCLUDES = @ID3LIB_DEBUG_FLAGS@
 
@@ -44,6 +44,13 @@ snapshot: config.h.win32
 	rm -rf $$ss_distdir
 
 # $Log$
+# Revision 1.10  2000/04/09 14:05:44  eldamitri
+# (config.h.win32): Fixed bug in creating config.h.win32.
+# (release): Added.  Creates id3lib-$(VERSION).tar.gz and
+# id3lib-$(VERSION).zip.
+# (snapshot): Added.  Created id3lib-$(DATE).tar.gz and
+# id3lib-$(DATE).zip
+#
 # Revision 1.9  2000/04/08 04:47:38  eldamitri
 # Updated for config.h.win32.
 #
