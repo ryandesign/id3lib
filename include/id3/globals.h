@@ -375,6 +375,10 @@ ID3_ENUM(ID3_Err)
   ID3E_InvalidTagVersion,       /**< Invalid tag version */
   ID3E_NoFile,                  /**< No file to parse */
   ID3E_ReadOnly,                /**< Attempting to write to a read-only file */
+  ID3E_BufferNotEmpty,          /**< The target buffer is not empty */
+  ID3E_UnknownEncoding,         /**< When converting encodings, an unknown encoding is asked for/supplied*/
+  ID3E_ConvertInitError,        /**< Initialisation of convert function went wrong*/
+  ID3E_ConvertError,            /**< Conversion function went wrong*/
   ID3E_zlibError                /**< Error in compression/uncompression */
 };
 
