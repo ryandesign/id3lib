@@ -15,7 +15,7 @@
 #ifndef __GLOBALS_H__
 #define __GLOBALS_H__
 
-#include <id3/sized_types.h>
+#include "sized_types.h"
 
 /// Shorthand type definition for unsigned char
 typedef       unsigned char   uchar;

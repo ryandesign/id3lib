@@ -15,7 +15,7 @@
 #ifndef ID3LIB_TYPES_H
 #define ID3LIB_TYPES_H
 
-#include <id3/globals.h>
+#include "globals.h"
 
 #ifdef __DLL
 #define DLLEXPORT       __declspec ( dllexport )
@@ -50,11 +50,14 @@ inline lsint MAX(lsint x, lsint y)
 
 // include other abstract types here because they
 // may depend on the types defined above
-#include <id3/int28.h>
+#include "int28.h"
 
 #endif
 
 // $Log$
+// Revision 1.1  1999/12/01 17:16:11  scott
+// moved from src/id3 to include/id3
+//
 // Revision 1.7  1999/11/30 20:14:22  scott
 // Removed include for wchar.h
 //

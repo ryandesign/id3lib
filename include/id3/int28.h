@@ -16,7 +16,7 @@
 #define ID3LIB_TYPES_28BITINT_H
 
 #include <iostream.h>
-#include <id3/types.h>
+#include "types.h"
 
 class int28
 {
@@ -42,6 +42,9 @@ istream & operator>>(istream& in, int28& val);
 #endif
 
 // $Log$
+// Revision 1.1  1999/12/01 17:16:07  scott
+// moved from src/id3 to include/id3
+//
 // Revision 1.5  1999/11/29 19:26:18  scott
 // Updated the leading license information of the file to reflect new maintainer.
 //

@@ -16,8 +16,8 @@
 #define ID3LIB_MISC_SUPPORT_H
 
 #include <string.h>
-#include <id3/types.h>
-#include <id3/tag.h>
+#include "types.h"
+#include "tag.h"
 
 // in 'id3_misc_support.cpp'
 char *ID3_GetArtist(ID3_Tag *tag);
@@ -54,6 +54,9 @@ void ID3_RemoveTrailingSpaces(char *buffer, luint length);
 #endif
 
 // $Log$
+// Revision 1.2  1999/12/01 22:10:02  scott
+// Minor declaraction problem (thanks, elrod).
+//
 // Revision 1.1  1999/12/01 17:16:08  scott
 // moved from src/id3 to include/id3
 //

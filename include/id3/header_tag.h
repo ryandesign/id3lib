@@ -15,8 +15,8 @@
 #ifndef ID3LIB_HEADER_TAG_H
 #define ID3LIB_HEADER_TAG_H
 
-#include <id3/types.h>
-#include <id3/header.h>
+#include "types.h"
+#include "header.h"
 
 #define ID3_TAGID               "ID3"
 #define ID3_TAGHEADERSIZE       (10)
@@ -38,6 +38,9 @@ lsint ID3_IsTagHeader(uchar header[ID3_TAGHEADERSIZE]);
 #endif
 
 // $Log$
+// Revision 1.1  1999/12/01 17:16:06  scott
+// moved from src/id3 to include/id3
+//
 // Revision 1.5  1999/11/29 19:26:18  scott
 // Updated the leading license information of the file to reflect new maintainer.
 //

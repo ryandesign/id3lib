@@ -16,7 +16,7 @@
 #ifndef ID3LIB_DLLHEADERS_H
 #define ID3LIB_DLLHEADERS_H
 
-#include <id3/globals.h>
+#include "globals.h"
 
 class ID3_Field;
 class ID3_Frame;
@@ -78,6 +78,9 @@ void        ID3Field_ToFile(ID3_Field *field, char *fileName);
 #endif
 
 // $Log$
+// Revision 1.1  1999/12/01 17:14:06  scott
+// moved from src/id3 to include/id3
+//
 // Revision 1.7  1999/11/29 19:26:18  scott
 // Updated the leading license information of the file to reflect new maintainer.
 //

@@ -15,10 +15,10 @@
 #ifndef ID3LIB_HEADER_FRAME_H
 #define ID3LIB_HEADER_FRAME_H
 
-#include <id3/types.h>
-#include <id3/header.h>
-#include <id3/header_tag.h>
-#include <id3/field.h>
+#include "types.h"
+#include "header.h"
+#include "header_tag.h"
+#include "field.h"
 
 #define ID3FL_TAGALTER    (1 << 15)
 #define ID3FL_FILEALTER   (1 << 14)
@@ -50,6 +50,9 @@ protected:
 #endif
 
 // $Log$
+// Revision 1.1  1999/12/01 17:16:05  scott
+// moved from src/id3 to include/id3
+//
 // Revision 1.6  1999/11/29 19:26:18  scott
 // Updated the leading license information of the file to reflect new maintainer.
 //

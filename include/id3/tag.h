@@ -17,11 +17,11 @@
 
 #include <wchar.h>
 #include <stdio.h>
-#include <id3/types.h>
-#include <id3/frame.h>
-#include <id3/header_frame.h>
-#include <id3/header_tag.h>
-#include <id3/version.h>
+#include "types.h"
+#include "frame.h"
+#include "header_frame.h"
+#include "header_tag.h"
+#include "version.h"
 
 // for file buffers etc
 #define BUFF_SIZE (65536)
@@ -798,6 +798,9 @@ private:
 #endif
 
 // $Log$
+// Revision 1.1  1999/12/01 17:16:10  scott
+// moved from src/id3 to include/id3
+//
 // Revision 1.10  1999/11/29 19:26:18  scott
 // Updated the leading license information of the file to reflect new maintainer.
 //

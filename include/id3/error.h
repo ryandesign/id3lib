@@ -16,7 +16,7 @@
 #ifndef ID3LIB_ERROR_H
 #define ID3LIB_ERROR_H
 
-#include <id3/types.h>
+#include "types.h"
 
 /**
    Predefined id3lib error types.
@@ -138,6 +138,9 @@ private:
 #endif
 
 // $Log$
+// Revision 1.1  1999/12/01 17:15:59  scott
+// moved from src/id3 to include/id3
+//
 // Revision 1.9  1999/11/29 19:26:18  scott
 // Updated the leading license information of the file to reflect new maintainer.
 //

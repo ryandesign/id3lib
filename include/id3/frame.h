@@ -12,9 +12,9 @@
 // submissions may be altered, and will be included and released under these
 // terms.
 
-#include <id3/types.h>
-#include <id3/field.h>
-#include <id3/header_frame.h>
+#include "types.h"
+#include "field.h"
+#include "header_frame.h"
 
 class ID3_Tag;
 
@@ -136,6 +136,9 @@ protected:
 ;
 
 // $Log$
+// Revision 1.1  1999/12/01 17:16:02  scott
+// moved from src/id3 to include/id3
+//
 // Revision 1.9  1999/11/29 19:26:18  scott
 // Updated the leading license information of the file to reflect new maintainer.
 //
