@@ -1,0 +1,8 @@
+# $Id$
+
+package "id3info"
+version "@VERSION@"
+
+option  "assign"        a "Test the assignment operator"        flag    off
+option  "warning"       w "Turn on warnings (for debugging)"    flag    off
+option  "notice"        n "Turn on notices (for debugging)"     flag    off

@@ -1,0 +1,11 @@
+# $Id$
+
+package "id3convert"
+version "@VERSION@"
+
+option  "v1tag"         1 "Render only the id3v1 tag"           flag    off
+option  "v2tag"         2 "Render only the id3v2 tag"           flag    off
+option  "strip"         s "Strip the tags instead of rendering" flag    off
+option  "padding"       p "Use padding in the tag"              flag    off
+option  "warning"       w "Turn on warnings (for debugging)"    flag    off
+option  "notice"        n "Turn on notices (for debugging)"     flag    off
