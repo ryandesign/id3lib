@@ -41,7 +41,7 @@ void PrintVersion(char *sName)
 {
   cout << sName << " 1.0" << endl;
   cout << "Displays ID3 Tag Information - Written by Scott Thomas Haug" << endl;
-  cout << "Uses " << ID3_FullName() << endl << endl;
+  cout << "Uses " << ID3LIB_FULL_NAME << endl << endl;
 }
 
 char *GetDescription(const ID3_FrameID eFrameID)
@@ -439,6 +439,9 @@ int main( int argc, char *argv[])
 }
 
 // $Log$
+// Revision 1.2  2000/04/18 21:45:39  eldamitri
+// Moved demo_info.cpp from src/examples to examples
+//
 // Revision 1.7  2000/04/15 18:44:54  eldamitri
 // (PrintInformation): Renamed ID3FN_SYMBOL to ID3FN_ID
 //

@@ -62,7 +62,7 @@ void PrintVersion(char *sName)
     cout << VERSION_NUMBER[nIndex];
   }
   cout << endl;
-  cout << "Uses " << ID3_FullName() << endl << endl;
+  cout << "Uses " << ID3LIB_FULL_NAME << endl << endl;
 
   cout << "This program converts and strips ID3v1/1.1 and Lyrics3 v2.0" << endl;
   cout << "tags to ID3v2 tags." << endl << endl;
