@@ -46,6 +46,17 @@ AC_SUBST(ID3LIB_VERSION)
 AC_SUBST(ID3LIB_INTERFACE_AGE)
 AC_SUBST(ID3LIB_BINARY_AGE)
 
+# for documentation purposes
+DOX_DIR_HTML=api
+DOX_DIR_LATEX=latex
+DOX_DIR_MAN=man
+DOX_DIR_RTF=rtf
+
+AC_SUBST(DOX_DIR_HTML)
+AC_SUBST(DOX_DIR_LATEX)
+AC_SUBST(DOX_DIR_MAN)
+AC_SUBST(DOX_DIR_RTF)
+
 # libtool versioning
 LT_RELEASE=$ID3LIB_MAJOR_VERSION.$ID3LIB_MINOR_VERSION
 LT_CURRENT=`expr $ID3LIB_PATCH_VERSION - $ID3LIB_INTERFACE_AGE`
@@ -204,6 +215,9 @@ AC_OUTPUT(                      \
 )
 
 # $Log$
+# Revision 1.24  2000/04/20 04:59:44  eldamitri
+# Updated for 3.7.1 release
+#
 # Revision 1.23  2000/04/20 03:52:19  eldamitri
 # - Added ID3LIB_NAME definition
 # - Prepended '__' onto all macros that will be defined in config.h to
