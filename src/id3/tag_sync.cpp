@@ -1,3 +1,5 @@
+// $Id$
+
 //  The authors have released ID3Lib as Public Domain (PD) and claim no
 //  copyright, patent or other intellectual property protection in this work.
 //  This means that it may be modified, redistributed and used in commercial
@@ -121,3 +123,5 @@ void ID3_Tag::UnSync(uchar *destData, luint destSize, uchar *sourceData, luint s
 }
 
 
+
+// $Log$

@@ -1,3 +1,5 @@
+// $Id$
+
 //  The authors have released ID3Lib as Public Domain (PD) and claim no
 //  copyright, patent or other intellectual property protection in this work.
 //  This means that it may be modified, redistributed and used in commercial
@@ -122,3 +124,5 @@ ID3_Tag& operator<<(ID3_Tag& tag, ID3_Frame& frame);
 ID3_Tag& operator<<(ID3_Tag& tag, ID3_Frame *frame);
 
 #endif
+
+// $Log$

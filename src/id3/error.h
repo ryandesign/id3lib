@@ -1,3 +1,5 @@
+// $Id$
+
 //  The authors have released ID3Lib as Public Domain (PD) and claim no
 //  copyright, patent or other intellectual property protection in this work.
 //  This means that it may be modified, redistributed and used in commercial
@@ -52,3 +54,5 @@ protected:
 #define ID3_THROW(x) throw ID3_Error(x, __FILE__, __LINE__)
 
 #endif
+
+// $Log$

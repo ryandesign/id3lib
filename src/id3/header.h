@@ -1,3 +1,5 @@
+// $Id$
+
 //  The authors have released ID3Lib as Public Domain (PD) and claim no
 //  copyright, patent or other intellectual property protection in this work.
 //  This means that it may be modified, redistributed and used in commercial
@@ -57,3 +59,5 @@ protected:
 ID3_HeaderInfo *ID3_LookupHeaderInfo(uchar ver, uchar rev);
 
 #endif
+
+// $Log$

@@ -1,3 +1,5 @@
+// $Id$
+
 //  The authors have released ID3Lib as Public Domain (PD) and claim no
 //  copyright, patent or other intellectual property protection in this work.
 //  This means that it may be modified, redistributed and used in commercial
@@ -23,3 +25,5 @@
 #define ID3LIB_VERSTRING        ID3LIB_NAME " " ID3LIB_VERSION " " ID3LIB_DATE
 
 #endif
+
+// $Log$
