@@ -32,6 +32,7 @@ the_sources =                   \
   header_tag.cpp                \
   int28.cpp                     \
   misc_support.cpp              \
+  spec.cpp                      \
   tag.cpp                       \
   tag_file.cpp                  \
   tag_find.cpp                  \
@@ -51,6 +52,10 @@ libid3_la_LDFLAGS = \
   -export-dynamic
 
 # $Log$
+# Revision 1.8  2000/04/21 04:59:44  eldamitri
+# (the_sources): Added c_wrapper.cpp
+# (EXTRA_DIST): Removed, since dll_wrapper.cpp is no longer distributed
+#
 # Revision 1.7  2000/04/20 03:47:51  eldamitri
 # (the_sources): Added globals.cpp, removed version.cpp
 #
