@@ -190,11 +190,9 @@ ID3_FrameID ID3_Frame::GetID(void) const
 }
 
 
-void ID3_Frame::SetSpec(const ID3_V2Spec spec)
+bool ID3_Frame::SetSpec(const ID3_V2Spec spec)
 {
-  __bHasChanged = __bHasChanged || (__FrmHdr.GetSpec() != spec);
-  
-  __FrmHdr.SetSpec(spec);
+  return __FrmHdr.SetSpec(spec);
 }
 
 ID3_V2Spec ID3_Frame::GetSpec() const
