@@ -30,6 +30,7 @@ id3lib_sources =                \
   field_string_ascii.cpp        \
   field_string_unicode.cpp      \
   frame.cpp                     \
+  frame_impl.cpp                \
   frame_parse.cpp               \
   frame_render.cpp              \
   globals.cpp                   \
