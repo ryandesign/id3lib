@@ -1067,7 +1067,7 @@ ID3_FieldImpl::HasChanged() const
  ** integer fields, this returns the number of bytes in the field.
  ** 
  ** \code
- **   size_t howBig = myFrame.Field(ID3FN_DATA).Size();
+ **   size_t howBig = myFrame.GetField(ID3FN_DATA)->Size();
  ** \endcode
  ** 
  ** \return The size of the field, either in bytes (for binary or integer
@@ -1115,14 +1115,6 @@ size_t ID3_FieldImpl::Size() const
   }
 
   return size;
-}
-
-size_t ID3_FieldImpl::Parse(const uchar *buffer, size_t buffSize)
-{
-  ID3_MemoryReader mr(reinterpret_cast<const char *>(buffer), buffSize);
-  ID3_Reader::pos_type beg = mr.getCur();
-  this->Parse(mr);
-  return mr.getCur() - beg;
 }
 
 bool ID3_FieldImpl::Parse(ID3_Reader& reader)
@@ -1200,30 +1192,34 @@ ID3_FindFrameID(const char *id)
   return fid;
 }
 
-size_t ID3_FieldImpl::Render(uchar *buffer) const
+void ID3_FieldImpl::Render(ID3_Writer& writer) const
 {
-  size_t bytesUsed = 0;
-  
   switch (this->GetType()) 
   {
     case ID3FTY_INTEGER:
-      bytesUsed = RenderInteger(buffer);
+    {
+      RenderInteger(writer);
       break;
+    }
         
     case ID3FTY_BINARY:
-      bytesUsed = RenderBinary(buffer);
+    {
+      RenderBinary(writer);
       break;
+    }
         
     case ID3FTY_TEXTSTRING:
-      bytesUsed = RenderString(buffer);
+    {
+      RenderString(writer);
       break;
+    }
         
     default:
+    {
       ID3D_WARNING ( "ID3D_FieldImpl::Render(): unknown field type" );
       break;
+    }
   }
-    
-  return bytesUsed;
 }
 
 ID3_Field &
