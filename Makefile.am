@@ -11,9 +11,12 @@
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 EXTRA_DIST = reconf
-SUBDIRS = m4 doc src include
+SUBDIRS = m4 doc src include prj zlib
 
 # $Log$
+# Revision 1.5  1999/12/01 19:08:59  scott
+# (SUBDIRS): Added "include".
+#
 # Revision 1.4  1999/11/30 19:54:08  scott
 # (EXTRA_DIST): Removed ChangeLog, configure, HISTORY, and TODO.
 # These are included in the distribution automatically.
