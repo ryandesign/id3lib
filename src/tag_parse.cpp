@@ -97,7 +97,7 @@ namespace
         ID3_Field* fld = f->GetField(ID3FN_DATA);
         if (fld)
         {
-          ID3_MemoryReader mr(fld->GetBinary(), fld->BinSize());
+          ID3_MemoryReader mr(fld->GetRawBinary(), fld->BinSize());
           ID3_Reader::char_type ch = mr.readChar();
           if (ch != 'z') 
           { 
@@ -236,7 +236,7 @@ void ID3_TagImpl::ParseFile()
       }
       cur  = wr.getCur();
       wr.setBeg(cur);
-    } while (cur > last);
+    } while (!wr.atEnd() && cur > last);
   }
 
   _prepended_bytes = cur - beg;
