@@ -114,9 +114,9 @@ bool ID3_Frame::_ClearFields()
   {
     return false;
   }
-  for (index_t i = 0; i < __num_fields; i++)
+  for (index_t fi = 0; fi < __num_fields; fi++)
   {
-    delete __fields[i];
+    delete __fields[fi];
   }
   
   delete [] __fields;
