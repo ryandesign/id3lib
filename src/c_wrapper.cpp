@@ -602,6 +602,7 @@ extern "C"
     catch (...)
     {
     }
+    return false;
   }
 
 
