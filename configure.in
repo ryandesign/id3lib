@@ -13,18 +13,18 @@
 AC_INIT(reconf)
 AM_CONFIG_HEADER(config.h)
 
-id3lib_version=3
-id3lib_revision=0
+id3lib_major=3
+id3lib_minor=0
 id3lib_patch=6
 
-id3lib_release=$id3lib_version.$id3lib_revision.$id3lib_patch
+id3lib_release=$id3lib_major.$id3lib_minor.$id3lib_patch
 id3lib_name=id3lib
 id3lib_date="$Date$UNDEFINED"
 
 AM_INIT_AUTOMAKE($id3lib_name,$id3lib_release)
-lt_ver=`expr $id3lib_version + $id3lib_revision`
+lt_ver=`expr $id3lib_major + $id3lib_minor`
 lt_rev=$id3lib_patch
-lt_age=$id3lib_revision
+lt_age=$id3lib_minor
 AC_SUBST(lt_ver)
 AC_SUBST(lt_rev)
 AC_SUBST(lt_age)
@@ -88,22 +88,28 @@ dnl  * determining internal versioning information.  The intent is that these
 dnl  * macros will be made available int the library via functions or static
 dnl  * methods.
 dnl  */
-dnl /* Defines which version of id3lib is being used (int) */
-dnl #undef ID3LIB_VERSION
-dnl /* Defines which revision of id3lib is being used (int) */
-dnl #undef ID3LIB_REVISION
+dnl /* Defines which major version of id3lib is being used (int) */
+dnl #undef ID3LIB_MAJOR
+dnl /* Defines which minor version of id3lib is being used (int) */
+dnl #undef ID3LIB_MINOR
 dnl /* Defines which patch of id3lib is being used (int) */
 dnl #undef ID3LIB_PATCH
 dnl /* The date of this id3lib release */
 dnl #undef ID3LIB_DATE
 dnl /* The identifying string of this id3lib */
 dnl #undef ID3LIB_FULLNAME
+dnl /* The full release version of this id3lib */
+dnl #undef ID3LIB_RELEASE
+dnl /* The name of the library */
+dnl #undef ID3LIB_NAME
 dnl END ACCONFIG
 
-AC_DEFINE_UNQUOTED(ID3LIB_VERSION,  ($id3lib_version))
-AC_DEFINE_UNQUOTED(ID3LIB_REVISION, ($id3lib_revision))
+AC_DEFINE_UNQUOTED(ID3LIB_MAJOR,    ($id3lib_major))
+AC_DEFINE_UNQUOTED(ID3LIB_MINOR,    ($id3lib_minor))
 AC_DEFINE_UNQUOTED(ID3LIB_PATCH,    ($id3lib_patch))
+AC_DEFINE_UNQUOTED(ID3LIB_RELEASE,  "$id3lib_release")
 AC_DEFINE_UNQUOTED(ID3LIB_DATE,     "$id3lib_date")
+AC_DEFINE_UNQUOTED(ID3LIB_NAME,     "$id3lib_name")
 AC_DEFINE_UNQUOTED(ID3LIB_FULLNAME, "$id3lib_name-$id3lib_release")
 
 AC_OUTPUT(                      \
@@ -113,13 +119,12 @@ AC_OUTPUT(                      \
   doc/man/Makefile              \
   doc/latex/Makefile            \
   doc/texinfo/Makefile          \
+  examples/Makefile             \
   include/Makefile              \
   include/id3/Makefile          \
   m4/Makefile                   \
   prj/Makefile                  \
   src/Makefile                  \
-  src/id3/Makefile              \
-  src/examples/Makefile         \
   zlib/Makefile                 \
   zlib/include/Makefile         \
   zlib/lib/Makefile             \
@@ -128,6 +133,10 @@ AC_OUTPUT(                      \
 )
 
 # $Log$
+# Revision 1.14  2000/01/04 16:38:15  eldamitri
+# Removed AC_C_CONST and AC_C_INLINE checks, since we're using a C++ compiler
+# and these check against the C compiler.
+#
 # Revision 1.13  1999/12/27 06:15:35  scott
 # Changed release information from 3.6.2 to 3.0.6, to prepare for
 # future MusicMatch release to happen Real Soon Now.

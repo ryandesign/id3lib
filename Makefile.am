@@ -10,10 +10,13 @@
 # WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-EXTRA_DIST = reconf config.win32
-SUBDIRS = m4 doc src include prj zlib
+EXTRA_DIST = reconf config.win32 acconfig
+SUBDIRS = m4 doc src examples include prj zlib
 
 # $Log$
+# Revision 1.7  1999/12/03 14:10:11  scott
+# (EXTRA_DIST): Added config.win32.
+#
 # Revision 1.6  1999/12/03 00:45:17  scott
 # (SUBDIRS): Added prj and zlib
 #
