@@ -62,6 +62,7 @@ extern "C"
   ID3_C_EXPORT ID3Frame   *ID3Tag_FindFrameWithUNICODE (const ID3Tag *tag, ID3_FrameID id, ID3_FieldID fld, const unicode_t *data);
   ID3_C_EXPORT ID3Frame   *ID3Tag_GetFrameNum          (const ID3Tag *tag, index_t num);
   ID3_C_EXPORT size_t      ID3Tag_NumFrames            (const ID3Tag *tag);
+  ID3_C_EXPORT bool        ID3Tag_HasTagType           (const ID3Tag *tag, ID3_TagType);
 
   /* frame wrappers */
   ID3_C_EXPORT ID3Frame   *ID3Frame_New                (void);
@@ -98,4 +99,4 @@ extern "C"
 }
 #endif /*__cplusplus*/
 
-#endif /* __ID3LIB_ID3H__ */
+#endif /* __ID3LIB_ID3_H__ */

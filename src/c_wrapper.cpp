@@ -419,6 +419,26 @@ extern "C"
 
 
   ID3_C_EXPORT
+  bool ID3Tag_HasTagType(const ID3Tag *tag, ID3_TagType tt)
+  {
+    bool has_tt = false;
+  
+    try
+    {
+      if (tag)
+      {
+        has_tt = ((const ID3_Tag *) tag)->HasTagType(tt);
+      }
+    }
+    catch (...)
+    {
+    }
+    
+    return has_tt;
+  }
+
+
+  ID3_C_EXPORT
   ID3Frame *ID3Tag_GetFrameNum(const ID3Tag *tag, index_t num)
   {
     ID3_Frame *frame = NULL;
