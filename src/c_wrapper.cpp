@@ -137,22 +137,22 @@ extern "C"
     {
     }
   }
-
-
-  ID3_C_EXPORT
-  void ID3Tag_SetCompression(ID3Tag *tag, bool comp)
-  {
-    try
-    {
-      if (tag)
-      {
-        ((ID3_Tag *) tag)->SetCompression(comp);
-      }
-    }
-    catch (...)
-    {
-    }
-  }
+  
+  
+  ID3_C_EXPORT 
+  void ID3Tag_SetCompression(ID3Tag *tag, bool comp) 
+  { 
+    try 
+    { 
+      if (tag) 
+      { 
+        ((ID3_Tag *) tag)->SetCompression(comp); 
+      } 
+    } 
+    catch (...) 
+    { 
+    } 
+  } 
 
 
   ID3_C_EXPORT
@@ -570,6 +570,38 @@ extern "C"
     }
     
     return (ID3Field *) field;
+  }
+
+
+  ID3_C_EXPORT
+  void ID3Frame_SetCompression(ID3Frame *frame, bool comp)
+  {
+    try
+    {
+      if (frame)
+      {
+        ((ID3_Frame *) frame)->SetCompression(comp);
+      }
+    }
+    catch (...)
+    {
+    }
+  }
+
+
+  ID3_C_EXPORT
+  bool ID3Frame_GetCompression(ID3Frame *frame)
+  {
+    try
+    {
+      if (frame)
+      {
+        return ((ID3_Frame *) frame)->GetCompression();
+      }
+    }
+    catch (...)
+    {
+    }
   }
 
 
