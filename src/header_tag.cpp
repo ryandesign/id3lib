@@ -98,6 +98,10 @@ ID3_Err ID3_TagHeader::Render(ID3_Writer& writer) const
           }
         }
       }
+      default:
+      {
+        break; //can't reach here, but added to avoid compiler warnings
+      }
     }
   //  else //not implemented
   }

@@ -140,6 +140,10 @@ namespace
               ID3D_NOTICE( "parseFields(): found linked_fixed_size = " << linked_fixed_size );
               break;
             }
+            default:
+            {
+              break; //should never reach here, added to avoid compiler errors
+            }
           }
         }
       }
