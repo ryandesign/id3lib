@@ -16,6 +16,7 @@
 #  include <config.h>
 #endif
 
+#include <string.h>
 #include <iostream.h>
 #include <id3/tag.h>
 #include "demo_convert_options.h"
