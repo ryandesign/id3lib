@@ -56,11 +56,11 @@ size_t ID3_Frame::Parse(const uchar * const buffer, luint size)
     data = expanded_data; 
     data_size = expanded_size; 
   }  
-      
+  
   // set the type of frame based on the parsed header  
   this->_ClearFields(); 
   this->_InitFields(); 
-  try  
+  try
   {  
     ID3_TextEnc enc = ID3TE_ASCII;  // set the default encoding 
     size_t remainder = data_size;   // how many bytes remain to be parsed 
@@ -86,7 +86,7 @@ size_t ID3_Frame::Parse(const uchar * const buffer, luint size)
         continue; 
       }
       
-      //(*fi)->SetEncoding(enc);
+      (*fi)->SetEncoding(enc);
       size_t frame_size = (*fi)->Parse(data, remainder); 
       
       if (0 == frame_size) 
@@ -97,7 +97,7 @@ size_t ID3_Frame::Parse(const uchar * const buffer, luint size)
       } 
  
       if ((*fi)->GetID() == ID3FN_TEXTENC)  
-      {  
+      {
         enc = static_cast<ID3_TextEnc>((*fi)->Get());  
       }  
       
