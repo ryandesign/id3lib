@@ -94,6 +94,9 @@ istream& operator>>(istream& in, int28& val)
 }
 
 // $Log$
+// Revision 1.12  2000/04/10 16:57:47  eldamitri
+// (ProcessBinaries): Minor change to prevent warning in windows.
+//
 // Revision 1.11  2000/04/05 05:21:15  eldamitri
 // Updated initial comment information to reflect license, copyright
 // change.
