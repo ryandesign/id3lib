@@ -61,11 +61,12 @@ public:
    **/
   ID3_Frame(ID3_FrameID id = ID3FID_NOFRAME);
   ID3_Frame(const ID3_FrameHeader &);
+  ID3_Frame(const ID3_Frame&);
 
   /// Destructor.
   ~ID3_Frame(void);
   
-  /** Clears the frame of alld ata and resets the frame such that it can take
+  /** Clears the frame of all data and resets the frame such that it can take
    ** on the form of any id3v2 frame that id3lib supports.
    ** 
    ** @see ID3_Tag::Clear
