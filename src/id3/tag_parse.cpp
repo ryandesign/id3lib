@@ -236,7 +236,7 @@ void ID3_Tag::ProcessBinaries(ID3_FrameID whichFrame, bool attach)
           }
         }
       }
-      catch (ID3_Error err)
+      catch (ID3_Error&)
       {
         // There's been an error in the parsing of the frame.  It shouldn't be
         // attached.
@@ -425,6 +425,9 @@ luint ID3_Tag::ParseFromHandle(void)
 }
 
 // $Log$
+// Revision 1.19  2000/04/10 16:58:13  eldamitri
+// (ProcessBinaries): Minor change to prevent warning in windows.
+//
 // Revision 1.18  2000/04/09 22:46:04  eldamitri
 // Minor structure change.
 //
