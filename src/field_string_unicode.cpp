@@ -61,7 +61,8 @@ void ID3_Field::Set(const unicode_t *string)
   
   Set((uchar *) string, nBytes);
   
-  __enc = ID3TE_UNICODE;
+  this->SetEncoding(ID3TE_UNICODE);
+  __type = ID3FTY_TEXTSTRING;
   __changed = true;
   
   return ;

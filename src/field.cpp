@@ -1009,6 +1009,7 @@ ID3_Field::Render(uchar *buffer)
       {
         bytesUsed = RenderASCIIString(buffer);
       }
+      break;
         
     default:
       ID3_THROW (ID3E_UnknownFieldType);

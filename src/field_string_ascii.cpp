@@ -60,7 +60,8 @@ void ID3_Field::Set(const char *sString)
     Set(temp);
     delete [] temp;
       
-    __enc = ID3TE_ASCII;
+    this->SetEncoding(ID3TE_ASCII);
+    __type = ID3FTY_TEXTSTRING;
   }
   
   return ;
@@ -125,10 +126,9 @@ void ID3_Field::Add(const char *sString)
     Add(temp);
     delete [] temp;
     
-    __enc = ID3TE_ASCII;
+    this->SetEncoding(ID3TE_ASCII);
+    __type = ID3FTY_TEXTSTRING;
   }
-  
-  return ;
 }
 
 
