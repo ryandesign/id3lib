@@ -19,7 +19,9 @@ the_headers =                   \
   spec.h                        \
   reader.h                      \
   readers.h                     \
-  tag.h                         
+  tag.h                         \
+  writer.h                      \
+  writers.h                     
 
 id3includedir      = $(includedir)/id3
 id3include_HEADERS = $(the_headers)
@@ -39,4 +41,6 @@ noinst_HEADERS =                \
   readers_compressed.h          \
   strings.h                     \
   uint28.h                      \
-  utils.h
+  utils.h                       \
+  writer_decorators.h           \
+  writers_compressed.h          
