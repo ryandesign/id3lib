@@ -37,8 +37,9 @@
 #include "tag.h"
 #include "utils.h"
 #include "frame_impl.h"
-#include "writer_decorators.h"
-#include "writers_compressed.h"
+#include "io_decorators.h"
+#include "io_strings.h"
+#include "io_helpers.h"
 
 using namespace dami;
 
@@ -133,8 +134,7 @@ void ID3_FrameImpl::Render(ID3_Writer& writer) const
   // No-man's land!  Not part of the header, not part of the data
   if (hdr.GetCompression())
   {
-    io::BinaryNumberWriter bnr(writer);
-    bnr.writeNumber(origSize, sizeof(uint32));
+    io::writeBENumber(writer, origSize, sizeof(uint32));
     ID3D_NOTICE( "ID3_FrameImpl::Render(): frame is compressed, wrote origSize = " << origSize );
   }
   if (hdr.GetEncryption())

@@ -598,7 +598,7 @@ size_t ID3_GetGenreNum(const ID3_Tag *tag)
     if (*pCur == ')')
     {
       // if the genre number is greater than 255, its invalid.
-      ulGenre = MIN(0xFF, atoi(&sGenre[1]));
+      ulGenre = min(0xFF, atoi(&sGenre[1]));
     }
   }
 
@@ -920,8 +920,7 @@ ID3_Frame *ID3_GetSyncLyrics(const ID3_Tag *tag, const char *lang,
   }
   
   // get the lyrics size
-  size_t datasize = frmExist->GetField(ID3FN_DATA)->Size();
-  size = MIN(size, datasize);
+  size = min(size, frmExist->GetField(ID3FN_DATA)->Size());
 
   // get the lyrics data
   pData = frmExist->GetField (ID3FN_DATA)->GetBinary();

@@ -28,9 +28,7 @@
 #include <config.h>
 #endif
 
-#if defined HAVE_SYS_PARAM_H
-#include <sys/param.h>
-#endif
+#include "debug.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -39,7 +37,13 @@
 #include "helpers.h"
 #include "utils.h"
 #include "writers.h"
-#include "writer_decorators.h"
+#include "io_decorators.h"
+#include "io_helpers.h"
+#include "io_strings.h"
+
+#if defined HAVE_SYS_PARAM_H
+#include <sys/param.h>
+#endif
 
 using namespace dami;
 
@@ -47,26 +51,24 @@ void id3::v1::render(ID3_Writer& writer, const ID3_TagImpl& tag)
 {
   writer.writeChars("TAG", 3);
   
-  io::TrailingSpacesWriter tsw(writer);
-
-  tsw.writeString(id3::v2::getTitle(tag),  ID3_V1_LEN_TITLE);
-  tsw.writeString(id3::v2::getArtist(tag), ID3_V1_LEN_ARTIST);
-  tsw.writeString(id3::v2::getAlbum(tag),  ID3_V1_LEN_ALBUM);
-  tsw.writeString(id3::v2::getYear(tag),   ID3_V1_LEN_YEAR);
+  io::writeTrailingSpaces(writer, id3::v2::getTitle(tag),  ID3_V1_LEN_TITLE);
+  io::writeTrailingSpaces(writer, id3::v2::getArtist(tag), ID3_V1_LEN_ARTIST);
+  io::writeTrailingSpaces(writer, id3::v2::getAlbum(tag),  ID3_V1_LEN_ALBUM);
+  io::writeTrailingSpaces(writer, id3::v2::getYear(tag),   ID3_V1_LEN_YEAR);
   
   size_t track = id3::v2::getTrackNum(tag);
   String comment = id3::v2::getV1Comment(tag);
   if (track > 0)
   {
-    tsw.writeString(comment, ID3_V1_LEN_COMMENT - 2);
-    tsw.writeChar('\0');
-    tsw.writeChar((char) track);
+    io::writeTrailingSpaces(writer, comment, ID3_V1_LEN_COMMENT - 2);
+    writer.writeChar('\0');
+    writer.writeChar((char) track);
   }
   else
   {
-    tsw.writeString(comment, ID3_V1_LEN_COMMENT);
+    io::writeTrailingSpaces(writer, comment, ID3_V1_LEN_COMMENT);
   }
-  tsw.writeChar((char) id3::v2::getGenreNum(tag));
+  writer.writeChar((char) id3::v2::getGenreNum(tag));
 }
 
 namespace

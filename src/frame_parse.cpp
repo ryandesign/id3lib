@@ -32,8 +32,7 @@
 
 #include "frame_impl.h"
 #include "utils.h"
-#include "reader_decorators.h"
-#include "readers_compressed.h"
+#include "io_decorators.h"
 
 namespace dami
 {
@@ -138,8 +137,7 @@ bool ID3_FrameImpl::Parse(ID3_Reader& reader)
   unsigned long origSize = 0;
   if (_hdr.GetCompression())
   {
-    io::BinaryNumberReader nr(wr);
-    origSize = nr.readNumber(sizeof(uint32));
+    origSize = io::readBENumber(reader, sizeof(uint32));
     ID3D_NOTICE( "ID3_FrameImpl::Parse(): frame is compressed, origSize = " << origSize );
   }
 

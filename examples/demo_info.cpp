@@ -28,7 +28,7 @@
 #include <id3/utils.h>
 #include <id3/misc_support.h>
 #include <id3/readers.h>
-#include <id3/reader_decorators.h>
+#include <id3/io_helpers.h>
 #include <id3/error.h>
 
 #include "demo_info_options.h"
@@ -271,12 +271,11 @@ void PrintInformation(const ID3_Tag &myTag)
           if (fld)
           {
             ID3_MemoryReader mr(fld->GetBinary(), fld->BinSize());
-            io::BinaryNumberReader bnr(mr);
-            io::TextReader tr(mr);
             while (!mr.atEnd())
             {
-              cout << tr.readText();
-              cout << " [" << bnr.readNumber(sizeof(uint32)) << " " << format << "] ";
+              cout << io::readString(mr);
+              cout << " [" << io::readBENumber(mr, sizeof(uint32)) << " " 
+                   << format << "] ";
             }
           }
           cout << endl;

@@ -31,8 +31,7 @@
 #include "debug.h"
 #include "field_impl.h"
 #include "utils.h"
-#include "reader_decorators.h"
-#include "writer_decorators.h"
+#include "io_helpers.h"
 
 using namespace dami;
 
@@ -92,8 +91,7 @@ bool ID3_FieldImpl::ParseInteger(ID3_Reader& reader)
     this->Clear();
     size_t fixed = this->Size();
     size_t nBytes = (fixed > 0) ? fixed : sizeof(uint32);
-    io::BinaryNumberReader nr(reader);
-    this->Set(nr.readNumber(nBytes));
+    this->Set(io::readBENumber(reader, nBytes));
     _changed = false;
     success = true;
   }
@@ -102,6 +100,5 @@ bool ID3_FieldImpl::ParseInteger(ID3_Reader& reader)
 
 void ID3_FieldImpl::RenderInteger(ID3_Writer& writer) const
 {
-  io::BinaryNumberWriter bnw(writer);
-  bnw.writeNumber(_integer, this->Size());
+  io::writeBENumber(writer, _integer, this->Size());
 }

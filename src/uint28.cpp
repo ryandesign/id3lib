@@ -28,14 +28,11 @@
 
 #include "uint28.h"
 #include "readers.h"
-#include "reader_decorators.h"
 #include "writers.h"
 
 #if defined HAVE_IOMANIP_H
 #  include "iomanip.h"
 #endif
-
-using namespace dami;
 
 // values are initialized here
 // this stops the window complier from complaining

@@ -39,19 +39,19 @@
 #include "tag_impl.h"
 #include "uint28.h"
 #include "utils.h"
-#include "reader_decorators.h"
+#include "io_helpers.h"
+#include "io_strings.h"
 
 using namespace dami;
 
-size_t ID3_TagImpl::IsV2Tag(ID3_Reader& rdr)
+size_t ID3_TagImpl::IsV2Tag(ID3_Reader& reader)
 {
-  io::ExitTrigger et(rdr);
+  io::ExitTrigger et(reader);
   size_t tagSize = 0;
-  io::TextReader tr(rdr);
-  String id = tr.readText(ID3_TagHeader::ID_SIZE);
-  String ver = tr.readText(2);
-  char flags = tr.readChar();
-  String size = tr.readText(4);
+  String id = io::readText(reader, ID3_TagHeader::ID_SIZE);
+  String ver = io::readText(reader, 2);
+  char flags = reader.readChar();
+  String size = io::readText(reader, 4);
   
   if (id == ID3_TagHeader::ID &&
       (uchar) ver [0] < 0xFF   &&      (uchar) ver [1] < 0xFF   &&

@@ -33,8 +33,10 @@
 #endif
 
 #include "field_impl.h"
-#include "reader_decorators.h"
+#include "reader.h"
 #include "writer.h"
+#include "io_helpers.h"
+#include "utils.h"
 
 using namespace dami;
 
@@ -60,11 +62,11 @@ ID3_FieldImpl::Set(const uchar *newData, //< data to assign to this field.
         _bytes = newSize;
         _binary = new uchar[_bytes];
       }
-      ::memcpy(_binary, newData, MIN(_bytes, newSize));
+      ::memcpy(_binary, newData, min(_bytes, newSize));
     }
     _changed = true;
   }
-  return MIN(_bytes, newSize);
+  return min(_bytes, newSize);
 }
 
 
@@ -85,7 +87,7 @@ size_t ID3_FieldImpl::Get(uchar *buffer,    //< Destination of retrieved string
   size_t bytes = 0;
   if (this->GetType() == ID3FTY_BINARY)
   {
-    bytes = MIN(max_bytes, this->Size());
+    bytes = min(max_bytes, this->Size());
     if (NULL != buffer && NULL != _binary && bytes > 0)
     {
       ::memcpy(buffer, _binary, bytes);
@@ -164,8 +166,7 @@ bool ID3_FieldImpl::ParseBinary(ID3_Reader& reader)
 {
   // copy the remaining bytes, unless we're fixed length, in which case copy
   // the minimum of the remaining bytes vs. the fixed length
-  ::io::BinaryReader br(reader);
-  ::BString binary = br.readBinary();
+  BString binary = io::readAllBinary(reader);
   this->Set(binary.data(), binary.size());
   _changed = false;
   return true;

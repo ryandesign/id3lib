@@ -36,8 +36,7 @@
 #include "uint28.h"
 #include "utils.h"
 #include "tag.h"
-#include "reader_decorators.h"
-#include "writer_decorators.h"
+#include "io_helpers.h"
 
 using namespace dami;
 
@@ -86,8 +85,7 @@ void ID3_TagHeader::Render(ID3_Writer& writer) const
   // now we render the extended header
   if (_flags.test(EXTENDED))
   {
-    io::BinaryNumberWriter bnw(writer);
-    bnw.writeNumber(_info->extended_bytes, sizeof(uint32));
+    io::writeBENumber(writer, _info->extended_bytes, sizeof(uint32));
   }
 }
 

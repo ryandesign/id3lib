@@ -418,11 +418,12 @@ size_t ID3_Tag::Parse(const uchar header[ID3_TagHeader::SIZE],
   {
     return 0;
   }
-  ::BString buf;
+  BString buf;
   buf.reserve(ID3_TagHeader::SIZE + size);
-  buf.append((char*)header, ID3_TagHeader::SIZE);
-  buf.append((char*)buffer, size);
-  return this->Parse((uchar*)buf.data(), buf.size());
+  buf.append(reinterpret_cast<const BString::value_type *>(header), 
+             ID3_TagHeader::SIZE);
+  buf.append(reinterpret_cast<const BString::value_type *>(buffer), size);
+  return this->Parse(buf.data(), buf.size());
 }
 
 /** Renders the tag and writes it to the attached file; the type of tag
