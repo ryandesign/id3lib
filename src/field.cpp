@@ -763,6 +763,7 @@ ID3_Field::ID3_Field(void)
   __sData   = NULL;
   __ulSize  = 0;
   __ulFlags = 0;
+  __spec    = ID3V2_LATEST;
   
   Clear();
 }
@@ -969,7 +970,7 @@ ID3_Field::operator=( const ID3_Field &rField )
 {
   if (this != &rField) // && (__spec >= __eSpecBegin && __spec <= __eSpecEnd))
   {
-    switch (__eType)
+    switch (rField.__eType)
     {
       case ID3FTY_INTEGER:
         *this = rField.Get();
@@ -982,10 +983,17 @@ ID3_Field::operator=( const ID3_Field &rField )
         break;
     }
   }
+  __eType = rField.__eType;
+  __spec  = rField.__spec;
   return *this;
 }
 
 // $Log$
+// Revision 1.5  2000/04/26 15:53:30  eldamitri
+// Updated lists of supported/unsupported frames (PRIV now supported)
+// (ID3FD_Private): Added definition
+// (ID3_FrameDefs): Updated Private's definition
+//
 // Revision 1.4  2000/04/26 03:42:52  eldamitri
 // - Replaced version/revision uchar combination with ID3_V2Spec enums
 // - Deprecated {Get,Set}Version, GetRevision for {Get,Set}Spec
