@@ -34,7 +34,6 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
 #include <memory.h>
 #include "tag.h"
 #include "misc_support.h"
