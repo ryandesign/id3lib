@@ -120,7 +120,7 @@ public:
   size_t     NumFrames() const { return _frames.size(); }
   ID3_TagImpl&   operator=( const ID3_Tag & );
   
-  bool       HasTagType(uint16 tt) const { return _file_tags.test(tt); }
+  bool       HasTagType(ID3_TagType tt) const { return _file_tags.test(tt); }
   ID3_V2Spec GetSpec() const;
   bool       SetSpec(ID3_V2Spec);
   

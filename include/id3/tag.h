@@ -107,7 +107,7 @@ public:
 
   ID3_Tag&   operator=( const ID3_Tag & );
   
-  bool       HasTagType(uint16 tt) const;
+  bool       HasTagType(ID3_TagType tt) const;
   ID3_V2Spec GetSpec() const;
   bool       SetSpec(ID3_V2Spec);
   

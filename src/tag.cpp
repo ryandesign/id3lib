@@ -916,7 +916,7 @@ ID3_Tag& ID3_Tag::operator=( const ID3_Tag &rTag )
   return *this;
 }
 
-bool ID3_Tag::HasTagType(uint16 tt) const
+bool ID3_Tag::HasTagType(ID3_TagType tt) const
 {
   return _impl->HasTagType(tt);
 }
