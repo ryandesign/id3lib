@@ -44,27 +44,20 @@ void ID3_Field::Set(const uchar *newData, //< The data to assign to this field.
 {
   Clear();
   
-  if (newSize > 0)
+  if (newSize == 0 || newData == NULL)
+  {
+    __size = 0;
+    __data = NULL;
+  }
+  else
   {
     __data = new uchar[newSize];
-    if (NULL == __data)
-    {
-      ID3_THROW(ID3E_NoMemory);
-    }
     
-    if (newData != NULL)
-    {
-      memcpy(__data, newData, newSize);
-    }
-    else
-    {
-      memset(__data, 0, newSize);
-    }
+    memcpy(__data, newData, newSize);
     __size = newSize;
-    
-    __type = ID3FTY_BINARY;
-    __changed = true;
   }
+  __type = ID3FTY_BINARY;
+  __changed = true;
   
   return ;
 }
