@@ -1426,8 +1426,8 @@ ID3_Frame *ID3_GetSyncLyricsInfo(const ID3_Tag *tag, const char *desc,
   return frmExist;
 }
 
-ID3_Frame *ID3_GetSyncLyrics(const ID3_Tag *tag, const char *lang,
-                             const char *desc, const uchar *pData, size_t& size)
+ID3_Frame *ID3_GetSyncLyrics(const ID3_Tag* tag, const char* lang,
+                             const char* desc, const uchar* &pData, size_t& size)
 {
   // check if a SYLT frame of this language or descriptor exists
   ID3_Frame* frmExist = NULL;

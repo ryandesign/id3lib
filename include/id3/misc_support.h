@@ -110,8 +110,8 @@ ID3_C_EXPORT ID3_Frame* ID3_AddSyncLyrics(ID3_Tag*, const uchar*, size_t,
 ID3_C_EXPORT ID3_Frame* ID3_GetSyncLyricsInfo(const ID3_Tag *tag, const char *lang,
                                               const char *desc, char &stampformat,
                                               char &type, size_t &size);
-ID3_C_EXPORT ID3_Frame* ID3_GetSyncLyrics(const ID3_Tag *tag, const char *lang,
-                                          const char *desc, char *pData, size_t &size);
+ID3_C_EXPORT ID3_Frame* ID3_GetSyncLyrics(const ID3_Tag* tag, const char* lang,
+                                          const char* desc, const uchar* &pData, size_t& size);
 
 
 //following routine courtesy of John George
