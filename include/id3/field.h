@@ -30,33 +30,6 @@
 #include <stdlib.h>
 #include "error.h"
 
-// field flags
-enum ID3_FieldFlags 
-{
-  ID3FF_NONE       =      0,
-  ID3FF_NULL       = 1 << 0,
-  ID3FF_NULLDIVIDE = 1 << 1,
-  ID3FF_ADJUSTENC  = 1 << 2,
-  ID3FF_ADJUSTEDBY = 1 << 3
-};
-
-// Enumeration of the types of field types
-enum ID3_FieldType
-{
-  ID3FTY_INTEGER        = 0,
-  ID3FTY_BITFIELD,
-  ID3FTY_BINARY,
-  ID3FTY_ASCIISTRING,
-  ID3FTY_UNICODESTRING
-};
-
-// Used for version control
-enum ID3_VerCtl
-{
-  ID3VC_HIGHER  = 0,
-  ID3VC_LOWER
-};
-
 struct ID3_FieldDef
 {
   ID3_FieldID   eID;
