@@ -20,28 +20,31 @@
 
 class int28
 {
-public:
-  int28(luint val = 0);
-  int28(uchar *val);
-  
-  uchar operator[](luint posn);
   friend ostream &operator<<(ostream& out, int28& val);
-  luint get(void);
+  friend istream &operator>>(istream& in, int28& val);
+public:
+  int28(uint32 val = 0);
+  int28(uchar val[sizeof(uint32)]);
   
-  // *** PRIVATE INTERNAL DATA - DO NOT USE *** PRIVATE INTERNAL DATA - DO NOT USE ***
+  uchar operator[](size_t posn);
+  uint32 get(void);
   
 protected:
-  void set(luint val);
-  uchar value[sizeof(luint)]; // the integer stored as a uchar array
+  void set(uint32 val);
+  void set(uchar val[sizeof(uint32)]);
+
+private:
+  uchar __acValue[sizeof(uint32)]; // the integer stored as a uchar array
+  uint32 __nValue;
 }
 ;
-
-ostream & operator<<(ostream& out, int28& val);
-istream & operator>>(istream& in, int28& val);
 
 #endif
 
 // $Log$
+// Revision 1.3  1999/12/17 16:05:02  scott
+// Updated opening comment block.
+//
 // Revision 1.2  1999/12/02 22:45:28  scott
 // Changed all of the #include <id3/*> to #include "*" to help ensure that
 // the sources are searched for in the right places.
