@@ -108,7 +108,7 @@ void ID3_Field::Add(const unicode_t *string)
 
 // this is Get()
 
-size_t ID3_Field::Get(unicode_t *buffer, size_t maxChars, index_t itemNum)
+size_t ID3_Field::Get(unicode_t *buffer, size_t maxChars, index_t itemNum) const
 {
   size_t charsUsed = 0;
   

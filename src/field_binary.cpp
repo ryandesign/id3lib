@@ -63,7 +63,7 @@ void ID3_Field::Set(const uchar *newData, size_t newSize)
 }
 
 
-void ID3_Field::Get(uchar *buffer, size_t buffLength)
+void ID3_Field::Get(uchar *buffer, size_t buffLength) const
 {
   if (NULL == buffer)
   {

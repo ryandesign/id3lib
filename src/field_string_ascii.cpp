@@ -70,7 +70,7 @@ void ID3_Field::Set(const char *sString)
 
 // the ::Get() function for ASCII
 
-size_t ID3_Field::Get(char* buffer, size_t maxLength, index_t itemNum)
+size_t ID3_Field::Get(char* buffer, size_t maxLength, index_t itemNum) const
 {
   unicode_t* unicode_buffer = new unicode_t[maxLength];
   if (NULL == unicode_buffer)
