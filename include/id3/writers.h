@@ -54,11 +54,12 @@ class ID3_OStreamWriter : public ID3_Writer
    **/
   virtual size_type writeChars(const char buf[], size_type len)
   { 
-    return this->writeChars(reinterpret_cast<const char_type *>(buf), len);
+    _stream.write(buf, len);
+    return len;
   }
   virtual size_type writeChars(const char_type buf[], size_type len)
   {
-    _stream.write(buf, len);
+    _stream.write(reinterpret_cast<const char*>(buf), len);
     return len;
   }
 
@@ -101,11 +102,12 @@ class ID3_IOStreamWriter : public ID3_Writer
    **/
   virtual size_type writeChars(const char buf[], size_type len)
   { 
-    return this->writeChars(reinterpret_cast<const char_type *>(buf), len);
+    _stream.write(buf, len);
+    return len;
   }
   virtual size_type writeChars(const char_type buf[], size_type len)
   {
-    _stream.write(buf, len);
+    _stream.write(reinterpret_cast<const char*>(buf), len);
     return len;
   }
 
