@@ -132,9 +132,6 @@ protected:
   ID3_V2Spec GetSpec() const;
   void       ClearList(ID3_Elem *);
   void       DeleteElem(ID3_Elem *);
-  void       AddBinary(const uchar *, luint);
-  void       ExpandBinaries(const uchar *, luint);
-  void       ProcessBinaries(ID3_FrameID = ID3FID_NOFRAME, bool = true);
   void       RemoveFromList(ID3_Elem *, ID3_Elem **);
   ID3_Elem*  Find(const ID3_Frame *) const;
   luint      PaddingSize(luint) const;
