@@ -24,8 +24,8 @@
 // id3lib.  These files are distributed with id3lib at
 // http://download.sourceforge.net/id3lib/
 
-#include <cstdio>
-#include <cstring>
+#include <stdio.h>
+#include <string.h>
 #include <memory.h>
 #include <zlib.h>
 #include "tag.h"
@@ -428,6 +428,10 @@ luint ID3_Tag::ParseFromHandle(void)
 }
 
 // $Log$
+// Revision 1.16  2000/04/07 04:35:38  eldamitri
+// Added optional parameters to Link to make parsing of id3v1/lyrics3
+// tags optional.
+//
 // Revision 1.15  2000/04/05 05:21:15  eldamitri
 // Updated initial comment information to reflect license, copyright
 // change.

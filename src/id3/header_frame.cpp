@@ -24,7 +24,7 @@
 // id3lib.  These files are distributed with id3lib at
 // http://download.sourceforge.net/id3lib/
 
-#include <cstring>
+#include <string.h>
 #include <memory.h>
 #include "header_frame.h"
 #include "error.h"
@@ -171,6 +171,10 @@ void ID3_FrameHeader::Clear()
 }
 
 // $Log$
+// Revision 1.12  2000/04/05 05:21:15  eldamitri
+// Updated initial comment information to reflect license, copyright
+// change.
+//
 // Revision 1.11  2000/01/04 15:42:49  eldamitri
 // For compilation with gcc 2.95.2 and better compatibility with ANSI/ISO
 // standard C++, updated, rearranged, and removed (where necessary)

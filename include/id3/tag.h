@@ -27,7 +27,7 @@
 #ifndef ID3LIB_TAG_H
 #define ID3LIB_TAG_H
 
-#include <cstdio>
+#include <stdio.h>
 #include "types.h"
 #include "frame.h"
 #include "header_frame.h"
@@ -860,6 +860,9 @@ private:
 #endif
 
 // $Log$
+// Revision 1.10  2000/04/07 19:35:14  eldamitri
+// Added HasV1Tag, HasV2Tag, and HasLyrics (thanks John Adcock).
+//
 // Revision 1.9  2000/04/07 04:45:31  eldamitri
 // Minor cleanup for log comments.
 //

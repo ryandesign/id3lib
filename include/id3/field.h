@@ -27,7 +27,7 @@
 #ifndef ID3LIB_FIELD_H
 #define ID3LIB_FIELD_H
 
-#include <cstdlib>
+#include <stdlib.h>
 #include "types.h"
 #include "error.h"
 
@@ -431,6 +431,9 @@ ID3_FrameID   ID3_FindFrameID(const char *id);
 #endif
 
 // $Log$
+// Revision 1.9  2000/04/07 04:45:31  eldamitri
+// Minor cleanup for log comments.
+//
 // Revision 1.8  2000/04/05 05:20:52  eldamitri
 // Updated initial comment information to reflect license, copyright
 // change.
