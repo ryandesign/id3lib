@@ -29,6 +29,9 @@
 #include "header_frame.h"
 #include "error.h"
 #include "utils.h"
+#include "frame_def.h"
+#include "field_def.h"
+#include "field_impl.h"
 
 #if defined HAVE_CONFIG_H
 #include <config.h>
