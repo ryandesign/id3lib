@@ -12,10 +12,16 @@
 
 LT_VERSION = $(LT_CURRENT):$(LT_REVISION):$(LT_AGE)
 
-INCLUDES = \
-  @ID3LIB_DEBUG_FLAGS@ -I$(top_srcdir)/include/id3 -I$(top_srcdir)/include
+if ID3_NEEDZLIB
+zlib_include = -I$(top_srcdir)/zlib/include
+else
+zlib_include = 
+endif
 
-the_sources =                   \
+INCLUDES = \
+  @ID3LIB_DEBUG_FLAGS@ -I$(top_srcdir)/include/id3 -I$(top_srcdir)/include $(zlib_include)
+
+id3lib_sources =                \
   c_wrapper.cpp                 \
   error.cpp                     \
   field.cpp                     \
@@ -45,7 +51,7 @@ the_sources =                   \
 
 lib_LTLIBRARIES   = libid3.la 
 
-libid3_la_SOURCES = $(the_sources)
+libid3_la_SOURCES = $(id3lib_sources)
 libid3_la_LIBADD  = -lz
 libid3_la_LDFLAGS = \
   -version-info $(LT_VERSION) \
