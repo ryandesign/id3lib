@@ -299,7 +299,7 @@ size_t io::writeTrailingSpaces(ID3_Writer& writer, String buf, size_t len)
 {
   ID3_Writer::pos_type beg = writer.getCur();
   ID3_Writer::size_type strLen = buf.size();
-  ID3_Writer::size_type size = min(len, (unsigned long)strLen);
+  ID3_Writer::size_type size = min(len,strLen);
   writer.writeChars(buf.data(), size);
   for (; size < len; ++size)
   {
