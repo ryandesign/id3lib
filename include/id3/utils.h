@@ -29,10 +29,12 @@
 
 #include "globals.h"
 
+#if defined ID3_UNDEFINED
 namespace id3
 {
+#endif /* ID3_UNDEFINED */
   uint32 ParseNumber(const uchar *buffer, size_t size = sizeof(uint32));
-  void   RenderNumber(uchar *buffer, uint32 val, size_t size = sizeof(uint32));
+  size_t RenderNumber(uchar *buffer, uint32 val, size_t size = sizeof(uint32));
   
   void   mbstoucs(unicode_t *unicode, const char *ascii, const luint len);
   void   ucstombs(char *ascii, const unicode_t *unicode, const luint len);
@@ -42,8 +44,9 @@ namespace id3
   int    ucscmp(const unicode_t *s1, const unicode_t *s2);
   int    ucsncmp(const unicode_t *s1, const unicode_t *s2, size_t len);
 
-  void RemoveTrailingSpaces(char *buffer, luint length);
+#if defined ID3_UNDEFINED
 }
+#endif  /* ID3_UNDEFINED */
   
   
 #endif /* __ID3LIB_UTILS_H__ */
