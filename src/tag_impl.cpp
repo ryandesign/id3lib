@@ -164,13 +164,13 @@ void ID3_TagImpl::AddFrame(const ID3_Frame* frame)
   }
 }
 
-void ID3_TagImpl::AttachFrame(ID3_Frame *frame)
+bool ID3_TagImpl::AttachFrame(ID3_Frame *frame)
 {
 
   if (NULL == frame)
   {
     // log this
-    return;
+    return false;
     //ID3_THROW(ID3E_NoData);
   }
 
@@ -178,6 +178,7 @@ void ID3_TagImpl::AttachFrame(ID3_Frame *frame)
   _cursor = _frames.begin();
 
   _changed = true;
+  return true;
 }
 
 
