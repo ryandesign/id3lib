@@ -347,6 +347,8 @@ public:
   
   ID3_Field&    operator=( const ID3_Field & );
 
+  const uchar*  GetBinary() const { return __data; }
+
 private:
   luint         BinSize(const bool withExtras = true);
   bool          HasChanged();
