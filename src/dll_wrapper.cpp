@@ -496,6 +496,10 @@ void ID3Field_ToFile(ID3_Field *field, char *fileName)
 #endif
 
 // $Log$
+// Revision 1.14  2000/04/08 04:33:44  eldamitri
+// Changed new ANSI-standard C++ include headers to old-style headers.
+// Updated ID3_VerInfo to represent major, minor, and patch versions.
+//
 // Revision 1.13  2000/04/05 05:21:15  eldamitri
 // Updated initial comment information to reflect license, copyright
 // change.
