@@ -43,6 +43,7 @@ id3lib_sources =                \
   tag_find.cpp                  \
   tag_parse.cpp                 \
   tag_parse_lyrics3.cpp         \
+  tag_parse_musicmatch.cpp      \
   tag_parse_v1.cpp              \
   tag_render.cpp                \
   tag_sync.cpp                  \
