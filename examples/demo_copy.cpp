@@ -24,7 +24,7 @@
 
 using std::cout;
 using std::endl;
-uding std::cerr;
+using std::cerr;
 
 static const char* VERSION_NUMBER = "$Revision$";
 
