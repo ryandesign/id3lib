@@ -31,6 +31,7 @@
 
 #include <id3/id3lib_frame.h>
 #include <id3/field.h>
+#include <id3/utils.h>//for ID3_PATH_LENGTH
 
 class ID3_Reader;
 class ID3_Writer;
@@ -40,6 +41,7 @@ class ID3_Tag;
 class ID3_CPP_EXPORT ID3_Tag
 {
   ID3_TagImpl* _impl;
+  char _tmp_filename[ID3_PATH_LENGTH];
 public:
 
   class Iterator
