@@ -48,15 +48,23 @@ namespace
                  frame.NumFields() );
     for (ID3_FrameImpl::iterator fi = frame.begin(); fi != frame.end(); ++fi)
     {
+      ID3_Field* fp = *fi;
+
       if (rdr.atEnd())
       { 
         // there's no remaining data to parse! 
         ID3D_WARNING( "ID3_FrameImpl::Parse(): out of data at postion " <<
                       rdr.getCur() );
+        if(fp->GetType() == ID3FTY_TEXTSTRING)  //correct handling of winamp-esque empty frames
+		{
+			// Exit the loop (don't just return true).
+			// This will set the current "pointer" of the reader to the correct value
+			break;
+		}
+
         return false;
       } 
       
-      ID3_Field* fp = *fi;
       if (NULL == fp)
       {
         // Ack!  Why is the field NULL?  Log this...
