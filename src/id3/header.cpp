@@ -14,12 +14,14 @@
 //
 //  Mon Nov 23 18:34:01 1998
 
+#if defined HAVE_CONFIG_H
+#include <config.h>
+#endif
 
 #include <string.h>
 #include <memory.h>
 #include <id3/header.h>
 #include <id3/error.h>
-
 
 ID3_HeaderInfo ID3_VersionInfo[] =
   {
@@ -35,15 +37,13 @@ ID3_HeaderInfo ID3_VersionInfo[] =
 ID3_HeaderInfo *ID3_LookupHeaderInfo(uchar ver, uchar rev)
 {
   ID3_HeaderInfo *info = NULL;
-  luint i = 0;
-  for (luint i = 0; (ID3_VersionInfo[i].version  != 0   &&
-                     ID3_VersionInfo[i].version  == ver &&
-                     ID3_VersionInfo[i].revision == rev);
-       i++)
-    continue;
-
-  if (ID3_VersionInfo[i].version != 0)
-    info = &ID3_VersionInfo[i];
+  for (luint i = 0; ID3_VersionInfo[i].ucVersion != 0; i++)
+    if (ID3_VersionInfo[i].ucVersion  == ver &&
+        ID3_VersionInfo[i].ucRevision == rev)
+    {
+      info = &ID3_VersionInfo[i];
+      break;
+    }
     
   return info;
 }
@@ -51,31 +51,34 @@ ID3_HeaderInfo *ID3_LookupHeaderInfo(uchar ver, uchar rev)
 ID3_Header::ID3_Header(void)
 {
   SetVersion(ID3_TAGVERSION, ID3_TAGREVISION);
-  dataSize = 0;
-  flags = 0;
+  __ulDataSize = 0;
+  __ulFlags = 0;
 }
 
 void ID3_Header::SetVersion(uchar ver, uchar rev)
 {
-  version = ver;
-  revision = rev;
-  info = ID3_LookupHeaderInfo(version, revision);
+  __ucVersion = ver;
+  __ucRevision = rev;
+  __pInfo = ID3_LookupHeaderInfo(__ucVersion, __ucRevision);
   
   return ;
 }
 
 void ID3_Header::SetDataSize(luint newSize)
 {
-  dataSize = newSize;
+  __ulDataSize = newSize;
   
   return ;
 }
 
 void ID3_Header::SetFlags(luint newFlags)
 {
-  flags = newFlags;
+  __ulFlags = newFlags;
   
   return ;
 }
 
 // $Log$
+// Revision 1.4  1999/11/04 04:15:55  scott
+// Added cvs Id and Log tags to beginning and end of file, respectively.
+//
