@@ -474,8 +474,8 @@ ID3_Frame* ID3_AddTrack(ID3_Tag *tag, uchar trk, uchar ttl, bool replace)
     }
     if (replace || NULL == tag->Find(ID3FID_TRACKNUM))
     {
-      ID3_Frame *trackFrame = new ID3_Frame(ID3FID_TRACKNUM);
-      if (trackFrame)
+      frame = new ID3_Frame(ID3FID_TRACKNUM);
+      if (frame)
       {
         char *sTrack = NULL;
         if (0 == ttl)
@@ -489,8 +489,8 @@ ID3_Frame* ID3_AddTrack(ID3_Tag *tag, uchar trk, uchar ttl, bool replace)
           sprintf(sTrack, "%lu/%lu", (luint) trk, (luint) ttl);
         }
         
-        trackFrame->Field(ID3FN_TEXT) = sTrack;
-        tag->AttachFrame(trackFrame);
+        frame->Field(ID3FN_TEXT) = sTrack;
+        tag->AttachFrame(frame);
 
         delete [] sTrack;
       }
