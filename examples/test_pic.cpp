@@ -19,7 +19,6 @@ int main( int argc, char *argv[])
     tag.Update();
 
     tag.Clear();
-    /*
     frame.SetID(ID3FID_TITLE);
     frame.Field(ID3FN_TEXT).Set("Aquarium");
     tag.AddFrame(frame);
@@ -60,9 +59,9 @@ int main( int argc, char *argv[])
     frame.Field(ID3FN_PICTURETYPE).Set(11);
     frame.Field(ID3FN_DESCRIPTION).Set("B/W picture of Saint-Saëns");
     tag.AddFrame(frame);
-    */
+
     tag.SetPadding(false);
-    tag.SetUnsync(true);
+    tag.SetUnsync(false);
     tag.Update(ID3TT_ID3V2);
   }   
   catch(const ID3_Error& err)
