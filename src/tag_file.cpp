@@ -243,12 +243,10 @@ size_t ID3_Tag::Link(const char *fileInfo, flags_t tag_types)
   }
   
   strcpy(__file_name, fileInfo);
-    
-  if (ID3E_NoError != OpenFileForReading())
-  {
-    __starting_bytes = 0;
-  }
-  else
+  __changed = true;
+  __starting_bytes = 0;
+  __ending_bytes = 0;
+  if (ID3E_NoError == OpenFileForReading())
   {
     __starting_bytes = ParseFromHandle();
     
