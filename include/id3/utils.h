@@ -85,8 +85,7 @@ namespace dami
   WString toWString(const unicode_t[], size_t);
   
   size_t ucslen(const unicode_t *unicode);
-  String ucstombs(String);
-  String mbstoucs(String);
+  String convert(String data, ID3_TextEnc, ID3_TextEnc);
 
   // file utils
   size_t getFileSize(fstream&);

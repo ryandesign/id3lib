@@ -115,9 +115,13 @@ typedef uint16                flags_t;
 ID3_ENUM(ID3_TextEnc)
 {
   ID3TE_NONE = -1,
-  ID3TE_ASCII = 0,
-  ID3TE_UNICODE,
-  ID3TE_NUMENCODINGS  
+  ID3TE_ISO8859_1,
+  ID3TE_UTF16,
+  ID3TE_UTF16BE,
+  ID3TE_UTF8,
+  ID3TE_NUMENCODINGS,
+  ID3TE_ASCII = ID3TE_ISO8859_1,
+  ID3TE_UNICODE = ID3TE_UTF16
 };
 
 /** Enumeration of the various id3 specifications

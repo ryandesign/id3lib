@@ -1182,14 +1182,7 @@ bool ID3_FieldImpl::SetEncoding(ID3_TextEnc enc)
     (ID3TE_NONE < enc && enc < ID3TE_NUMENCODINGS);
   if (changed)
   {
-    if (_enc == ID3TE_UNICODE && enc == ID3TE_ASCII)
-    {
-      _text = ucstombs(_text);
-    }
-    else if (_enc == ID3TE_ASCII && enc == ID3TE_UNICODE)
-    {
-      _text = mbstoucs(_text);
-    }
+    _text = convert(_text, _enc, enc);
     _enc = enc;
     _changed = true;
   }

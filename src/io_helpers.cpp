@@ -346,15 +346,15 @@ size_t io::writeText(ID3_Writer& writer, String data)
   return writer.getCur() - beg;
 }
 
-size_t io::writeUnicodeString(ID3_Writer& writer, String data)
+size_t io::writeUnicodeString(ID3_Writer& writer, String data, bool bom)
 {
-  size_t size = writeUnicodeText(writer, data);
+  size_t size = writeUnicodeText(writer, data, bom);
   unicode_t null = NULL_UNICODE;
   writer.writeChars((const unsigned char*) &null, 2);
   return size + 2;
 }
 
-size_t io::writeUnicodeText(ID3_Writer& writer, String data)
+size_t io::writeUnicodeText(ID3_Writer& writer, String data, bool bom)
 {
   ID3_Writer::pos_type beg = writer.getCur();
   size_t size = (data.size() / 2) * 2;
@@ -362,13 +362,16 @@ size_t io::writeUnicodeText(ID3_Writer& writer, String data)
   {
     return 0;
   }
-  // Write the BOM: 0xFEFF
-  unicode_t bom = 0xFEFF;
-  writer.writeChars((const unsigned char*) &bom, 2);
-  for (size_t i = 0; i < size; i += 2)
+  if (bom)
   {
-    unicode_t ch = (data[i] << 8) | data[i+1];
-    writer.writeChars((const unsigned char*) &ch, 2);
+    // Write the BOM: 0xFEFF
+    unicode_t BOM = 0xFEFF;
+    writer.writeChars((const unsigned char*) &BOM, 2);
+    for (size_t i = 0; i < size; i += 2)
+    {
+      unicode_t ch = (data[i] << 8) | data[i+1];
+      writer.writeChars((const unsigned char*) &ch, 2);
+    }
   }
   return writer.getCur() - beg;
 }
