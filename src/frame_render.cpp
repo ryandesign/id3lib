@@ -75,8 +75,7 @@ luint ID3_Frame::Render(uchar *buffer)
     
   // if we can compress frames individually and we have been asked to compress
   // the frames
-  if (__FrmHdr.GetFlags() & ID3FL_COMPRESSION && 
-      __FrmHdr.GetSpec() >= ID3V2_3_0)
+  if (__FrmHdr.GetCompression() && __FrmHdr.GetSpec() >= ID3V2_3_0)
   {
       
     bytesUsed -= __FrmHdr.Size();
@@ -122,32 +121,9 @@ luint ID3_Frame::Render(uchar *buffer)
   }
     
   // determine which flags need to be set
-  if (didCompress)
-  {
-    __FrmHdr.AddFlags(ID3FL_COMPRESSION);
-  }
-  else
-  {
-    __FrmHdr.RemoveFlags(ID3FL_COMPRESSION);
-  }
-
-  if (strlen(__sEncryptionID) > 0)
-  {
-    __FrmHdr.AddFlags(ID3FL_ENCRYPTION);
-  }
-  else
-  {
-    __FrmHdr.RemoveFlags(ID3FL_ENCRYPTION);
-  }
-
-  if (strlen(__sGroupingID) > 0)
-  {
-    __FrmHdr.AddFlags(ID3FL_GROUPING);
-  }
-  else
-  {
-    __FrmHdr.RemoveFlags(ID3FL_GROUPING);
-  }
+  __FrmHdr.SetCompression(didCompress);
+  __FrmHdr.SetEncryption(strlen(__sEncryptionID) > 0);
+  __FrmHdr.SetGrouping(strlen(__sGroupingID) > 0);
       
   __FrmHdr.SetDataSize(bytesUsed - __FrmHdr.Size());
   __FrmHdr.Render(buffer);
