@@ -123,7 +123,7 @@ public:
   
   static size_t IsV2Tag(ID3_Reader&);
 
-  Mp3_Headerinfo* GetMp3HeaderInfo() const { if (_mp3_info) return _mp3_info->GetMp3HeaderInfo(); else return NULL; }
+  const Mp3_Headerinfo* GetMp3HeaderInfo() const { if (_mp3_info) return _mp3_info->GetMp3HeaderInfo(); else return NULL; }
 
   iterator         begin()       { return _frames.begin(); }
   iterator         end()         { return _frames.end(); }
