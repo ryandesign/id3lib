@@ -1,7 +1,6 @@
 // $Id$
 
 #include <iostream.h>
-#include <getopt.h>
 #include <stdlib.h>
 
 #include <id3/tag.h>
@@ -14,7 +13,7 @@ int main( int argc, char *argv[])
     if (argc != 3)
     {
       cout << "Usage: get_pic <tagfile> <picfilename>" << endl;
-      exit(1);
+      return 1;
     }
 
     ID3_Tag tag(argv[1]);
@@ -28,7 +27,7 @@ int main( int argc, char *argv[])
     else
     {
       cout << "*** no picture frame found in \"" << argv[1] << "\"" << endl;
-      exit(1);
+      return 1;
     }
   }   
   catch(const ID3_Error& err)
