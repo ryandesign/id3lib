@@ -33,10 +33,10 @@
 class Mp3Info
 {
 public:
-  Mp3Info() { _mp3_header_output = new Mp3_Headerinfo; };
+  Mp3Info() { _mp3_header_output = LEAKTESTNEW(Mp3_Headerinfo); };
   ~Mp3Info() { this->Clean(); };
   void Clean();
-    
+
   const Mp3_Headerinfo* GetMp3HeaderInfo() const { return _mp3_header_output; };
   bool Parse(ID3_Reader&, size_t mp3size);
 
@@ -54,6 +54,7 @@ public:
   bool Copyrighted() const { return _mp3_header_output->copyrighted; };
   bool Original() const { return _mp3_header_output->original; };
   uint32 Seconds() const { return _mp3_header_output->time; };
+  uint32 DataSize() const { return _mp3_header_output->datasize; };
 
 private:
 
