@@ -31,9 +31,9 @@
 
 struct ID3_FrameAttr
 {
-  char  textID[5];
-  luint size;
-  luint flags;
+  char  sTextID[5];
+  luint ulSize;
+  luint ulFlags;
 };
 
 class ID3_FrameHeader : public ID3_Header
@@ -45,10 +45,13 @@ public:
   virtual luint Render(uchar *buffer);
   
 protected:
-  ID3_FrameID   frameID;        // which frame are we the header for?
+  ID3_FrameID   __eFrameID;        // which frame are we the header for?
 }
 ;
 
 #endif
 
 // $Log$
+// Revision 1.4  1999/11/04 04:15:55  scott
+// Added cvs Id and Log tags to beginning and end of file, respectively.
+//

@@ -24,14 +24,14 @@
 
 struct ID3_HeaderInfo
 {
-  uchar version;
-  uchar revision;
-  uchar frameIDBytes;
-  uchar frameSizeBytes;
-  uchar frameFlagsBytes;
-  bool  hasExtHeader;
-  luint extHeaderBytes;
-  bool  setExpBit;
+  uchar ucVersion;
+  uchar ucRevision;
+  uchar ucFrameIDBytes;
+  uchar ucFrameSizeBytes;
+  uchar ucFrameFlagsBytes;
+  bool  bHasExtHeader;
+  luint ulExtHeaderBytes;
+  bool  bSetExpBit;
 };
 
 extern ID3_HeaderInfo ID3_VersionInfo[];
@@ -48,11 +48,11 @@ public:
   virtual luint Render(uchar *buffer) = 0;
   
 protected:
-  uchar version;        // which version?
-  uchar revision;       // which revision?
-  luint dataSize;       // how big is the data?
-  luint flags;          // tag flags
-  ID3_HeaderInfo *info; // the info about this version of the headers
+  uchar __ucVersion;        // which version?
+  uchar __ucRevision;       // which revision?
+  luint __ulDataSize;       // how big is the data?
+  luint __ulFlags;          // tag flags
+  ID3_HeaderInfo *__pInfo;  // the info about this version of the headers
 }
 ;
 
@@ -61,3 +61,6 @@ ID3_HeaderInfo *ID3_LookupHeaderInfo(uchar ver, uchar rev);
 #endif
 
 // $Log$
+// Revision 1.4  1999/11/04 04:15:55  scott
+// Added cvs Id and Log tags to beginning and end of file, respectively.
+//
