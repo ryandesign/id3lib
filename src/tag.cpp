@@ -967,7 +967,7 @@ void ID3_Tag::AddNewFrame(ID3_Frame* f)
  **/
 void ID3_Tag::AddFrames(const ID3_Frame *frames, size_t numFrames)
 {
-  for (index_t i = numFrames - 1; i >= 0; i--)
+  for (int i = numFrames - 1; i >= 0; i--)
   {
     this->AddFrame(frames[i]);
   }
