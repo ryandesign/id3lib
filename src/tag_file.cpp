@@ -240,7 +240,7 @@ size_t RenderV2ToFile(const ID3_TagImpl& tag, fstream& file)
     file.seekg(tag.GetPrependedBytes(), ios::beg);
     
     uchar tmpBuffer[BUFSIZ];
-    while (!file)
+    while (!file.eof())
     {
       file.read((char *)tmpBuffer, BUFSIZ);
       size_t nBytes = file.gcount();
