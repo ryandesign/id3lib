@@ -358,14 +358,11 @@ size_t RenderV2ToHandle(const ID3_Tag& tag, FILE*& handle)
   }
   
 
-  cerr << "*** tag.GetPrependedBytes() = " << tag.GetPrependedBytes() << endl;
-  cerr << "*** ID3_GetDataSize(tag) = " << ID3_GetDataSize(tag) << endl;
   // if the new tag fits perfectly within the old and the old one
   // actually existed (ie this isn't the first tag this file has had)
   if ((!tag.GetPrependedBytes() && !ID3_GetDataSize(tag)) ||
       (tag_size == tag.GetPrependedBytes()))
   {
-    cerr << "*** fits exactly" << endl;
     fseek(handle, 0, SEEK_SET);
     if (buffer)
     {
