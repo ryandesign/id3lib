@@ -1482,9 +1482,9 @@ ID3_FieldImpl::ID3_FieldImpl()
     _spec_begin(ID3V2_EARLIEST),
     _spec_end(ID3V2_LATEST),
     _flags(0),
+    _linked_field(ID3FN_NOFIELD),
     _changed(false),
     _fixed_size(0),
-    _linked_field(ID3FN_NOFIELD),
     _num_items(0),
     _enc(ID3TE_NONE)
 {
@@ -1497,9 +1497,9 @@ ID3_FieldImpl::ID3_FieldImpl(const ID3_FieldDef& def)
     _spec_begin(def._spec_begin),
     _spec_end(def._spec_end),
     _flags(def._flags),
+    _linked_field(def._linked_field),
     _changed(false),
     _fixed_size(def._fixed_size),
-    _linked_field(def._linked_field),
     _num_items(0),
     _enc((_type == ID3FTY_TEXTSTRING) ? ID3TE_ISO8859_1 : ID3TE_NONE)
 {
