@@ -209,7 +209,7 @@ void ID3_Frame::_InitFields()
     }
     
     // tell the frame that this field is present
-    BS_SET(_field_bitset, _fields[i]->_id);
+    BS_SET(_field_bitset, _fields[i]->GetID());
   }
   
   _changed = true;
@@ -292,7 +292,7 @@ ID3_Field& ID3_Frame::Field(ID3_FieldID fieldName) const
   {
     for (size_t num = 0; num < _num_fields; num++)
     {
-      if (_fields[num]->_id == fieldName)
+      if (_fields[num]->GetID() == fieldName)
       {
         field = _fields[num];
       }
