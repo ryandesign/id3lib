@@ -70,8 +70,8 @@ size_t ID3_TagHeader::Render(uchar *buffer) const
   memcpy(&buffer[size], (uchar *) ID, strlen(ID));
   size += strlen(ID);
   
-  buffer[size++] = ID3_V2SpecToVer(this->GetSpec());
-  buffer[size++] = ID3_V2SpecToRev(this->GetSpec());
+  buffer[size++] = ID3_V2SpecToVer(ID3V2_LATEST);
+  buffer[size++] = ID3_V2SpecToRev(ID3V2_LATEST);
   
   // set the flags byte in the header
   buffer[size++] = static_cast<uchar>(__flags.get() & MASK8);
