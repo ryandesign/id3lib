@@ -41,11 +41,12 @@
  */
 #ifdef NATIVE_WIN32
 #  ifdef ID3LIB_COMPILATION
-#    define ID3_C_VAR __declspec(dllexport)
+#    define ID3_C_VAR extern
+#    define ID3_C_EXPORT __declspec(dllexport)
 #  else /* !ID3LIB_COMPILATION */
-#    define ID3_C_VAR extern __declspec(dllimport)
+#    define ID3_C_VAR 
+#    define ID3_C_EXPORT __declspec(dllimport)
 #  endif /* !ID3LIB_COMPILATION */
-#  define ID3_C_EXPORT ID3_C_VAR
 #else /* !NATIVE_WIN32 */
 #  define ID3_C_VAR extern
 #  define ID3_C_EXPORT
