@@ -39,18 +39,16 @@
  * properly get exported in windows dlls.
  * (borrowed from glib.h http://www.gtk.org)
  */
-#ifdef NATIVE_WIN32
+#ifdef WIN32
 #  ifdef ID3LIB_COMPILATION
-#    define ID3_C_VAR extern
-#    define ID3_C_EXPORT __declspec(dllexport)
+#    define ID3_C_EXPORT extern __declspec(dllexport)
 #  else /* !ID3LIB_COMPILATION */
-#    define ID3_C_VAR 
-#    define ID3_C_EXPORT __declspec(dllimport)
+#    define ID3_C_EXPORT extern __declspec(dllimport)
 #  endif /* !ID3LIB_COMPILATION */
-#else /* !NATIVE_WIN32 */
-#  define ID3_C_VAR extern
+#else /* !WIN32 */
 #  define ID3_C_EXPORT
-#endif /* !NATIVE_WIN32 */
+#endif /* !WIN32 */
+#define ID3_C_VAR extern
 
 #ifndef __cplusplus
 
@@ -352,7 +350,7 @@ ID3_ENUM(ID3_VerCtl)
 /*
  * The following is borrowed from glib.h (http://www.gtk.org)
  */
-#ifdef NATIVE_WIN32
+#ifdef WIN32
 
 /* On native Win32, directory separator is the backslash, and search path
  * separator is the semicolon.
@@ -362,7 +360,7 @@ ID3_ENUM(ID3_VerCtl)
 #  define ID3_SEARCHPATH_SEPARATOR ';'
 #  define ID3_SEARCHPATH_SEPARATOR_S ";"
 
-#else  /* !NATIVE_WIN32 */
+#else  /* !WIN32 */
 
 #  ifndef __EMX__
 /* Unix */
@@ -382,7 +380,7 @@ ID3_ENUM(ID3_VerCtl)
 
 #  endif
 
-#endif /* !NATIVE_WIN32 */
+#endif /* !WIN32 */
 
 #ifndef NULL
 #define NULL ((void*) 0)
