@@ -27,14 +27,14 @@
 #ifndef _ID3LIB_FRAME_H_
 #define _ID3LIB_FRAME_H_
 
-#include "spec.h"
+#include "globals.h"
 
 class ID3_Field;
 class ID3_FrameImpl;
 class ID3_Reader;
 class ID3_Writer;
 
-class ID3_Frame : public ID3_Speccable
+class ID3_Frame
 {
   ID3_FrameImpl* _impl;
 public:
