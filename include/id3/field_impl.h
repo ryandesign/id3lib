@@ -79,6 +79,10 @@ public:
 
   // binary field functions
   size_t        Set(const uchar*, size_t);
+  size_t        Set(const char* buf, size_t size)
+  { 
+    return this->Set(reinterpret_cast<const uchar *>(buf), size);
+  }
   size_t        Get(uchar*, size_t) const;
   const uchar*  GetBinary() const { return _binary; }
   void          FromFile(const char*);
