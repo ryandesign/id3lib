@@ -325,19 +325,15 @@ void ID3_Tag::AddFrame(const ID3_Frame *frame)
  **/
 void ID3_Tag::AttachFrame(ID3_Frame *frame)
 {
-  ID3_Elem *elem;
   
   if (NULL == frame)
   {
-    ID3_THROW(ID3E_NoData);
+    // log this
+    return;
+    //ID3_THROW(ID3E_NoData);
   }
 
-  elem = new ID3_Elem;
-  if (NULL == elem)
-  {
-    ID3_THROW(ID3E_NoMemory);
-  }
-
+  ID3_Elem *elem = new ID3_Elem;
   elem->pNext = __frames;
   elem->pFrame = frame;
   
