@@ -18,6 +18,7 @@
 #define ID3LIB_TYPES_H
 
 #include <wchar.h>
+#include <id3/globals.h>
 
 #ifdef __DLL
 #define DLLEXPORT       __declspec ( dllexport )
@@ -26,14 +27,6 @@
 #define DLLEXPORT
 #define CDLLEXPORT
 #endif
-
-typedef       unsigned char   uchar;
-typedef short   signed int    ssint;
-typedef short unsigned int    suint;
-typedef long    signed int    lsint;
-typedef long  unsigned int    luint;
-typedef long           double ldoub;
-typedef long  unsigned int *  bitset;
 
 #define BS_SIZE (sizeof(luint)*8)
 #define BS_SET(v,x)   ((v)[(x) / BS_SIZE] |=  (1 << ((x) % BS_SIZE)))
@@ -65,3 +58,6 @@ inline lsint MAX(lsint x, lsint y)
 #endif
 
 // $Log$
+// Revision 1.4  1999/11/04 04:15:55  scott
+// Added cvs Id and Log tags to beginning and end of file, respectively.
+//
