@@ -196,13 +196,12 @@ AC_DEFINE_UNQUOTED(ID3LIB_DATE, "$ID3LIB_DATE")
 AC_OUTPUT(                      \
   Makefile                      \
   doc/Makefile                  \
+  examples/Makefile             \
   include/Makefile              \
   include/id3/Makefile          \
   m4/Makefile                   \
   prj/Makefile                  \
   src/Makefile                  \
-  src/id3/Makefile              \
-  src/examples/Makefile         \
   zlib/Makefile                 \
   zlib/include/Makefile         \
   zlib/lib/Makefile             \
@@ -213,6 +212,9 @@ AC_OUTPUT(                      \
 )
 
 # $Log$
+# Revision 1.21  2000/04/17 12:52:10  eldamitri
+# (AC_OUTPUT): Removed doc's subdirs.
+#
 # Revision 1.20  2000/04/17 05:11:38  eldamitri
 # Minor updates.
 #
