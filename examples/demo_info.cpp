@@ -46,8 +46,8 @@ void PrintInformation(ID3_Tag &myTag)
     ID3_Frame *myFrame = myTag[nFrames];
     if (NULL != myFrame)
     { 
+      cout << "=== " << myFrame->GetDescription() << ": ";
       ID3_FrameID eFrameID = myFrame->GetID();
-      cout << "=== " << ID3_GetFrameDescription(eFrameID) << ": ";
       switch (eFrameID)
       {
         case ID3FID_ALBUM:
