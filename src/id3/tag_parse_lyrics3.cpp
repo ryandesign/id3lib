@@ -29,15 +29,21 @@ luint ID3_CRLFtoLF(char *buffer, luint size)
   char *dest = buffer;
   char *source = buffer;
   
-  if (buffer != NULL && size > 0)
+  if (NULL == buffer || size == 0)
+  {
     ID3_THROW(ID3E_NoData);
+  }
 
   while (source < (buffer + size))
   {
     if (*source == 0x0D)
+    {
       source++;
+    }
     else
+    {
       *dest++ = *source++;
+    }
   }
     
   newSize = dest - buffer;
@@ -53,14 +59,20 @@ luint ID3_StripTimeStamps(char *buffer, luint size)
   char *source = buffer;
   
   if (buffer != NULL && size > 0)
+  {
     ID3_THROW(ID3E_NoData);
+  }
 
   while (source < (buffer + size))
   {
     if (*source == '[')
+    {
       source += 7;
+    }
     else
+    {
       *dest++ = *source++;
+    }
   }
     
   newSize = dest - buffer;
@@ -72,7 +84,9 @@ luint ID3_StripTimeStamps(char *buffer, luint size)
 void ID3_Tag::ParseLyrics3(void)
 {
   if (NULL == __fFileHandle)
+  {
     ID3_THROW(ID3E_NoData);
+  }
 
   uchar buffer[18];
     
@@ -107,7 +121,9 @@ void ID3_Tag::ParseLyrics3(void)
         
         buff2 = new uchar[bytesToRead];
         if (NULL == buff2)
+        {
           ID3_THROW(ID3E_NoMemory);
+        }
 
         luint posn = 0;
         bool stampsUsed = false;
@@ -131,7 +147,9 @@ void ID3_Tag::ParseLyrics3(void)
           if (strcmp((char *) fid, "IND") == 0)
           {
             if (buff2[posn + 8 + 1] == '1')
+            {
               stampsUsed = true;
+            }
           }
               
           // the TITLE field
@@ -141,7 +159,9 @@ void ID3_Tag::ParseLyrics3(void)
             
             text = new char[size + 1];
             if (NULL == text)
+            {
               ID3_THROW(ID3E_NoMemory);
+            }
 
             text[size] = 0;
             memcpy(text, &buff2[posn + 8], size);
@@ -158,7 +178,9 @@ void ID3_Tag::ParseLyrics3(void)
 
             text = new char[size + 1];
             if (NULL == text)
+            {
               ID3_THROW(ID3E_NoMemory);
+            }
 
             text[size] = 0;
             memcpy(text, &buff2[posn + 8], size);
@@ -175,7 +197,9 @@ void ID3_Tag::ParseLyrics3(void)
                 
             text = new char[size + 1];
             if (NULL == text)
+            {
               ID3_THROW(ID3E_NoMemory);
+            }
 
             text[size] = 0;
             memcpy(text, &buff2[posn + 8], size);
@@ -194,12 +218,16 @@ void ID3_Tag::ParseLyrics3(void)
             newSize = ID3_CRLFtoLF((char *) & buff2[posn + 8], size);
                 
             if (stampsUsed)
+            {
               newSize = ID3_StripTimeStamps((char *) & buff2[posn + 8], 
                                             newSize);
+            }
                   
             text = new char[newSize + 1];
             if (NULL == text)
+            {
               ID3_THROW(ID3E_NoMemory);
+            }
 
             text[newSize] = 0;
                   
@@ -222,6 +250,11 @@ void ID3_Tag::ParseLyrics3(void)
 }
 
 // $Log$
+// Revision 1.7  1999/12/01 18:00:59  scott
+// Changed all of the #include <id3/*> to #include "*" to help ensure that
+// the sources are searched for in the right places (and to make compiling under
+// windows easier).
+//
 // Revision 1.6  1999/11/29 19:26:18  scott
 // Updated the leading license information of the file to reflect new maintainer.
 //
