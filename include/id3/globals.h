@@ -433,5 +433,5 @@ ID3_ENUM(ID3_TimeStampFormat)
 
 #undef CLAMP
 #define CLAMP(x, low, high)  (((x) > (high)) ? (high) : (((x) < (low)) ? (low) : (x)))
-
+ 
 #endif /* __ID3LIB_GLOBALS_H__ */
