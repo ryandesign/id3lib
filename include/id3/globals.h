@@ -163,6 +163,8 @@ ID3_ENUM(ID3_FieldID)
   ID3FN_VOLCHGLEFT,     /**< Volume chage on the left channel */
   ID3FN_PEAKVOLRIGHT,   /**< Peak volume on the right channel */
   ID3FN_PEAKVOLLEFT,    /**< Peak volume on the left channel */
+  ID3FN_TIMESTAMPFORMAT,/**< SYLT Timestamp Format */
+  ID3FN_CONTENTTYPE,    /**< SYLT content type */
   ID3FN_LASTFIELDID     /**< Last field placeholder */
 };
 
