@@ -34,7 +34,7 @@
 class ID3_FieldDef;
 class ID3_FrameDef;
 class ID3_Frame;
-class ID3_Tag;
+class ID3_Reader;
 
 class ID3_FieldImpl : public ID3_Field
 {
@@ -97,6 +97,7 @@ public:
 
   size_t        Render(uchar *buffer) const;
   size_t        Parse(const uchar *buffer, size_t buffSize);
+  void          Parse(ID3_Reader&);
   bool          HasChanged() const;
 
 private:
@@ -137,10 +138,10 @@ protected:
   size_t RenderString(uchar *buffer) const;
   size_t RenderBinary(uchar *buffer) const;
   
-  size_t ParseInteger(const uchar *buffer, size_t);
-  size_t ParseASCIIString(const uchar *buffer, size_t);
-  size_t ParseUnicodeString(const uchar *buffer, size_t);
-  size_t ParseBinary(const uchar *buffer, size_t);
+  void ParseInteger(ID3_Reader&);
+  void ParseASCIIString(ID3_Reader&);
+  void ParseUnicodeString(ID3_Reader&);
+  void ParseBinary(ID3_Reader&);
   
 };
 
