@@ -30,6 +30,8 @@
 #include "spec.h"
 #include "flags.h"
 
+class ID3_Reader;
+
 class ID3_Header : public ID3_Speccable
 {
 public:
