@@ -46,9 +46,12 @@ libid3_la_SOURCES = $(the_sources)
 libid3_la_LIBADD  = -lz
 libid3_la_LDFLAGS = -version-info $(LTVERSION)
 
-EXTRA_DIST = ChangeLog
-
 # $Log$
+# Revision 1.7  1999/12/01 18:03:28  scott
+# (INCLUDES): Now points to new, toplevel include directory.
+# (the_headers, id3includedir, id3include_HEADERS): Removed.  Headers are
+# no longer in this directory.
+#
 # Revision 1.6  1999/11/30 20:08:16  scott
 # (the_headers): Added sized_headers.h
 # (the_sources): Added version.cpp
