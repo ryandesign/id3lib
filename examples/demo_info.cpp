@@ -261,21 +261,22 @@ void PrintInformation(const ID3_Tag &myTag)
           }
           cout << endl;
           size_t size = myFrame->Field(ID3FN_DATA).Size();
-          const uchar* bin = myFrame->Field(ID3FN_DATA).GetBinary();
-          const uchar* p = bin;
-          while (p < bin + size)
+          const uchar* beg = myFrame->Field(ID3FN_DATA).GetBinary();
+          const uchar* cur = beg;
+          const uchar* end = beg + size;
+          while (cur < end)
           {
-            size_t len = strlen((char *)p);
-            cout << p;
-            p += len + 1;
-            if (p < bin + size)
+            size_t len = id3::min<size_t>(end - cur, ::strlen((char *) cur));
+            cout << id3::string((char*)cur, len);
+            cur += len + 1;
+            if (cur < end)
             {
-              size_t 
-                bytesleft = bin + size - p,
-                bytestoparse = MIN(sizeof(uint32), bytesleft);
               
-              cout << " [" << id3::parseNumber(p, bytestoparse) << " " << format << "] ";
-              p += 4;
+              cout 
+                << " [" 
+                << id3::parseNumber(cur, id3::min<size_t>(end - cur, sizeof(uint32))) 
+                << " " << format << "] ";
+              cur += sizeof(uint32);
             }
           }
           cout << endl;
