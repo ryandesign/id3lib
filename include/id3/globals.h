@@ -99,8 +99,10 @@ const unicode_t NULL_UNICODE = (unicode_t) '\0';
  **/
 ID3_ENUM(ID3_TextEnc)
 {
+  ID3TE_NONE = -1,
   ID3TE_ASCII = 0,
-  ID3TE_UNICODE
+  ID3TE_UNICODE,
+  ID3TE_NUMENCODINGS  
 };
 
 /** Enumeration of the various id3 specifications
