@@ -134,6 +134,7 @@ protected:
   size_t     ParseFromHandle();
   void       ParseID3v1();
   void       ParseLyrics3();
+  void       ParseMusicMatch();
   
 private:
   ID3_TagHeader __hdr;          // information relevant to the tag header
