@@ -490,10 +490,12 @@ bool ID3_Tag::HasChanged(void) const
   return changed;
 }
 
-void ID3_Tag::SetSpec(const ID3_V2Spec spec)
+bool ID3_Tag::SetSpec(ID3_V2Spec spec)
 {
-  __bHasChanged = __bHasChanged || (spec != __spec);
+  bool changed = (spec != __spec);
+  __bHasChanged = __bHasChanged || changed;
   __spec = spec;
+  return changed;
 }
 
 ID3_V2Spec ID3_Tag::GetSpec() const
