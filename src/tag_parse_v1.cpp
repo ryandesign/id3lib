@@ -152,6 +152,9 @@ void ID3_Tag::ParseID3v1(void)
 }
 
 // $Log$
+// Revision 1.15  2000/04/08 04:42:59  eldamitri
+// Changed new ANSI-standard C++ include headers to old-style headers.
+//
 // Revision 1.14  2000/04/05 05:21:15  eldamitri
 // Updated initial comment information to reflect license, copyright
 // change.
