@@ -88,7 +88,7 @@ RPM_OPT_FLAGS="-O3 -fomit-frame-pointer -pipe -s -mcpu=$ID3_ARCH -march=$ID3_ARC
 
 %endif
 
-CXXFLAGS="$RPM_OPT_FLAGS -fexceptions" ./configure --prefix=%prefix
+CXXFLAGS="$RPM_OPT_FLAGS -fexceptions" ./configure --prefix=%prefix --enable-debug=no
 
 %ifnarch noarch
 
