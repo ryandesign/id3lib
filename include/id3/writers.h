@@ -52,6 +52,10 @@ class ID3_OStreamWriter : public ID3_Writer
   /** Write up to \c len chars into buf and advance the internal position
    ** accordingly.  Returns the number of characters write into buf.
    **/
+  virtual size_type writeChars(const char buf[], size_type len)
+  { 
+    return this->writeChars(reinterpret_cast<const char_type *>(buf), len);
+  }
   virtual size_type writeChars(const char_type buf[], size_type len)
   {
     _stream.write(buf, len);
@@ -95,6 +99,10 @@ class ID3_IOStreamWriter : public ID3_Writer
   /** Write up to \c len chars into buf and advance the internal position
    ** accordingly.  Returns the number of characters write into buf.
    **/
+  virtual size_type writeChars(const char buf[], size_type len)
+  { 
+    return this->writeChars(reinterpret_cast<const char_type *>(buf), len);
+  }
   virtual size_type writeChars(const char_type buf[], size_type len)
   {
     _stream.write(buf, len);
@@ -144,12 +152,17 @@ class ID3_MemoryWriter : public ID3_Writer
   /** Write up to \c len chars from buf and advance the internal position
    ** accordingly.  Returns the number of characters written from buf.
    **/
+  virtual size_type writeChars(const char buf[], size_type len)
+  { 
+    return this->writeChars(reinterpret_cast<const char_type *>(buf), len);
+  }
   virtual size_type writeChars(const char_type buf[], size_type len)
   {
     size_type remaining = _end - _cur;
     size_type size = (remaining > len) ? len : remaining;
     ::memcpy(_cur, buf, size);
     _cur += size;
+    return size;
   }
     
   virtual pos_type getCur() 

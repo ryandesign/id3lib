@@ -27,8 +27,9 @@
 #ifndef _ID3LIB_READERS_COMPRESSED_H_
 #define _ID3LIB_READERS_COMPRESSED_H_
 
-#include "readers.h"
 #include <zlib.h>
+#include "readers.h"
+#include "reader_decorators.h"
 
 namespace dami
 {
@@ -43,11 +44,13 @@ namespace dami
         : _uncompressed(new char_type[newSize])
       {
         size_type oldSize = reader.remainingChars();
-        char_type buffer[oldSize];
-        reader.readChars(buffer, oldSize);
+        
+        BinaryReader br(reader);
+        BString binary = br.readBinary(oldSize);
+
         ::uncompress(_uncompressed,
                      reinterpret_cast<luint*>(&newSize),
-                     reinterpret_cast<const uchar*>(buffer),
+                     reinterpret_cast<const uchar*>(binary.data()),
                      oldSize);
         this->setBuffer(_uncompressed, newSize);
       }

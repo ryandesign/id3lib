@@ -84,11 +84,11 @@ class ID3_Reader
    ** the value returned may be less than the number of bytes that the internal
    ** position advances, due to multi-byte characters.
    **/
-  virtual size_type readChars(char* buf, size_type len)
+  virtual size_type readChars(char buf[], size_type len)
   {
-    return this->readChars(reinterpret_cast<uchar *>(buf), len);
+    return this->readChars(reinterpret_cast<char_type *>(buf), len);
   }
-  virtual size_type readChars(uchar buf[], size_type len) = 0;
+  virtual size_type readChars(char_type buf[], size_type len) = 0;
   
   /** Skip up to \c len chars in the stream and advance the internal position
    ** accordingly.  Returns the number of characters actually skipped (may be 
@@ -96,8 +96,14 @@ class ID3_Reader
    **/
   virtual size_type skipChars(size_type len)
   {
-    char_type bytes[len];
-    return this->readChars(bytes, len);
+    const size_type SIZE = 1024;
+    char_type bytes[SIZE];
+    size_type remaining = len;
+    while (!this->atEnd() && remaining > 0)
+    {
+      remaining -= this->readChars(bytes, (remaining < SIZE ? remaining : SIZE));
+    }
+    return len - remaining;
   }
 
   virtual size_type remainingChars()
