@@ -89,7 +89,7 @@ namespace dami
           {
             index++;
           }
-          else if (ch = text[0])
+          else if (ch == text[0])
           {
             index = 1;
           }
