@@ -115,10 +115,10 @@ size_t ID3_FrameHeader::Parse(const uchar *buffer, size_t size)
     this->SetFrameID(fid);
   }
 
-  this->SetDataSize(id3::ParseNumber(&buffer[nSize], __info->frame_bytes_size));
+  this->SetDataSize(ParseNumber(&buffer[nSize], __info->frame_bytes_size));
   nSize += __info->frame_bytes_size;
 
-  __flags.add(id3::ParseNumber(&buffer[nSize], __info->frame_bytes_flags));
+  __flags.add(ParseNumber(&buffer[nSize], __info->frame_bytes_flags));
   nSize += __info->frame_bytes_flags;
   
   return nSize;
@@ -147,11 +147,8 @@ size_t ID3_FrameHeader::Render(uchar *buffer) const
   memcpy(&buffer[size], (uchar *) sTextID, __info->frame_bytes_id);
   size += __info->frame_bytes_id;
     
-  id3::RenderNumber(&buffer[size], __data_size, __info->frame_bytes_size);
-  size += __info->frame_bytes_size;
-    
-  id3::RenderNumber(&buffer[size], __flags.get(), __info->frame_bytes_flags);
-  size += __info->frame_bytes_flags;
+  size += RenderNumber(&buffer[size], __data_size, __info->frame_bytes_size);
+  size += RenderNumber(&buffer[size], __flags.get(), __info->frame_bytes_flags);
 
   return size;
 }
