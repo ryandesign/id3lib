@@ -258,6 +258,22 @@ const unicode_t* ID3_FieldImpl::GetUnicodeText() const
   return text;
 }
 
+const unicode_t* ID3_FieldImpl::GetUnicodeTextItem(index_t index) const
+{
+  const unicode_t* text = NULL;
+  if (this->GetType() == ID3FTY_TEXTSTRING && 
+      this->GetEncoding() == ID3TE_ASCII &&
+      index < this->GetNumTextItems())
+  {
+    text = _unicode;
+    for (size_t i = 0; i < index; ++i)
+    {
+      text += ucslen(text) + 1;
+    }
+  }
+  return text;
+}
+
 size_t ID3_FieldImpl::Get(unicode_t *buffer, size_t maxLength, index_t itemNum) const
 {
   size_t length = 0;
