@@ -47,7 +47,7 @@ luint ID3_Field::Get(void)
 }
 
 
-luint ID3_Field::ParseInteger(uchar *buffer, luint posn, luint buffSize)
+luint ID3_Field::ParseInteger(const uchar *buffer, const luint posn, const luint buffSize)
 {
   luint bytesUsed = 0;
 
@@ -87,6 +87,12 @@ luint ID3_Field::RenderInteger(uchar *buffer)
 }
 
 // $Log$
+// Revision 1.5  1999/11/15 20:16:06  scott
+// Added include for config.h.  Minor code cleanup.  Removed
+// assignments from if checks; first makes assignment, then checks
+// for appropriate value.  Made private member variable names more
+// descriptive.
+//
 // Revision 1.4  1999/11/04 04:15:54  scott
 // Added cvs Id and Log tags to beginning and end of file, respectively.
 //
