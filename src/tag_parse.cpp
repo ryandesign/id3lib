@@ -36,7 +36,7 @@
 #include <config.h>
 #endif
 
-ID3_Elem *ID3_Tag::GetLastElem(ID3_Elem *list)
+ID3_Elem* ID3_GetLastElem(ID3_Elem *list)
 {
   ID3_Elem *last;
   
@@ -78,7 +78,7 @@ void ID3_Tag::AddBinary(uchar *buffer, luint size)
   elem->acBinary = newBin;
   elem->bTagOwns = true;
         
-  lastElem = GetLastElem(__binaries);
+  lastElem = ID3_GetLastElem(__binaries);
         
   if (NULL == lastElem)
   {
@@ -249,7 +249,7 @@ void ID3_Tag::ProcessBinaries(ID3_FrameID whichFrame, bool attach)
         // newly parsed frame to the tag, do so
         ID3_Elem 
           *elem     = new ID3_Elem, 
-          *lastElem = GetLastElem(__frames);
+          *lastElem = ID3_GetLastElem(__frames);
         if (NULL == elem)
         {
           ID3_THROW(ID3E_NoMemory);
