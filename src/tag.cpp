@@ -717,7 +717,7 @@ flags_t ID3_Tag::Update(flags_t flags)
  ** Can be run after Link(<filename>)
  **
  **/
-Mp3_Headerinfo* ID3_Tag::GetMp3HeaderInfo() const
+const Mp3_Headerinfo* ID3_Tag::GetMp3HeaderInfo() const
 {
   return _impl->GetMp3HeaderInfo();
 }

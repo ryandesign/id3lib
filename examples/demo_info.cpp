@@ -341,7 +341,7 @@ int main( unsigned int argc, char * const argv[])
     ID3_Tag myTag;
     
     myTag.Link(filename, ID3TT_ALL);
-    Mp3_Headerinfo* mp3info;
+    const Mp3_Headerinfo* mp3info;
     mp3info = myTag.GetMp3HeaderInfo();
 
     cout << endl << "*** Tag information for " << filename << endl;

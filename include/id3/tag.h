@@ -100,7 +100,7 @@ public:
   
   size_t     NumFrames() const;
 
-  Mp3_Headerinfo* GetMp3HeaderInfo() const;
+  const Mp3_Headerinfo* GetMp3HeaderInfo() const;
 
   Iterator*  CreateIterator();
   ConstIterator* CreateIterator() const;
