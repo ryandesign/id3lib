@@ -24,16 +24,21 @@
 // id3lib.  These files are distributed with id3lib at
 // http://download.sourceforge.net/id3lib/
 
+#if defined HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include "debug.h"
+
+#include <string.h>
+
 #include "header_tag.h"
 #include "uint28.h"
 #include "utils.h"
 #include "tag.h"
-#include <string.h>
 #include "reader_decorators.h"
 
-#if defined HAVE_CONFIG_H
-#include <config.h>
-#endif
+using namespace dami;
 
 const char* const ID3_TagHeader::ID = "ID3";
 
@@ -84,7 +89,7 @@ size_t ID3_TagHeader::Render(uchar *buffer) const
   // now we render the extended header
   if (_flags.test(EXTENDED))
   {
-    size += id3::renderNumber(&buffer[size], _info->extended_bytes);
+    size += ::renderNumber(&buffer[size], _info->extended_bytes);
   }
   
   return size;

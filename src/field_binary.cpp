@@ -35,6 +35,8 @@
 #include "field_impl.h"
 #include "reader_decorators.h"
 
+using namespace dami;
+
 /** Copies the supplied unicode string to the field.
  ** 
  ** Again, like the string types, the binary Set() function copies the data
@@ -161,8 +163,8 @@ bool ID3_FieldImpl::ParseBinary(ID3_Reader& reader)
 {
   // copy the remaining bytes, unless we're fixed length, in which case copy
   // the minimum of the remaining bytes vs. the fixed length
-  id3::BinaryReader br(reader);
-  id3::bstring binary = br.getBinary();
+  ::io::BinaryReader br(reader);
+  ::BString binary = br.getBinary();
   this->Set(binary.data(), binary.size());
   _changed = false;
   return true;

@@ -33,6 +33,8 @@
 #include "utils.h"
 #include "reader_decorators.h"
 
+using namespace dami;
+
 /** \fn ID3_Field& ID3_Field::operator=(uint32 val)
  ** \brief A shortcut for the Set method.
  **
@@ -89,7 +91,7 @@ bool ID3_FieldImpl::ParseInteger(ID3_Reader& reader)
     this->Clear();
     size_t fixed = this->Size();
     size_t nBytes = (fixed > 0) ? fixed : sizeof(uint32);
-    id3::NumberReader nr(reader);
+    ::io::NumberReader nr(reader);
     this->Set(nr.readNumber(nBytes));
     _changed = false;
     success = true;
@@ -99,7 +101,7 @@ bool ID3_FieldImpl::ParseInteger(ID3_Reader& reader)
 
 size_t ID3_FieldImpl::RenderInteger(uchar *buffer) const
 {
-  size_t bytesUsed = id3::renderNumber(buffer, _integer, this->Size());
+  size_t bytesUsed = ::renderNumber(buffer, _integer, this->Size());
   _changed = false;
   return bytesUsed;
 }

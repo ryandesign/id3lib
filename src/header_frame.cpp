@@ -40,6 +40,8 @@
 #include "field_impl.h"
 #include "reader_decorators.h"
 
+using namespace dami;
+
 void ID3_FrameHeader::SetUnknownFrame(const char* id)
 {
   Clear();
@@ -95,7 +97,7 @@ size_t ID3_FrameHeader::Size() const
 
 bool ID3_FrameHeader::Parse(ID3_Reader& reader)
 {
-  id3::ExitTrigger et(reader);
+  io::ExitTrigger et(reader);
   if (!_info)
   {
     return false;
@@ -107,8 +109,8 @@ bool ID3_FrameHeader::Parse(ID3_Reader& reader)
 
   et.setExitPos(reader.getCur() + 10);
   
-  id3::TextReader tr(reader);
-  id3::string text_id = tr.readText(_info->frame_bytes_id);
+  io::TextReader tr(reader);
+  ::String text_id = tr.readText(_info->frame_bytes_id);
 
   ID3D_NOTICE( "ID3_FrameHeader::Parse: text_id = " << text_id );
 
@@ -123,7 +125,7 @@ bool ID3_FrameHeader::Parse(ID3_Reader& reader)
     this->SetFrameID(fid);
   }
 
-  id3::NumberReader nr(reader);
+  io::NumberReader nr(reader);
   uint32 dataSize = nr.readNumber(_info->frame_bytes_size);
   ID3D_NOTICE( "ID3_FrameHeader::Parse: dataSize = " << dataSize );
   this->SetDataSize(dataSize);
@@ -157,8 +159,8 @@ size_t ID3_FrameHeader::Render(uchar *buffer) const
   memcpy(&buffer[size], (uchar *) text_id, _info->frame_bytes_id);
   size += _info->frame_bytes_id;
   
-  size += id3::renderNumber(&buffer[size], _data_size, _info->frame_bytes_size);
-  size += id3::renderNumber(&buffer[size], _flags.get(), _info->frame_bytes_flags);
+  size += ::renderNumber(&buffer[size], _data_size, _info->frame_bytes_size);
+  size += ::renderNumber(&buffer[size], _flags.get(), _info->frame_bytes_flags);
   
   return size;
 }
