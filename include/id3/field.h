@@ -205,7 +205,7 @@ public:
      
      @return The value of the integer field
    */
-  luint         Get(void);
+  luint         Get(void) const;
   // ASCII string field functions
   /** Shortcut for the Set operator.
 
@@ -374,6 +374,8 @@ public:
   */
   void          ToFile(const char *sInfo);
   
+  ID3_Field    &operator=( const ID3_Field & );
+
 private:
   luint         BinSize(const bool withExtras = true);
   bool          HasChanged(void);
@@ -416,6 +418,10 @@ ID3_FrameID   ID3_FindFrameID(const char *id);
 #endif
 
 // $Log$
+// Revision 1.2  1999/12/02 22:45:28  scott
+// Changed all of the #include <id3/*> to #include "*" to help ensure that
+// the sources are searched for in the right places.
+//
 // Revision 1.1  1999/12/01 17:16:01  scott
 // moved from src/id3 to include/id3
 //
