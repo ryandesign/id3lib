@@ -29,6 +29,7 @@
 #include "tag.h"
 #include "frame.h"
 #include "field.h"
+#include "error.h"
 
 #if defined HAVE_CONFIG_H
 #include <config.h>
