@@ -24,6 +24,7 @@ the_sources =                   \
   frame.cpp                     \
   frame_parse.cpp               \
   frame_render.cpp              \
+  globals.cpp                   \
   header.cpp                    \
   header_frame.cpp              \
   header_tag.cpp                \
@@ -36,8 +37,7 @@ the_sources =                   \
   tag_parse_lyrics3.cpp         \
   tag_parse_v1.cpp              \
   tag_render.cpp                \
-  tag_sync.cpp                  \
-  version.cpp                   
+  tag_sync.cpp
 
 EXTRA_DIST =                    \
   dll_wrapper.cpp               
@@ -53,6 +53,9 @@ libid3_la_LDFLAGS = \
   -export-dynamic
 
 # $Log$
+# Revision 1.6  2000/04/19 02:02:47  eldamitri
+# Moved from src/id3 to src.
+#
 # Revision 1.10  2000/04/07 04:47:55  eldamitri
 # Updated versioning macros, ala glib (http://www.gtk.org).  Also added a
 # few more tests.
