@@ -36,8 +36,8 @@ namespace id3
   uint32 ParseNumber(const uchar *buffer, size_t size = sizeof(uint32));
   size_t RenderNumber(uchar *buffer, uint32 val, size_t size = sizeof(uint32));
   
-  void   mbstoucs(unicode_t *unicode, const char *ascii, const luint len);
-  void   ucstombs(char *ascii, const unicode_t *unicode, const luint len);
+  void   mbstoucs(unicode_t *unicode, const char *ascii, const size_t len);
+  void   ucstombs(char *ascii, const unicode_t *unicode, const size_t len);
   size_t ucslen(const unicode_t *unicode);
   void   ucscpy(unicode_t *dest, const unicode_t *src);
   void   ucsncpy(unicode_t *dest, const unicode_t *src, size_t len);

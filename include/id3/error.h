@@ -79,7 +79,7 @@ public:
    ** 
    ** <pre>cout << "Line #" << err.GetErrorLine() << endl;</pre>
    **/
-  luint   GetErrorLine() const;
+  size_t   GetErrorLine() const;
   
   /** Constructor
    ** 
@@ -88,11 +88,11 @@ public:
    ** @param nLineNum     Linenumber where error occurred
    ** @param sDescription Description of error
    **/
-  ID3_Error(ID3_Err eID, const char *sFileName, luint nLineNum, 
+  ID3_Error(ID3_Err eID, const char *sFileName, size_t nLineNum, 
             const char *sDescription);
 private:
   ID3_Err __error;
-  luint   __line_num;
+  size_t  __line_num;
   char   *__file_name;
   char   *__description;
 };

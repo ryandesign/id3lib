@@ -39,7 +39,7 @@ public:
     uchar      frame_bytes_size;
     uchar      frame_bytes_flags;
     bool       is_extended;
-    luint      extended_bytes;
+    size_t     extended_bytes;
     bool       is_experimental;
   };
 

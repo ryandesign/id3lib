@@ -124,10 +124,10 @@ public:
 
   ID3_Frame  &operator=(const ID3_Frame &);
   bool        HasChanged() const;
-  size_t      Parse(const uchar *buffer, luint size);
-  luint       Size();
-  luint       Render(uchar *buffer);
-  bool        Contains(ID3_FieldID fld)
+  size_t      Parse(const uchar *buffer, size_t size);
+  size_t      Size();
+  size_t      Render(uchar *buffer);
+  bool        Contains(ID3_FieldID fld) const
   { return BS_ISSET(__field_bitset, fld) > 0; }
   bool        SetSpec(ID3_V2Spec);
   ID3_V2Spec  GetSpec() const;
@@ -151,7 +151,7 @@ private:
   char        __grouping_id[256];   // the group to which this frame belongs
   bool        __changed;            // frame changed since last parse/render?
   bitset      __field_bitset;       // which fields are present?
-  luint       __num_fields;         // how many fields are in this frame?
+  size_t      __num_fields;         // how many fields are in this frame?
   ID3_Field **__fields;             // an array of field object pointers
   ID3_FrameHeader __hdr;            // 
   bool        __bad_parse;          //

@@ -34,6 +34,7 @@
 
 #include <stdlib.h>
 #include "sized_types.h"
+#include <iostream.h>
 
 /* id3lib version.
  * we prefix variable declarations so they can
@@ -78,7 +79,8 @@ typedef short unsigned int    suint;
 typedef long    signed int    lsint;
 typedef long  unsigned int    luint;
 typedef long           double ldoub;
-typedef long  unsigned int *  bitset;
+
+typedef uint32*               bitset;
 typedef uint16                unicode_t;
 typedef size_t                index_t;
 typedef uint16                flags_t;
@@ -351,7 +353,7 @@ ID3_ENUM(ID3_TimeStampFormat)
   ID3TSF_MS
 };
 
-#define BS_SIZE (sizeof(luint)*8)
+#define BS_SIZE (sizeof(uint32)*8)
 #define BS_SET(v,x)   ((v)[(x) / BS_SIZE] |=  (1 << ((x) % BS_SIZE)))
 #define BS_CLEAR(v,x) ((v)[(x) / BS_SIZE] &= ~(1 << ((x) % BS_SIZE)))
 #define BS_ISSET(v,x) ((v)[(x) / BS_SIZE] &   (1 << ((x) % BS_SIZE)))
