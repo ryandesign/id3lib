@@ -86,6 +86,7 @@ size_t ID3_Frame::Parse(const uchar * const buffer, luint size)
         continue; 
       }
       
+      //(*fi)->SetEncoding(enc);
       size_t frame_size = (*fi)->Parse(data, remainder); 
       
       if (0 == frame_size) 
