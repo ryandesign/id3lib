@@ -210,8 +210,20 @@ voidpf zcalloc (opaque, items, size)
     unsigned items;
     unsigned size;
 {
+#if !defined(WINCE)
     if (opaque) items += size - size; /* make compiler happy */
     return (voidpf)calloc(items, size);
+#else
+    voidpf pNewSpace;
+    if (opaque) items += size - size; /* make compiler happy */
+    /* WinCE doesn't have calloc, but it does have malloc */
+    pNewSpace = (voidpf)malloc ((size_t) items * size);
+    if (pNewSpace != NULL)
+    {
+      memset(pNewSpace,0,(size_t) items * size); /* clear memory */
+    }
+    return(pNewSpace);
+#endif
 }
 
 void  zcfree (opaque, ptr)

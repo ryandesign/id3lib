@@ -572,17 +572,18 @@ extern "C"
   ID3_C_EXPORT
   bool ID3Frame_GetCompression(const ID3Frame *frame)
   {
+    bool compressed = false;
     try
     {
       if (frame)
       {
-        return ((const ID3_Frame *) frame)->GetCompression();
+        compressed = ((const ID3_Frame *) frame)->GetCompression();
       }
     }
     catch (...)
     {
     }
-    return false;
+    return compressed;
   }
 
 

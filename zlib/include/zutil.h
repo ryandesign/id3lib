@@ -96,6 +96,11 @@ extern const char *z_errmsg[10]; /* indexed by 2-zlib_error */
 #  define OS_CODE  0x0b
 #endif
 
+#if defined(WINCE)
+#  include <malloc.h>
+#  include <stdlib.h>
+#endif
+
 #if defined(VAXC) || defined(VMS)
 #  define OS_CODE  0x02
 #  define F_OPEN(name, mode) \

@@ -248,6 +248,9 @@ typedef uLong FAR uLongf;
 #ifndef z_off_t
 #  define  z_off_t long
 #endif
+#if defined(WINCE) && !defined(isgraph) // TODO: check for version <=2.11
+#  include <ctype2.h>           // NOTE: you must also link in ctype2.lib
+#endif
 
 /* MVS linker does not support external names larger than 8 bytes */
 #if defined(__MVS__)
