@@ -62,21 +62,30 @@ void ID3_Header::SetVersion(uchar ver, uchar rev)
   return ;
 }
 
-void ID3_Header::SetDataSize(luint newSize)
+void ID3_Header::SetDataSize(size_t newSize)
 {
   __ulDataSize = newSize;
-  
-  return ;
 }
 
-void ID3_Header::SetFlags(luint newFlags)
+size_t ID3_Header::GetDataSize() const
+{
+  return __ulDataSize;
+}
+
+void ID3_Header::SetFlags(uint16 newFlags)
 {
   __ulFlags = newFlags;
-  
-  return ;
+}
+
+uint16 ID3_Header::GetFlags() const
+{
+  return __ulFlags;
 }
 
 // $Log$
+// Revision 1.8  1999/12/17 16:13:04  scott
+// Updated opening comment block.
+//
 // Revision 1.7  1999/12/01 18:00:59  scott
 // Changed all of the #include <id3/*> to #include "*" to help ensure that
 // the sources are searched for in the right places (and to make compiling under
