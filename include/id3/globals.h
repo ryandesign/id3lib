@@ -89,7 +89,8 @@ typedef uint16                flags_t;
 #if !defined index_t
 #define index_t               size_t
 #endif
-const unicode_t NULL_UNICODE = (unicode_t) '\0';
+
+#define NULL_UNICODE ((unicode_t) '\0')
 
 /* These macros are used to make the C and C++ declarations for enums and
  * structs have the same syntax.  Basically, it allows C users to refer to an
