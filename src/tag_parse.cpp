@@ -136,6 +136,7 @@ namespace
       ID3D_NOTICE( "id3::v2::parseFrames: done parsing, [cur, end] = [" << 
                    rdr.getCur() << ", " << rdr.getEnd() << "]" );
     }
+    return true;
   }
 };
  
