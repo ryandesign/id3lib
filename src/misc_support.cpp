@@ -993,8 +993,8 @@ ID3_Frame* ID3_AddGenre(ID3_Tag* tag, size_t genreNum, char* genre, bool add_v1_
   bool writeRX = false;
   bool writeCR = false;
   char* tmpgenre1 = LEAKTESTNEW(char[1024]);// = NULL;
-  char* tmpgenre = NULL;
-  char* remainder = NULL;
+  const char* tmpgenre = NULL;
+  const char* remainder = NULL;
   dami::String* newgenre = LEAKTESTNEW(dami::String);
   int iCompare;
 

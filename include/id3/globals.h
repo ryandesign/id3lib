@@ -483,7 +483,7 @@ ID3_ENUM(ID3_TimeStampFormat)
 
 #define ID3_NR_OF_V1_GENRES 148
 
-static char* ID3_v1_genre_description[ID3_NR_OF_V1_GENRES] =
+static const char* ID3_v1_genre_description[ID3_NR_OF_V1_GENRES] =
 {
   "Blues",             //0
   "Classic Rock",      //1
