@@ -78,9 +78,9 @@ luint ID3_Tag::Render(uchar *buffer)
   ID3_Elem *cur = __pFrameList;
   ID3_TagHeader header;
     
-  SetVersion(ID3v2_VERSION, ID3v2_REVISION);
+  this->SetSpec(ID3V2_LATEST);
     
-  header.SetVersion(__ucVersion, __ucRevision);
+  header.SetSpec(this->GetSpec());
   bytesUsed += header.Size();
     
   // set up the encryption and grouping IDs
@@ -95,7 +95,7 @@ luint ID3_Tag::Render(uchar *buffer)
       {
         cur->pFrame->__FrmHdr.AddFlags(ID3FL_COMPRESSION);
       }
-      cur->pFrame->SetVersion(__ucVersion, __ucRevision);
+      cur->pFrame->SetSpec(this->GetSpec());
       bytesUsed += cur->pFrame->Render(&buffer[bytesUsed]);
     }
       
@@ -178,14 +178,14 @@ luint ID3_Tag::Size(void) const
   ID3_Elem *cur = __pFrameList;
   ID3_TagHeader header;
   
-  header.SetVersion(__ucVersion, __ucRevision);
+  header.SetSpec(this->GetSpec());
   bytesUsed += header.Size();
   
   while (cur)
   {
     if (cur->pFrame)
     {
-      cur->pFrame->SetVersion(__ucVersion, __ucRevision);
+      cur->pFrame->SetSpec(this->GetSpec());
       bytesUsed += cur->pFrame->Size();
     }
     
@@ -206,7 +206,7 @@ luint ID3_Tag::Size(void) const
 
 void ID3_Tag::RenderExtHeader(uchar *buffer)
 {
-  if (__ucVersion == 3 && __ucRevision == 0)
+  if (this->GetSpec() == ID3V2_3_0)
   {
   }
   
@@ -516,6 +516,9 @@ luint ID3_Tag::PaddingSize(luint curSize) const
 
 
 // $Log$
+// Revision 1.5  2000/04/24 14:49:10  eldamitri
+// Added comments originally in include/id3/tag.h
+//
 // Revision 1.4  2000/04/23 17:38:15  eldamitri
 // - Moved def of ID3_PATH_LENGTH from tag.h, since its def requires a
 //   macro defined in config.h, which isn't accessible from the .h files.

@@ -33,26 +33,24 @@
 #include <config.h>
 #endif
 
-ID3_HeaderInfo ID3_VersionInfo[] =
-  {
-    //         SIZEOF SIZEOF SIZEOF EXT    EXT  EXPERIM
-    // VER REV FRID   FRSZ   FRFL   HEADER SIZE BIT
-    {  2,  0,  3,     3,     0,     false, 0,   false },
-    {  2,  1,  3,     3,     0,     true,  8,   true },
-    {  3,  0,  4,     4,     2,     false, 10,  false },
-    {  0 }
-  };
+ID3_HeaderInfo ID3_SpecInfo[] =
+{
+  //             SIZEOF SIZEOF SIZEOF EXT    EXT  EXPERIM
+  // V2 SPEC     FRID   FRSZ   FRFL   HEADER SIZE BIT
+  {  ID3V2_2_0,  3,     3,     0,     false, 0,   false },
+  {  ID3V2_2_1,  3,     3,     0,     true,  8,   true }, 
+  {  ID3V2_3_0,  4,     4,     2,     false, 10,  false },
+  {  ID3V2_UNKNOWN }
+};
   
-  
-ID3_HeaderInfo *ID3_LookupHeaderInfo(uchar ver, uchar rev)
+ID3_HeaderInfo *ID3_LookupHeaderInfo(ID3_V2Spec spec)
 {
   ID3_HeaderInfo *info = NULL;
-  for (size_t i = 0; ID3_VersionInfo[i].ucVersion != 0; i++)
+  for (size_t i = 0; ID3_SpecInfo[i].eSpec != ID3V2_UNKNOWN; i++)
   {
-    if (ID3_VersionInfo[i].ucVersion  == ver &&
-        ID3_VersionInfo[i].ucRevision == rev)
+    if (ID3_SpecInfo[i].eSpec == spec)
     {
-      info = &ID3_VersionInfo[i];
+      info = &ID3_SpecInfo[i];
       break;
     }
   }
@@ -60,18 +58,22 @@ ID3_HeaderInfo *ID3_LookupHeaderInfo(uchar ver, uchar rev)
   return info;
 }
 
+ID3_HeaderInfo* ID3_LookupHeaderInfo(uchar ver, uchar rev)
+{
+  return ID3_LookupHeaderInfo(ID3_VerRevToV2Spec(ver, rev));
+}
+
 ID3_Header::ID3_Header(void)
 {
-  SetVersion(ID3v2_VERSION, ID3v2_REVISION);
+  SetSpec();
   __ulDataSize = 0;
   __ulFlags = 0;
 }
 
-void ID3_Header::SetVersion(uchar ver, uchar rev)
+void ID3_Header::SetSpec(ID3_V2Spec spec)
 {
-  __ucVersion = ver;
-  __ucRevision = rev;
-  __pInfo = ID3_LookupHeaderInfo(__ucVersion, __ucRevision);
+  __spec = spec;
+  __pInfo = ID3_LookupHeaderInfo(spec);
 }
 
 void ID3_Header::SetDataSize(size_t newSize)
@@ -104,20 +106,14 @@ uint16 ID3_Header::GetFlags() const
   return __ulFlags;
 }
 
-uchar ID3_Header::GetVersion() const
+ID3_V2Spec ID3_Header::GetSpec() const
 {
-  return __ucVersion;
-}
-
-uchar ID3_Header::GetRevision() const
-{
-  return __ucRevision;
+  return __spec;
 }
 
 void ID3_Header::Clear()
 {
-  __ucVersion = 0;
-  __ucRevision = 0;
+  __spec = ID3V2_UNKNOWN;
   __ulDataSize = 0;
   __ulFlags = 0;
   //__pInfo = 0;
@@ -127,7 +123,7 @@ ID3_Header &ID3_Header::operator=( const ID3_Header& hdr )
 {
   if (this != &hdr)
   {
-    SetVersion(hdr.GetVersion(), hdr.GetRevision());
+    SetSpec(hdr.GetSpec());
     SetDataSize(hdr.GetDataSize());
     SetFlags(hdr.GetFlags());
     __pInfo = hdr.__pInfo;
@@ -136,6 +132,9 @@ ID3_Header &ID3_Header::operator=( const ID3_Header& hdr )
 }
 
 // $Log$
+// Revision 1.3  2000/04/20 03:49:42  eldamitri
+// (ID3_LookupHeaderInfo): Minor update
+//
 // Revision 1.2  2000/04/18 22:11:53  eldamitri
 // Moved header.cpp from src/id3/ to src/
 //

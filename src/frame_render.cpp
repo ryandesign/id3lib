@@ -69,23 +69,21 @@ luint ID3_Frame::Render(uchar *buffer)
     
   for (luint i = 0; i < __ulNumFields; i++)
   {
-    __apFields[i]->SetVersion(__FrmHdr.GetVersion(), __FrmHdr.GetRevision());
+    __apFields[i]->SetSpec(__FrmHdr.GetSpec());
     bytesUsed += __apFields[i]->Render(&buffer[bytesUsed]);
   }
     
   // if we can compress frames individually and we have been asked to compress
   // the frames
   if (__FrmHdr.GetFlags() & ID3FL_COMPRESSION && 
-      __FrmHdr.GetVersion() >= 3)
+      __FrmHdr.GetSpec() >= ID3V2_3_0)
   {
-    luint newFrameSize;
-    uchar *newTemp;
       
     bytesUsed -= __FrmHdr.Size();
       
-    newFrameSize = bytesUsed + (bytesUsed / 10) + 12;
+    luint newFrameSize = bytesUsed + (bytesUsed / 10) + 12;
       
-    newTemp = new uchar[newFrameSize];
+    uchar* newTemp = new uchar[newFrameSize];
     if (NULL == newTemp)
     {
       ID3_THROW(ID3E_NoMemory);
@@ -159,6 +157,9 @@ luint ID3_Frame::Render(uchar *buffer)
 }
 
 // $Log$
+// Revision 1.2  2000/04/18 22:11:41  eldamitri
+// Moved frame_render.cpp from src/id3/ to src/
+//
 // Revision 1.13  2000/04/08 04:40:26  eldamitri
 // Changed new ANSI-standard C++ include headers to old-style headers.
 //

@@ -160,9 +160,8 @@ void ID3_Frame::InitFields(const ID3_FrameDef *info)
     __apFields[i]->__eName        = info->aeFieldDefs[i].eID;
     __apFields[i]->__eType        = info->aeFieldDefs[i].eType;
     __apFields[i]->__ulFixedLength = info->aeFieldDefs[i].ulFixedLength;
-    __apFields[i]->__ucIOVersion  = info->aeFieldDefs[i].ucVersion;
-    __apFields[i]->__ucIORevision = info->aeFieldDefs[i].ucRevision;
-    __apFields[i]->__eControl     = info->aeFieldDefs[i].eControl;
+    __apFields[i]->__eSpecBegin   = info->aeFieldDefs[i].eSpecBegin;
+    __apFields[i]->__eSpecEnd     = info->aeFieldDefs[i].eSpecEnd;
     __apFields[i]->__ulFlags      = info->aeFieldDefs[i].ulFlags;
             
     // tell the frame that this field is present
@@ -190,14 +189,11 @@ ID3_FrameID ID3_Frame::GetID(void) const
 }
 
 
-void ID3_Frame::SetVersion(uchar ver, uchar rev)
+void ID3_Frame::SetSpec(ID3_V2Spec spec)
 {
-  if (__FrmHdr.GetVersion() != ver || __FrmHdr.GetRevision() != rev)
-  {
-    __bHasChanged = true;
-  }
+  __bHasChanged = __bHasChanged || (__FrmHdr.GetSpec() != spec);
   
-  __FrmHdr.SetVersion(ver, rev);
+  __FrmHdr.SetSpec(spec);
 }
 
 lsint ID3_Frame::FindField(ID3_FieldID fieldName) const
@@ -312,7 +308,7 @@ luint ID3_Frame::Size(void)
   
   for (luint i = 0; i < __ulNumFields; i++)
   {
-    __apFields[i]->SetVersion(__FrmHdr.GetVersion(), __FrmHdr.GetRevision());
+    __apFields[i]->SetSpec(__FrmHdr.GetSpec());
     bytesUsed += __apFields[i]->BinSize();
   }
   
@@ -354,6 +350,9 @@ ID3_Frame::operator=( const ID3_Frame &rFrame )
 }
 
 // $Log$
+// Revision 1.3  2000/04/24 14:48:11  eldamitri
+// (ID3_Frame): Added copy constructor implementation
+//
 // Revision 1.2  2000/04/18 22:11:19  eldamitri
 // Moved frame.cpp from src/id3/ to src/
 //

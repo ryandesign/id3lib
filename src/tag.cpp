@@ -44,7 +44,6 @@
 
 luint ID3_Tag::s_ulInstances = 0;
 
-
 /** Copies a frame to the tag.  The frame parameter can thus safely be deleted
  ** or allowed to go out of scope.
  ** 
@@ -112,8 +111,7 @@ ID3_Tag::ID3_Tag(const ID3_Tag &tag)
 void ID3_Tag::SetupTag(char *fileInfo)
 {
   __sFileName       = new char[ID3_PATH_LENGTH];
-  __ucVersion       = ID3v2_VERSION;
-  __ucRevision      = ID3v2_REVISION;
+  __spec            = ID3V2_LATEST;
   __pFrameList      = NULL;
   __pBinaryList     = NULL;
   __pFindCursor     = NULL;
@@ -140,7 +138,6 @@ void ID3_Tag::SetupTag(char *fileInfo)
   return ;
 }
 
-
 ID3_Tag::~ID3_Tag(void)
 {
   CloseFile();
@@ -157,7 +154,6 @@ ID3_Tag::~ID3_Tag(void)
   delete [] __sFileName;
   
 }
-
 
   /** Clears the object and disassociates it from any files.
    **
@@ -448,20 +444,16 @@ bool ID3_Tag::HasChanged(void) const
   return changed;
 }
 
-
-void ID3_Tag::SetVersion(uchar ver, uchar rev)
+void ID3_Tag::SetSpec(ID3_V2Spec spec)
 {
-  if (__ucVersion != ver || __ucRevision != rev)
-  {
-    __bHasChanged = true;
-  }
-    
-  __ucVersion = ver;
-  __ucRevision = rev;
-  
-  return ;
+  __bHasChanged = __bHasChanged || (spec != __spec);
+  __spec = spec;
 }
 
+ID3_V2Spec ID3_Tag::GetSpec() const
+{
+  return __spec;
+}
 
   /** Turns unsynchronization on or off, dependant on the value of the boolean
    ** parameter.
@@ -634,6 +626,17 @@ ID3_Tag::operator=( const ID3_Tag &rTag )
 }
 
 // $Log$
+// Revision 1.4  2000/04/24 14:48:34  eldamitri
+// - Added comments originally in include/id3/tag.h
+// - (operator<<): Made frame parameter constant
+// - (AddFrame):
+//   - Made frame parameter constant
+//   - Now adds a copy of the frame onto the tag, rather than the frame
+//     passed in, thus allowing the tag to be repsonsible for deleting
+//     the frame
+// - (AddNewFrame): Deprecated in favor of AttachFrame
+// - (AddFrames): Adds copies of frames
+//
 // Revision 1.3  2000/04/23 17:37:53  eldamitri
 // - Moved def of ID3_PATH_LENGTH from tag.h, since its def requires a
 //   macro defined in config.h, which isn't accessible from the .h files.
