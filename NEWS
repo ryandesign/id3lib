@@ -1,5 +1,27 @@
 $Id$
 
+2000-05-24 Version 3.7.9
+
+* Fixed a bug when parsing compressed frames (thanks to Christian Becker 
+  <chris@craze.de> for the bug report and example file)
+* Fixed several bugs when writing to files (thanks to Lothar Egger 
+  <lothar.egger@chello.at> and Peter Thorstenson <swede@openlink.com.br> for
+  the bug reports)
+* New delphi example code for use with id3com (thanks to Michael Little
+  <mike@netlinear.com>)
+* Cleaned up the class interfaces to use size_t, flags_t, and index_t rather
+  than luint, so as to be more descriptive
+* Cleaned up internal class definitions (thereby destroying binary 
+  compatibility)
+* ID3_Tag::RemoveFrame() now returns the pointer to the frame removed (NULL if
+  not present), thus releasing the tag from its repsonsibility of managing that
+  frame's memory
+* Cleaned up implementation of ID3_Tag::Clear() to fix inconsistencies
+* Deprecated ID3_Tag's HasV2Tag(), HasV1Tag(), and HasLyrics() methods in 
+  favor of ID3_Tag::HasTagType() method
+* All Render() methods now const
+* Lots of other minor changes
+
 2000-05-11 Version 3.7.8
 
 * Major bug fix that caused all string frames to be written out as unicode, yet
