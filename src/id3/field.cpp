@@ -45,6 +45,8 @@ static ID3_FieldDef ID3FD_Unimplemented[] =
   }
 };
 
+const ID3_FieldDef* ID3_FieldDef::DEFAULT = ID3FD_Unimplemented;
+
 static ID3_FieldDef ID3FD_URL[] =
 { 
   {
@@ -924,6 +926,10 @@ ID3_Field::operator=( const ID3_Field &rField )
 }
 
 // $Log$
+// Revision 1.17  2000/04/08 04:35:48  eldamitri
+// Changed new ANSI-standard C++ include headers to old-style headers.
+// Fixed return bug in operator=.
+//
 // Revision 1.16  2000/04/05 05:21:15  eldamitri
 // Updated initial comment information to reflect license, copyright
 // change.
