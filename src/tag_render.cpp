@@ -104,7 +104,7 @@ size_t RenderV1(const ID3_Tag& tag, uchar *buffer)
   pCur = &pCur[ID3_V1_LEN_YEAR];
 
   // Write the COMMENT
-  sTemp = ID3_GetComment(&tag);
+  sTemp = ID3_GetComment(&tag, STR_V1_COMMENT_DESC);
   if (sTemp != NULL)
   {
     strncpy(pCur, sTemp, ID3_V1_LEN_COMMENT);
