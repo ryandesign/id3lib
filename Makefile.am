@@ -47,6 +47,9 @@ docsdistdir = $(PACKAGE)-doc-$(VERSION)
 
 .PHONY: release snapshot docs-release docs
 
+changelog:
+	./cvs2cl.pl --tags --branches --revisions --day-of-week --prune --fsf -U AUTHORS -W 3600
+
 docs:
 	-cd doc && $(MAKE) $(AM_MAKEFLAGS) $@
 
