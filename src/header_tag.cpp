@@ -111,7 +111,17 @@ size_t ID3_TagHeader::Parse(const uchar* data, size_t data_size)
   
   if (__flags.test(EXTENDED))
   {
-    // need to do something here
+    if (this->GetSpec() == ID3V2_2_1)
+    {
+      // okay, if we are ID3v2.2.1, then let's skip over the extended header
+      // for now because I am lazy
+    }
+
+    if (this->GetSpec() == ID3V2_3_0)
+    {
+      // okay, if we are ID3v2.3.0, then let's actually parse the extended
+      // header (for now, we skip it because we are lazy)
+    }
   }
   
   return size;
