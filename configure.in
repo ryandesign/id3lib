@@ -152,7 +152,7 @@ AC_CHECK_FUNCS(
 )
 
 dnl Checks for typedefs, structures, and compiler characteristics.
-AC_SIZE_T
+AC_TYPE_SIZE_T
 
 dnl
 dnl Checks with local macros
