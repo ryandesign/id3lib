@@ -48,25 +48,23 @@
  ** \brief The representative class of an id3 tag.
  ** 
  ** This is the 'container' class for everything else.  It is through an
- ** ID3_Tag that most of the productive stuff happens.  
- ** Let's look at what's
+ ** ID3_Tag that most of the productive stuff happens.  Let's look at what's
  ** required to start using ID3v2 tags.
  ** 
  ** \code
  **   #include <id3/tag.h>
  ** \endcode
  ** 
- ** This simple \c #include does it all.  In order to read an
- ** existing tag, do the following:
+ ** This simple \c #include does it all.  In order to read an existing tag, do
+ ** the following:
  **
  ** \code
  **   ID3_Tag myTag;
  **   myTag.Link("something.mp3");
  ** \endcode
  ** 
- ** That is all there is to it.  Now all you have to do is use the 
- ** Find() method to locate the frames you are interested in
- ** is the following:
+ ** That is all there is to it.  Now all you have to do is use the Find()
+ ** method to locate the frames you are interested in is the following:
  ** 
  ** \code
  **   ID3_Frame *myFrame;
