@@ -12,6 +12,10 @@
 //  submissions may be altered, and will be included and released under these
 //  terms.
 
+#if defined HAVE_CONFIG_H
+#include <config.h>
+#endif
+                                                                                
 #include <iostream.h>
 #include <id3/tag.h>
 #include <getopt.h>

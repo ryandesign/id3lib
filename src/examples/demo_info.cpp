@@ -17,6 +17,10 @@
 // $Id$
 
 
+#if defined HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <iostream.h>
 #include <id3/tag.h>
 #include <id3/misc_support.h>
@@ -375,6 +379,13 @@ int main( int argc, char *argv[])
 }
 
 // $Log$
+// Revision 1.4  1999/12/09 02:48:54  scott
+// (PrintInformation): Separated out information printing code into this
+// separate function.
+// (main): Added new runtime option -a that will test the ability of
+// id3lib to make copies of tags.  Not very useful in general, but nice
+// for testing the new operator= code.
+//
 // Revision 1.3  1999/11/30 20:05:30  scott
 // Updated to reflect changes from version macros to version functions.
 //
