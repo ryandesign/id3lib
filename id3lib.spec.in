@@ -52,14 +52,14 @@ Requires:       %{name}
 
 %description	examples
 This package contains simple example applications that make use of id3lib, a 
-software library for ID3v1 and ID3v2 tag maniuplation.
+software library for ID3v1 and ID3v2 tag manipulation.
 
 %prep
 %setup -q
 
 %build
 
-CXXFLAGS="$RPM_OPT_FLAGS -fnoexceptions" ./configure --prefix=%prefix --enable-debug=no
+CXXFLAGS="$RPM_OPT_FLAGS" ./configure --prefix=%prefix --enable-debug=no
 
 %ifnarch noarch
 
