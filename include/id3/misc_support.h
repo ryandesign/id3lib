@@ -19,6 +19,19 @@
 #include "types.h"
 #include "tag.h"
 
+#define MASK(bits) ((1 << (bits)) - 1)
+#define MASK1 MASK(1)
+#define MASK2 MASK(2)
+#define MASK3 MASK(3)
+#define MASK4 MASK(4)
+#define MASK5 MASK(5)
+#define MASK6 MASK(6)
+#define MASK7 MASK(7)
+#define MASK8 MASK(8)
+
+uint32 ParseNumber(const uchar *buffer, size_t size = sizeof(uint32));
+void   RenderNumber(uchar *buffer, uint32 val, size_t size = sizeof(uint32));
+
 // defined in 'id3_misc_support.cpp'
 // these are 'convenience functions,' to make using the library easier for the 
 // most common of operations
@@ -75,6 +88,9 @@ void ID3_RemoveTrailingSpaces(char *buffer, luint length);
 #endif
 
 // $Log$
+// Revision 1.6  1999/12/17 16:05:02  scott
+// Updated opening comment block.
+//
 // Revision 1.5  1999/12/09 02:45:52  scott
 // (ID3_GetString): Added nItems parameter for retrieving a string from a
 // list (for example, the involved people list).
