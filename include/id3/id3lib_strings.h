@@ -29,6 +29,16 @@
 #ifndef _ID3LIB_STRINGS_H_
 #define _ID3LIB_STRINGS_H_
 
+#if defined(__BORLANDC__)
+// due to a bug in borland it sometimes still wants mfc compatibility even when you disable it
+#  if defined(_MSC_VER)
+#    undef _MSC_VER
+#  endif
+#  if defined(__MFC_COMPAT__)
+#    undef __MFC_COMPAT__
+#  endif
+#endif
+
 #include <string>
 
 #if (defined(__GNUC__) && (__GNUC__ >= 3) || (defined(_MSC_VER) && _MSC_VER > 1000))
