@@ -24,7 +24,7 @@
 // id3lib.  These files are distributed with id3lib at
 // http://download.sourceforge.net/id3lib/
 
-#include "field.h"
+#include "field_impl.h"
 #include "utils.h"
 
 #if defined HAVE_CONFIG_H
@@ -45,7 +45,7 @@
 /** \brief Sets the value of the field to the specified integer.
  ** \param data The data to assign to this field
  **/
-void ID3_Field::Set(uint32 val)
+void ID3_FieldImpl::Set(uint32 val)
 {
   if (this->GetType() == ID3FTY_INTEGER)
   {
@@ -66,7 +66,7 @@ void ID3_Field::Set(uint32 val)
  ** \return The value of the integer field
  **/
 
-size_t ID3_Field::ParseInteger(const uchar *buffer, size_t nSize)
+size_t ID3_FieldImpl::ParseInteger(const uchar *buffer, size_t nSize)
 {
   size_t nBytes = 0;
 
@@ -83,7 +83,7 @@ size_t ID3_Field::ParseInteger(const uchar *buffer, size_t nSize)
 }
 
 
-size_t ID3_Field::RenderInteger(uchar *buffer) const
+size_t ID3_FieldImpl::RenderInteger(uchar *buffer) const
 {
   size_t bytesUsed = RenderNumber(buffer, _integer, this->Size());
   _changed = false;
