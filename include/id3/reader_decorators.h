@@ -516,8 +516,9 @@ namespace dami
         
         for (size_type i = 0; i < bytes.size(); i++)
         {
+          ID3D_NOTICE( "BinaryNumberReader::readNumber: bytes[i] = " << hex << (uint16) bytes[i] << dec );
           val *= 256; // 2^8
-          val += static_cast<uint32>(bytes[i]);
+          val += static_cast<uint32>(0xFF & bytes[i]);
         }
         return val;
       }
