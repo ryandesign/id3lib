@@ -223,6 +223,11 @@ size_t ID3_Tag::ParseFromHandle()
     }
   }
     
+  if (__tags_to_parse.test(ID3TT_MUSICMATCH))
+  {
+    ParseMusicMatch();
+  }
+  
   if (__tags_to_parse.test(ID3TT_LYRICS))
   {
     ParseLyrics3();
