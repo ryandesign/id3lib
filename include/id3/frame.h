@@ -53,6 +53,8 @@ public:
   const char* GetDescription() const;
   static const char* GetDescription(ID3_FrameID);
 
+  const char* GetTextID() const { return __hdr.GetTextID(); }
+
   ID3_Frame  &operator=(const ID3_Frame &);
   bool        HasChanged() const;
   size_t      Parse(const uchar *buffer, size_t size);
