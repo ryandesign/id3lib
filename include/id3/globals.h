@@ -32,6 +32,7 @@
 #ifndef __ID3LIB_GLOBALS_H__
 #define __ID3LIB_GLOBALS_H__
 
+#include <stdlib.h>
 #include "sized_types.h"
 
 /* id3lib version.
@@ -245,7 +246,8 @@ ID3_ENUM(ID3_FrameID)
   /* WPAY */ ID3FID_WWWPAYMENT,        /**< Payment */
   /* WPUB */ ID3FID_WWWPUBLISHER,      /**< Official publisher webpage */
   /* WXXX */ ID3FID_WWWUSER,           /**< User defined URL link */
-  /*      */ ID3FID_METACRYPTO         /**< Encrypted meta frame (id3v2.2.x) */
+  /*      */ ID3FID_METACRYPTO,        /**< Encrypted meta frame (id3v2.2.x) */
+  /*      */ ID3FID_METACOMPRESSION    /**< Compressed meta frame (id3v2.2.1) */
 };
 
 ID3_ENUM(ID3_V1Lengths)
