@@ -126,13 +126,26 @@ public:
   bool        HasChanged() const;
   size_t      Parse(const uchar *buffer, size_t size);
   size_t      Size();
-  size_t      Render(uchar *buffer);
+  size_t      Render(uchar *buffer) const;
   bool        Contains(ID3_FieldID fld) const
   { return BS_ISSET(__field_bitset, fld) > 0; }
   bool        SetSpec(ID3_V2Spec);
   ID3_V2Spec  GetSpec() const;
 
+  /** Sets the compression flag within the frame.  When the compression flag is
+   ** is set, compression will be attempted.  However, the frame might not 
+   ** actually be compressed after it is rendered if the "compressed" data is no
+   ** smaller than the "uncompressed" data.
+   **/
   bool        SetCompression(bool b)  { return __hdr.SetCompression(b); }
+  /** Returns whether or not the compression flag is set.  After parsing a tag,
+   ** this will indicate whether or not the frame was compressed.  After
+   ** rendering a tag, however, it does not actually indicate if the frame is
+   ** compressed rendering.  It only indicates whether or not compression was
+   ** attempted.  A frame will not be compressed, even whent the compression
+   ** flag is set, if the "compressed" data is no smaller than the
+   ** "uncompressed" data.
+   **/
   bool        GetCompression() const  { return __hdr.GetCompression(); }
   bool        BadParse() const { return __bad_parse; }
   size_t      GetDataSize() const { return __hdr.GetDataSize(); }
@@ -146,14 +159,33 @@ protected:
   void        _UpdateFieldDeps();
   lsint       _FindField(ID3_FieldID name) const;
 
+  bool _SetEncryptionID(uchar id)
+  {
+    bool changed = id != __encryption_id;
+    __encryption_id = id;
+    __changed = __changed || changed;
+    __hdr.SetEncryption(true);
+    return changed;
+  }
+  uchar _GetEncryptionID() const { return __encryption_id; }
+  bool _SetGroupingID(uchar id)
+  {
+    bool changed = id != __grouping_id;
+    __grouping_id = id;
+    __changed = __changed || changed;
+    __hdr.SetGrouping(true);
+    return changed;
+  }
+  uchar _GetGroupingID() const { return __grouping_id; }
+
 private:
-  char        __encryption_id[256]; // encryption method used with this frame
-  char        __grouping_id[256];   // the group to which this frame belongs
-  bool        __changed;            // frame changed since last parse/render?
+  mutable bool        __changed;    // frame changed since last parse/render?
   bitset      __field_bitset;       // which fields are present?
   size_t      __num_fields;         // how many fields are in this frame?
   ID3_Field **__fields;             // an array of field object pointers
   ID3_FrameHeader __hdr;            // 
+  uchar       __encryption_id;      // encryption id
+  uchar       __grouping_id;        // grouping id
   bool        __bad_parse;          //
 }
 ;
