@@ -52,8 +52,8 @@ public:
   virtual size_t        Set(const char*) = 0;
   virtual size_t        Get(char*, size_t) const = 0;
   virtual size_t        Get(char*, size_t, index_t) const = 0;
-  virtual const char*   GetText() const = 0;
-  virtual const char*   GetTextItem(index_t) const = 0;
+  virtual const char*   GetRawText() const = 0;
+  virtual const char*   GetRawTextItem(index_t) const = 0;
   virtual size_t        Add(const char*) = 0;
 
   // Unicode string field functions
@@ -61,14 +61,14 @@ public:
   virtual size_t        Set(const unicode_t*) = 0;
   virtual size_t        Get(unicode_t *buffer, size_t) const = 0;
   virtual size_t        Get(unicode_t *buffer, size_t, index_t) const = 0;
-  virtual const unicode_t* GetUnicodeText() const = 0;
-  virtual const unicode_t* GetUnicodeTextItem(index_t) const = 0;
+  virtual const unicode_t* GetRawUnicodeText() const = 0;
+  virtual const unicode_t* GetRawUnicodeTextItem(index_t) const = 0;
   virtual size_t        Add(const unicode_t*) = 0;
 
   // binary field functions
   virtual size_t        Set(const uchar*, size_t) = 0;
   virtual size_t        Get(uchar*, size_t) const = 0;
-  virtual const uchar*  GetBinary() const = 0;
+  virtual const uchar*  GetRawBinary() const = 0;
   virtual void          FromFile(const char*) = 0;
   virtual void          ToFile(const char *sInfo) const = 0;
   
