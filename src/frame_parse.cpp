@@ -102,6 +102,8 @@ bool id3::v2::parseFields(ID3_Reader& rdr, ID3_FrameImpl& frame)
     }
   }
   et.setExitPos(rdr.getCur());
+
+  return true;
 }
 
 bool ID3_FrameImpl::Parse(ID3_Reader& reader) 
