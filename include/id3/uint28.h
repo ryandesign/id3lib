@@ -26,8 +26,7 @@
 #define __ID3LIB_UINT28_H__
 
 #include "globals.h"
-#include <iostream>
-#include <algorithm>
+#include <iostream.h>
 
 class uint28
 {
