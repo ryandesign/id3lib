@@ -26,7 +26,7 @@
 
 #include <string.h>
 #include "tag.h"
-#include "misc_support.h"
+#include "utils.h"
 
 #if defined HAVE_CONFIG_H
 #include <config.h>
