@@ -37,7 +37,7 @@ void PrintVersion(char *sName)
 {
   cout << sName << " 1.0" << endl;
   cout << "Displays ID3 Tag Information - Written by Scott Thomas Haug" << endl;
-  cout << "Uses " << ID3LIB_NAME << " " << ID3LIB_VERSION << endl << endl;
+  cout << "Uses " << ID3_FullName() << endl << endl;
 }
 
 char *GetDescription(const ID3_FrameID eFrameID)
@@ -347,6 +347,10 @@ int main( int argc, char *argv[])
 }
 
 // $Log$
+// Revision 1.2  1999/11/19 17:09:02  scott
+// * demo_info.cpp: Added runtime options for version and help.  Minor
+// code cleanup.
+//
 // Revision 1.1  1999/11/16 05:25:52  scott
 // Initial revision.
 //
