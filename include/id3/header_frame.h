@@ -1,16 +1,28 @@
 // $Id$
-//  
-// This program is free software; you can distribute it and/or modify it under 
-// the terms discussed in the COPYING file, which should have been included  
-// with this distribution.                                                  
-//                                                                           
-// This program is distributed in the hope that it will be useful, but WITHOUT 
-// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
-// FITNESS FOR A PARTICULAR PURPOSE.  See the COPYING file for more details. 
-//                                                                           
-// The id3lib authors encourage improvements and optimisations to be sent to   
-// the id3lib coordinator.  Please see the README file for details on where  
-// to send such submissions. 
+
+// id3lib: a C++ library for creating and manipulating id3v1/v2 tags
+// Copyright 1999, 2000  Scott Thomas Haug
+
+// This library is free software; you can redistribute it and/or modify it
+// under the terms of the GNU Library General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or (at your
+// option) any later version.
+//
+// This library is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+// FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public
+// License for more details.
+//
+// You should have received a copy of the GNU Library General Public License
+// along with this library; if not, write to the Free Software Foundation,
+// Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+// The id3lib authors encourage improvements and optimisations to be sent to
+// the id3lib coordinator.  Please see the README file for details on where to
+// send such submissions.  See the AUTHORS file for a list of people who have
+// contributed to id3lib.  See the ChangeLog file for a list of changes to
+// id3lib.  These files are distributed with id3lib at
+// http://download.sourceforge.net/id3lib/
 
 #ifndef ID3LIB_HEADER_FRAME_H
 #define ID3LIB_HEADER_FRAME_H
@@ -51,6 +63,14 @@ protected:
 #endif
 
 // $Log$
+// Revision 1.5  1999/12/27 06:09:26  scott
+// (ID3_FrameAttr): Removed.
+// (class ID3_FrameHeader): Added declarations for default constructor and
+// Parse, GetFrameID, GetTextID, GetFrameDef, and Clear methods.  Changed
+// return type for Size and Render.  Replaced __eFrameID data member with
+// __pFrameDef, which encapsulates more information about the frame
+// header.
+//
 // Revision 1.4  1999/12/26 16:40:18  scott
 // (ID3FL_READONLY): Renamed from ID3FL_SIGNED.
 // (class ID3_FrameHeader): Minor cleanup to interface.
