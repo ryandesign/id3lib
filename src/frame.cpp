@@ -35,9 +35,10 @@ ID3_Frame::ID3_Frame(ID3_FrameID id)
   : __changed(false),
     __field_bitset(NULL),
     __num_fields(0),
+    __fields(NULL),
     __encryption_id('\0'),
     __grouping_id('\0'),
-    __fields(NULL)
+    __bad_parse(false)
 {
   
   _InitFieldBits();
@@ -49,9 +50,10 @@ ID3_Frame::ID3_Frame(const ID3_FrameHeader &hdr)
     __field_bitset(NULL),
     __num_fields(0),
     __fields(NULL),
+    __hdr(hdr),
     __encryption_id('\0'),
     __grouping_id('\0'),
-    __hdr(hdr)
+    __bad_parse(false)
 {
   this->_InitFieldBits();
   this->_InitFields();
@@ -61,9 +63,10 @@ ID3_Frame::ID3_Frame(const ID3_Frame& frame)
   : __changed(false),
     __field_bitset(NULL),
     __num_fields(0),
+    __fields(NULL),
     __encryption_id('\0'),
     __grouping_id('\0'),
-    __fields(NULL)
+    __bad_parse(false)
 {
   _InitFieldBits();
   *this = frame;
