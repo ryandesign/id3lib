@@ -88,14 +88,14 @@ void ID3_FrameImpl::Render(ID3_Writer& writer) const
   size_t origSize = 0;
   if (!this->GetCompression())
   {
-    id3::v2::renderFields(fldWriter, *this);
+    renderFields(fldWriter, *this);
     origSize = flds.size();
     ID3D_NOTICE ( "ID3_FrameImpl::Render(): uncompressed fields" );
   }
   else
   {
     io::CompressedWriter cr(fldWriter);
-    id3::v2::renderFields(cr, *this);
+    renderFields(cr, *this);
     cr.flush();
     origSize = cr.getOrigSize();
     ID3D_NOTICE ( "ID3_FrameImpl::Render(): compressed fields, orig size = " <<
