@@ -35,17 +35,22 @@
 
 size_t ID3_ReSync(uchar *data, size_t size)
 {
-  uchar *src, *dest;
-  for (src = dest = data; src < data + size - 1; src++, dest++)
+  const uchar* src = data;
+  const uchar* end = data + size;
+  uchar* dest = data;
+  for (; src < end; src++, dest++)
   {
-    *dest = *src;
-    if (0xFF == src[0] && '\0' == src[1])
+    if (src > dest)
+    {
+      *dest = *src;
+    }
+    if (0xFF == src[0] && src + 1 < end && 0x00 == src[1])
     {
       src++;
     }
   }
   
-  return size - (src - dest);
+  return dest - data;
 }
 
 // Determine if pCur is at a point in the pStart buffer where unsyncing is 
@@ -61,7 +66,7 @@ bool ID3_ShouldUnsync(const uchar *cur, const uchar *start, const size_t size)
     ( cur            < start + size)    &&
     ( cur[0]        == 0xFF)            && // first sync
     ((cur    + 1    == (start + size))  || // last byte?
-     (cur[1] & 0xE0 == 0xE0)            || // second sync
+     (cur[1]        >= 0xE0)            || // second sync
      (cur[1]        == 0x00));             // second null
 }
 
