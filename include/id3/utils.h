@@ -33,6 +33,12 @@
 namespace id3
 {
 #endif /* ID3_UNDEFINED */
+  size_t ID3_TimeToSeconds(const char*, size_t);
+  bool ID3_IsCRLF(const char*, const char*);
+  size_t ID3_CRLFtoLF(char *, size_t);
+
+  void   RemoveTrailingSpaces(char*, size_t);
+  
   uint32 ParseNumber(const uchar *buffer, size_t size = sizeof(uint32));
   size_t RenderNumber(uchar *buffer, uint32 val, size_t size = sizeof(uint32));
   
