@@ -53,7 +53,7 @@ release: config.h.win32 id3lib.spec
 	-rm -rf .deps */.deps $(distdir).zip
 	$(MAKE) $(AM_MAKEFLAGS) distcheck
 	GZIP=$(GZIP_ENV) $(TAR) zxf $(distdir).tar.gz
-	-cp -R id3com/ prj/ libprj/ $(distdir)
+	-cp -R id3com/ prj/ libprj/ delphi/ $(distdir)
 	-find $(distdir) -name "*~" -exec rm {} \;
 	-find $(distdir) -type d -name CVS -exec rm -r {} \;
 	-find $(distdir) -name .cvsignore -exec rm {} \;
