@@ -300,7 +300,7 @@ void PrintInformation(const ID3_Tag &myTag)
   }
 }
 
-int main( int argc, char *argv[])
+int main( unsigned int argc, char *argv[])
 {
 
   int iOpt;

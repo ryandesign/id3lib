@@ -65,7 +65,7 @@ void DisplayTags(ostream &os, luint nTags)
     os << "v2";
 }
 
-int main( int argc, char *argv[])
+int main( unsigned int argc, char *argv[])
 {
   int ulFlag = ID3TT_ID3;
   int iOpt;
