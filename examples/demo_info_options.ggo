@@ -1,6 +1,7 @@
 # $Id$
 
 package "id3info"
+# don't define 'version' - use the one defined by id3lib's automake
 
 option  "assign"        a "Test the assignment operator"        flag    off
 option  "warning"       w "Turn on warnings (for debugging)"    flag    off

@@ -1,7 +1,7 @@
 # $Id$
 
 package "id3tag"
-version "3.8.0pre1"
+# don't define 'version' - use the one defined by id3lib's automake
 
 option  "v1tag"         1 "Render only the id3v1 tag"           flag    off
 option  "v2tag"         2 "Render only the id3v2 tag"           flag    off
