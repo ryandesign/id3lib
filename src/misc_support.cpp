@@ -33,9 +33,11 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <stdio.h>
 
 #include "misc_support.h"
 #include "field.h"
+#include "error.h"
 
 char *ID3_GetString(const ID3_Frame *frame, ID3_FieldID fldName)
 {
@@ -838,10 +840,6 @@ ID3_Frame* ID3_AddSyncLyrics(ID3_Tag *tag, const uchar *data, size_t datasize,
     }
 
     ID3_Frame* frame = new ID3_Frame(ID3FID_SYNCEDLYRICS);
-    if (NULL == frame)
-    {
-      ID3_THROW(ID3E_NoMemory);
-    }
 
     frame->Field(ID3FN_LANGUAGE) = lang;
     frame->Field(ID3FN_DESCRIPTION) = desc;
