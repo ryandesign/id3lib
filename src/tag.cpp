@@ -601,8 +601,7 @@ size_t ID3_Tag::Parse(const uchar* buffer, size_t bytes)
  ** @param buffer The remainder of the tag (not including the data source) 
  **               read in from the data source.
  **/
-size_t ID3_Tag::Parse(const uchar header[ID3_TAGHEADERSIZE],
-		      const uchar *buffer)
+size_t ID3_Tag::Parse(const uchar header[ID3_TAGHEADERSIZE], const uchar *buffer)
 {
   size_t size = ID3_Tag::IsV2Tag(header);
   if (0 == size)
