@@ -24,6 +24,7 @@
 // id3lib.  These files are distributed with id3lib at
 // http://download.sourceforge.net/id3lib/
 
+#include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
 #include <stdio.h>
@@ -823,6 +824,10 @@ size_t ID3_RemoveLyrics(ID3_Tag *tag)
 }
 
 // $Log$
+// Revision 1.21  2000/04/08 04:40:40  eldamitri
+// Changed new ANSI-standard C++ include headers to old-style headers.
+// (ID3_GetString): Removed variable name to prevent warning in windows.
+//
 // Revision 1.20  2000/04/05 05:21:15  eldamitri
 // Updated initial comment information to reflect license, copyright
 // change.
