@@ -22,7 +22,7 @@
 
 #define ID3FL_TAGALTER    (1 << 15)
 #define ID3FL_FILEALTER   (1 << 14)
-#define ID3FL_SIGNED      (1 << 13)
+#define ID3FL_READONLY    (1 << 13)
 #define ID3FL_COMPRESSION (1 <<  7)
 #define ID3FL_ENCRYPTION  (1 <<  6)
 #define ID3FL_GROUPING    (1 <<  5)
@@ -38,8 +38,8 @@ class ID3_FrameHeader : public ID3_Header
 {
 public:
   virtual luint Size(void);
-  void SetFrameID(ID3_FrameID id);
-  luint GetFrameInfo(ID3_FrameAttr &attr, uchar *buffer);
+  virtual void  SetFrameID(ID3_FrameID id);
+  virtual luint GetFrameInfo(ID3_FrameAttr &attr, uchar *buffer);
   virtual luint Render(uchar *buffer);
   
 protected:
@@ -50,6 +50,9 @@ protected:
 #endif
 
 // $Log$
+// Revision 1.3  1999/12/17 16:05:02  scott
+// Updated opening comment block.
+//
 // Revision 1.2  1999/12/02 22:45:28  scott
 // Changed all of the #include <id3/*> to #include "*" to help ensure that
 // the sources are searched for in the right places.
