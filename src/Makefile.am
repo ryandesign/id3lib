@@ -12,9 +12,11 @@
 
 LT_VERSION = $(LT_CURRENT):$(LT_REVISION):$(LT_AGE)
 
-INCLUDES = @ID3LIB_DEBUG_FLAGS@ -I$(top_srcdir)/include/id3
+INCLUDES = \
+  @ID3LIB_DEBUG_FLAGS@ -I$(top_srcdir)/include/id3 -I$(top_srcdir)/include
 
 the_sources =                   \
+  c_wrapper.cpp                 \
   error.cpp                     \
   field.cpp                     \
   field_binary.cpp              \
@@ -39,10 +41,6 @@ the_sources =                   \
   tag_render.cpp                \
   tag_sync.cpp
 
-EXTRA_DIST =                    \
-  dll_wrapper.cpp               
-
-
 lib_LTLIBRARIES   = libid3.la 
 
 libid3_la_SOURCES = $(the_sources)
@@ -53,6 +51,9 @@ libid3_la_LDFLAGS = \
   -export-dynamic
 
 # $Log$
+# Revision 1.7  2000/04/20 03:47:51  eldamitri
+# (the_sources): Added globals.cpp, removed version.cpp
+#
 # Revision 1.6  2000/04/19 02:02:47  eldamitri
 # Moved from src/id3 to src.
 #
