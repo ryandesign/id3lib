@@ -14,9 +14,11 @@
 //
 //  Mon Nov 23 18:34:01 1998
 
+#if defined HAVE_CONFIG_H
+#include <config.h>
+#endif
 
 #include <id3/tag.h>
-
 
 #ifdef __DLL
 
@@ -487,3 +489,6 @@ void ID3Field_ToFile(ID3_Field *field, char *fileName)
 #endif
 
 // $Log$
+// Revision 1.4  1999/11/04 04:15:54  scott
+// Added cvs Id and Log tags to beginning and end of file, respectively.
+//
