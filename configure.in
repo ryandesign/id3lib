@@ -137,7 +137,8 @@ AC_CHECK_HEADER(iostream.h)
 
 dnl Check for functions.
 AC_FUNC_MEMCMP
-AC_HAVE_FUNCS(
+AC_CHECK_FUNCS(mkstemp)
+AC_CHECK_FUNCS(
   truncate                      \
   ,,AC_MSG_ERROR([Missing a vital function for id3lib])
 )
@@ -214,6 +215,10 @@ AC_OUTPUT(                      \
 )
 
 # $Log$
+# Revision 1.17  2000/04/08 04:49:54  eldamitri
+# Updated to version 3.7.0, per Kamran's (MusicMatch) suggestion.  Other
+# minor updates.
+#
 # Revision 1.16  2000/04/07 04:46:37  eldamitri
 # Changed occurrences of 'micro' to 'patch'.
 #
