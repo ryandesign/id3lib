@@ -28,7 +28,7 @@
 #ifndef _ID3LIB_V1_H_
 #define _ID3LIB_V1_H_
 
-#include "strings.h"
+#include "id3/id3lib_strings.h"
 
 namespace dami
 {

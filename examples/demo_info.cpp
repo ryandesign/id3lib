@@ -21,7 +21,6 @@
 #  include <config.h>
 #endif
 
-#include <iostream.h>
 #include <id3/tag.h>
 #include <id3/utils.h>
 #include <id3/misc_support.h>
@@ -31,6 +30,8 @@
 #include "demo_info_options.h"
 
 using namespace dami;
+using std::cout;
+using std::endl;
 
 static String VERSION_NUMBER = "$Revision$";
 
@@ -192,7 +193,7 @@ void PrintInformation(const ID3_Tag &myTag)
       case ID3FID_GENERALOBJECT:
       {
         char 
-        *sMimeType = ID3_GetString(frame, ID3FN_TEXT), 
+        *sMimeType = ID3_GetString(frame, ID3FN_MIMETYPE), 
         *sDesc = ID3_GetString(frame, ID3FN_DESCRIPTION), 
         *sFileName = ID3_GetString(frame, ID3FN_FILENAME);
         size_t 
@@ -207,7 +208,7 @@ void PrintInformation(const ID3_Tag &myTag)
       }
       case ID3FID_UNIQUEFILEID:
       {
-        char *sOwner = ID3_GetString(frame, ID3FN_TEXT);
+        char *sOwner = ID3_GetString(frame, ID3FN_OWNER);
         size_t nDataSize = frame->GetField(ID3FN_DATA)->Size();
         cout << sOwner << ", " << nDataSize
              << " bytes" << endl;

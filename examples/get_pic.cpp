@@ -4,11 +4,14 @@
 #  include <config.h>
 #endif
 
-#include <iostream.h>
+#include "id3/id3lib_streams.h"
 #include <stdlib.h>
 
 #include <id3/tag.h>
 #include <id3/misc_support.h>
+
+using std::cout;
+using std::endl;
 
 int main( int argc, char *argv[])
 {

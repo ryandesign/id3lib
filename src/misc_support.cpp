@@ -44,9 +44,11 @@ using namespace dami;
 char *ID3_GetString(const ID3_Frame *frame, ID3_FieldID fldName)
 {
   char *text = NULL;
-  if (NULL != frame)
+//  if (NULL != frame)
+  ID3_Field* fld;
+  if (NULL != frame && NULL != (fld = frame->GetField(fldName)))
   {
-    ID3_Field* fld = frame->GetField(fldName);
+//    ID3_Field* fld = frame->GetField(fldName);
     ID3_TextEnc enc = fld->GetEncoding();
     fld->SetEncoding(ID3TE_ASCII);
     size_t nText = fld->Size();

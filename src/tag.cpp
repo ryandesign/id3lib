@@ -32,7 +32,7 @@
 #include "readers.h"
 #include "writers.h"
 #include "tag_impl.h"
-#include "strings.h"
+#include "id3/id3lib_strings.h"
 #include "utils.h"
 
 using namespace dami;

@@ -32,9 +32,9 @@
 #include <config.h>
 #endif
 
-#include <fstream.h>
+#include "id3/id3lib_streams.h"
 #include "globals.h"
-#include "strings.h"
+#include "id3/id3lib_strings.h"
 
 namespace dami
 {

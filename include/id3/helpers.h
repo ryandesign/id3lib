@@ -28,7 +28,7 @@
 #ifndef _ID3LIB_HELPERS_H_
 #define _ID3LIB_HELPERS_H_
 
-#include "strings.h"
+#include "id3/id3lib_strings.h"
 #include "globals.h"
 
 class ID3_TagImpl;

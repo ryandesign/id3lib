@@ -4,7 +4,7 @@
 #  include <config.h>
 #endif
 
-#include <iostream.h>
+#include "id3/id3lib_streams.h"
 #include <stdlib.h>
 #include <string.h>
 
@@ -12,6 +12,9 @@
 #include <id3/misc_support.h>
 
 #include "demo_tag_options.h"
+
+using std::cout;
+using std::endl;
 
 static const char* VERSION_NUMBER = "$Revision$";
 

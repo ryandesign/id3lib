@@ -35,7 +35,7 @@
 #include "frame.h"
 #include "field.h"
 #include "spec.h"
-#include "strings.h"
+#include "id3/id3lib_strings.h"
 
 class ID3_Reader;
 class ID3_Writer;
