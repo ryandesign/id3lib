@@ -43,6 +43,7 @@ class ID3_TagHeader : public ID3_Header
 public:
   virtual size_t Size(void);
   virtual size_t Render(uchar *buffer);
+  ID3_TagHeader& operator=(const ID3_TagHeader&);
 };
 
 lsint ID3_IsTagHeader(uchar header[ID3_TAGHEADERSIZE]);
@@ -50,6 +51,10 @@ lsint ID3_IsTagHeader(uchar header[ID3_TAGHEADERSIZE]);
 #endif
 
 // $Log$
+// Revision 1.5  2000/04/05 05:20:52  eldamitri
+// Updated initial comment information to reflect license, copyright
+// change.
+//
 // Revision 1.4  1999/12/27 06:06:54  scott
 // (ID3_TAGIDSIZE): Added constant.
 // (class ID3_TagHeader): Minor return type changes for Size and Render.
