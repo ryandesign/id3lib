@@ -37,25 +37,30 @@ enum ID3_Err
 class ID3_Error
 {
 public:
-  ID3_Err GetErrorID(void);
-  char   *GetErrorDesc(void);
-  char   *GetErrorFile(void);
-  luint   GetErrorLine(void);
+  ID3_Err GetErrorID(void) const;
+  char   *GetErrorType(void) const;
+  char   *GetErrorDesc(void) const;
+  char   *GetErrorFile(void) const;
+  luint   GetErrorLine(void) const;
   
-  // *** PRIVATE INTERNAL DATA - DO NOT USE ***
+  ID3_Error(const ID3_Err eID, const char *sFileName, const luint nLineNum, 
+            const char *sDescription);
 private:
-  ID3_Error(ID3_Err id, char *file, luint lineNum);
-protected:
-  ID3_Err error;
-  luint errLine;
-  char  errFile[ 256 ];
+  ID3_Err __eError;
+  luint   __nErrLine;
+  char   *__sErrFileName;
+  char   *__sErrDesc;
 };
 
-#define ID3_THROW(x) throw ID3_Error(x, __FILE__, __LINE__)
+#define ID3_THROW(x) throw ID3_Error(x, __FILE__, __LINE__, "")
+#define ID3_THROW_DESC(x, y) throw ID3_Error(x, __FILE__, __LINE__, y)
 
 #endif
 
 // $Log$
+// Revision 1.4  1999/11/04 04:32:11  scott
+// Initial revision
+//
 // Revision 1.3  1999/11/04 04:15:54  scott
 // Added cvs Id and Log tags to beginning and end of file, respectively.
 //
