@@ -68,7 +68,7 @@ public:
   luint      Render(uchar *buffer);
   luint      RenderV1(char *buffer);
   luint      Size() const;
-  void       Parse(uchar header[ID3_TAGHEADERSIZE], uchar *buffer);
+  size_t     Parse(uchar header[ID3_TAGHEADERSIZE], uchar *buffer);
   luint      Link(const char *fileInfo, const luint tt = (luint) ID3TT_ALL);
   luint      Update(const luint tt = (luint) ID3TT_ID3V2);
   luint      Strip(const luint tt = (luint) ID3TT_ALL);

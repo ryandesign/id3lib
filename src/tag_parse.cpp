@@ -319,7 +319,7 @@ void ID3_Tag::ProcessBinaries(ID3_FrameID whichFrame, bool attach)
    ** @param buffer The remainder of the tag (not including the data source) 
    **               read in from the data source.
    **/
-void ID3_Tag::Parse(uchar header[ID3_TAGHEADERSIZE], uchar *buffer)
+size_t ID3_Tag::Parse(uchar header[ID3_TAGHEADERSIZE], uchar *buffer)
 {
   luint tagSize = 0;
   uint28 temp = &header[6];
@@ -336,8 +336,8 @@ void ID3_Tag::Parse(uchar header[ID3_TAGHEADERSIZE], uchar *buffer)
     tagSize = ReSync(buffer, tagSize);
   }
   
-  // okay, if we are ID3v2.2.1, then let's skip over the extended header for now
-  // because I am lazy
+  // okay, if we are ID3v2.2.1, then let's skip over the extended header for
+  // now because I am lazy
   if (this->GetSpec() == ID3V2_2_1)
   {
     if (header[5] & ID3_TagHeader::EXTENDED)
@@ -385,7 +385,7 @@ void ID3_Tag::Parse(uchar header[ID3_TAGHEADERSIZE], uchar *buffer)
   // set the flag which says that the tag hasn't changed
   __changed = false;
   
-  return ;
+  return tagSize;
 }
 
 
