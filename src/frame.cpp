@@ -189,7 +189,7 @@ void ID3_Frame::_InitFields()
   
   _num_fields = 0;
   
-  while (info->aeFieldDefs[_num_fields].eID != ID3FN_NOFIELD)
+  while (info->aeFieldDefs[_num_fields]._id != ID3FN_NOFIELD)
   {
     _num_fields++;
   }
@@ -202,19 +202,12 @@ void ID3_Frame::_InitFields()
   
   for (index_t i = 0; i < _num_fields; i++)
   {
-    _fields[i] = new ID3_Field;
+    _fields[i] = new ID3_Field(info->aeFieldDefs[i]);
     if (NULL == _fields[i])
     {
       ID3_THROW(ID3E_NoMemory);
     }
     
-    _fields[i]->_id           = info->aeFieldDefs[i].eID;
-    _fields[i]->_type         = info->aeFieldDefs[i].eType;
-    _fields[i]->_length       = info->aeFieldDefs[i].ulFixedLength;
-    _fields[i]->_spec_begin   = info->aeFieldDefs[i].eSpecBegin;
-    _fields[i]->_spec_end     = info->aeFieldDefs[i].eSpecEnd;
-    _fields[i]->_flags        = info->aeFieldDefs[i].ulFlags;
-            
     // tell the frame that this field is present
     BS_SET(_field_bitset, _fields[i]->_id);
   }
