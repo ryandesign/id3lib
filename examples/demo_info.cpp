@@ -26,6 +26,8 @@
 #include <id3/tag.h>
 #include <id3/utils.h>
 #include <id3/misc_support.h>
+#include <id3/readers.h>
+#include <id3/reader_decorators.h>
 #include <id3/error.h>
 #include <popt.h>
 
@@ -263,23 +265,16 @@ void PrintInformation(const ID3_Tag &myTag)
             case ID3CT_TRIVIA:   cout << "Trivia/'pop up' information"; break;
           }
           cout << endl;
-          size_t size = myFrame->GetField(ID3FN_DATA)->Size();
-          const uchar* beg = myFrame->GetField(ID3FN_DATA)->GetBinary();
-          const uchar* cur = beg;
-          const uchar* end = beg + size;
-          while (cur < end)
+          ID3_Field* fld = myFrame->GetField(ID3FN_DATA);
+          if (fld)
           {
-            size_t len = ::min<size_t>(end - cur, ::strlen((char *) cur));
-            cout << String((char*)cur, len);
-            cur += len + 1;
-            if (cur < end)
+            ID3_MemoryReader mr(fld->GetBinary(), fld->BinSize());
+            io::BinaryNumberReader bnr(mr);
+            io::TextReader tr(mr);
+            while (!mr.atEnd())
             {
-              
-              cout 
-                << " [" 
-                << ::parseNumber(cur, ::min<size_t>(end - cur, sizeof(uint32))) 
-                << " " << format << "] ";
-              cur += sizeof(uint32);
+              cout << tr.readText();
+              cout << " [" << bnr.readNumber(sizeof(uint32)) << " " << format << "] ";
             }
           }
           cout << endl;
@@ -361,10 +356,12 @@ int main( unsigned int argc, const char *argv[])
     if (bWarning)
     {
       ID3D_INIT_WARNING();
+      ID3D_WARNING ( "warnings turned on" );
     }
     if (bNotice)
     {
       ID3D_INIT_NOTICE();
+      ID3D_NOTICE ( "notices turned on" );
     }
     const char* filename = NULL;
     while((filename = poptGetArg(con)) != NULL)
