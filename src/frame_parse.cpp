@@ -45,7 +45,7 @@ size_t ID3_Frame::Parse(const uchar * const buffer, luint size)
   // data is the part of the buffer that appears after the header  
   const uchar * data = &buffer[hdr_size]; 
   uchar* expanded_data = NULL;
-      
+  
   // expand out the data if it's compressed 
   if (__hdr.GetCompression())
   {  
