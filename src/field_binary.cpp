@@ -25,12 +25,12 @@
 // http://download.sourceforge.net/id3lib/
 
 
-#include <stdio.h>
-#include <memory.h>
-
 #if defined HAVE_CONFIG_H
 #include <config.h>
 #endif
+
+#include <stdio.h>
+#include <memory.h>
 
 #include "field_impl.h"
 #include "reader.h"
