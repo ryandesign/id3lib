@@ -44,8 +44,15 @@ void ID3_Field::Set(const uchar *newData, const luint newSize)
     {
       ID3_THROW(ID3E_NoMemory);
     }
-      
-    memcpy(__sData, newData, newSize);
+    
+    if (newData != NULL)
+    {
+      memcpy(__sData, newData, newSize);
+    }
+    else
+    {
+      memset(__sData, 0, newSize);
+    }
     __ulSize = newSize;
     
     __eType = ID3FTY_BINARY;
@@ -166,6 +173,11 @@ ID3_Field::RenderBinary(uchar *buffer)
 
 
 // $Log$
+// Revision 1.3  2000/04/24 14:47:50  eldamitri
+// __lFixedLength changed to __ulFixedLength.  A fixed length of 0, rather
+// than -1, represents a variable-length field, since we should never have
+// a fixed field length of 0.
+//
 // Revision 1.2  2000/04/18 22:10:20  eldamitri
 // Moved field_binary.cpp from src/id3/ to src/
 //
