@@ -26,6 +26,9 @@
 
 #include <string.h>
 #include "tag.h"
+#include "field_impl.h"
+#include "frame_def.h"
+#include "field_def.h"
 
 #if defined HAVE_CONFIG_H
 #include <config.h>
@@ -141,7 +144,7 @@ bool ID3_Frame::_ClearFields()
   }
   for (index_t fi = 0; fi < _num_fields; fi++)
   {
-    delete _fields[fi];
+    delete dynamic_cast<ID3_FieldImpl*>(_fields[fi]);
   }
   
   delete [] _fields;
@@ -202,7 +205,7 @@ void ID3_Frame::_InitFields()
   
   for (index_t i = 0; i < _num_fields; i++)
   {
-    _fields[i] = new ID3_Field(info->aeFieldDefs[i]);
+    _fields[i] = new ID3_FieldImpl(info->aeFieldDefs[i]);
     if (NULL == _fields[i])
     {
       ID3_THROW(ID3E_NoMemory);
