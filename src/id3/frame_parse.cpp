@@ -14,31 +14,36 @@
 //
 //  Mon Nov 23 18:34:01 1998
 
+#if defined HAVE_CONFIG_H
+#include <config.h>
+#endif
 
 #include <id3/frame.h>
 #include <zlib.h>
-
 
 void ID3_Frame::Parse(uchar *buffer, luint size)
 {
   luint i;
   luint posn = 0;
   
-  for (i = 0; i < numFields; i++)
+  for (i = 0; i < __ulNumFields; i++)
   {
-    fields[i]->SetVersion(version, revision);
-    posn += fields[i]->Parse(buffer, posn, size);
+    __apFields[i]->SetVersion(__ucVersion, __ucRevision);
+    posn += __apFields[i]->Parse(buffer, posn, size);
     
     // if we just parsed a TEXTENC field, we'd better tell the rest of the
     // concerned string fields in the frame what they are expected to parse
     // (ASCII or Unicode)
-    if(fields[i]->name == ID3FN_TEXTENC)
+    if (ID3FN_TEXTENC == __apFields[i]->__eName)
       UpdateStringTypes();
   }
   
-  hasChanged = false;
+  __bHasChanged = false;
   
   return ;
 }
 
 // $Log$
+// Revision 1.4  1999/11/04 04:15:54  scott
+// Added cvs Id and Log tags to beginning and end of file, respectively.
+//
