@@ -686,7 +686,7 @@ static const char *ID3_v1_genre_description[ID3_NR_OF_V1_GENRES] =
   "Christian Rock ",       //141
   "Merengue",              //142
   "Salsa",                 //143
-  "Trash Metal",           //144
+  "Thrash Metal",          //144
   "Anime",                 //145
   "JPop",                  //146
   "Synthpop"               //147
