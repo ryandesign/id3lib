@@ -360,10 +360,7 @@ const char* ID3_Frame::GetDescription(ID3_FrameID eFrameID)
   {
     return myFrameDef->sDescription;
   }
-  else
-  {
-    return "Unknown";
-  }
+  return NULL;
 }
 
 const char* ID3_Frame::GetDescription() const
@@ -373,9 +370,6 @@ const char* ID3_Frame::GetDescription() const
   {
     return def->sDescription;
   }
-  else
-  {
-    return "Unknown";
-  }
+  return NULL;
 }
 
