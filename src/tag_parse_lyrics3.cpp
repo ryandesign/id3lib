@@ -262,6 +262,9 @@ void ID3_Tag::ParseLyrics3(void)
 }
 
 // $Log$
+// Revision 1.12  2000/04/08 04:42:59  eldamitri
+// Changed new ANSI-standard C++ include headers to old-style headers.
+//
 // Revision 1.11  2000/04/05 05:21:15  eldamitri
 // Updated initial comment information to reflect license, copyright
 // change.
