@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 #include <id3/tag.h>
+#include <id3/error.h>
 #include <id3/misc_support.h>
 
 int main( int argc, char *argv[])
