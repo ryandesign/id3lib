@@ -199,8 +199,8 @@ size_t ID3_TagImpl::PaddingSize(size_t curSize) const
 {
   luint newSize = 0;
   
-  // if padding is switched off or there is no attached file
-  if (! _is_padded || !this->GetPrependedBytes())
+  // if padding is switched off
+  if (! _is_padded)
   {
     return 0;
   }
@@ -208,8 +208,9 @@ size_t ID3_TagImpl::PaddingSize(size_t curSize) const
   // if the old tag was large enough to hold the new tag, then we will simply
   // pad out the difference - that way the new tag can be written without
   // shuffling the rest of the song file around
-  if (this->GetPrependedBytes() && (this->GetPrependedBytes() >= curSize) && 
-      (this->GetPrependedBytes() - curSize) < ID3_PADMAX)
+  if ((this->GetPrependedBytes()-ID3_TagHeader::SIZE > 0) &&
+      (this->GetPrependedBytes()-ID3_TagHeader::SIZE >= curSize) && 
+      (this->GetPrependedBytes()-ID3_TagHeader::SIZE - curSize) < ID3_PADMAX)
   {
     newSize = this->GetPrependedBytes()-ID3_TagHeader::SIZE;
   }

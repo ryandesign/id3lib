@@ -112,7 +112,7 @@ bool id3::v1::parse(ID3_TagImpl& tag, ID3_Reader& reader)
   ID3D_NOTICE("id3::v1::parse: read bytes: " << reader.getCur() - beg);
   String comment = io::readTrailingSpaces(reader, ID3_V1_LEN_COMMENT);
   if (comment.length() == ID3_V1_LEN_COMMENT  &&
-      '\0' == comment[ID3_V1_LEN_COMMENT - 2] ||
+      '\0' == comment[ID3_V1_LEN_COMMENT - 2] &&
       '\0' != comment[ID3_V1_LEN_COMMENT - 1])
   {
     // This is an id3v1.1 tag.  The last byte of the comment is the track
