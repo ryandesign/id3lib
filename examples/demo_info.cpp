@@ -269,7 +269,7 @@ void PrintInformation(const ID3_Tag &myTag)
           ID3_Field* fld = myFrame->GetField(ID3FN_DATA);
           if (fld)
           {
-            ID3_MemoryReader mr(fld->GetBinary(), fld->BinSize());
+            ID3_MemoryReader mr(fld->GetRawBinary(), fld->BinSize());
             while (!mr.atEnd())
             {
               cout << io::readString(mr).c_str();
