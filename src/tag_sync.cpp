@@ -108,38 +108,3 @@ void ID3_Tag::UnSync(uchar *pDestData, luint nDestSize, uchar *pSrcData, luint n
     }
   }
 }
-
-
-
-// $Log$
-// Revision 1.10  2000/04/05 05:21:15  eldamitri
-// Updated initial comment information to reflect license, copyright
-// change.
-//
-// Revision 1.9  2000/01/04 15:42:49  eldamitri
-// For compilation with gcc 2.95.2 and better compatibility with ANSI/ISO
-// standard C++, updated, rearranged, and removed (where necessary)
-// #include directives.
-//
-// Revision 1.8  1999/12/17 16:12:03  scott
-// Updated opening comment block.
-// (ShouldUnsync): Added for use with GetUnSyncSize and UnSync.
-// (ReSync, GetUnSyncSize, UnSync): Renamed variables.  Restructured code.
-//
-// Revision 1.7  1999/12/01 18:00:59  scott
-// Changed all of the #include <id3/*> to #include "*" to help ensure that
-// the sources are searched for in the right places (and to make compiling under
-// windows easier).
-//
-// Revision 1.6  1999/11/29 19:26:18  scott
-// Updated the leading license information of the file to reflect new maintainer.
-//
-// Revision 1.5  1999/11/15 20:21:36  scott
-// Added include for config.h.  Minor code cleanup.  Removed
-// assignments from if checks; first makes assignment, then checks
-// for appropriate value.  Made private member variable names more
-// descriptive.
-//
-// Revision 1.4  1999/11/04 04:15:55  scott
-// Added cvs Id and Log tags to beginning and end of file, respectively.
-//
