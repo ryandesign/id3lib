@@ -20,7 +20,7 @@ EXTRA_DIST =                    \
 	id3lib.spec             \
         id3lib.spec.in          \
         reconf
-SUBDIRS = . m4 doc src include prj zlib id3com libprj examples
+SUBDIRS = . m4 doc src include zlib examples
 
 INCLUDES = @ID3LIB_DEBUG_FLAGS@
 
@@ -53,6 +53,8 @@ release: config.h.win32 id3lib.spec
 	-rm -rf .deps */.deps $(distdir).zip
 	$(MAKE) $(AM_MAKEFLAGS) distcheck
 	GZIP=$(GZIP_ENV) $(TAR) zxf $(distdir).tar.gz
+	-cp -R id3com/ prj/ libprj/ $(distdir)
+	-find $(distdir) -type d -name CVS -exec rm -rf {} \;
 	cd $(distdir) && cp config.h.win32 config.h
 	cd $(distdir) && zip -r ../$(distdir).zip *
 	cd $(distdir) && ./configure && $(MAKE) $(AM_MAKEFLAGS) docs-release
@@ -69,6 +71,12 @@ snapshot: config.h.win32
 	rm -rf $$ss_distdir
 
 # $Log$
+# Revision 1.14  2000/04/21 19:55:09  eldamitri
+# (docs): Added for creating documentation from top directory
+# (docs-release): Added for automating creation of documentation
+# deliverables
+# (release): Updated to create documentation release
+#
 # Revision 1.13  2000/04/19 02:03:31  eldamitri
 # (SUBDIRS): Added 'examples'
 #
