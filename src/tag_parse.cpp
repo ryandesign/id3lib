@@ -411,7 +411,7 @@ void ID3_TagImpl::ParseReader(ID3_Reader &reader)
   wr.setBeg(wr.getCur());
 
   _file_tags.clear();
-  _file_size = reader.getEnd() + 1;
+  _file_size = reader.getEnd();
 
   ID3_Reader::pos_type beg  = wr.getBeg();
   ID3_Reader::pos_type cur  = wr.getCur();
@@ -572,3 +572,4 @@ void ID3_TagImpl::ParseReader(ID3_Reader &reader)
   else
     this->SetPadding(false); //no need to pad an empty file
 }
+
