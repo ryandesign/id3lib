@@ -36,7 +36,7 @@
 
 const char* const ID3_TagHeader::ID = "ID3";
 
-bool ID3_TagHeader::SetSpec(const ID3_V2Spec spec)
+bool ID3_TagHeader::SetSpec(ID3_V2Spec spec)
 {
   bool changed = this->ID3_Header::SetSpec(spec);
   if (changed)

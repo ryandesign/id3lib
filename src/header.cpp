@@ -39,7 +39,7 @@ static const ID3_Header::Info _spec_info[] =
   {  4,     4,     2,     false, 10,  false }  // ID3V2_3_0
 };
   
-bool ID3_Header::SetSpec(const ID3_V2Spec spec)
+bool ID3_Header::SetSpec(ID3_V2Spec spec)
 {
   bool changed = false;
   if (spec < ID3V2_EARLIEST || spec > ID3V2_LATEST)
