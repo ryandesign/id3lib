@@ -126,10 +126,22 @@ bool id3::v1::parse(ID3_TagImpl& tag, ID3_Reader& reader)
   }
   else
   {
-    if (trackno[1] == '\0' || trackno[1] == 0x20 && trackno[0] != '\0' && trackno[0] != 0x20)
-      comment.append((const unsigned char)trackno.data(), 1);
-    else if (trackno[1] != '\0' && trackno[1] != 0x20 && trackno[0] != '\0' && trackno[0] != 0x20)
-      comment.append((const unsigned char)trackno.data(), 2);
+    // trackno[0] != '\0'
+    const int paddingsize = (ID3_V1_LEN_COMMENT-2) - comment.size();
+    const char * padding = "                            "; //28 spaces
+
+    if (trackno[1] == '\0' || trackno[1] == 0x20 && trackno[0] != 0x20)
+    {
+      // if there used to be spaces they are gone now, we need to rebuild them
+      comment.append(padding, paddingsize);
+      comment.append((const char *)trackno.data(), 1);
+    }
+	else if (trackno[1] != '\0' && trackno[1] != 0x20 &&  trackno[0] != 0x20)
+    {
+      // if there used to be spaces they are gone now, we need to rebuild them
+      comment.append(padding, paddingsize);
+      comment.append((const char *)trackno.data(), 2);
+    }
   }
   ID3D_NOTICE( "id3::v1::parse: comment = \"" << comment << "\"" );
   if (comment.size() > 0)
