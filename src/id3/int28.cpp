@@ -50,10 +50,10 @@ void int28::set(uchar val[sizeof(uint32)])
   }
 
   uchar bytes [4];
-  bytes[0] = ((__acValue[0] >> 3) & MASK4);
-  bytes[1] = ((__acValue[1] >> 2) & MASK5) | ((__acValue[0] & MASK3) << 5);
-  bytes[2] = ((__acValue[2] >> 1) & MASK6) | ((__acValue[1] & MASK2) << 6);
-  bytes[3] = ((__acValue[3] >> 0) & MASK7) | ((__acValue[2] & MASK1) << 7);
+  bytes[0] = (uchar) ((__acValue[0] >> 3) & MASK4);
+  bytes[1] = (uchar)(((__acValue[1] >> 2) & MASK5) | ((__acValue[0] & MASK3) << 5));
+  bytes[2] = (uchar)(((__acValue[2] >> 1) & MASK6) | ((__acValue[1] & MASK2) << 6));
+  bytes[3] = (uchar)(((__acValue[3] >> 0) & MASK7) | ((__acValue[2] & MASK1) << 7));
 
   __nValue = ParseNumber(bytes);
 }
@@ -64,7 +64,7 @@ void int28::set(uint32 val)
   for (size_t i = 0; i < sizeof(uint32); i++)
   {
     __acValue[sizeof(uint32) - 1 - i] = 
-      (uchar) ((val >> (i * 7)) & MASK7) & MASK8;
+      (uchar) (((val >> (i * 7)) & MASK7) & MASK8);
   }
 }
 
@@ -94,6 +94,10 @@ istream& operator>>(istream& in, int28& val)
 }
 
 // $Log$
+// Revision 1.11  2000/04/05 05:21:15  eldamitri
+// Updated initial comment information to reflect license, copyright
+// change.
+//
 // Revision 1.10  2000/01/04 15:42:49  eldamitri
 // For compilation with gcc 2.95.2 and better compatibility with ANSI/ISO
 // standard C++, updated, rearranged, and removed (where necessary)

@@ -179,7 +179,7 @@ void ID3_Tag::ProcessBinaries(ID3_FrameID whichFrame, bool attach)
       posn++, extras++;
     }
 
-    bReadOnly = frHeader.GetFlags() & ID3FL_READONLY;
+    bReadOnly = ((frHeader.GetFlags() & ID3FL_READONLY) != 0);
 
     id = frHeader.GetFrameID();
     
@@ -425,6 +425,9 @@ luint ID3_Tag::ParseFromHandle(void)
 }
 
 // $Log$
+// Revision 1.18  2000/04/09 22:46:04  eldamitri
+// Minor structure change.
+//
 // Revision 1.17  2000/04/08 04:42:59  eldamitri
 // Changed new ANSI-standard C++ include headers to old-style headers.
 //
