@@ -247,6 +247,9 @@ maintainer-clean-generic clean mostlyclean distclean maintainer-clean
 
 
 # $Log$
+# Revision 1.2  1999/12/01 19:11:30  scott
+# (EXTRA_DIST): Removed.  No extra files to distribute
+#
 # Revision 1.1  1999/12/01 18:09:37  scott
 # Initial revision.
 #
