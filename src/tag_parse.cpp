@@ -238,7 +238,17 @@ void ID3_TagImpl::ParseFile()
       wr.setBeg(cur);
     } while (!wr.atEnd() && cur > last);
   }
-
+  // add silly padding outside the tag to _prepended_bytes
+  if (!wr.atEnd() && wr.peekChar() == '\0')
+  {
+    do
+    {
+      last = cur;
+      cur = wr.getCur() + 1;
+      wr.setBeg(cur);
+      wr.setCur(cur);
+    } while (!wr.atEnd() &&  cur > last && wr.peekChar() == '\0');
+  }
   _prepended_bytes = cur - beg;
 
   cur = wr.setCur(end);
