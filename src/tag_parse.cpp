@@ -425,6 +425,10 @@ luint ID3_Tag::ParseFromHandle(void)
 }
 
 // $Log$
+// Revision 1.20  2000/04/10 20:57:57  eldamitri
+// * src/id3/tag_parse.cpp
+// (ProcessBinaries): Removed name of caught error since it isn't used.
+//
 // Revision 1.19  2000/04/10 16:58:13  eldamitri
 // (ProcessBinaries): Minor change to prevent warning in windows.
 //
