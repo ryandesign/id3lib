@@ -46,7 +46,8 @@ void ID3_FrameHeader::SetUnknownFrame(const char* id)
   __frame_def->eID = ID3FID_NOFRAME;
   __frame_def->bTagDiscard = false;
   __frame_def->bFileDiscard = false;
-  __frame_def->aeFieldDefs = (ID3_FieldDef *) ID3_FieldDef::DEFAULT;
+  __frame_def->aeFieldDefs = ID3_FieldDef::DEFAULT;
+  __frame_def->sDescription = NULL;
   if (strlen(id) <= 3)
   {
     strcpy(__frame_def->sShortTextID, id);
@@ -54,7 +55,7 @@ void ID3_FrameHeader::SetUnknownFrame(const char* id)
   }
   else
   {
-    strncpy(__frame_def->sLongTextID, id, 4);
+    strcpy(__frame_def->sLongTextID, id);
     strcpy(__frame_def->sShortTextID, "");
   }
   __dyn_frame_def = true;
