@@ -57,6 +57,44 @@ main( int argc, char *argv[] )
     {
       printf("Didn't get the frame\n");
     }
+
+    if ((frame = ID3Tag_FindFrameWithID(tag, ID3FID_LEADARTIST)) != NULL)
+    {
+      ID3Field *field;
+      if ((field = ID3Frame_GetField(frame, ID3FN_TEXT)) != NULL)
+      {
+        char artist[1024];
+        (void) ID3Field_GetASCII(field, artist, 1024);
+        printf("Artist: %s\n", artist);
+      }
+      else
+      {
+        printf("Didn't get the field\n");
+      }
+    }
+    else
+    {
+      printf("Didn't get the frame\n");
+    }
+
+    if ((frame = ID3Tag_FindFrameWithID(tag, ID3FID_ALBUM)) != NULL)
+    {
+      ID3Field *field;
+      if ((field = ID3Frame_GetField(frame, ID3FN_TEXT)) != NULL)
+      {
+        char album[1024];
+        (void) ID3Field_GetASCII(field, album, 1024);
+        printf("Album: %s\n", album);
+      }
+      else
+      {
+        printf("Didn't get the field\n");
+      }
+    }
+    else
+    {
+      printf("Didn't get the frame\n");
+    }
   }
   else
   {
