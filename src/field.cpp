@@ -1203,7 +1203,7 @@ bool ID3_FieldImpl::SetEncoding(ID3_TextEnc enc)
  ** 
  ** void ShowKnownFrameInfo {
  **   ID3_FrameInfo myFrameInfo;
- **   for (int cur = ID3FID_NOFRAME; cur < myFrameInfo.MaxFrameID(); cur ++)
+ **   for (int cur = ID3FID_NOFRAME+1; cur <= myFrameInfo.MaxFrameID(); cur ++)
  **   { 
  **     cout << "Short ID: " << myFrameInfo.ShortName(ID3_FrameID(cur)) <<
  ** 	" Long ID: " << myFrameInfo.LongName(ID3_FrameID(cur)) <<
@@ -1220,7 +1220,7 @@ bool ID3_FieldImpl::SetEncoding(ID3_TextEnc enc)
  ** does it take on any meaningful significance.
  **
  ** \code
- **  for (int cur = ID3FID_NOFRAME; cur < fi.MaxFrameID(); cur ++)
+ **  for (int cur = ID3FID_NOFRAME+1; cur <= fi.MaxFrameID(); cur ++)
  **  {
  **	int numfields = fi.NumFields(ID3_FrameID(cur));
  **
