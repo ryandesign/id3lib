@@ -155,6 +155,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Thu Sep 14 2000 Scott Haug <scott@id3.org> 3.7.13-1
+- Version 3.7.13
+
 * Sat Aug 26 2000 Scott Haug <scott@id3.org> 3.7.12-2
 - Removed -mpreferred-stack-boundary option from RPM_OPT_FLAGS for RedHat 6.2
 
