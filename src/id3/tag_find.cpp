@@ -21,7 +21,7 @@
 #include <id3/tag.h>
 #include <id3/misc_support.h>
 
-ID3_Elem *ID3_Tag::Find(ID3_Frame *frame)
+ID3_Elem *ID3_Tag::Find(ID3_Frame *frame) const
 {
   ID3_Elem *elem = NULL;
   
@@ -198,6 +198,14 @@ ID3_Frame *ID3_Tag::operator[](luint num) const
 }
 
 // $Log$
+// Revision 1.5  1999/11/15 20:20:47  scott
+// Added include for config.h.  Removed assignments from if checks;
+// first makes assignment, then checks for appropriate value.  Made
+// private member variable names more descriptive.  Major code
+// cleanup: use of for loops instead of while's to ease code
+// readability, more compact looping structures to reduce possibility
+// in coding or human parsing errors,
+//
 // Revision 1.4  1999/11/04 04:15:55  scott
 // Added cvs Id and Log tags to beginning and end of file, respectively.
 //
