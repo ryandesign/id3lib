@@ -12,10 +12,6 @@
 //  submissions may be altered, and will be included and released under these
 //  terms.
 
-#if defined HAVE_CONFIG_H
-#include <config.h>
-#endif
-                                                                                
 #include <iostream.h>
 #include <id3/tag.h>
 #include <getopt.h>
@@ -70,19 +66,19 @@ void PrintVersion(char *sName)
 
 void DisplayTags(ostream &os, luint nTags)
 {
-  if (!((nTags & V1_TAG) || (nTags & V2_TAG)))
+  if (!((nTags & ID3TT_ID3V1) || (nTags & ID3TT_ID3V2)))
   {
     os << "no tag";
   }
-  if (nTags & V1_TAG)
+  if (nTags & ID3TT_ID3V1)
   {
     os << "v1";
   }
-  if ((nTags & V1_TAG) && (nTags & V2_TAG))
+  if ((nTags & ID3TT_ID3V1) && (nTags & ID3TT_ID3V2))
   {
     os << " and ";
   }
-  if (nTags & V2_TAG)
+  if (nTags & ID3TT_ID3V2)
   {
     os << "v2";
   }
@@ -90,7 +86,7 @@ void DisplayTags(ostream &os, luint nTags)
 
 int main( int argc, char *argv[])
 {
-  int ulFlag = BOTH_ID3_TAGS;
+  int ulFlag = ID3TT_ID3;
   int iOpt;
   bool bError = false;
   bool bStrip = false;
@@ -118,8 +114,8 @@ int main( int argc, char *argv[])
 
     switch (iOpt)
     {
-      case '1': ulFlag = V1_TAG;        break;
-      case '2': ulFlag = V2_TAG;        break;
+      case '1': ulFlag = ID3TT_ID3V1;        break;
+      case '2': ulFlag = ID3TT_ID3V2;        break;
       case 's': bStrip = true;          break;
       case 'v': PrintVersion(argv[0]);  exit (0);
       case 'h': PrintUsage(argv[0]);    exit (0);
