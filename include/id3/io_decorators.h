@@ -41,7 +41,7 @@ namespace dami
      * Set a window on the buffer.  Characters can only be read within this 
      * window.
      */
-    class WindowedReader : public ID3_Reader
+    class ID3_CPP_EXPORT WindowedReader : public ID3_Reader
     {
       typedef ID3_Reader SUPER;
 
@@ -90,7 +90,7 @@ namespace dami
       void close() { ; }
     };
 
-    class CharReader : public ID3_Reader
+    class ID3_CPP_EXPORT CharReader : public ID3_Reader
     {
       typedef ID3_Reader SUPER;
 
@@ -124,7 +124,7 @@ namespace dami
     };
 
 
-    class LineFeedReader : public CharReader
+    class ID3_CPP_EXPORT LineFeedReader : public CharReader
     {
       typedef CharReader SUPER;
 
@@ -133,7 +133,7 @@ namespace dami
       int_type readChar();
     };
 
-    class UnsyncedReader : public CharReader
+    class ID3_CPP_EXPORT UnsyncedReader : public CharReader
     {
       typedef CharReader SUPER;
 
@@ -142,7 +142,7 @@ namespace dami
       int_type readChar();
     };
 
-    class CompressedReader : public ID3_MemoryReader
+    class ID3_CPP_EXPORT CompressedReader : public ID3_MemoryReader
     {
       char_type* _uncompressed;
      public:
@@ -150,7 +150,7 @@ namespace dami
       virtual ~CompressedReader();
     };
 
-    class UnsyncedWriter : public ID3_Writer
+    class ID3_CPP_EXPORT UnsyncedWriter : public ID3_Writer
     {
       typedef ID3_Writer SUPER;
 

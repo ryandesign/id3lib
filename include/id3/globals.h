@@ -44,11 +44,14 @@
 #ifdef WIN32
 #  ifdef ID3LIB_COMPILATION
 #    define ID3_C_EXPORT extern _declspec(dllexport)
+#    define ID3_CPP_EXPORT __declspec(dllexport)
 #  else /* !ID3LIB_COMPILATION */
 #    define ID3_C_EXPORT extern _declspec(dllimport)
+#    define ID3_CPP_EXPORT __declspec(dllimport)
 #  endif /* !ID3LIB_COMPILATION */
 #else /* !WIN32 */
 #  define ID3_C_EXPORT
+#  define ID3_CPP_EXPORT
 #endif /* !WIN32 */
 #define ID3_C_VAR extern
 

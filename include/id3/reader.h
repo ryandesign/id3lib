@@ -30,7 +30,7 @@
 
 #include <id3/globals.h>
 
-class ID3_Reader
+class ID3_CPP_EXPORT ID3_Reader
 {
  public:
   typedef uint32 size_type;

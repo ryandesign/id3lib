@@ -36,7 +36,7 @@ class ID3_Writer;
 class ID3_TagImpl;
 class ID3_Tag;
 
-class ID3_Tag
+class ID3_CPP_EXPORT ID3_Tag
 {
   ID3_TagImpl* _impl;
 public:
@@ -128,7 +128,7 @@ public:
 };
 
 // deprecated!
-int32 ID3_IsTagHeader(const uchar header[ID3_TAGHEADERSIZE]);
+int32 ID3_C_EXPORT ID3_IsTagHeader(const uchar header[ID3_TAGHEADERSIZE]);
 
 
 #endif /* _ID3LIB_TAG_H_ */

@@ -35,7 +35,7 @@ class ID3_FrameImpl;
 class ID3_Reader;
 class ID3_Writer;
 
-class ID3_Frame
+class ID3_CPP_EXPORT ID3_Frame
 {
   ID3_FrameImpl* _impl;
 public:

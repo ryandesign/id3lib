@@ -69,6 +69,12 @@ char *ID3_GetString(const ID3_Frame *frame, ID3_FieldID fldName, size_t nIndex)
   return text;
 }
 
+void ID3_FreeString(char *str)
+{
+  if(str != NULL)
+    delete [] str;
+}
+
 char *ID3_GetArtist(const ID3_Tag *tag)
 {
   char *sArtist = NULL;

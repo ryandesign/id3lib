@@ -33,7 +33,7 @@
 class ID3_Reader;
 class ID3_Writer;
 
-class ID3_Field
+class ID3_CPP_EXPORT ID3_Field
 {
 public:
   virtual void Clear() = 0;
