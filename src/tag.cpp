@@ -265,8 +265,6 @@ void ID3_Tag::Clear()
   __hdr.Clear();
   __hdr.SetSpec(ID3V2_LATEST);
   
-  strcpy(__file_name, "");
-  __file_handle = NULL;
   __file_size = 0;
   __starting_bytes = 0;
   __ending_bytes = 0;
