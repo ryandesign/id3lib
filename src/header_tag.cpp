@@ -120,6 +120,9 @@ ID3_TagHeader& ID3_TagHeader::operator=(const ID3_TagHeader& hdr)
 }
 
 // $Log$
+// Revision 1.14  2000/04/10 16:57:38  eldamitri
+// (operator=): Added implementation.
+//
 // Revision 1.13  2000/04/08 04:40:26  eldamitri
 // Changed new ANSI-standard C++ include headers to old-style headers.
 //
