@@ -47,7 +47,7 @@ class ID3_Header : public ID3_Speccable
 public:
   ID3_Header(void);
   
-  virtual void       SetSpec(ID3_V2Spec = ID3V2_LATEST);
+  virtual void       SetSpec(const ID3_V2Spec);
   virtual ID3_V2Spec GetSpec() const;
   virtual void       SetDataSize(size_t newSize);
   virtual size_t     GetDataSize() const;
