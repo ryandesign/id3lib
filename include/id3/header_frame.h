@@ -53,9 +53,9 @@ public:
   virtual const char *GetTextID(void) const;
   virtual const ID3_FrameDef *GetFrameDef() const;
   virtual void Clear();
+  ID3_FrameHeader& operator=(const ID3_FrameHeader&);
  
 protected:
-  virtual void Copy(const ID3_Header &hdr);
   virtual void  SetUnknownFrame(const char*);
 
   ID3_FrameDef *__pFrameDef;
@@ -66,6 +66,12 @@ protected:
 #endif
 
 // $Log$
+// Revision 1.7  2000/04/09 22:36:45  eldamitri
+// (class ID3_FrameHeader): Added destructor and new method
+// SetUnknownFrame(const char*) for creating a frame with an unknown
+// frame id.  Added __bDynFrameDef member, set when __pFrameDef has been
+// dynamically created.
+//
 // Revision 1.6  2000/04/05 05:20:52  eldamitri
 // Updated initial comment information to reflect license, copyright
 // change.
