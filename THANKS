@@ -8,6 +8,10 @@ Since version 3.05a, several individuals have helped further the development of
 id3lib.  They are listed below, in no particular order.  Please inform the
 current project maintainer if anyone has been missed.
 
+* John George (johngeorge_k@asianetindia.com) for donating a number of routines
+  in misc_support.cpp.
+* Frog Prince (thefrogprince@hotmail.com) for helping with compatibility issues
+  for VB and Delphi
 * Simon Ferrett (simon@musicmatch.com) made the id3lib.org domain point to our
   project page. He also kindly created an email alias.
 * Kamran (kamran@musicmatch.com) fixed several bugs in MusicMatch's internal 
