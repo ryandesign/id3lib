@@ -122,7 +122,7 @@ namespace
     String target;
     size_t source_size = source.size();
     
-#if defined(ID3LIB_ICONV_OLDSTYLE)
+#if defined(ID3LIB_ICONV_CONSTSOURCE)
     const char* source_str = source.data();
 #else
     char *source_str = new char[source.size()+1];
@@ -144,7 +144,7 @@ namespace
       if (nconv == (size_t) -1 && errno != EINVAL && errno != E2BIG)
       {
 // errno is probably EILSEQ here, which means either an invalid byte sequence or a valid but unconvertible byte sequence 
-#if !defined(ID3LIB_ICONV_OLDSTYLE)
+#if !defined(ID3LIB_ICONV_CONSTSOURCE)
         delete [] source_str;
 #endif
         return target;
@@ -154,7 +154,7 @@ namespace
       target_size = ID3LIB_BUFSIZ;
     }
     while (source_size > 0);
-#if !defined(ID3LIB_ICONV_OLDSTYLE)
+#if !defined(ID3LIB_ICONV_CONSTSOURCE)
     delete [] source_str;
 #endif
     return target;
