@@ -222,16 +222,6 @@ void ID3_Tag::ProcessBinaries(ID3_FrameID whichFrame, bool attach)
           delete[] expBin;
         }
         
-        // here is where we call a special handler for this frame type if one
-        // is specified in the frame definition
-        {
-          ID3_FrameDef *frameInfo = ID3_FindFrameDef(id);
-          
-          if (frameInfo != NULL && frameInfo->parseHandler != NULL)
-          {
-            bShouldAttach = frameInfo->parseHandler(frame);
-          }
-        }
       }
       catch (ID3_Error&)
       {
@@ -460,6 +450,15 @@ luint ID3_Tag::ParseFromHandle(void)
 }
 
 // $Log$
+// Revision 1.4  2000/04/26 03:42:52  eldamitri
+// - Replaced version/revision uchar combination with ID3_V2Spec enums
+// - Deprecated {Get,Set}Version, GetRevision for {Get,Set}Spec
+// - ID3_VerCtl enumeration deprecated in favor of using two ID3_V2Spec
+//   enums to denote field scope
+// - Replaced ID3v2_VERSION, ID3v2_REVISION constants with ID3V2_LATEST
+//   enum
+// - Use ID3V2_UNKNOWN enum rather than 0 for version, revision
+//
 // Revision 1.3  2000/04/24 14:49:00  eldamitri
 // - Added comments originally in include/id3/tag.h
 // - (ParseFromHandle): Conditionally parses tag types based on
