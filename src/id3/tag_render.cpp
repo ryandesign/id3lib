@@ -390,7 +390,7 @@ luint ID3_Tag::PaddingSize(luint curSize) const
     // the tag included) then we just add another 2K of padding
     tempSize = ((tempSize / ID3_PADMULTIPLE) + 1) * ID3_PADMULTIPLE;
     
-    // the size of the new tag is the new filesize minus the song size
+    // the size of the new tag is the new filesize minus the audio data
     newSize = tempSize - __ulFileSize;
   }
   
@@ -400,6 +400,9 @@ luint ID3_Tag::PaddingSize(luint curSize) const
 
 
 // $Log$
+// Revision 1.14  1999/12/17 16:13:04  scott
+// Updated opening comment block.
+//
 // Revision 1.13  1999/12/16 14:39:44  scott
 // Minor formatting cleanup.
 //
