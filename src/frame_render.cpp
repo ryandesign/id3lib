@@ -28,7 +28,7 @@
 #include <memory.h>
 #include <zlib.h>
 #include "tag.h"
-#include "misc_support.h"
+#include "utils.h"
 
 #if defined HAVE_CONFIG_H
 #include <config.h>
@@ -104,9 +104,7 @@ luint ID3_Frame::Render(uchar *buffer)
             
       memcpy(&buffer[posn + sizeof(uint32)], newTemp, newFrameSize);
         
-      RenderNumber(&buffer[posn], bytesUsed);
-              
-      bytesUsed = newFrameSize + sizeof(uint32);
+      bytesUsed += newFrameSize + RenderNumber(&buffer[posn], bytesUsed);
       didCompress = true;
     }
           
