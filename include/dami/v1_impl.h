@@ -3,6 +3,7 @@
 
 // id3lib: a software library for creating and manipulating id3v1/v2 tags
 // Copyright 1999, 2000  Scott Thomas Haug
+// Copyright 2002 Thijmen Klok (thijmen@id3lib.org)
 
 // This library is free software; you can redistribute it and/or modify it
 // under the terms of the GNU Library General Public License as published by
@@ -46,28 +47,28 @@ namespace dami
         unsigned char  _track;
         unsigned char  _genre;
        public:
-        
+
         TagImpl() : _track(0), _genre(0xFF) { ; }
         TagImpl(Tag& rhs) { *this = rhs; }
 
         string getTitle() const { return _title; }
         void setTitle(string title) { _title = title; }
-    
+
         string getArtist() const { return _artist; }
         void setArtist(string artist) { _artist = artist; }
-    
+
         string getAlbum() const { return _album; }
         void setAlbum(string album) { _album = album; }
-    
+
         string getComment() const { return _comment; }
         void setComment(string comment) { _comment = comment; }
-    
+
         string getYear() const { return _year; }
         void setYear(string year) { year = _year; }
-    
+
         unsigned short getTrack() const { return _track; }
         void setTrack(unsigned short track) { _track = track; }
-    
+
         unsigned short getGenre() const { return _genre; }
         void setGenre(unsigned short genre) { _genre = genre; }
       };
