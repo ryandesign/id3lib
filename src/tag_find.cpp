@@ -209,6 +209,9 @@ ID3_Frame *ID3_Tag::operator[](luint num) const
 }
 
 // $Log$
+// Revision 1.13  2000/04/10 16:58:05  eldamitri
+// Added inclusion of string.h
+//
 // Revision 1.12  2000/04/05 05:21:15  eldamitri
 // Updated initial comment information to reflect license, copyright
 // change.
