@@ -13,16 +13,18 @@
 the_headers =                   \
   error.h                       \
   field.h                       \
+  flags.h                       \
   frame.h                       \
   globals.h                     \
   header.h                      \
   header_frame.h                \
   header_tag.h                  \
-  int28.h                       \
   misc_support.h                \
   sized_types.h                 \
   spec.h                        \
-  tag.h
+  tag.h                         \
+  uint28.h                      \
+  utils.h                       
 
 id3includedir      = $(includedir)/id3
 id3include_HEADERS = $(the_headers)
