@@ -5,6 +5,7 @@
 #include <stdlib.h>
 
 #include <id3/tag.h>
+#include <id3/error.h>
 #include <id3/misc_support.h>
 
 static const char* VERSION_NUMBER = "$Revision$";

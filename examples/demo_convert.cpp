@@ -14,6 +14,7 @@
 
 #include <iostream.h>
 #include <id3/tag.h>
+#include <id3/error.h>
 #include <popt.h>
 
 static const char* VERSION_NUMBER = "$Revision$";
