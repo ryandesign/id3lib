@@ -34,6 +34,7 @@
 
 static char *ID3_ErrorDescs[] =
 {
+  "no error",
   "out of memory",
   "no source/dest data specified",
   "improperly formatted id3 tag",
@@ -94,6 +95,9 @@ luint ID3_Error::GetErrorLine(void) const
 
 
 // $Log$
+// Revision 1.2  2000/04/18 22:10:09  eldamitri
+// Moved error.cpp from src/id3/ to src/
+//
 // Revision 1.13  2000/04/08 04:34:37  eldamitri
 // Changed new ANSI-standard C++ include headers to old-style headers.
 //
