@@ -80,6 +80,8 @@ typedef long  unsigned int    luint;
 typedef long           double ldoub;
 typedef long  unsigned int *  bitset;
 typedef uint16                unicode_t;
+typedef size_t                index_t;
+typedef uint16                flags_t;
 const unicode_t NULL_UNICODE = (unicode_t) '\0';
 
 /* These macros are used to make the C and C++ declarations for enums and
