@@ -192,7 +192,7 @@ ID3_Frame *ID3_Tag::Find(ID3_FrameID id, ID3_FieldID fld, const unicode_t *data)
           (data != NULL) && ucslen(data) > 0 && 
           cur->pFrame->Contains(fld))
       {
-        luint ulSize = cur->pFrame->Field(fld).BinSize();
+        size_t ulSize = cur->pFrame->Field(fld).BinSize();
         unicode_t *wsBuffer = new unicode_t[ulSize];
           
         if (NULL == wsBuffer)
