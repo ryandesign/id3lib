@@ -28,10 +28,13 @@
 #include "uint28.h"
 #include "utils.h"
 #include "tag.h"
+#include <string.h>
 
 #if defined HAVE_CONFIG_H
 #include <config.h>
 #endif
+
+const char* const ID3_TagHeader::ID = "ID3";
 
 bool ID3_TagHeader::SetSpec(const ID3_V2Spec spec)
 {
