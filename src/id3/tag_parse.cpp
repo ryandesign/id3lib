@@ -304,7 +304,6 @@ void ID3_Tag::Parse(uchar header[ID3_TAGHEADERSIZE], uchar *buffer)
   Clear();
   
   tagSize = temp.get();
-  
   SetVersion(header[3], header[4]);
   
   if (header[5] & ID3HF_UNSYNC)
@@ -373,54 +372,52 @@ luint ID3_Tag::ParseFromHandle(void)
   {
     ID3_THROW(ID3E_NoData);
   }
-  else
-  {
-    uchar header[ID3_TAGHEADERSIZE];
-    lsint tagSize;
+
+  uchar header[ID3_TAGHEADERSIZE];
+  lsint tagSize;
     
-    if (fseek(__fFileHandle, 0, SEEK_SET) != 0)
-    {
-      ID3_THROW_DESC(ID3E_NoFile, 
-                     "ID3_Tag::ParseFromHandle: Ack! Couldn't seek");
-    }
+  if (fseek(__fFileHandle, 0, SEEK_SET) != 0)
+  {
+    ID3_THROW_DESC(ID3E_NoFile, 
+                   "ID3_Tag::ParseFromHandle: Ack! Couldn't seek");
+  }
       
-    if (fread(header, 1, sizeof(header), __fFileHandle) == 0)
+  if (fread(header, 1, sizeof(header), __fFileHandle) == 0)
+  {
+    ID3_THROW_DESC(ID3E_NoFile, 
+                   "ID3_Tag::ParseFromHandle: Ack! Couldn't read");
+  }
+
+  tagSize = ID3_IsTagHeader(header);
+  if (tagSize > 0)
+  {
+    uchar * bin;
+        
+    bin = new uchar[tagSize];
+    if (NULL == bin)
+    {
+      ID3_THROW(ID3E_NoMemory);
+    }
+
+    if (fread(bin, 1, tagSize, __fFileHandle) == 0)
     {
       ID3_THROW_DESC(ID3E_NoFile, 
                      "ID3_Tag::ParseFromHandle: Ack! Couldn't read");
     }
 
-    tagSize = ID3_IsTagHeader(header);
-    if (tagSize > 0)
-    {
-      uchar * bin;
-        
-      bin = new uchar[tagSize];
-      if (NULL == bin)
-      {
-        ID3_THROW(ID3E_NoMemory);
-      }
-
-      if (fread(bin, 1, tagSize, __fFileHandle) == 0)
-      {
-        ID3_THROW_DESC(ID3E_NoFile, 
-                       "ID3_Tag::ParseFromHandle: Ack! Couldn't read");
-      }
-
-      Parse(header, bin);
-      size = tagSize;
+    Parse(header, bin);
+    size = tagSize;
           
-      delete[] bin;
-    }
+    delete[] bin;
+  }
     
-    if (__bParseLyrics3)
-    {
-      ParseLyrics3();
-    }
-    if (__bParseID3v1)
-    {
-      ParseID3v1();
-    }
+  if (__bParseLyrics3)
+  {
+    ParseLyrics3();
+  }
+  if (__bParseID3v1)
+  {
+    ParseID3v1();
   }
     
   return size;
@@ -428,6 +425,9 @@ luint ID3_Tag::ParseFromHandle(void)
 }
 
 // $Log$
+// Revision 1.17  2000/04/08 04:42:59  eldamitri
+// Changed new ANSI-standard C++ include headers to old-style headers.
+//
 // Revision 1.16  2000/04/07 04:35:38  eldamitri
 // Added optional parameters to Link to make parsing of id3v1/lyrics3
 // tags optional.
