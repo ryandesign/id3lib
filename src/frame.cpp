@@ -153,10 +153,12 @@ size_t ID3_Frame::NumFields() const
   return _impl->NumFields();
 }
 
+/*
 ID3_Field* ID3_Frame::GetFieldNum(index_t index) const
 {
   return _impl->GetFieldNum(index);
 }
+*/
 
 size_t ID3_Frame::Size()
 {
@@ -256,3 +258,61 @@ uchar ID3_Frame::GetGroupingID() const
   return _impl->GetGroupingID();
 }
 
+namespace
+{
+  class IteratorImpl : public ID3_Frame::Iterator
+  {
+    ID3_FrameImpl::iterator _cur;
+    ID3_FrameImpl::iterator _end;
+  public:
+    IteratorImpl(ID3_FrameImpl& frame)
+      : _cur(frame.begin()), _end(frame.end())
+    {
+    }
+
+    ID3_Field* GetNext() 
+    { 
+      ID3_Field* next = NULL;
+      while (next == NULL && _cur != _end)
+      {
+        next = *_cur;
+        ++_cur;
+      }
+      return next;
+    }
+  };
+
+  
+  class ConstIteratorImpl : public ID3_Frame::ConstIterator
+  {
+    ID3_FrameImpl::const_iterator _cur;
+    ID3_FrameImpl::const_iterator _end;
+  public:
+    ConstIteratorImpl(ID3_FrameImpl& frame)
+      : _cur(frame.begin()), _end(frame.end())
+    {
+    }
+    const ID3_Field* GetNext() 
+    { 
+      ID3_Field* next = NULL;
+      while (next == NULL && _cur != _end)
+      {
+        next = *_cur;
+        ++_cur;
+      }
+      return next;
+    }
+  };
+}
+
+ID3_Frame::Iterator* 
+ID3_Frame::CreateIterator()
+{
+  return new IteratorImpl(*_impl);
+}
+
+ID3_Frame::ConstIterator* 
+ID3_Frame::CreateIterator() const
+{
+  return new ConstIteratorImpl(*_impl);
+}

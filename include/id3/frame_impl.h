@@ -55,7 +55,6 @@ public:
   ID3_Field*  GetField(ID3_FieldID name) const;
 
   size_t      NumFields() const;
-  ID3_Field*  GetFieldNum(index_t) const;
   
   const char* GetDescription() const;
   static const char* GetDescription(ID3_FrameID);
@@ -108,6 +107,11 @@ public:
   }
   uchar GetGroupingID() const { return _grouping_id; }
 
+  iterator         begin()       { return _fields.begin(); }
+  iterator         end()         { return _fields.end(); }
+  const_iterator   begin() const { return _fields.begin(); }
+  const_iterator   end()   const { return _fields.end(); }
+  
 protected:
   bool        _SetID(ID3_FrameID);
   bool        _ClearFields();

@@ -46,7 +46,7 @@ namespace
     // parse the frame's fields  
     ID3D_NOTICE( "ID3_FrameImpl::Parse(): num_fields = " << 
                  frame.NumFields() );
-    for (size_t i = 0; i < frame.NumFields(); ++i)
+    for (ID3_FrameImpl::iterator fi = frame.begin(); fi != frame.end(); ++fi)
     {
       if (rdr.atEnd())
       { 
@@ -56,8 +56,7 @@ namespace
         return false;
       } 
       
-      ID3D_NOTICE( "ID3_FrameImpl::Parse(): field #" << i );
-      ID3_Field* fp = frame.GetFieldNum(i);
+      ID3_Field* fp = *fi;
       if (NULL == fp)
       {
         // Ack!  Why is the field NULL?  Log this...

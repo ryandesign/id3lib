@@ -98,12 +98,10 @@ public:
   ID3_Frame* Find(ID3_FrameID, ID3_FieldID, const unicode_t*) const;
   
   size_t     NumFrames() const;
-  ID3_Frame* GetFrameNum(index_t) const;
 
   Iterator*  CreateIterator();
   ConstIterator* CreateIterator() const;
 
-  ID3_Frame* operator[](index_t) const;
   ID3_Tag&   operator=( const ID3_Tag & );
   
   bool       HasTagType(uint16 tt) const;
@@ -122,6 +120,8 @@ public:
   bool       HasV2Tag()  const;
   bool       HasV1Tag()  const;
   size_t     Parse(const uchar header[ID3_TAGHEADERSIZE], const uchar *buffer);
+  //ID3_Frame* operator[](index_t) const;
+  //ID3_Frame* GetFrameNum(index_t) const;
 
   ID3_Tag&   operator<<(const ID3_Frame &);
   ID3_Tag&   operator<<(const ID3_Frame *);

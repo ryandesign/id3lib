@@ -48,9 +48,9 @@ namespace
   void renderFields(ID3_Writer& writer, const ID3_FrameImpl& frame)
   {
     ID3_TextEnc enc = ID3TE_ASCII;
-    for (size_t i = 0; i < frame.NumFields(); ++i)
+    for (ID3_FrameImpl::const_iterator fi = frame.begin(); fi != frame.end(); ++fi)
     {
-      ID3_Field* fld = frame.GetFieldNum(i);
+      ID3_Field* fld = *fi;
       if (fld != NULL && fld->InScope(frame.GetSpec()))
       {
         if (fld->GetID() == ID3FN_TEXTENC)  

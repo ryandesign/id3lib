@@ -117,8 +117,6 @@ public:
   ID3_Frame* Find(ID3_FrameID id, ID3_FieldID fld, dami::WString) const;
   
   size_t     NumFrames() const { return _frames.size(); }
-  ID3_Frame* GetFrameNum(index_t) const;
-  ID3_Frame* operator[](index_t) const;
   ID3_TagImpl&   operator=( const ID3_Tag & );
   
   bool       HasTagType(uint16 tt) const { return _file_tags.test(tt); }

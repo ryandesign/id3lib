@@ -247,30 +247,3 @@ ID3_Frame *ID3_TagImpl::Find(ID3_FrameID id, ID3_FieldID fldID, uint32 data) con
   return frame;
 }
 
-ID3_Frame *ID3_TagImpl::GetFrameNum(index_t num) const
-{
-  const size_t numFrames = this->NumFrames();
-  if (num >= numFrames)
-  {
-    return NULL;
-  }
-
-  ID3_Frame *frame = NULL;
-  index_t curNum = 0;
-  // search from the cursor to the end
-  for (const_iterator cur = _frames.begin(); cur != _frames.end(); ++cur)
-  {
-    if (curNum++ == num)
-    {
-      frame = *cur;
-      break;
-    }
-  }
-  
-  return frame;
-}
-
-ID3_Frame *ID3_TagImpl::operator[](index_t num) const
-{
-  return GetFrameNum(num);
-}

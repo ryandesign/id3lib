@@ -302,20 +302,6 @@ extern "C"
     return has_tt;
   }
 
-
-  ID3_C_EXPORT ID3Frame*
-  ID3Tag_GetFrameNum(const ID3Tag *tag, index_t num)
-  {
-    ID3_Frame *frame = NULL;
-  
-    if (tag)
-    {
-      ID3_CATCH(frame = reinterpret_cast<const ID3_Tag *>(tag)->GetFrameNum(num));
-    }
-    
-    return reinterpret_cast<ID3Frame *>(frame);
-  }
-
   ID3_C_EXPORT ID3TagIterator*
   ID3Tag_CreateIterator(ID3Tag* tag)
   {

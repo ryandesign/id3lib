@@ -287,16 +287,19 @@ bool ID3_TagImpl::SetPadding(bool pad)
 ID3_TagImpl &
 ID3_TagImpl::operator=( const ID3_Tag &rTag )
 {
-  Clear();
-  size_t nFrames = rTag.NumFrames();
-  for (size_t nIndex = 0; nIndex < nFrames; nIndex++)
+  this->Clear();
+
+  this->SetUnsync(rTag.GetUnsync());
+  this->SetExtended(rTag.GetExtendedHeader());
+  this->SetExperimental(rTag.GetExperimental());
+
+  ID3_Tag::ConstIterator* iter = rTag.CreateIterator();
+  const ID3_Frame* frame = NULL;
+  while (NULL != (frame = iter->GetNext()))
   {
-    ID3_Frame *frame = new ID3_Frame;
-    // Copy the frames in reverse order so that they appear in the same order
-    // as the original tag when rendered.
-    *frame = *(rTag[nFrames - nIndex - 1]);
-    AttachFrame(frame);
+    this->AttachFrame(new ID3_Frame(*frame));
   }
+  delete iter;
   return *this;
 }
 
