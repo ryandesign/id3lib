@@ -7,6 +7,10 @@
 //  distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either
 //  express or implied.
 
+#if defined HAVE_CONFIG_H
+#include <config.h>
+#endif
+                                                                                
 #include <iostream.h>
 #include <id3/tag.h>
 #include <getopt.h>
@@ -111,7 +115,7 @@ int main( int argc, char *argv[])
       { "total",   required_argument, &iLongOpt, 'T' },
       { 0, 0, 0, 0 }
     };
-    iOpt = getopt_long (argc, argv, "12vha:A:s:g:y:c:t:T:", 
+    iOpt = getopt_long (argc, argv, "12vha:A:s:g:y:c:t:T:C:",
                         long_options, &option_index);
 
     if (iOpt == -1)
