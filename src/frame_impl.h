@@ -34,7 +34,7 @@
 #else
 #include <bitset>
 #endif
-#include "frame.h"
+#include "id3lib_frame.h"
 #include "header_frame.h"
 
 class ID3_FrameImpl

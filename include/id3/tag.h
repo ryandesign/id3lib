@@ -29,7 +29,7 @@
 #ifndef _ID3LIB_TAG_H_
 #define _ID3LIB_TAG_H_
 
-#include <id3/frame.h>
+#include <id3/id3lib_frame.h>
 #include <id3/field.h>
 
 class ID3_Reader;
