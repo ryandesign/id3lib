@@ -8,6 +8,8 @@ Since version 3.05a, several individuals have helped further the development of
 id3lib.  They are listed below, in no particular order.  Please inform the
 current project maintainer if anyone has been missed.
 
+* Simon Ferrett (simon@musicmatch.com) made the id3lib.org domain point to our
+  project page.
 * Kamran (kamran@musicmatch.com) fixed several bugs in MusicMatch's internal 
   version of ID3Lib which were merged into the current public version of 
   id3lib.
