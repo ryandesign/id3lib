@@ -242,13 +242,13 @@ void PrintInformation(const ID3_Tag &myTag)
           cout << "(" << sDesc << ")[" << sLang << "]: ";
           switch (nRating)
           {
-            case ID3LC_OTHER:    cout << "Other"; break;
-            case ID3LC_LYRICS:   cout << "Lyrics"; break;
-            case ID3LC_TEXT:     cout << "Text transcription"; break;
-            case ID3LC_MOVEMENT: cout << "Movement/part name"; break;
-            case ID3LC_EVENTS:   cout << "Events"; break;
-            case ID3LC_CHORD:    cout << "Chord"; break;
-            case ID3LC_TRIVIA:   cout << "Trivia/'pop up' information"; break;
+            case ID3CT_OTHER:    cout << "Other"; break;
+            case ID3CT_LYRICS:   cout << "Lyrics"; break;
+            case ID3CT_TEXTTRANSCRIPTION:     cout << "Text transcription"; break;
+            case ID3CT_MOVEMENT: cout << "Movement/part name"; break;
+            case ID3CT_EVENTS:   cout << "Events"; break;
+            case ID3CT_CHORD:    cout << "Chord"; break;
+            case ID3CT_TRIVIA:   cout << "Trivia/'pop up' information"; break;
           }
           cout << endl;
           size_t size = myFrame->Field(ID3FN_DATA).Size();
