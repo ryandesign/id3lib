@@ -57,8 +57,9 @@ void ID3_Tag::ParseID3v1(void)
   // posn ourselves at 128 bytes from the end of the file
   if (fseek(__file_handle, 0-ID3_V1_LEN, SEEK_END) != 0)
   {
+    return;
     // TODO:  This is a bad error message.  Make it more descriptive
-    ID3_THROW(ID3E_NoData);
+    //ID3_THROW(ID3E_NoData);
   }
     
     
