@@ -1042,7 +1042,7 @@ void ID3_Field::Clear()
 }
 
 bool
-ID3_Field::HasChanged()
+ID3_Field::HasChanged() const
 {
   return _changed;
 }
