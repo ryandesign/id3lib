@@ -33,7 +33,9 @@ void ID3_Frame::Parse(uchar *buffer, luint size)
     // concerned string fields in the frame what they are expected to parse
     // (ASCII or Unicode)
     if (ID3FN_TEXTENC == __apFields[i]->__eName)
+    {
       UpdateStringTypes();
+    }
   }
   
   __bHasChanged = false;
@@ -42,6 +44,9 @@ void ID3_Frame::Parse(uchar *buffer, luint size)
 }
 
 // $Log$
+// Revision 1.8  1999/12/17 16:13:04  scott
+// Updated opening comment block.
+//
 // Revision 1.7  1999/12/01 18:00:59  scott
 // Changed all of the #include <id3/*> to #include "*" to help ensure that
 // the sources are searched for in the right places (and to make compiling under

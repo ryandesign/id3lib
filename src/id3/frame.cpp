@@ -21,8 +21,6 @@
 
 ID3_Frame::ID3_Frame(ID3_FrameID id)
 {
-  luint lwordsForFields = 0;
-  
   __ucVersion  = ID3_TAGVERSION;
   __ucRevision = ID3_TAGREVISION;
   __ulNumFields = 0;
@@ -30,21 +28,23 @@ ID3_Frame::ID3_Frame(ID3_FrameID id)
   __sGroupingID[0] = 0;
   __sEncryptionID[0] = 0;
   __bCompression = true;
+  __bReadOnly = false;
   
-  lwordsForFields =(((luint) ID3FN_LASTFIELDID) - 1) / (sizeof(luint) * 8);
+  luint lWordsForFields =
+    (((luint) ID3FN_LASTFIELDID) - 1) / (sizeof(luint) * 8);
   
-  if ((((luint) ID3FN_LASTFIELDID) - 1) %(sizeof(luint) * 8) != 0)
+  if ((((luint) ID3FN_LASTFIELDID) - 1) % (sizeof(luint) * 8) != 0)
   {
-    lwordsForFields++;
+    lWordsForFields++;
   }
     
-  __auiFieldBits = new luint[lwordsForFields];
+  __auiFieldBits = new luint[lWordsForFields];
   if (NULL == __auiFieldBits)
   {
     ID3_THROW(ID3E_NoMemory);
   }
 
-  for (luint i = 0; i < lwordsForFields; i++)
+  for (luint i = 0; i < lWordsForFields; i++)
   {
     __auiFieldBits[i] = 0;
   }
@@ -316,6 +316,9 @@ ID3_Frame::operator=( const ID3_Frame &rFrame )
 }
 
 // $Log$
+// Revision 1.9  1999/12/17 16:13:04  scott
+// Updated opening comment block.
+//
 // Revision 1.8  1999/12/09 03:32:17  scott
 // (operator=): Added implementation.
 //
