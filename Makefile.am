@@ -20,7 +20,7 @@ EXTRA_DIST =                    \
 	id3lib.spec             \
         id3lib.spec.in          \
         reconf
-SUBDIRS = . m4 doc src include zlib examples
+SUBDIRS = . m4 zlib doc include src examples
 
 INCLUDES = @ID3LIB_DEBUG_FLAGS@
 
