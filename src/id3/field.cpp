@@ -572,12 +572,13 @@ ID3_Field::BinSize(bool withExtras)
         bytes /= sizeof(wchar_t);
       }
     }
-    else if (__eType == ID3FTY_UNICODESTRING)
+    else if (__eType == ID3FTY_UNICODESTRING || __eType == ID3FTY_ASCIISTRING)
     {
       // because it seems that the application called us via ID3_Field::Size()
-      // we are going to return the number of characters, not bytes, so if the
-      // string is Unicode, we will half the 'bytes' variable because Unicode
-      // strings have twice as many bytes as they do characters
+      // we are going to return the number of characters, not bytes.  since we
+      // store every string internally as unicode, we will divide the 'bytes'
+      // variable by the size of a unicode character (should be two bytes)
+      // because Unicode strings have twice as many bytes as they do characters
       bytes /= sizeof(wchar_t);
     }
   }
@@ -586,7 +587,7 @@ ID3_Field::BinSize(bool withExtras)
 }
 
 luint
-ID3_Field::Parse(uchar *buffer, luint posn, luint buffSize)
+ID3_Field::Parse(const uchar *buffer, const luint posn, const luint buffSize)
 {
   luint bytesUsed       = 0;
 
@@ -622,7 +623,7 @@ ID3_Field::Parse(uchar *buffer, luint posn, luint buffSize)
 }
 
 ID3_FrameDef *
-ID3_FindFrameDef(ID3_FrameID id)
+ID3_FindFrameDef(const ID3_FrameID id)
 {
   ID3_FrameDef  *info   = NULL;
 
@@ -639,7 +640,7 @@ ID3_FindFrameDef(ID3_FrameID id)
 }
 
 ID3_FrameID
-ID3_FindFrameID(char *id)
+ID3_FindFrameID(const char *id)
 {
   ID3_FrameID fid = ID3FID_NOFRAME;
   
@@ -693,6 +694,9 @@ ID3_Field::Render(uchar *buffer)
 }
 
 // $Log$
+// Revision 1.6  1999/11/16 22:50:19  scott
+// * field.cpp (Render): Minor reformatting.
+//
 // Revision 1.5  1999/11/15 20:15:25  scott
 // Added include for config.h.  Replaced LU_NULL with ID3FF_NONE for
 // more consistency in flag naming.  Blocked out the ID3FD_Volume
