@@ -918,7 +918,7 @@ ID3_Tag& ID3_Tag::operator=( const ID3_Tag &rTag )
 
 bool ID3_Tag::HasTagType(uint16 tt) const
 {
-  return _impl->HasTagType(16);
+  return _impl->HasTagType(tt);
 }
 
 ID3_V2Spec ID3_Tag::GetSpec() const
