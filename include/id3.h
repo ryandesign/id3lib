@@ -39,8 +39,6 @@ extern "C"
   typedef struct { char __dummy; } ID3Frame;
   typedef struct { char __dummy; } ID3Field;
 
-  /*#ifndef __DLL*/
-
   /* tag wrappers */
   ID3_C_EXPORT ID3Tag     *ID3Tag_New                  (void);
   ID3_C_EXPORT void        ID3Tag_Delete               (ID3Tag *tag);
@@ -92,8 +90,6 @@ extern "C"
   ID3_C_EXPORT void        ID3Field_GetBINARY          (ID3Field *field, uchar *buffer, luint buffLength);
   ID3_C_EXPORT void        ID3Field_FromFile           (ID3Field *field, char *fileName);
   ID3_C_EXPORT void        ID3Field_ToFile             (ID3Field *field, char *fileName);
-
-  /*#endif / * __DLL */
 
 #ifdef __cplusplus
 }
