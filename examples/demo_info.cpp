@@ -16,11 +16,6 @@
 //  
 // $Id$
 
-
-#if defined HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include <iostream.h>
 #include <id3/tag.h>
 #include <id3/misc_support.h>
@@ -439,6 +434,9 @@ int main( int argc, char *argv[])
 }
 
 // $Log$
+// Revision 1.3  2000/04/20 03:27:47  eldamitri
+// Replaced call to ID3_FullName with ID3LIB_FULL_NAME constant
+//
 // Revision 1.2  2000/04/18 21:45:39  eldamitri
 // Moved demo_info.cpp from src/examples to examples
 //
