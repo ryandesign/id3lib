@@ -219,7 +219,7 @@
 
               <li>
 
-                <a href="html/index.html">Documentation for the id3lib API</a>
+                <a href="@DOX_DIR_HTML@/index.html">Documentation for the id3lib API</a>
                 is available thanks to the <a
                 href="http://www.stack.nl/~dimitri/doxygen/">Doxygen</a>
                 documentation system.
