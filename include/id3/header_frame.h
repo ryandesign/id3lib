@@ -43,6 +43,7 @@ class ID3_FrameHeader : public ID3_Header
 {
 public:
   ID3_FrameHeader();
+  virtual ~ID3_FrameHeader();
   
   virtual size_t Size(void);
   virtual size_t Parse(uchar *buffer);
@@ -55,14 +56,20 @@ public:
  
 protected:
   virtual void Copy(const ID3_Header &hdr);
+  virtual void  SetUnknownFrame(const char*);
 
   ID3_FrameDef *__pFrameDef;
+  bool __bDynFrameDef;
 }
 ;
 
 #endif
 
 // $Log$
+// Revision 1.6  2000/04/05 05:20:52  eldamitri
+// Updated initial comment information to reflect license, copyright
+// change.
+//
 // Revision 1.5  1999/12/27 06:09:26  scott
 // (ID3_FrameAttr): Removed.
 // (class ID3_FrameHeader): Added declarations for default constructor and
