@@ -141,9 +141,17 @@
                 href="http://www.gnu.org">GNU</a>/<a
                 href="http://www.linux.org">Linux</a> operating system but has
               been compiled and tested on other Unix-like OS's as well as
-              Windows NT.  id3lib aspires to provide interfaces for multiple
-              programming languages, and currently supports both C and C++.
-              
+              Windows NT. 
+            </dd>
+            
+            <dt><b>Multi-language</b></dt>
+            <dd>
+
+              id3lib aspires to provide interfaces for multiple programming
+              languages, and currently fully supports both C and C++.  A COM
+              wrapper (id3com) is also supplied allowing VB, VBA, VBScript and
+              other COM-enabled languages to use the library.
+
             </dd>
           </dl>
           
