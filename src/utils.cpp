@@ -78,7 +78,7 @@ namespace
 
   // converts a Unicode string into ASCII
   
-  String dami::ucstombs(String data)
+  String ucstombs(String data)
   {
     size_t size = data.size() / 2;
     String ascii(size, '\0');
