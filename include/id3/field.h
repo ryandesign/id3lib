@@ -406,10 +406,10 @@ protected:
   luint RenderUnicodeString(uchar *buffer);
   luint RenderBinary(uchar *buffer);
   
-  luint ParseInteger(const uchar *buffer, const luint posn, const luint buffSize);
-  luint ParseASCIIString(const uchar *buffer, const luint posn, const luint buffSize);
-  luint ParseUnicodeString(const uchar *buffer, const luint posn, const luint buffSize);
-  luint ParseBinary(const uchar *buffer, const luint posn, const luint buffSize);
+  size_t ParseInteger(const uchar *buffer, luint posn, size_t nSize);
+  size_t ParseASCIIString(const uchar *buffer, luint posn, size_t nSize);
+  size_t ParseUnicodeString(const uchar *buffer, luint posn, size_t nSize);
+  size_t ParseBinary(const uchar *buffer, luint posn, size_t nSize);
   
 };
 
@@ -419,6 +419,9 @@ ID3_FrameID   ID3_FindFrameID(const char *id);
 #endif
 
 // $Log$
+// Revision 1.5  1999/12/17 16:05:02  scott
+// Updated opening comment block.
+//
 // Revision 1.4  1999/12/15 06:37:39  scott
 // Reformatted some comments.
 //
