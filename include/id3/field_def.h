@@ -33,7 +33,7 @@ struct ID3_FieldDef
 {
   ID3_FieldID   _id;
   ID3_FieldType _type;
-  size_t        _fixed_length;
+  size_t        _fixed_size;
   ID3_V2Spec    _spec_begin;
   ID3_V2Spec    _spec_end;
   flags_t       _flags;
