@@ -83,6 +83,18 @@ size_t ID3_Frame::Parse(const uchar * const buffer, luint size)
       if (!(*fi)->InScope(spec)) 
       { 
         // this field isn't in scope, so don't attempt to parse into it 
+        // rather, give it some reasonable default value in case someone tries
+        // to access it
+        switch ((*fi)->GetType())
+        {
+          case ID3FTY_INTEGER:
+            **fi = (luint) 0;
+            break;
+          default:
+            **fi = "";
+            break;
+        }
+        // now continue with the rest of the fields
         continue; 
       }
       
