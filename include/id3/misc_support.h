@@ -29,7 +29,8 @@
 
 #include "tag.h"
 
-char*      ID3_GetString(const ID3_Frame *, ID3_FieldID, size_t nItems = 1);
+char*      ID3_GetString(const ID3_Frame *, ID3_FieldID);
+char*      ID3_GetString(const ID3_Frame *, ID3_FieldID, size_t nItems);
 
 // defined in 'id3_misc_support.cpp'
 // these are 'convenience functions,' to make using the library easier for the 
