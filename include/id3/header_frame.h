@@ -58,13 +58,13 @@ public:
   ID3_FrameHeader&    operator=(const ID3_FrameHeader&);
 
   bool SetCompression(bool b) { return this->SetFlags(COMPRESSION, b); }
-  bool SetEncryption(bool b) { return this->SetFlags(ENCRYPTION, b); }
-  bool SetGrouping(bool b) { return this->SetFlags(GROUPING, b); }
+  bool SetEncryption(bool b)  { return this->SetFlags(ENCRYPTION, b); }
+  bool SetGrouping(bool b)    { return this->SetFlags(GROUPING, b); }
 
   bool GetCompression() const { return __flags.test(COMPRESSION); }
-  bool GetEncryption() const { return __flags.test(ENCRYPTION); }
-  bool GetGrouping() const { return __flags.test(GROUPING); }
-  bool GetReadOnly() const { return __flags.test(READONLY); }
+  bool GetEncryption() const  { return __flags.test(ENCRYPTION); }
+  bool GetGrouping() const    { return __flags.test(GROUPING); }
+  bool GetReadOnly() const    { return __flags.test(READONLY); }
 
 protected:
   bool                SetFlags(uint16 f, bool b)
