@@ -31,6 +31,7 @@
 #include "header_tag.h"
 #include "frame.h"
 #include "spec.h"
+#include "error.h"
 
 struct ID3_Elem
 {
