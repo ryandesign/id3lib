@@ -32,7 +32,8 @@ static char *ID3_ErrorDescs[] =
   "tag is already attached to a file",
   "invalid tag version",
   "file not found",
-  "error in zlib compression library"
+  "error in zlib compression library",
+  "improperly formatted id3 tag"
 };
   
   
@@ -81,6 +82,12 @@ luint ID3_Error::GetErrorLine(void) const
 
 
 // $Log$
+// Revision 1.5  1999/11/15 20:15:03  scott
+// Added include for config.h.  Added new interface to error
+// reporting to allow for more descriptive error messages (this
+// should still be worked on).  Made private member variable names
+// more descriptive.
+//
 // Revision 1.4  1999/11/04 04:15:54  scott
 // Added cvs Id and Log tags to beginning and end of file, respectively.
 //
