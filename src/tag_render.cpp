@@ -215,7 +215,8 @@ size_t ID3_TagImpl::PaddingSize(size_t curSize) const
   }
   else
   {
-    luint tempSize = curSize + ID3_GetDataSize(*this);
+    luint tempSize = curSize + ID3_GetDataSize(*this) +
+                     this->GetAppendedBytes() + ID3_TagHeader::SIZE;
     
     // this method of automatic padding rounds the COMPLETE FILE up to the
     // nearest 2K.  If the file will already be an even multiple of 2K (with
@@ -223,7 +224,8 @@ size_t ID3_TagImpl::PaddingSize(size_t curSize) const
     tempSize = ((tempSize / ID3_PADMULTIPLE) + 1) * ID3_PADMULTIPLE;
     
     // the size of the new tag is the new filesize minus the audio data
-    newSize = tempSize - ID3_GetDataSize(*this);
+    newSize = tempSize - ID3_GetDataSize(*this) - this->GetAppendedBytes () -
+              ID3_TagHeader::SIZE;
   }
   
   return newSize - curSize;
