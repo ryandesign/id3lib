@@ -243,7 +243,7 @@ bool mm::parse(ID3_TagImpl& tag, ID3_Reader& rdr)
         
       // Our offset will be exactly 256 bytes prior to our potential metadata
       // section
-      int offset = possibleSizes[i] + 256;
+      size_t offset = possibleSizes[i] + 256;
       if (dataWindow.getCur() < offset)
       {
         // if our filesize is less than the offset, then it can't possibly
