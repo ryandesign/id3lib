@@ -14,19 +14,26 @@
 AUTOMAKE_OPTIONS = 1.4
 
 EXTRA_DIST =                    \
-        reconf                  \
+	HISTORY                 \
         config.h.win32          \
-        config.h.win32.in 
+        config.h.win32.in       \
+	id3lib.spec             \
+        id3lib.spec.in          \
+        reconf
 SUBDIRS = . m4 doc src include prj zlib id3com libprj
 
 INCLUDES = @ID3LIB_DEBUG_FLAGS@
 
 config.h.win32: $(top_builddir)/config.status $(top_srcdir)/config.h.win32.in 
-	cd $(top_builddir) && CONFIG_FILES=$@ CONFIG_HEADERS= $(SHELL) ./config.status 
+	cd $(top_builddir) && CONFIG_FILES=$@ CONFIG_HEADERS= $(SHELL) ./config.status
+
+id3lib.spec: $(top_builddir)/config.status $(top_srcdir)/id3lib.spec.in 
+	cd $(top_builddir) && CONFIG_FILES=$@ CONFIG_HEADERS= $(SHELL) ./config.status
+
 
 .PHONY: release snapshot
 
-release: config.h.win32
+release: config.h.win32 id3lib.spec
 	rm -rf .deps */.deps
 	$(MAKE) distcheck
 	GZIP=$(GZIP_ENV) $(TAR) zxf $(distdir).tar.gz
@@ -44,6 +51,9 @@ snapshot: config.h.win32
 	rm -rf $$ss_distdir
 
 # $Log$
+# Revision 1.11  2000/04/12 16:31:14  eldamitri
+# (SUBDIRS): Added id3com and libprj
+#
 # Revision 1.10  2000/04/09 14:05:44  eldamitri
 # (config.h.win32): Fixed bug in creating config.h.win32.
 # (release): Added.  Creates id3lib-$(VERSION).tar.gz and
