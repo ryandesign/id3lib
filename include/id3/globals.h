@@ -206,7 +206,27 @@ enum ID3_FrameID
   /// Grouping reg
   ID3FID_GROUPINGREG,
   /// Cryptography reg
-  ID3FID_CRYPTOREG
+  ID3FID_CRYPTOREG,
+  /// Linked Information
+  ID3FID_LINKEDINFO,
+  /// BPM (Beats Per Minute)
+  ID3FID_BEATSPERMINUTE,
+  /// Playlist delay
+  ID3FID_PLAYLISTDELAY,
+  /// Initial key
+  ID3FID_KEY,
+  /// Song length
+  ID3FID_SONGLEN,
+  /// Original year
+  ID3FID_ORIGYEAR,
+  /// File owner/licensee
+  ID3FID_OWNER,
+  /// Size
+  ID3FID_SIZE,
+  /// ISRC
+  ID3FID_ISRC,
+  /// Terms of use
+  ID3FID_TERMSOFUSE
 };
 
 #endif /* __GLOBALS_H__ */
