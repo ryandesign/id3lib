@@ -53,7 +53,7 @@ class ID3_Tag : public ID3_Speccable
 public:
   ID3_Tag(char *name = NULL);
   ID3_Tag(const ID3_Tag &tag);
-  ~ID3_Tag();
+  virtual ~ID3_Tag();
   
   void       Clear();
   bool       HasChanged() const;

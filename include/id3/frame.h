@@ -64,7 +64,7 @@ public:
   ID3_Frame(const ID3_Frame&);
 
   /// Destructor.
-  ~ID3_Frame();
+  virtual ~ID3_Frame();
   
   /** Clears the frame of all data and resets the frame such that it can take
    ** on the form of any id3v2 frame that id3lib supports.
