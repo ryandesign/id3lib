@@ -593,7 +593,7 @@ void ID3_Tag::SetExtendedHeader(bool ext)
  **/
 void ID3_Tag::SetPadding(bool pad)
 {
-  __bHasChanged = __bHasChanged && (__bPadding != pad);
+  __bHasChanged = __bHasChanged || (__bPadding != pad);
     
   __bPadding = pad;
   
