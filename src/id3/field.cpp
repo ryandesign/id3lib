@@ -661,9 +661,8 @@ ID3_FindFrameID(char *id)
 luint
 ID3_Field::Render(uchar *buffer)
 {
-  luint bytesUsed       = 0;
+  luint bytesUsed = 0;
   
-  // if (doIt)
   if ((__eControl == ID3VC_HIGHER &&
        __ucVersion >= __ucIOVersion && __ucRevision >= __ucIORevision) ||
       (__ucVersion <= __ucIOVersion && __ucRevision <= __ucIORevision))
@@ -694,6 +693,18 @@ ID3_Field::Render(uchar *buffer)
 }
 
 // $Log$
+// Revision 1.5  1999/11/15 20:15:25  scott
+// Added include for config.h.  Replaced LU_NULL with ID3FF_NONE for
+// more consistency in flag naming.  Blocked out the ID3FD_Volume
+// array definition since it is currently unused.  Reformatted
+// ID3_FrameDefs for easier reading (although most lines are more
+// than 80 chars long now).  Made private member variable names more
+// descriptive.  Fixed bug in SetVersion (was checking "rev != rev").
+// Adjusted logic somewhat in BinSize to ease code reading.  Fixed
+// bug in BinSize that was causing incorrect parsing of correct
+// frames, such as COMM (previously assumed a wchar_t is 2 bytes,
+// which might not be true on some platforms).
+//
 // Revision 1.4  1999/11/04 04:15:54  scott
 // Added cvs Id and Log tags to beginning and end of file, respectively.
 //
