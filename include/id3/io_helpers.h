@@ -66,9 +66,11 @@ namespace dami
     uint32      readLENumber(ID3_Reader&, size_t);
     uint32      readBENumber(ID3_Reader&, size_t);
     String      readTrailingSpaces(ID3_Reader&, size_t);
+    uint32      readUInt28(ID3_Reader&);
 
-    size_t      writeBENumber(ID3_Writer&, uint32 val, size_t len);
-    size_t      writeTrailingSpaces(ID3_Writer&, String, size_t len);
+    size_t      writeBENumber(ID3_Writer&, uint32 val, size_t);
+    size_t      writeTrailingSpaces(ID3_Writer&, String, size_t);
+    size_t      writeUInt28(ID3_Writer&, uint32);
   };
 };
 

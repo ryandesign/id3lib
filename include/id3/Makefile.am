@@ -40,5 +40,4 @@ noinst_HEADERS =                \
   io_helpers.h                  \
   io_strings.h                  \
   strings.h                     \
-  uint28.h                      \
   utils.h                       

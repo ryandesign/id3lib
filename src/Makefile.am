@@ -51,7 +51,6 @@ id3lib_sources =                \
   tag_parse_musicmatch.cpp      \
   tag_parse_v1.cpp              \
   tag_render.cpp                \
-  uint28.cpp                    \
   utils.cpp                     \
   writers.cpp                   
 

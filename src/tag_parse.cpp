@@ -35,7 +35,6 @@
 #include <memory.h>
 
 #include "tag_impl.h"
-#include "uint28.h"
 #include "utils.h"
 #include "io_decorators.h"
 #include "io_helpers.h"
