@@ -570,7 +570,7 @@ extern "C"
     {
       if (frame)
       {
-        field = &( ((const ID3_Frame *) frame)->Field(name));
+        field = ((const ID3_Frame *) frame)->GetField(name);
       }
     }
     catch (...)
