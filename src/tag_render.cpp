@@ -228,7 +228,7 @@ luint ID3_Tag::RenderV1(uchar *buffer)
   // sTemp is used as a temporary string pointer for functions that return
   //  dynamically created strings
   uchar* pCur = buffer;
-  const char* sTemp = NULL;
+  char* sTemp = NULL;
 
   // The default char for a v1 tag is null
   memset(buffer, '\0', ID3_V1_LEN);
