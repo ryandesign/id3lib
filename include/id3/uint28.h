@@ -28,6 +28,9 @@
 #include "globals.h"
 #include <iostream.h>
 
+class ID3_Reader;
+class ID3_Writer;
+
 /** Class representation of an unsigned 28-bit integer for use in an ID3v2 tag.
  **
  ** The ID3v2 tag specification (http://www.id3.org) defines an unsigned 28-bit
@@ -69,11 +72,6 @@ public:
    **/
   explicit uint28(uint32 val = 0) { *this = val; }
 
-  /** Creates a uint28 object from a character string
-   ** \param data The character string to parse to create the uint28 object
-   **/
-  explicit uint28(const uchar* data) { *this = data; }
-
   /** Copy constructor
    ** \param rhs The uint28 object to copy
    **/
@@ -108,28 +106,6 @@ public:
     return *this; 
   }
   
-  /** Unsigned Character string assignment operator
-   ** \param data The character string from which to extract a 28-bit integer
-   **             (must be at least 4 characters long)
-   ** \return The newly-assigned uint28 object (*this)
-   **/
-  uint28&    operator=(const uchar* data)
-  {
-    this->Parse(data);
-    return *this;
-  }
-  
-  /** Character string assignment operator
-   ** \param data The character string from which to extract a 28-bit integer
-   **             (must be at least 4 characters long)
-   ** \return The newly-assigned uint28 object (*this)
-   **/
-  uint28&    operator=(const char* data)
-  {
-    this->Parse(data);
-    return *this;
-  }
-  
   /** Converts the unsigned 28-bit integer object to a built-in unsigned 32-bit
    ** integer.
    **/
@@ -143,16 +119,14 @@ public:
    **             characters in length) 
    ** \return The number of characters parsed (should always be 4)
    **/
-  size_t    Parse(const uchar* data);
-  size_t    Parse(const char* data);
+  bool      Parse(ID3_Reader&);
   
   /** Renders a 28-bit integer to a character string
    ** \param data The character string to render to (should be at least 4 
    **             characters in length)
    ** \return The number of characters render (should always be 4)
    **/
-  size_t    Render(uchar*) const;
-  size_t    Render(char*) const;
+  void    Render(ID3_Writer&) const;
 
 };
 
