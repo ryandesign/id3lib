@@ -64,12 +64,15 @@ public:
   
   virtual bool       Clear()
   {
-    this->SetDataSize(0);
+    bool changed = this->SetDataSize(0);
     if (this->GetSpec() == ID3V2_UNKNOWN)
     {
       this->SetSpec(ID3V2_LATEST);
+      changed = true;
     }
-    __changed = __flags.clear() || __changed;
+    changed = __flags.clear() || changed;
+    __changed = changed || __changed;
+    return changed;
   }
   virtual size_t     Size() const = 0;
   
