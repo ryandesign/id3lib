@@ -162,7 +162,7 @@ size_t ID3_Frame::Render(uchar *buffer) const
   uchar* data = buffer + hdr_size;
   if (decompressed_size)
   {
-    data += RenderNumber(data, decompressed_size);
+    data += id3::renderNumber(data, decompressed_size);
   }
   if (e_id)
   {

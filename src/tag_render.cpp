@@ -201,7 +201,7 @@ size_t ID3_Tag::RenderV2(uchar *buffer) const
   
   if (this->GetUnsync())
   {
-    size_t newTagSize = ID3_GetUnSyncSize(&buffer[hdr_size], 
+    size_t newTagSize = id3::getUnSyncSize(&buffer[hdr_size], 
                                          bytesUsed - hdr_size);
     if (newTagSize > 0 && (newTagSize + hdr_size) > bytesUsed)
     {
@@ -212,8 +212,8 @@ size_t ID3_Tag::RenderV2(uchar *buffer) const
         //ID3_THROW(ID3E_NoMemory);
       }
 
-      ID3_UnSync(tempz, newTagSize, &buffer[hdr_size],
-                 bytesUsed - hdr_size);
+      id3::unsync(tempz, newTagSize, &buffer[hdr_size],
+                  bytesUsed - hdr_size);
       hdr.SetUnsync(true);
 
       memcpy(&buffer[hdr_size], tempz, newTagSize);
