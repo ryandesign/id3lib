@@ -105,17 +105,22 @@ ID3_ENUM(ID3_TextEnc)
 
 /** Enumeration of the various id3 specifications
  **/
-ID3_ENUM(ID3_SpecVersion)
+ID3_ENUM(ID3_V1Spec)
 {
-  ID3SV_1_0 = 0,
-  ID3SV_1_1,
-  ID3SV_2_2_0,
-  ID3SV_2_2_1,
-  ID3SV_2_3_0,
-  ID3SV_NUMVERSIONS
+  ID3V1_0 = 0,
+  ID3V1_1,
+  ID3V1_NUMSPECS
 };
 
-const ID3_SpecVersion ID3SV_LATEST = ID3SV_2_3_0;
+ID3_ENUM(ID3_V2Spec)
+{
+  ID3V2_UNKNOWN = -1,
+  ID3V2_2_0 = 0,
+  ID3V2_2_1,
+  ID3V2_3_0,
+  ID3V2_EARLIEST = ID3V2_2_0,
+  ID3V2_LATEST = ID3V2_3_0  
+};
 
 /** The various types of tags that id3lib can handle
  **/
