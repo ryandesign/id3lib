@@ -290,6 +290,8 @@ size_t RenderV2ToFile(const ID3_TagImpl& tag, fstream& file)
       tmpOut.write(tmpBuffer, nBytes);
     }
 
+    close(fd); //closes the file
+
 #endif ////((defined(__GNUC__) && __GNUC__ >= 3  ) || !defined(HAVE_MKSTEMP))
 
     tmpOut.close();
@@ -403,9 +405,8 @@ flags_t ID3_TagImpl::Strip(flags_t ulTagFlag)
     // moved in the actual file.
     // The nBytesCopied variable keeps track of how many actual bytes were
     // copied (or moved) so far.
-    size_t
-      nBytesRemaining = nBytesToCopy,
-      nBytesCopied = 0;
+    size_t nBytesRemaining = nBytesToCopy,
+    nBytesCopied = 0;
     while (!file.eof())
     {
 #if (defined(__GNUC__) && __GNUC__ == 2)
