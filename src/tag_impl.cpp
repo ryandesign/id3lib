@@ -99,7 +99,7 @@ size_t ID3_TagImpl::IsV2Tag(ID3_Reader& reader)
 ID3_TagImpl::ID3_TagImpl(const char *name)
   : _frames(),
     _cursor(_frames.begin()),
-    _file_name(new char[ID3_PATH_LENGTH]),
+    _file_name(),
     _file_size(0),
     _prepended_bytes(0),
     _appended_bytes(0),
@@ -115,7 +115,7 @@ ID3_TagImpl::ID3_TagImpl(const char *name)
 ID3_TagImpl::ID3_TagImpl(const ID3_Tag &tag)
   : _frames(),
     _cursor(_frames.begin()),
-    _file_name(new char[ID3_PATH_LENGTH]),
+    _file_name(),
     _file_size(0),
     _prepended_bytes(0),
     _appended_bytes(0),
@@ -127,8 +127,6 @@ ID3_TagImpl::ID3_TagImpl(const ID3_Tag &tag)
 ID3_TagImpl::~ID3_TagImpl()
 {
   this->Clear();
-  
-  delete [] _file_name;
 }
 
 void ID3_TagImpl::Clear()
