@@ -132,3 +132,4 @@ int32 ID3_C_EXPORT ID3_IsTagHeader(const uchar header[ID3_TAGHEADERSIZE]);
 
 
 #endif /* _ID3LIB_TAG_H_ */
+

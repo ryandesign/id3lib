@@ -33,3 +33,4 @@
 
 const ID3_Reader::int_type ID3_Reader::END_OF_READER = -1;
 const ID3_Writer::int_type ID3_Writer::END_OF_WRITER = -1;
+

@@ -383,3 +383,4 @@ WString dami::toWString(const unicode_t buf[], size_t len)
   }
   return str;
 }
+

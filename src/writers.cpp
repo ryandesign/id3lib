@@ -42,3 +42,4 @@ ID3_MemoryWriter::writeChars(const char_type buf[], size_type len)
   return size;
 }
 */
+

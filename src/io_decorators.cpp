@@ -296,3 +296,4 @@ io::CompressedWriter::writeChars(const char_type buf[], size_type len)
   _data.append(buf, len);
   return len;
 }
+

@@ -190,3 +190,4 @@ class ID3_CPP_EXPORT ID3_MemoryWriter : public ID3_Writer
 };
 
 #endif /* _ID3LIB_WRITERS_H_ */
+

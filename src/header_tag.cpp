@@ -126,3 +126,4 @@ bool ID3_TagHeader::Parse(ID3_Reader& reader)
   et.setExitPos(reader.getCur());
   return true;
 }
+

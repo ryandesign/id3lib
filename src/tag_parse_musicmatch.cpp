@@ -353,3 +353,4 @@ bool mm::parse(ID3_TagImpl& tag, ID3_Reader& rdr)
 
   return true;
 }
+

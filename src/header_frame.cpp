@@ -244,3 +244,4 @@ bool ID3_FrameHeader::Clear()
   }
   return changed;
 }
+

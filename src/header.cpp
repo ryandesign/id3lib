@@ -57,3 +57,4 @@ bool ID3_Header::SetSpec(ID3_V2Spec spec)
   _changed = _changed || changed;
   return changed;
 }
+

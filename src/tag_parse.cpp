@@ -281,3 +281,4 @@ void ID3_TagImpl::ParseFile()
   } while (cur != last);
   _appended_bytes = end - cur;
 }
+

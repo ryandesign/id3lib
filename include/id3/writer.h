@@ -96,3 +96,4 @@ class ID3_CPP_EXPORT ID3_Writer
 };
 
 #endif /* _ID3LIB_WRITER_H_ */
+

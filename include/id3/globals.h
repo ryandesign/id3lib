@@ -401,3 +401,4 @@ ID3_ENUM(ID3_TimeStampFormat)
 #endif
 
 #endif /* _ID3LIB_GLOBALS_H_ */
+

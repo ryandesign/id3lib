@@ -111,3 +111,4 @@ void ID3_FieldImpl::RenderInteger(ID3_Writer& writer) const
 {
   io::writeBENumber(writer, _integer, this->Size());
 }
+

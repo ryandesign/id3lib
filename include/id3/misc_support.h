@@ -102,3 +102,4 @@ ID3_C_EXPORT ID3_Frame* ID3_GetSyncLyrics(const ID3_Tag *tag, const char *lang,
                                           const char *desc, char *pData, size_t &size);
 
 #endif /* _ID3LIB_MISC_SUPPORT_H_ */
+

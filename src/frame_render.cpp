@@ -144,3 +144,4 @@ void ID3_FrameImpl::Render(ID3_Writer& writer) const
   writer.writeChars(flds.data(), fldSize);
   _changed = false;
 }
+

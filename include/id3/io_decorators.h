@@ -216,3 +216,4 @@ namespace dami
 };
 
 #endif /* _ID3LIB_READER_DECORATORS_H_ */
+

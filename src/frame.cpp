@@ -316,3 +316,4 @@ ID3_Frame::CreateIterator() const
 {
   return new ConstIteratorImpl(*_impl);
 }
+
