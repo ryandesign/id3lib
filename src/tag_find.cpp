@@ -153,7 +153,7 @@ ID3_Frame *ID3_Tag::Find(ID3_FrameID id, ID3_FieldID fld, const char *data) cons
   size_t len = strlen(data) + 1;
   unicode_t *temp = new unicode_t[len];
 
-  mbstoucs(temp, data, len);
+  id3::mbstoucs(temp, data, len);
     
   ID3_Frame* frame = Find(id, fld, temp);
     
@@ -200,7 +200,7 @@ ID3_Frame *ID3_Tag::Find(ID3_FrameID id, ID3_FieldID fld, const unicode_t *data)
         wsBuffer[ulSize] = NULL_UNICODE;
         cur->pFrame->Field(fld).Get(wsBuffer, ulSize);
           
-        bool bInFrame = (ucscmp(wsBuffer, data) == 0);
+        bool bInFrame = (id3::ucscmp(wsBuffer, data) == 0);
           
         delete [] wsBuffer;
 
