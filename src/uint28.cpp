@@ -23,10 +23,13 @@
 // http://download.sourceforge.net/id3lib/
 
 #include "uint28.h"
-#include <iomanip.h>
 
 #if defined HAVE_CONFIG_H
-#include <config.h>
+#  include <config.h>
+#endif
+
+#if defined HAVE_IOMANIP_H
+#  include "iomanip.h"
 #endif
 
 // values are initialized here
