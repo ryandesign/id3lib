@@ -190,7 +190,7 @@ size_t ParseMusicMatch(ID3_Tag& tag, fstream& file)
             strcat(mimetype, img_ext);
             frame->Field(ID3FN_MIMETYPE).Set(mimetype);
             frame->Field(ID3FN_IMAGEFORMAT).Set("");
-            frame->Field(ID3FN_PICTURETYPE).Set(static_cast<size_t>(0));
+            frame->Field(ID3FN_PICTURETYPE).Set(static_cast<unsigned int>(0));
             frame->Field(ID3FN_DESCRIPTION).Set("");
             frame->Field(ID3FN_DATA).Set(img_data, img_size);
             tag.AttachFrame(frame);

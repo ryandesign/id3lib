@@ -59,7 +59,7 @@ struct ID3_FrameDef
 
 class ID3_Field
 {
-  friend ID3_Frame;
+  friend class ID3_Frame;
 public:
   ~ID3_Field();
   

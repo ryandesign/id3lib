@@ -108,12 +108,23 @@ public:
     return *this; 
   }
   
-  /** Character string assignment operator
+  /** Unsigned Character string assignment operator
    ** \param data The character string from which to extract a 28-bit integer
    **             (must be at least 4 characters long)
    ** \return The newly-assigned uint28 object (*this)
    **/
   uint28&    operator=(const uchar* data)
+  {
+    this->Parse(data);
+    return *this;
+  }
+  
+  /** Character string assignment operator
+   ** \param data The character string from which to extract a 28-bit integer
+   **             (must be at least 4 characters long)
+   ** \return The newly-assigned uint28 object (*this)
+   **/
+  uint28&    operator=(const char* data)
   {
     this->Parse(data);
     return *this;
@@ -133,6 +144,7 @@ public:
    ** \return The number of characters parsed (should always be 4)
    **/
   size_t    Parse(const uchar* data);
+  size_t    Parse(const char* data);
   
   /** Renders a 28-bit integer to a character string
    ** \param data The character string to render to (should be at least 4 
@@ -140,6 +152,7 @@ public:
    ** \return The number of characters render (should always be 4)
    **/
   size_t    Render(uchar*) const;
+  size_t    Render(char*) const;
 
 };
 
