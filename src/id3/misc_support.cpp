@@ -24,9 +24,9 @@
 // id3lib.  These files are distributed with id3lib at
 // http://download.sourceforge.net/id3lib/
 
-#include <cstdlib>
-#include <cctype>
-#include <cstdio>
+#include <stdlib.h>
+#include <ctype.h>
+#include <stdio.h>
 #include "misc_support.h"
 
 #if defined HAVE_CONFIG_H
@@ -165,7 +165,7 @@ char *ID3_GetString(const ID3_Frame *frame, const ID3_FieldID fldName,
     {
       frame->Field(fldName).Get(sText, nText, nIndex);
     }
-    catch (ID3_Err err)
+    catch (ID3_Err&)
     {
       delete [] sText;
       return NULL;
@@ -823,6 +823,10 @@ size_t ID3_RemoveLyrics(ID3_Tag *tag)
 }
 
 // $Log$
+// Revision 1.20  2000/04/05 05:21:15  eldamitri
+// Updated initial comment information to reflect license, copyright
+// change.
+//
 // Revision 1.19  2000/01/04 15:42:49  eldamitri
 // For compilation with gcc 2.95.2 and better compatibility with ANSI/ISO
 // standard C++, updated, rearranged, and removed (where necessary)
