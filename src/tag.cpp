@@ -405,6 +405,7 @@ ID3_Frame* ID3_Tag::RemoveFrame(const ID3_Frame *frame)
     elem->pFrame = NULL;
     ID3_RemoveFromList(elem, &__frames);
     --__num_frames;
+    __changed = true;
   }
     
   return the_frame;
