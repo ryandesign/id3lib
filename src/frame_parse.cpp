@@ -41,7 +41,7 @@ size_t ID3_Frame::Parse(const uchar * const buffer, size_t size)
   {  
     return 0;  
   }  
-  
+
   // data is the part of the frame buffer that appears after the header  
   const uchar* data = &buffer[hdr_size]; 
   const size_t data_size = __hdr.GetDataSize();
