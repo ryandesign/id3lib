@@ -90,6 +90,8 @@ public:
    **/
   ID3_Error(ID3_Err eID, const char *sFileName, size_t nLineNum, 
             const char *sDescription);
+  ID3_Error(ID3_Error& Error);
+  ~ID3_Error();
 private:
   ID3_Err __error;
   size_t  __line_num;

@@ -29,6 +29,12 @@
 #include <config.h>
 #endif
 
+// values are initialized here
+// this stops the window complier from complaining
+const unsigned short uint28::BITSUSED = 7;
+const uint32 uint28::MINVAL = 0;
+const uint32 uint28::MAXVAL = MASK(BITSUSED*sizeof(uint32));
+
 size_t uint28::Parse(const uchar* data)
 {
   uint32 val = 0;

@@ -55,12 +55,14 @@ class uint28
   // representation.
   uint32 __value;
 public:
+  // can't initilaize statics here as windows compiler doesn't like it
+  // these variables are initilaized in the cpp file
   /** The number of bits used per byte of an unsigned 28-bit integer **/
-  static const unsigned short BITSUSED = 7;
+  static const unsigned short BITSUSED;
   /** The minimum value this class can represent **/
-  static const uint32 MINVAL = 0;
+  static const uint32 MINVAL;
   /** The maximum value this class can represent (2^28-1) **/
-  static const uint32 MAXVAL = MASK(BITSUSED*sizeof(uint32));
+  static const uint32 MAXVAL;
 
   /** Default constructor
    ** \param val The initial value for the (defaults to 0)

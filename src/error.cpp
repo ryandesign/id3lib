@@ -59,17 +59,34 @@ ID3_Error::ID3_Error(ID3_Err eCode, const char *sFileName,
   size_t nDescLen = strlen(sDesc);
   
   __file_name = new char[nFileNameLen+1];
-  __description     = new char[nDescLen+1];
+  __description = new char[nDescLen+1];
   strncpy(__file_name, sFileName, nFileNameLen+1);
   strncpy(__description, sDesc, nDescLen+1);
 }
 
+ID3_Error::ID3_Error(ID3_Error& Error)
+{
+  __error = Error.__error;
+  __line_num = Error.__line_num;
+  size_t nFileNameLen = strlen(Error.__file_name);
+  size_t nDescLen = strlen(Error.__description);
+  
+  __file_name = new char[nFileNameLen+1];
+  __description = new char[nDescLen+1];
+  strncpy(__file_name, Error.__file_name, nFileNameLen+1);
+  strncpy(__description, Error.__description, nDescLen+1);
+}
+
+ID3_Error::~ID3_Error()
+{
+	delete __file_name;
+	delete __description;
+}
 
 ID3_Err ID3_Error::GetErrorID() const
 {
   return __error;
 }
-
 
 char *ID3_Error::GetErrorType() const
 {
@@ -85,7 +102,6 @@ char *ID3_Error::GetErrorFile() const
 {
   return __file_name;
 }
-
 
 size_t ID3_Error::GetErrorLine() const
 {
