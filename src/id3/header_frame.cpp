@@ -174,38 +174,31 @@ ID3_FrameHeader::GetTextID() const
   return sTextID;
 }
 
-void ID3_FrameHeader::Copy(const ID3_Header &hdr)
+ID3_FrameHeader& ID3_FrameHeader::operator=(const ID3_FrameHeader& hdr)
 {
   if (this != &hdr)
   {
-    try
+    Clear();
+    this->ID3_Header::operator=(hdr);
+    if (!hdr.__bDynFrameDef)
     {
-      Clear();
-      const ID3_FrameHeader &frmhdr = 
-        dynamic_cast<const ID3_FrameHeader &>( hdr );
-      ID3_Header::Copy(frmhdr);
-      if (!frmhdr.__bDynFrameDef)
-      {
-        __pFrameDef = frmhdr.__pFrameDef;
-      }
-      else
-      {
-        __pFrameDef = new ID3_FrameDef;
-        if (NULL == __pFrameDef)
-        {
-        }
-        __pFrameDef->eID = frmhdr.__pFrameDef->eID;
-        __pFrameDef->bTagDiscard = frmhdr.__pFrameDef->bTagDiscard;
-        __pFrameDef->bFileDiscard = frmhdr.__pFrameDef->bFileDiscard;
-        __pFrameDef->parseHandler = frmhdr.__pFrameDef->parseHandler;
-        __pFrameDef->aeFieldDefs = frmhdr.__pFrameDef->aeFieldDefs;
-        strcpy(__pFrameDef->sShortTextID, frmhdr.__pFrameDef->sShortTextID);
-        strcpy(__pFrameDef->sLongTextID, frmhdr.__pFrameDef->sLongTextID);
-        __bDynFrameDef = true;
-      }
+      __pFrameDef = hdr.__pFrameDef;
     }
-    catch (...)
+    else
     {
+      __pFrameDef = new ID3_FrameDef;
+      if (NULL == __pFrameDef)
+      {
+        // TODO: throw something here...
+      }
+      __pFrameDef->eID = hdr.__pFrameDef->eID;
+      __pFrameDef->bTagDiscard = hdr.__pFrameDef->bTagDiscard;
+      __pFrameDef->bFileDiscard = hdr.__pFrameDef->bFileDiscard;
+      __pFrameDef->parseHandler = hdr.__pFrameDef->parseHandler;
+      __pFrameDef->aeFieldDefs = hdr.__pFrameDef->aeFieldDefs;
+      strcpy(__pFrameDef->sShortTextID, hdr.__pFrameDef->sShortTextID);
+      strcpy(__pFrameDef->sLongTextID, hdr.__pFrameDef->sLongTextID);
+      __bDynFrameDef = true;
     }
   }
 }
@@ -238,6 +231,18 @@ void ID3_FrameHeader::Clear()
 }
 
 // $Log$
+// Revision 1.14  2000/04/09 22:42:19  eldamitri
+// (ID3_FrameHeader): Added implementation.
+// (SetUnknownFrame): Added implementation.
+// (SetFrameID): Sanity checking inputs.
+// (Parse): Now checks to make sure frame id isn't bogus.  If it is,
+// creates an "unknown" frame.
+// (Render): Fixed bug in short/long id determination logic
+// (GetTextID): Fixed bug in short/long id determination logic
+// (Copy): Handles case when copying a frame that has an "unknown" frame
+// type.
+// (Clear): Now deletes __pFrameDef is it was dynamically created.
+//
 // Revision 1.13  2000/04/08 04:40:26  eldamitri
 // Changed new ANSI-standard C++ include headers to old-style headers.
 //

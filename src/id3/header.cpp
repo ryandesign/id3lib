@@ -121,13 +121,7 @@ void ID3_Header::Clear()
   //__pInfo = 0;
 }
 
-ID3_Header &ID3_Header::operator=( const ID3_Header &hdr )
-{
-  Copy(hdr);
-  return *this;
-}
-
-void ID3_Header::Copy(const ID3_Header &hdr)
+ID3_Header &ID3_Header::operator=( const ID3_Header& hdr )
 {
   if (this != &hdr)
   {
@@ -136,9 +130,13 @@ void ID3_Header::Copy(const ID3_Header &hdr)
     SetFlags(hdr.GetFlags());
     __pInfo = hdr.__pInfo;
   }
+  return *this;
 }
 
 // $Log$
+// Revision 1.13  2000/04/08 04:40:26  eldamitri
+// Changed new ANSI-standard C++ include headers to old-style headers.
+//
 // Revision 1.12  2000/04/05 05:21:15  eldamitri
 // Updated initial comment information to reflect license, copyright
 // change.
