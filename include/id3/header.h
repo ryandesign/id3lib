@@ -28,13 +28,12 @@
 #ifndef _ID3LIB_HEADER_H_
 #define _ID3LIB_HEADER_H_
 
-#include "spec.h"
 #include "flags.h"
 
 class ID3_Reader;
 class ID3_Writer;
 
-class ID3_Header : public ID3_Speccable
+class ID3_Header
 {
 public:
   struct Info
