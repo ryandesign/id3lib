@@ -1,3 +1,4 @@
+// -*- C++ -*- 
 // $Id$
 
 // id3lib: a C++ library for creating and manipulating id3v1/v2 tags
@@ -97,7 +98,7 @@ public:
 
   size_t        Render(uchar *buffer) const;
   size_t        Parse(const uchar *buffer, size_t buffSize);
-  void          Parse(ID3_Reader&);
+  bool          Parse(ID3_Reader&);
   bool          HasChanged() const;
 
 private:
@@ -138,10 +139,10 @@ protected:
   size_t RenderString(uchar *buffer) const;
   size_t RenderBinary(uchar *buffer) const;
   
-  void ParseInteger(ID3_Reader&);
-  void ParseASCIIString(ID3_Reader&);
-  void ParseUnicodeString(ID3_Reader&);
-  void ParseBinary(ID3_Reader&);
+  bool ParseInteger(ID3_Reader&);
+  bool ParseASCIIString(ID3_Reader&);
+  bool ParseUnicodeString(ID3_Reader&);
+  bool ParseBinary(ID3_Reader&);
   
 };
 

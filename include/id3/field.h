@@ -80,7 +80,7 @@ public:
 
   virtual size_t        Render(uchar *buffer) const = 0;
   virtual size_t        Parse(const uchar *buffer, size_t buffSize) = 0;
-  virtual void          Parse(ID3_Reader&) = 0;
+  virtual bool          Parse(ID3_Reader&) = 0;
   virtual bool          HasChanged() const = 0;
 
 protected:
