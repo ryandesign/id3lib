@@ -49,6 +49,10 @@ using namespace dami;
 #  include <unistd.h>
 #endif
 
+#if defined HAVE_SYS_STAT_H
+#  include <sys/stat.h>
+#endif
+
 #if defined WIN32 && (!defined(WINCE))
 #  include <windows.h>
 static int truncate(const char *path, size_t length)
@@ -305,8 +309,18 @@ size_t RenderV2ToFile(const ID3_TagImpl& tag, fstream& file)
 
     file.close();
 
-    remove(filename.c_str());
-    rename(sTempFile, filename.c_str());
+    // the following sets the permissions of the new file
+    // to be the same as the original
+#if defined HAVE_SYS_STAT_H
+    struct stat fileStat;
+    if(stat(filename.c_str(), &fileStat) == 0) {
+#endif
+      remove(filename.c_str());
+      rename(sTempFile, filename.c_str());
+#if defined HAVE_SYS_STAT_H
+      chmod(filename.c_str(), fileStat.st_mode);
+    }
+#endif
 
     openWritableFile(filename, file);
 #endif
