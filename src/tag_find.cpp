@@ -190,7 +190,7 @@ ID3_Frame *ID3_Tag::Find(ID3_FrameID id, ID3_FieldID fld, unicode_t *data)
     {
       if ((cur->pFrame != NULL) && (cur->pFrame->GetID() == id) &&
           (data != NULL) && ucslen(data) > 0 && 
-          BS_ISSET(cur->pFrame->__auiFieldBits, fld))
+          cur->pFrame->Contains(fld))
       {
         luint ulSize = cur->pFrame->Field(fld).BinSize();
         unicode_t *wsBuffer = new unicode_t[ulSize];
