@@ -181,6 +181,18 @@ extern "C"
     return offset;
   }
 
+  ID3_C_EXPORT size_t
+  ID3Tag_LinkWithFlags(ID3Tag *tag, const char *fileName, flags_t flags)
+  {
+    size_t offset = 0;
+    if (tag)
+    {
+      ID3_CATCH(offset = reinterpret_cast<ID3_Tag *>(tag)->Link(fileName,flags));
+    }
+    return offset;
+  }
+
+
 
   ID3_C_EXPORT ID3_Err
   ID3Tag_Update(ID3Tag *tag)

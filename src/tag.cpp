@@ -629,7 +629,7 @@ size_t ID3_Tag::Parse(const uchar header[ID3_TAGHEADERSIZE],
  ** can be used.
  ** 
  ** Make sure the rendering parameters are set before calling the method.
- ** See the Link dcoumentation for an example of this method in use.
+ ** See the Link documentation for an example of this method in use.
  ** 
  ** \sa ID3_TagType
  ** \sa Link
