@@ -35,6 +35,8 @@ current project maintainer if anyone has been missed.
   id3com.
 * Peter Luijer (videoripper@hotmail.com) provided much useful documentation
   on the MusicMatch tagging format.
+* Steven Frank (stevenf@users.sourceforge.net) provided invaluable help in 
+  tracking down runtime bugs for the Macintosh port.
 * The following individuals have assisted by providing bug reports and (often)
   suggestions for fixes:
   - Ben Noblet (Ben.Noblet@xt3.com.au)
