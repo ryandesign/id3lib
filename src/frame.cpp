@@ -58,6 +58,19 @@ ID3_Frame::ID3_Frame(const ID3_FrameHeader &hdr)
   InitFields(__FrmHdr.GetFrameDef());
 }
 
+ID3_Frame::ID3_Frame(const ID3_Frame& frame)
+  : __bHasChanged(false),
+    __auiFieldBits(NULL),
+    __ulNumFields(0),
+    __apFields(NULL)
+{
+  __sEncryptionID[0] = '\0';
+  __sGroupingID[0]   = '\0';
+  
+  InitFieldBits();
+  *this = frame;
+}
+
 void ID3_Frame::InitFieldBits()
 {
   luint lWordsForFields =
@@ -146,7 +159,7 @@ void ID3_Frame::InitFields(const ID3_FrameDef *info)
 
     __apFields[i]->__eName        = info->aeFieldDefs[i].eID;
     __apFields[i]->__eType        = info->aeFieldDefs[i].eType;
-    __apFields[i]->__lFixedLength = info->aeFieldDefs[i].lFixedLength;
+    __apFields[i]->__ulFixedLength = info->aeFieldDefs[i].ulFixedLength;
     __apFields[i]->__ucIOVersion  = info->aeFieldDefs[i].ucVersion;
     __apFields[i]->__ucIORevision = info->aeFieldDefs[i].ucRevision;
     __apFields[i]->__eControl     = info->aeFieldDefs[i].eControl;
@@ -341,6 +354,9 @@ ID3_Frame::operator=( const ID3_Frame &rFrame )
 }
 
 // $Log$
+// Revision 1.2  2000/04/18 22:11:19  eldamitri
+// Moved frame.cpp from src/id3/ to src/
+//
 // Revision 1.14  2000/04/08 04:37:38  eldamitri
 // Changed new ANSI-standard C++ include headers to old-style headers.
 // Fixed return bug in operator=.
