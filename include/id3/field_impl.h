@@ -67,6 +67,7 @@ public:
   size_t        Get(char*, size_t) const;
   size_t        Get(char*, size_t, index_t) const;
   const char*   GetText() const;
+  const char*   GetTextItem(index_t) const;
   size_t        Add(const char*);
 
   // Unicode string field functions
@@ -75,6 +76,7 @@ public:
   size_t        Get(unicode_t *buffer, size_t) const;
   size_t        Get(unicode_t *buffer, size_t, index_t) const;
   const unicode_t* GetUnicodeText() const;
+  const unicode_t* GetUnicodeTextItem(index_t) const;
   size_t        Add(const unicode_t*);
 
   // binary field functions
