@@ -492,8 +492,8 @@ luint ID3_Tag::PaddingSize(luint curSize) const
   // if the old tag was large enough to hold the new tag, then we will simply
   // pad out the difference - that way the new tag can be written without
   // shuffling the rest of the song file around
-  if (__ulOldTagSize && (__ulOldTagSize > curSize) && 
-      (curSize - __ulOldTagSize) < ID3_PADMAX)
+  if (__ulOldTagSize && (__ulOldTagSize >= curSize) && 
+      (__ulOldTagSize - curSize) < ID3_PADMAX)
   {
     newSize = __ulOldTagSize;
   }
@@ -516,6 +516,15 @@ luint ID3_Tag::PaddingSize(luint curSize) const
 
 
 // $Log$
+// Revision 1.6  2000/04/26 03:42:52  eldamitri
+// - Replaced version/revision uchar combination with ID3_V2Spec enums
+// - Deprecated {Get,Set}Version, GetRevision for {Get,Set}Spec
+// - ID3_VerCtl enumeration deprecated in favor of using two ID3_V2Spec
+//   enums to denote field scope
+// - Replaced ID3v2_VERSION, ID3v2_REVISION constants with ID3V2_LATEST
+//   enum
+// - Use ID3V2_UNKNOWN enum rather than 0 for version, revision
+//
 // Revision 1.5  2000/04/24 14:49:10  eldamitri
 // Added comments originally in include/id3/tag.h
 //
