@@ -91,10 +91,6 @@ luint ID3_Tag::Render(uchar *buffer)
   {
     if (cur->pFrame != NULL)
     {
-      if (__bCompression)
-      {
-        cur->pFrame->__FrmHdr.AddFlags(ID3FL_COMPRESSION);
-      }
       cur->pFrame->SetSpec(this->GetSpec());
       bytesUsed += cur->pFrame->Render(&buffer[bytesUsed]);
     }
