@@ -43,7 +43,8 @@ static ID3_FieldDef ID3FD_Unimplemented[] =
     ID3V2_LATEST,                       // ENDING SPEC
     ID3FF_NONE,                         // FLAGS
     ID3FN_NOFIELD                       // LINKED FIELD
-  }
+  },
+  { ID3FN_NOFIELD }
 };
 
 const ID3_FieldDef* ID3_FieldDef::DEFAULT = ID3FD_Unimplemented;
@@ -1024,8 +1025,7 @@ size_t ID3_Field::Parse(const uchar *buffer, size_t buffSize)
   return bytesUsed;
 }
 
-ID3_FrameDef *
-ID3_FindFrameDef(const ID3_FrameID id)
+ID3_FrameDef* ID3_FindFrameDef(ID3_FrameID id)
 {
   ID3_FrameDef  *info   = NULL;
 
