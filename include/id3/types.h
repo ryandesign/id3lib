@@ -63,32 +63,11 @@ inline lsint MAX(lsint x, lsint y)
 #endif
 
 // $Log$
+// Revision 1.5  2000/04/05 05:20:52  eldamitri
+// Updated initial comment information to reflect license, copyright
+// change.
+//
 // Revision 1.4  2000/01/04 15:42:22  eldamitri
-// * include/id3/field.h:
-// * include/id3/int28.h:
-// * include/id3/misc_support.h:
-// * include/id3/tag.h:
-// * include/id3/types.h:
-// * src/id3/dll_wrapper.cpp
-// * src/id3/error.cpp
-// * src/id3/field.cpp
-// * src/id3/field_binary.cpp
-// * src/id3/field_integer.cpp
-// * src/id3/field_string_ascii.cpp
-// * src/id3/field_string_unicode.cpp
-// * src/id3/frame.cpp
-// * src/id3/frame_parse.cpp
-// * src/id3/frame_render.cpp
-// * src/id3/header.cpp
-// * src/id3/header_frame.cpp
-// * src/id3/header_tag.cpp
-// * src/id3/int28.cpp
-// * src/id3/misc_support.cpp
-// * src/id3/tag.cpp
-// * src/id3/tag_file.cpp:
-// * src/id3/tag_find.cpp:
-// * src/id3/tag_parse.cpp:
-// * src/id3/tag_parse_lyrics3.cpp:
 // For compilation with gcc 2.95.2 and better compatibility with ANSI/ISO
 // standard C++, updated, rearranged, and removed (where necessary)
 // #include directives.

@@ -149,6 +149,10 @@ private:
 #endif
 
 // $Log$
+// Revision 1.4  2000/04/05 05:20:52  eldamitri
+// Updated initial comment information to reflect license, copyright
+// change.
+//
 // Revision 1.3  1999/12/17 16:05:02  scott
 // Updated opening comment block.
 //
@@ -171,7 +175,7 @@ private:
 // (ID3_Err): Added error types SmallBuffer and ReadOnly.
 //
 // Revision 1.6  1999/11/16 22:50:15  scott
-// * error.h (ID3_Err): Added new ID3_Err: ID3E_BadData.
+// (ID3_Err): Added new ID3_Err: ID3E_BadData.
 //
 // Revision 1.5  1999/11/15 20:15:13  scott
 // Made constructor public.  Added new interface to error reporting
