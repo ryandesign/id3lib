@@ -80,7 +80,7 @@ namespace
   {
     size_t size = data.size();
     String unicode(size * 2, '\0');
-    for (index_t i = 0; i < size; i++)
+    for (size_t i = 0; i < size; i++)
     {
       unicode[i*2+1] = toascii(data[i]);
     }
@@ -93,7 +93,7 @@ namespace
   {
     size_t size = data.size() / 2;
     String ascii(size, '\0');
-    for (index_t i = 0; i < size; i++)
+    for (size_t i = 0; i < size; i++)
     {
       ascii[i] = toascii(data[i*2+1]);
     }

@@ -154,7 +154,7 @@ size_t ID3_Frame::NumFields() const
 }
 
 /*
-ID3_Field* ID3_Frame::GetFieldNum(index_t index) const
+ID3_Field* ID3_Frame::GetFieldNum(size_t index) const
 {
   return _impl->GetFieldNum(index);
 }

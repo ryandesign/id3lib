@@ -396,7 +396,7 @@ size_t id3::v2::getGenreNum(const ID3_TagImpl& tag)
 
   // If the genre string begins with "(ddd)", where "ddd" is a number, then 
   // "ddd" is the genre number---get it
-  index_t i = 0;
+  size_t i = 0;
   if (i < size && size && sGenre[i] == '(')
   {
     ++i;

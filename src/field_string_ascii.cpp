@@ -112,7 +112,7 @@ size_t ID3_FieldImpl::Get(char* buffer, size_t maxLength) const
   return size;
 }
 
-size_t ID3_FieldImpl::Get(char* buf, size_t maxLen, index_t index) const
+size_t ID3_FieldImpl::Get(char* buf, size_t maxLen, size_t index) const
 {
   size_t size = 0;
   if (this->GetType() == ID3FTY_TEXTSTRING &&
@@ -140,7 +140,7 @@ String ID3_FieldImpl::GetText() const
   return data;
 }
 
-String ID3_FieldImpl::GetTextItem(index_t index) const
+String ID3_FieldImpl::GetTextItem(size_t index) const
 {
   String data;
   if (this->GetType() == ID3FTY_TEXTSTRING &&
@@ -278,7 +278,7 @@ const char* ID3_FieldImpl::GetRawText() const
   return text;
 }
 
-const char* ID3_FieldImpl::GetRawTextItem(index_t index) const
+const char* ID3_FieldImpl::GetRawTextItem(size_t index) const
 {
   const char* text = NULL;
   if (this->GetType() == ID3FTY_TEXTSTRING && 

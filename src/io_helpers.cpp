@@ -182,7 +182,7 @@ String io::readUnicodeText(ID3_Reader& reader, size_t len)
   }
   else
   {
-    for (index_t i = 0; i < len; i += 2)
+    for (size_t i = 0; i < len; i += 2)
     {
       if (!readTwoChars(reader, ch1, ch2))
       {

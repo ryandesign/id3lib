@@ -853,7 +853,7 @@ size_t ID3_Tag::NumFrames() const
 /** Returns a pointer to the frame with the given index; returns NULL if
  ** there is no such frame at that index.
  ** 
- ** Optionally, operator[](index_t) can be used as an alternative to this
+ ** Optionally, operator[](size_t) can be used as an alternative to this
  ** method.  Indexing is 0-based (that is, the first frame is number 0, and the
  ** last frame in a tag that holds n frames is n-1).
  ** 
@@ -865,7 +865,7 @@ size_t ID3_Tag::NumFrames() const
  ** @return A pointer to the requested frame, or NULL if no such frame.
  **/
 /*
-ID3_Frame* ID3_Tag::GetFrameNum(index_t num) const
+ID3_Frame* ID3_Tag::GetFrameNum(size_t num) const
 {
   const size_t numFrames = this->NumFrames();
   if (num >= numFrames)
@@ -874,7 +874,7 @@ ID3_Frame* ID3_Tag::GetFrameNum(index_t num) const
   }
 
   ID3_Frame* frame = NULL;
-  index_t curNum = 0;
+  size_t curNum = 0;
   // search from the cursor to the end
   for (ID3_TagImpl::const_iterator cur = _impl->begin(); cur != _impl->end(); ++cur)
   {
@@ -898,7 +898,7 @@ ID3_Frame* ID3_Tag::GetFrameNum(index_t num) const
  ** @see #GetFrameNum
  **/
 /*
-ID3_Frame* ID3_Tag::operator[](index_t index) const
+ID3_Frame* ID3_Tag::operator[](size_t index) const
 {
   return this->GetFrameNum(index);
 }

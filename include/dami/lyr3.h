@@ -95,10 +95,10 @@ namespace dami
 
         virtual size_t getNumImages() const = 0;
         virtual string addImage(string, string, string) = 0;
-        virtual string getImageFilename(index_t) = 0;
-        virtual string getImageDescription(index_t) = 0;
-        virtual string getImageTimestampe(index_t) = 0;
-        virtual bool   removeImage(index_t) = 0;
+        virtual string getImageFilename(size_t) = 0;
+        virtual string getImageDescription(size_t) = 0;
+        virtual string getImageTimestampe(size_t) = 0;
+        virtual bool   removeImage(size_t) = 0;
       };
     };
   };

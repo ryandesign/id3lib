@@ -93,10 +93,6 @@ typedef long           double ldoub;
 
 typedef uint16                unicode_t;
 typedef uint16                flags_t;
-/* this needs to be done for compatibility with Sun Solaris */
-#if !defined index_t
-#  define index_t               size_t
-#endif
 
 #define NULL_UNICODE ((unicode_t) '\0')
 

@@ -569,7 +569,7 @@ extern "C"
 
   ID3_C_EXPORT size_t
   ID3Field_GetUNICODEItem(const ID3Field *field, unicode_t *buffer, 
-                          size_t maxChars, index_t itemNum)
+                          size_t maxChars, size_t itemNum)
   {
     size_t numChars = 0;
   
@@ -617,7 +617,7 @@ extern "C"
 
   ID3_C_EXPORT size_t
   ID3Field_GetASCIIItem(const ID3Field *field, char *buffer, 
-                        size_t maxChars, index_t itemNum)
+                        size_t maxChars, size_t itemNum)
   {
     size_t numChars = 0;
   

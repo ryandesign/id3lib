@@ -96,7 +96,7 @@ public:
 
   // Deprecated
   ID3_Field&  Field(ID3_FieldID name) const;
-  //ID3_Field*  GetFieldNum(index_t) const;
+  //ID3_Field*  GetFieldNum(size_t) const;
 };
 
 #endif /* _ID3LIB_FRAME_H_ */

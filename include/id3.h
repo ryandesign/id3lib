@@ -93,11 +93,11 @@ extern "C"
   ID3_C_EXPORT uint32      ID3Field_GetINT             (const ID3Field *field);
   ID3_C_EXPORT void        ID3Field_SetUNICODE         (ID3Field *field, const unicode_t *string);
   ID3_C_EXPORT size_t      ID3Field_GetUNICODE         (const ID3Field *field, unicode_t *buffer, size_t maxChars);
-  ID3_C_EXPORT size_t      ID3Field_GetUNICODEItem     (const ID3Field *field, unicode_t *buffer, size_t maxChars, index_t itemNum);
+  ID3_C_EXPORT size_t      ID3Field_GetUNICODEItem     (const ID3Field *field, unicode_t *buffer, size_t maxChars, size_t itemNum);
   ID3_C_EXPORT void        ID3Field_AddUNICODE         (ID3Field *field, const unicode_t *string);
   ID3_C_EXPORT void        ID3Field_SetASCII           (ID3Field *field, const char *string);
   ID3_C_EXPORT size_t      ID3Field_GetASCII           (const ID3Field *field, char *buffer, size_t maxChars);
-  ID3_C_EXPORT size_t      ID3Field_GetASCIIItem       (const ID3Field *field, char *buffer, size_t maxChars, index_t itemNum);
+  ID3_C_EXPORT size_t      ID3Field_GetASCIIItem       (const ID3Field *field, char *buffer, size_t maxChars, size_t itemNum);
   ID3_C_EXPORT void        ID3Field_AddASCII           (ID3Field *field, const char *string);
   ID3_C_EXPORT void        ID3Field_SetBINARY          (ID3Field *field, const uchar *data, size_t size);
   ID3_C_EXPORT void        ID3Field_GetBINARY          (const ID3Field *field, uchar *buffer, size_t buffLength);

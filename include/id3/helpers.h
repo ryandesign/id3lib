@@ -41,7 +41,7 @@ namespace dami
     namespace v2
     {
       ID3_C_EXPORT String     getString(const ID3_Frame*, ID3_FieldID);
-      ID3_C_EXPORT String     getStringAtIndex(const ID3_Frame*, ID3_FieldID, index_t);
+      ID3_C_EXPORT String     getStringAtIndex(const ID3_Frame*, ID3_FieldID, size_t);
       
       ID3_C_EXPORT String     getFrameText(const ID3_TagImpl&, ID3_FrameID);
       ID3_C_EXPORT ID3_Frame* setFrameText(ID3_TagImpl&, ID3_FrameID, String);
