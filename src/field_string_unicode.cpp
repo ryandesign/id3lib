@@ -326,7 +326,7 @@ size_t ID3_Field::RenderUnicodeString(uchar *buffer) const
   {
     // render the BOM
     unicode_t *BOM = (unicode_t *) buffer;
-    BOM[0] = 0xFEFF;
+    BOM[0] = 0xFFFE;
   }
   
   if (nBytes == sizeof(unicode_t) && (__flags & ID3FF_CSTR))
