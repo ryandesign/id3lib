@@ -416,6 +416,9 @@ bool Mp3Info::Parse(ID3_Reader& reader, size_t mp3size)
         else
           _mp3_header_output->framesize =  72000 * _mp3_header_output->bitrate / _mp3_header_output->frequency + (_tmpheader->padding_bit ? 1 : 0); //Mpeg2 + Mpeg2.5
         break;
+      default:
+        _mp3_header_output->framesize = 0; //unable to determine
+        break;
     }
 //    if (_mp3_header_output->layer == MPEGLAYER_I)
 //      _mp3_header_output->framesize = fto_nearest_i((float)((48 * (float)_mp3_header_output->bitrate) / _mp3_header_output->frequency)) + (_tmpheader->padding_bit ? 4 : 0);
