@@ -266,32 +266,17 @@ ID3_V2Spec ID3_FrameImpl::GetSpec() const
   return _hdr.GetSpec();
 }
 
-/** Returns a reference to the frame's internal field indicated by the
+/** Returns a pointer to the frame's internal field indicated by the
  ** parameter.
- ** 
- ** A list of fields that are in given frames appears in <id3/field.cpp>.  This
- ** method returns a reference to the field in question so that the result can
- ** be used as though it were a field itself.
  **
  ** \code
  **   ID3_TextEnc enc;
- **   enc = (ID3_TextEnc) myFrame.Field(ID3FN_TEXTENC).Get();
+ **   enc = (ID3_TextEnc) myFrame.GetField(ID3FN_TEXTENC)->Get();
  ** \endcode
  ** 
  ** @param name The name of the field to be retrieved
  ** @returns A reference to the desired field
  **/
-ID3_Field& ID3_FrameImpl::Field(ID3_FieldID fieldName) const
-{
-  ID3_Field* field = this->GetField(fieldName);
-  if (!field)
-  {
-    // log this
-    //ID3_THROW(ID3E_FieldNotFound);
-  }
-  return *field;
-}
-
 ID3_Field* ID3_FrameImpl::GetField(ID3_FieldID fieldName) const
 {
   ID3_Field* field = NULL;
@@ -308,15 +293,15 @@ ID3_Field* ID3_FrameImpl::GetField(ID3_FieldID fieldName) const
   return field;
 }
 
-size_t ID3_FrameImpl::GetNumFields() const
+size_t ID3_FrameImpl::NumFields() const
 {
   return _num_fields;
 }
 
-ID3_Field* ID3_FrameImpl::GetFieldAt(index_t index) const
+ID3_Field* ID3_FrameImpl::GetFieldNum(index_t index) const
 {
   ID3_Field* field = NULL;
-  if (index < this->GetNumFields())
+  if (index < this->NumFields())
   {
     field = _fields[index];
   }
@@ -378,11 +363,11 @@ ID3_FrameImpl::operator=( const ID3_Frame &rFrame )
 {
   ID3_FrameID eID = rFrame.GetID();
   this->SetID(eID);
-  for (size_t nIndex = 0; nIndex < this->GetNumFields(); nIndex++)
+  for (size_t nIndex = 0; nIndex < this->NumFields(); nIndex++)
   {
     ID3_Field
-      *thisFld = this->GetFieldAt(nIndex),
-      *thatFld = rFrame.GetFieldAt(nIndex);
+      *thisFld = this->GetFieldNum(nIndex),
+      *thatFld = rFrame.GetFieldNum(nIndex);
     if (thisFld != NULL && thatFld != NULL)
     {
       *thisFld = *thatFld;
