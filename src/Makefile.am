@@ -15,32 +15,26 @@ LTVERSION = @lt_ver@:@lt_rev@:@lt_age@
 INCLUDES = -I$(top_srcdir)/include/id3
 
 the_sources =                   \
-  error.cpp                     \
+  binary_field.cpp              \
+  common_ops.cpp                \
+  conversion_ops.cpp            \
+  debug.cpp                     \
+  details.cpp                   \
   field.cpp                     \
-  field_binary.cpp              \
-  field_integer.cpp             \
-  field_string_ascii.cpp        \
-  field_string_unicode.cpp      \
+  field_defs.cpp                \
   frame.cpp                     \
-  frame_parse.cpp               \
-  frame_render.cpp              \
+  frame_defs.cpp                \
+  frame_header.cpp              \
   header.cpp                    \
-  header_frame.cpp              \
-  header_tag.cpp                \
-  int28.cpp                     \
-  misc_support.cpp              \
+  integer_field.cpp             \
+  lib.cpp                       \
   tag.cpp                       \
-  tag_file.cpp                  \
-  tag_find.cpp                  \
-  tag_parse.cpp                 \
-  tag_parse_lyrics3.cpp         \
-  tag_parse_v1.cpp              \
-  tag_render.cpp                \
-  tag_sync.cpp                  \
-  version.cpp                   
+  tag_header.cpp                \
+  text_field.cpp                \
+  uint28.cpp                    
 
-EXTRA_DIST =                    \
-  dll_wrapper.cpp               
+#EXTRA_DIST =                    \
+#  dll_wrapper.cpp               
 
 
 lib_LTLIBRARIES   = libid3.la 
