@@ -56,6 +56,7 @@ struct ID3_FrameDef
   bool          bFileDiscard;
   bool        (*parseHandler) (ID3_Frame *frame);
   ID3_FieldDef *aeFieldDefs;
+  const char *  sDescription;
 };
 
 /** The representative class of an id3v2 field.
@@ -380,6 +381,9 @@ protected:
   
 };
 
+const char *ID3_GetFrameDescription(const ID3_FrameID id);
+
+// Ack! Not for public use
 ID3_FrameDef *ID3_FindFrameDef(const ID3_FrameID id);
 ID3_FrameID   ID3_FindFrameID(const char *id);
 
