@@ -93,6 +93,10 @@ luint ID3_Field::RenderInteger(uchar *buffer)
 }
 
 // $Log$
+// Revision 1.14  2000/04/17 02:31:35  eldamitri
+// Updated parameters of certain methods with const modifier to match
+// declaration.
+//
 // Revision 1.13  2000/04/05 05:21:15  eldamitri
 // Updated initial comment information to reflect license, copyright
 // change.
