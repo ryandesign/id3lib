@@ -33,10 +33,10 @@
 
 using namespace dami;
 
-ID3_Reader::streamsize
-ID3_MemoryReader::readChars(char_type buf[], streamsize len)
+ID3_Reader::size_type
+ID3_MemoryReader::readChars(char_type buf[], size_type len)
 {
-  streamsize size = ::min<streamsize>(len, _end - _cur);
+  size_type size = ::min<size_type>(len, _end - _cur);
   ::memcpy(buf, _cur, size);
   _cur += size;
   return size;
