@@ -37,6 +37,7 @@ class ID3_FrameImpl
 {
   typedef std::bitset<ID3FN_LASTFIELDID> Bitset;
   typedef std::vector<ID3_Field *> Fields;
+public:
   typedef Fields::iterator iterator;
   typedef Fields::const_iterator const_iterator;
 public:
