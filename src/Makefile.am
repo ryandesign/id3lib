@@ -37,6 +37,7 @@ id3lib_sources =                \
   header_frame.cpp              \
   header_tag.cpp                \
   helpers.cpp                   \
+  io.cpp                        \
   io_decorators.cpp             \
   io_helpers.cpp                \
   misc_support.cpp              \
