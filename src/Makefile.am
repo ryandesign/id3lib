@@ -38,9 +38,10 @@ id3lib_sources =                \
   header_frame.cpp              \
   header_tag.cpp                \
   helpers.cpp                   \
+  io_decorators.cpp             \
+  io_helpers.cpp                \
   misc_support.cpp              \
   readers.cpp                   \
-  reader_decorators.cpp         \
   spec.cpp                      \
   tag.cpp                       \
   tag_file.cpp                  \
@@ -53,8 +54,7 @@ id3lib_sources =                \
   tag_render.cpp                \
   uint28.cpp                    \
   utils.cpp                     \
-  writers.cpp                   \
-  writer_decorators.cpp        
+  writers.cpp                   
 
 lib_LTLIBRARIES   = libid3.la 
 
