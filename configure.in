@@ -213,7 +213,9 @@ if test $has_iconv = 1; then
   fi
 
 fi
-AC_SUBST(ICONV_LIB)
+if test "x$ICONV_LIB" != "x"; then
+  LIBS="$LIBS $ICONV_LIB"
+fi
 
 dnl Check for c++ features
 AC_LANG_SAVE
