@@ -44,8 +44,8 @@ struct ID3_Elem
  **
  ** \sa #ID3V1_Tag
  **/
-//const char STR_V1_COMMENT_DESC[] = "ID3v1_Comment";
-const char STR_V1_COMMENT_DESC[] = "";
+const char STR_V1_COMMENT_DESC[] = "ID3v1 Comment";
+//const char STR_V1_COMMENT_DESC[] = "";
 
 class ID3_Tag : public ID3_Speccable
 {
@@ -72,7 +72,7 @@ public:
   size_t     Render(uchar*, ID3_TagType = ID3TT_ID3V2) const;
   
   size_t     Link(const char *fileInfo, flags_t = (flags_t) ID3TT_ALL);
-  flags_t    Update(flags_t = (flags_t) ID3TT_ID3V2);
+  flags_t    Update(flags_t = (flags_t) ID3TT_ALL);
   flags_t    Strip(flags_t = (flags_t) ID3TT_ALL);
   
   size_t     GetPrependedBytes() const { return __prepended_bytes; }
