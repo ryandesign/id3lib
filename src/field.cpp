@@ -1054,3 +1054,17 @@ ID3_Field::operator=( const ID3_Field &rField )
   //__spec  = rField.__spec;
   return *this;
 }
+
+/*
+bool ID3_Field::SetEncoding(ID3_TextEnc enc)
+{
+  bool changed = this->IsEncodable() && (enc != this->GetEncoding()) &&
+    (ID3TE_NONE < enc && enc < fld::NUMENCODINGS);
+  if (changed)
+  {
+    this->_SetEncoding(enc);
+    __changed = true;
+  }
+  return changed;
+}
+*/
