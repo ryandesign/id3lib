@@ -204,18 +204,18 @@ AC_OUTPUT(                      \
   include/Makefile              \
   include/id3/Makefile          \
   m4/Makefile                   \
-  prj/Makefile                  \
   src/Makefile                  \
   zlib/Makefile                 \
   zlib/include/Makefile         \
   zlib/lib/Makefile             \
   zlib/prj/Makefile             \
   zlib/src/Makefile             \
-  id3com/Makefile               \
-  libprj/Makefile               \
 )
 
 # $Log$
+# Revision 1.27  2000/04/25 00:16:39  eldamitri
+# Updated for 3.7.3 release
+#
 # Revision 1.26  2000/04/21 20:13:54  eldamitri
 # Updated for 3.7.2 release
 #
