@@ -352,3 +352,30 @@ ID3_Frame::operator=( const ID3_Frame &rFrame )
   }
   return *this;
 }
+
+const char* ID3_Frame::GetDescription(ID3_FrameID eFrameID)
+{
+  ID3_FrameDef* myFrameDef = ID3_FindFrameDef(eFrameID);
+  if (myFrameDef != NULL)
+  {
+    return myFrameDef->sDescription;
+  }
+  else
+  {
+    return "Unknown";
+  }
+}
+
+const char* ID3_Frame::GetDescription() const
+{
+  const ID3_FrameDef* def = __hdr.GetFrameDef();
+  if (def)
+  {
+    return def->sDescription;
+  }
+  else
+  {
+    return "Unknown";
+  }
+}
+

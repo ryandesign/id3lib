@@ -925,19 +925,6 @@ ID3_FindFrameDef(const ID3_FrameID id)
   return info;
 }
 
-const char *ID3_GetFrameDescription(const ID3_FrameID eFrameID)
-{
-  ID3_FrameDef* myFrameDef = ID3_FindFrameDef(eFrameID);
-  if(myFrameDef != NULL)
-  {
-    return myFrameDef->sDescription;
-  }
-  else
-  {
-    return "Unknown";
-  }
-}
-
 ID3_FrameID
 ID3_FindFrameID(const char *id)
 {

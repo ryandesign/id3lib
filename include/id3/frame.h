@@ -119,6 +119,9 @@ public:
    **/
   ID3_Field  &Field(ID3_FieldID name) const;
   
+  const char* GetDescription() const;
+  static const char* GetDescription(ID3_FrameID);
+
   ID3_Frame  &operator=( const ID3_Frame &rFrame );
   bool        HasChanged() const;
   void        Parse(uchar *buffer, luint size);
