@@ -32,13 +32,11 @@ exec perl -w -x $0 ${1+"$@"} # -*- mode: perl; perl-indent-level: 2; -*-
 ## Boston, MA 02111-1307, USA.
 
 
-
 use strict;
 use Text::Wrap;
 use Time::Local;
 use File::Basename;
 
-
 # The Plan:
 #
 # Read in the logs for multiple files, spit out a nice ChangeLog that
@@ -70,12 +68,11 @@ use File::Basename;
 # If we're not using the `--distributed' flag, the directory is always
 # considered to be `./', even as descend into subdirectories.
 
-
 ############### Globals ################
 
 
 # What we run to generate it:
-my $Log_Source_Command = "cvs log";
+my $Log_Source_Command = "cvs -z3 log";
 
 # In case we have to print it out:
 my $VERSION = '$Revision$';
