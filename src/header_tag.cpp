@@ -36,6 +36,7 @@
 #include "utils.h"
 #include "tag.h"
 #include "io_helpers.h"
+#include "spec.h"
 
 using namespace dami;
 

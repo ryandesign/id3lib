@@ -116,7 +116,7 @@ size_t ID3_FieldImpl::Set_i(const unicode_t *string, size_t size)
     _num_items = 1;
   }
 
-  return min(_chars, size);
+  return dami::min(_chars, size);
 }
 
 size_t ID3_FieldImpl::Set(const unicode_t *string)
@@ -239,7 +239,7 @@ size_t ID3_FieldImpl::Get(unicode_t *buffer, size_t maxLength) const
       buffer != NULL && maxLength > 0)
   {
     size_t size = this->Size();
-    length = min(maxLength, size);
+    length = dami::min(maxLength, size);
     memcpy((void *)buffer, (void *)_unicode, length * 2);
     if (length < maxLength)
     {

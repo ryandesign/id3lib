@@ -33,6 +33,7 @@
 #include "readers.h"
 #include "writers.h"
 #include "strings.h"
+#include "utils.h"
 
 using namespace dami;
 
@@ -631,13 +632,15 @@ ID3_Frame* ID3_Tag::Find(ID3_FrameID id, ID3_FieldID fld, uint32 data) const
 /// Finds frame with given frame id, fld id, and ascii data
 ID3_Frame* ID3_Tag::Find(ID3_FrameID id, ID3_FieldID fld, const char* data) const
 {
-  return _impl->Find(id, fld, data);
+  String str(data);
+  return _impl->Find(id, fld, str);
 }
 
 /// Finds frame with given frame id, fld id, and unicode data
 ID3_Frame* ID3_Tag::Find(ID3_FrameID id, ID3_FieldID fld, const unicode_t* data) const
 {
-  return _impl->Find(id, fld, data);
+  WString str = toWString(data, ucslen(data));
+  return _impl->Find(id, fld, str);
 }
 
 size_t ID3_Tag::NumFrames() const
