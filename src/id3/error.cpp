@@ -25,15 +25,17 @@ static char *ID3_ErrorDescs[] =
 {
   "out of memory",
   "no source/dest data specified",
+  "improperly formatted id3 tag",
   "no buffer specified",
+  "buffer is insufficient in size",
   "invalid frame id",
   "field not found",
   "unknown field type",
   "tag is already attached to a file",
   "invalid tag version",
   "file not found",
-  "error in zlib compression library",
-  "improperly formatted id3 tag"
+  "trying to write to a read-only file",
+  "error in zlib compression library"
 };
   
   
@@ -47,8 +49,8 @@ ID3_Error::ID3_Error(const ID3_Err eCode, const char *sFileName,
   
   __sErrFileName = new char[nFileNameLen+1];
   __sErrDesc     = new char[nDescLen+1];
-  strncpy(__sErrFileName, sFileName, nFileNameLen);
-  strncpy(__sErrDesc, sDesc, nDescLen);
+  strncpy(__sErrFileName, sFileName, nFileNameLen+1);
+  strncpy(__sErrDesc, sDesc, nDescLen+1);
 }
 
 
@@ -82,6 +84,9 @@ luint ID3_Error::GetErrorLine(void) const
 
 
 // $Log$
+// Revision 1.6  1999/11/16 22:50:10  scott
+// * error.cpp (ID3_ErrorDescs): Added text entry for ID3E_BadData.
+//
 // Revision 1.5  1999/11/15 20:15:03  scott
 // Added include for config.h.  Added new interface to error
 // reporting to allow for more descriptive error messages (this
