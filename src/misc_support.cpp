@@ -37,6 +37,9 @@
 
 #include "misc_support.h"
 #include "field.h"
+#include "utils.h"
+
+using namespace dami;
 
 char *ID3_GetString(const ID3_Frame *frame, ID3_FieldID fldName)
 {
