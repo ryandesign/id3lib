@@ -29,39 +29,6 @@
 
 #include "globals.h"
 
-/**
- ** Predefined id3lib error types.
- **/
-enum ID3_Err
-{
-  /// No available memory
-  ID3E_NoMemory = 0,
-  /// No data to parse
-  ID3E_NoData,
-  /// Improperly formatted data
-  ID3E_BadData,
-  /// No buffer to write to
-  ID3E_NoBuffer,
-  /// Buffer is too small
-  ID3E_SmallBuffer,
-  /// Invalid frame id
-  ID3E_InvalidFrameID,
-  /// Requested field not found
-  ID3E_FieldNotFound,
-  /// Unknown field type
-  ID3E_UnknownFieldType,
-  /// Tag is already attached to a file
-  ID3E_TagAlreadyAttached,
-  /// Invalid tag version
-  ID3E_InvalidTagVersion,
-  /// No file to parse
-  ID3E_NoFile,
-  /// Attempting to write to a read-only file
-  ID3E_ReadOnly,
-  /// Error in compression/uncompression
-  ID3E_zlibError
-};
-
 /** When id3lib encounters a nasty error, it thros an exception of type
  ** ID3_Error.  A function that calls an id3lib routine can place the call in a
  ** try block and provide an appropriate catch block.
