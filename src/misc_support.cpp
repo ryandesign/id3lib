@@ -41,7 +41,7 @@ char *ID3_GetString(const ID3_Frame *frame, ID3_FieldID fldName)
     try 
     {
       ID3_Field& fld = frame->Field(fldName);
-      ID3_TextEncoding enc = fld.GetEncoding();
+      ID3_TextEnc enc = fld.GetEncoding();
       fld.SetEncoding(ID3TE_ASCII);
       size_t nText = fld.Size();
       text = new char[nText + 1];
