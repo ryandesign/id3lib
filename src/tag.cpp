@@ -195,19 +195,19 @@ ID3_Tag::ID3_Tag(const ID3_Tag &tag)
 
 void ID3_Tag::SetupTag(char *fileInfo)
 {
-  __file_name       = new char[ID3_PATH_LENGTH];
-  __spec            = ID3V2_LATEST;
-  __frames      = NULL;
-  __binaries     = NULL;
-  __cursor     = NULL;
-  __file_handle     = NULL;
-  __is_unsync         = false;
+  __file_name        = new char[ID3_PATH_LENGTH];
+  __spec             = ID3V2_LATEST;
+  __frames           = NULL;
+  __binaries         = NULL;
+  __cursor           = NULL;
+  __file_handle      = NULL;
+  __is_unsync        = false;
   __is_padded        = true;
-  __is_extended = true;
-  __is_file_writable   = false;
-  __file_size      = 0;
+  __is_extended      = true;
+  __is_file_writable = false;
+  __file_size        = 0;
   __orig_tag_size    = 0;
-  __extra_bytes    = 0;
+  __extra_bytes      = 0;
   __has_v1_tag       = false;
 
   __file_name[0]     = '\0';
