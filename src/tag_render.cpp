@@ -304,6 +304,13 @@ void ID3_Tag::RenderV1ToHandle()
 
   RenderV1(sTag);
 
+  if (__file_handle == NULL)
+  {
+    // log this
+    ID3_THROW(ID3E_NoData);
+    // cerr << "*** Ack! __file_handle is null!" << endl;
+  }
+
   if (ID3_V1_LEN > __file_size)
   {
     if (fseek(__file_handle, 0, SEEK_END) != 0)
@@ -465,9 +472,13 @@ void ID3_Tag::RenderV2ToHandle()
     }
       
     tmpOut.close();
+
     CloseFile();
+
     remove(__file_name);
     rename(sTempFile, __file_name);
+
+    OpenFileForWriting();
     
     __starting_bytes = size;
 #endif
