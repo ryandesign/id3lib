@@ -687,8 +687,6 @@ static ID3_FieldDef ID3FD_Volume[] =
 // SYLT  SLT  ID3FID_SYNCEDLYRICS      Synchronized lyric/text
 // SYTC  STC  ID3FID_SYNCEDTEMPO       Synchronized tempo codes
 //       CRM  ID3FID_METACRYPTO        Encrypted meta frame
-by the way i noticed that the "description" fields are out of whack in fields.cpp
-in ID3_FrameDef from PCNT to PRIV.
 static  ID3_FrameDef ID3_FrameDefs[] =
 {
   //                          short  long      tag    file
