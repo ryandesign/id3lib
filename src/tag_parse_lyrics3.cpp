@@ -231,8 +231,7 @@ size_t ParseLyrics3(ID3_Tag& tag, fstream& file)
 
       lyr_begin[lyr_size] = '\0';
 
-      ID3_Frame *frame = ID3_AddLyrics(&tag, lyr_begin, 
-                                       "Converted from Lyrics3 v1.00");
+      ID3_AddLyrics(&tag, lyr_begin, "Converted from Lyrics3 v1.00");
 
     }
   
@@ -355,7 +354,7 @@ size_t ParseLyrics3v2(ID3_Tag& tag, fstream& file)
           text[fld_size] = '\0';
           memcpy(text, fld_data, fld_size);
 
-          ID3_Frame* frame = ID3_AddAlbum(&tag, text, true);
+          ID3_AddAlbum(&tag, text, true);
 
           delete[] text;
         }
