@@ -47,7 +47,9 @@ void PrintInformation(const ID3_Tag &myTag)
     ID3_Frame *myFrame = myTag[nFrames];
     if (NULL != myFrame)
     { 
-      cout << "=== " << myFrame->GetDescription() << ": ";
+      const char* desc = myFrame->GetDescription();
+      if (!desc) desc = "";
+      cout << "=== " << myFrame->GetTextID() << " (" << desc << "): ";
       ID3_FrameID eFrameID = myFrame->GetID();
       switch (eFrameID)
       {
