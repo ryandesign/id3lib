@@ -29,7 +29,7 @@
 #define _ID3LIB_HELPERS_H_
 
 #include "id3/id3lib_strings.h"
-#include "globals.h"
+#include "id3/globals.h" //has <stdlib.h> "id3/sized_types.h"
 
 class ID3_TagImpl;
 class ID3_Frame;

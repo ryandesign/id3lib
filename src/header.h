@@ -28,7 +28,7 @@
 #ifndef _ID3LIB_HEADER_H_
 #define _ID3LIB_HEADER_H_
 
-#include "globals.h"
+#include "id3/globals.h" //has <stdlib.h> "id3/sized_types.h"
 #include "flags.h"
 
 class ID3_Reader;

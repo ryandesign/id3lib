@@ -33,7 +33,7 @@
 #endif
 
 #include "id3/id3lib_streams.h"
-#include "globals.h"
+#include "id3/globals.h" //has <stdlib.h> "id3/sized_types.h"
 #include "id3/id3lib_strings.h"
 
 namespace dami

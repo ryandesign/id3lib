@@ -30,14 +30,13 @@
 
 
 
-#include <string.h>
+//#include <string.h>
 #include <memory.h>
 #include <zlib.h>
 
 #include "tag.h"
-#include "utils.h"
 #include "frame_impl.h"
-#include "io_decorators.h"
+#include "id3/io_decorators.h" //has "readers.h" "io_helpers.h" "utils.h"
 #include "io_strings.h"
 #include "io_helpers.h"
 

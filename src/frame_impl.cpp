@@ -28,7 +28,7 @@
 #include <config.h>
 #endif
 
-#include <string.h>
+//#include <string.h>
 #include "tag.h"
 #include "frame_impl.h"
 #include "field_impl.h"

@@ -28,11 +28,8 @@
 #include <config.h>
 #endif
 
-
-
 #include "frame_impl.h"
-#include "utils.h"
-#include "io_decorators.h"
+#include "id3/io_decorators.h" //has "readers.h" "io_helpers.h" "utils.h"
 
 using namespace dami;
 

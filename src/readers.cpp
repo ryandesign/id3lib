@@ -24,14 +24,8 @@
 // id3lib.  These files are distributed with id3lib at
 // http://download.sourceforge.net/id3lib/
 
-#if defined HAVE_CONFIG_H
-#include <config.h>
-#endif
-
-#include <string.h>
-
 #include "readers.h"
-#include "utils.h"
+#include "id3/utils.h" // has <config.h> "id3/id3lib_streams.h" "id3/globals.h" "id3/id3lib_strings.h"
 
 using namespace dami;
 

@@ -34,7 +34,7 @@
 #define _ID3LIB_GLOBALS_H_
 
 #include <stdlib.h>
-#include <id3/sized_types.h>
+#include "id3/sized_types.h"
 
 /* id3lib version.
  * we prefix variable declarations so they can

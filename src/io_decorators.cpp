@@ -30,8 +30,7 @@
 
 
 
-#include "io_decorators.h"
-#include "utils.h"
+#include "id3/io_decorators.h" //has "readers.h" "io_helpers.h" "utils.h"
 #include "zlib.h"
 
 using namespace dami;

@@ -24,7 +24,7 @@
 // id3lib.  These files are distributed with id3lib at
 // http://download.sourceforge.net/id3lib/
 
-#include <string.h>
+//#include <string.h>
 #include "id3.h"
 #include "tag.h"
 #include "frame.h"
