@@ -28,18 +28,16 @@
 #define ID3LIB_VERSION_H
 
 /** id3lib defines some functions for making known the libraries version info.
-    
-    <p>
-    
-    They are used to identify the version and date of the id3lib that is
-    currently being used.
-*/
+ **    
+ ** They are used to identify the version and date of the id3lib that is
+ ** currently being used.
+ **/
 /// Returns the name of the library (i.e., "id3lib")
-const char *ID3_Name(void);
+const char* ID3_Name(void);
 /// Returns the library release (i.e., "3.0.6")
-const char *ID3_Version(void);
+const char* ID3_Version(void);
 /// Returns the full name of the library (i.e., "id3lib-3.0.6")
-const char *ID3_FullName(void);
+const char* ID3_FullName(void);
 /// Returns the library version (i.e., 3)
 unsigned short ID3_Major(void);
 /// Returns the library revision (i.e., 0)
@@ -50,6 +48,10 @@ unsigned short ID3_Patch(void);
 #endif
 
 // $Log$
+// Revision 1.4  2000/04/07 04:40:32  eldamitri
+// Changed the version functions to reflect the name change of release
+// and revision to major and minor.
+//
 // Revision 1.3  2000/04/05 05:20:52  eldamitri
 // Updated initial comment information to reflect license, copyright
 // change.

@@ -80,7 +80,9 @@ public:
    ** Either using this call or via the constructor, this must be the first
    ** command performed on an ID3_Frame object.  
    ** 
-   ** <pre>myFrame.SetID(ID3FID_TITLE);</pre>
+   ** \code
+   **   myFrame.SetID(ID3FID_TITLE);
+   ** \endcode
    ** 
    ** @param id The type of frame this frame should be set to
    ** @see ID3_FrameID
@@ -104,9 +106,10 @@ public:
    ** question so that the result can be used as though it were a field
    ** itself.
    **
-   ** <pre>
-   ** ID3_TextEnc enc;
-   ** enc = (ID3_TextEnc) myFrame.Field(ID3FN_TEXTENC).Get(); </pre>
+   ** \code
+   **   ID3_TextEnc enc;
+   **   enc = (ID3_TextEnc) myFrame.Field(ID3FN_TEXTENC).Get();
+   ** \endcode
    ** 
    ** @param name The name of the field to be retrieved
    ** @returns A reference to the desired field
@@ -139,6 +142,9 @@ private:
 ;
 
 // $Log$
+// Revision 1.8  2000/04/10 20:17:35  eldamitri
+// Updated comments for use with doxygen.
+//
 // Revision 1.7  2000/04/05 05:20:52  eldamitri
 // Updated initial comment information to reflect license, copyright
 // change.
