@@ -330,10 +330,15 @@ ID3_ENUM(ID3_Err)
 
 };
 
-ID3_ENUM(ID3_VerCtl)
+ID3_ENUM(ID3_LyricsContent)
 {
-  ID3VC_HIGHER  = 0,
-  ID3VC_LOWER
+  ID3LC_OTHER = 0,
+  ID3LC_LYRICS,
+  ID3LC_TEXT,
+  ID3LC_MOVEMENT,
+  ID3LC_EVENTS,
+  ID3LC_CHORD,
+  ID3LC_TRIVIA
 };
 
 #define BS_SIZE (sizeof(luint)*8)
