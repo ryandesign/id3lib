@@ -95,7 +95,7 @@ size_t ID3_Frame::Render(uchar *buffer) const
       enc = static_cast<ID3_TextEnc>((*fi)->Get());  
     }
     
-    if (*fi && (*fi)->InScope(ID3V2_LATEST));
+    if (*fi && (*fi)->InScope(ID3V2_LATEST))
     {
       (*fi)->SetEncoding(enc);
       data_size += (*fi)->Render(&buffer[data_size + hdr_size + extras]);
@@ -143,7 +143,7 @@ size_t ID3_Frame::Render(uchar *buffer) const
   hdr.SetGrouping(g_id > 0);
   hdr.SetCompression(decompressed_size > 0);
 
-  hdr.Render(data);
+  hdr.Render(buffer);
   uchar* data = buffer + hdr_size;
   if (decompressed_size)
   {
