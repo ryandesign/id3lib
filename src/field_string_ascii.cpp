@@ -165,7 +165,7 @@ ID3_Field::ParseASCIIString(const uchar *buffer, size_t nSize)
   // This check needs to come before the check for ID3FF_CSTR
   else if (__flags & ID3FF_LIST)
   {
-    char *sBuffer = (char *) buffer;
+    const char *sBuffer = (const char *) buffer;
     for (size_t i = 0; i < bytesUsed; i += strlen(&sBuffer[i]) + 1)
     {
       Add(&sBuffer[i]);
