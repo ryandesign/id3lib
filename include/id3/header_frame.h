@@ -27,29 +27,34 @@
 #define ID3FL_ENCRYPTION  (1 <<  6)
 #define ID3FL_GROUPING    (1 <<  5)
 
-struct ID3_FrameAttr
-{
-  char  sTextID[5];
-  luint ulSize;
-  luint ulFlags;
-};
-
 class ID3_FrameHeader : public ID3_Header
 {
 public:
-  virtual luint Size(void);
-  virtual void  SetFrameID(ID3_FrameID id);
-  virtual luint GetFrameInfo(ID3_FrameAttr &attr, uchar *buffer);
-  virtual luint Render(uchar *buffer);
+  ID3_FrameHeader();
   
+  virtual size_t Size(void);
+  virtual size_t Parse(uchar *buffer);
+  virtual size_t Render(uchar *buffer);
+  virtual void  SetFrameID(ID3_FrameID id);
+  virtual ID3_FrameID GetFrameID() const;
+  virtual const char *GetTextID(void) const;
+  virtual const ID3_FrameDef *GetFrameDef() const;
+  virtual void Clear();
+ 
 protected:
-  ID3_FrameID   __eFrameID;        // which frame are we the header for?
+  virtual void Copy(const ID3_Header &hdr);
+
+  ID3_FrameDef *__pFrameDef;
 }
 ;
 
 #endif
 
 // $Log$
+// Revision 1.4  1999/12/26 16:40:18  scott
+// (ID3FL_READONLY): Renamed from ID3FL_SIGNED.
+// (class ID3_FrameHeader): Minor cleanup to interface.
+//
 // Revision 1.3  1999/12/17 16:05:02  scott
 // Updated opening comment block.
 //
