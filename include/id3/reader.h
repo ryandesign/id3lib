@@ -28,6 +28,7 @@
 #define _ID3LIB_READER_H_
 
 #include "debug.h"
+#include "globals.h"
 
 class ID3_Reader
 {
@@ -84,7 +85,11 @@ class ID3_Reader
    ** the value returned may be less than the number of bytes that the internal
    ** position advances, due to multi-byte characters.
    **/
-  virtual streamsize readChars(char_type buf[], streamsize len) = 0;
+  virtual streamsize readChars(char* buf, streamsize len)
+  {
+    return this->readChars(reinterpret_cast<uchar *>(buf), len);
+  }
+  virtual streamsize readChars(uchar buf[], streamsize len) = 0;
   
   /** Skip up to \c len chars in the stream and advance the internal position
    ** accordingly.  Returns the number of characters actually skipped (may be 
