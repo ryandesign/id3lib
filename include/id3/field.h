@@ -66,6 +66,7 @@ public:
   void Clear();
 
   size_t Size() const;
+  size_t BinSize() const;
   size_t GetNumTextItems() const;
 
   // integer field functions
@@ -113,12 +114,12 @@ public:
   bool          IsEncodable() const { return (_flags & ID3FF_ENCODABLE) > 0; }
   
 
-private:
-  size_t        BinSize() const;
-  bool          HasChanged();
-  //void          SetSpec(ID3_V2Spec);
   size_t        Render(uchar *buffer) const;
   size_t        Parse(const uchar *buffer, size_t buffSize);
+  bool          HasChanged() const;
+
+private:
+  //void          SetSpec(ID3_V2Spec);
   size_t        Set_i(const char*, size_t);
   size_t        Set_i(const unicode_t*, size_t);
   size_t        Add_i(const char*, size_t);
