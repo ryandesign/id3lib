@@ -127,10 +127,6 @@ protected:
   size_t     PaddingSize(size_t) const;
   
   void       RenderExtHeader(uchar *);
-  ID3_Err    OpenFileForWriting();
-  ID3_Err    OpenFileForReading();
-  ID3_Err    CreateFile();
-  bool       CloseFile();
 
   void       ParseFile();
   size_t     RenderV2(uchar*) const;
