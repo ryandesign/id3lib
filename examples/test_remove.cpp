@@ -13,10 +13,8 @@ int main( int argc, char *argv[])
 
     tag.Link("test-remove.tag");
     tag.Strip(ID3TT_ALL);
-    tag.Update();
     tag.Clear();
 
-    tag.Clear();
     frame.SetID(ID3FID_TITLE);
     frame.Field(ID3FN_TEXT).Set("Test title");
     tag.AddFrame(frame);

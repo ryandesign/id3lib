@@ -12,9 +12,8 @@ int main( int argc, char *argv[])
 
     tag.Link("test-230-picture.tag");
     tag.Strip(ID3TT_ALL);
-    tag.Update();
-
     tag.Clear();
+
     frame.SetID(ID3FID_TITLE);
     frame.Field(ID3FN_TEXT).Set("Aquarium");
     tag.AddFrame(frame);

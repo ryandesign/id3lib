@@ -12,9 +12,8 @@ int main( int argc, char *argv[])
 
     tag.Link("test-230-unicode.tag");
     tag.Strip(ID3TT_ALL);
-    tag.Update();
-
     tag.Clear();
+
     frame.SetID(ID3FID_USERTEXT);
     frame.Field(ID3FN_DESCRIPTION).Set("example text frame");
     frame.Field(ID3FN_TEXT).Set("This text and the description should be in Unicode.");
