@@ -1,57 +1,71 @@
+// id3lib: a C++ library for creating and manipulating id3v1/v2 tags
 // $Id$
-// 
-//  
-// This program is free software; you can distribute it and/or modify it under 
-// the terms discussed in the COPYING file, which should have been included  
-// with this distribution.                                                  
-//                                                                           
-// This program is distributed in the hope that it will be useful, but WITHOUT 
-// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
-// FITNESS FOR A PARTICULAR PURPOSE.  See the COPYING file for more details. 
-//                                                                           
-// The id3lib authors encourage improvements and optimisations to be sent to   
-// the id3lib coordinator.  Please see the README file for details on where  
-// to send such submissions. 
+
+// This library is free software; you can redistribute it and/or modify it
+// under the terms of the GNU Library General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or (at your
+// option) any later version.
+//
+// This library is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+// FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public
+// License for more details.
+//
+// You should have received a copy of the GNU Library General Public License
+// along with this library; if not, write to the Free Software Foundation,
+// Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+// The id3lib authors encourage improvements and optimisations to be sent to
+// the id3lib coordinator.  Please see the README file for details on where to
+// send such submissions.  See the AUTHORS file for a list of people who have
+// contributed to id3lib.  See the ChangeLog file for a list of changes to
+// id3lib.  These files are distributed with id3lib at
+// http://download.sourceforge.net/id3lib/
 
 #ifndef ID3LIB_TYPES_H
 #define ID3LIB_TYPES_H
 
-#include "globals.h"
+#include "sized_types.h"
+#include <string>
 
-#ifdef __DLL
-#define DLLEXPORT       __declspec ( dllexport )
-#define CDLLEXPORT      extern "C" __declspec ( dllexport )
-#else
-#define DLLEXPORT
-#define CDLLEXPORT
+#if defined major
+#undef major
 #endif
 
-#define BS_SIZE (sizeof(luint)*8)
-#define BS_SET(v,x)   ((v)[(x) / BS_SIZE] |=  (1 << ((x) % BS_SIZE)))
-#define BS_CLEAR(v,x) ((v)[(x) / BS_SIZE] &= ~(1 << ((x) % BS_SIZE)))
-#define BS_ISSET(v,x) ((v)[(x) / BS_SIZE] &   (1 << ((x) % BS_SIZE)))
-
-#ifndef NULL
-#define NULL (0L)
+#if defined minor
+#undef minor
 #endif
 
-#ifndef MIN
-inline lsint MIN(lsint x, lsint y)
+namespace id3
 {
-  return x < y ? x : y;
-}
-#endif
+  /// Shorthand type definition for unsigned char
+  typedef       unsigned char   uchar;
 
-#ifndef MAX
-inline lsint MAX(lsint x, lsint y)
-{
-  return x > y ? x : y;
-}
-#endif
+  /// typedefs for different types of strings
+  typedef std::basic_string<char>     string;
+  typedef std::basic_string<wchar_t> wstring;
+  typedef std::basic_string<uchar>   bstring;
 
+  /// Used for masking the n least significant bits
+#define MASK(bits) ((1 << (bits)) - 1)
+#define MASK1 MASK(1)
+#define MASK2 MASK(2)
+#define MASK3 MASK(3)
+#define MASK4 MASK(4)
+#define MASK5 MASK(5)
+#define MASK6 MASK(6)
+#define MASK7 MASK(7)
+#define MASK8 MASK(8)
+};
+  
 #endif
 
 // $Log$
+// Revision 1.4  2000/01/04 15:42:22  eldamitri
+// For compilation with gcc 2.95.2 and better compatibility with ANSI/ISO
+// standard C++, updated, rearranged, and removed (where necessary)
+// #include directives.
+//
 // Revision 1.3  1999/12/17 16:05:02  scott
 // Updated opening comment block.
 //

@@ -1,75 +1,85 @@
+// id3lib: a C++ library for creating and manipulating id3v1/v2 tags
 // $Id$
-//  
-// This program is free software; you can distribute it and/or modify it under 
-// the terms discussed in the COPYING file, which should have been included  
-// with this distribution.                                                  
-//                                                                           
-// This program is distributed in the hope that it will be useful, but WITHOUT 
-// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
-// FITNESS FOR A PARTICULAR PURPOSE.  See the COPYING file for more details. 
-//                                                                           
-// The id3lib authors encourage improvements and optimisations to be sent to   
-// the id3lib coordinator.  Please see the README file for details on where  
-// to send such submissions. 
+
+// This library is free software; you can redistribute it and/or modify it
+// under the terms of the GNU Library General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or (at your
+// option) any later version.
+//
+// This library is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+// FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public
+// License for more details.
+//
+// You should have received a copy of the GNU Library General Public License
+// along with this library; if not, write to the Free Software Foundation,
+// Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+// The id3lib authors encourage improvements and optimisations to be sent to
+// the id3lib coordinator.  Please see the README file for details on where to
+// send such submissions.  See the AUTHORS file for a list of people who have
+// contributed to id3lib.  See the ChangeLog file for a list of changes to
+// id3lib.  These files are distributed with id3lib at
+// http://download.sourceforge.net/id3lib/
 
 #ifndef ID3LIB_HEADER_H
 #define ID3LIB_HEADER_H
 
+#include "enums.h"
 #include "types.h"
 
-#define ID3v2_VERSION  (3)
-#define ID3v2_REVISION (0)
-
-struct ID3_HeaderInfo
+namespace id3
 {
-  uchar ucVersion;
-  uchar ucRevision;
-  uchar ucFrameIDBytes;
-  uchar ucFrameSizeBytes;
-  uchar ucFrameFlagsBytes;
-  bool  bHasExtHeader;
-  luint ulExtHeaderBytes;
-  bool  bSetExpBit;
-};
+  class header
+  {
+  public:
+    header(spec::version = spec::CURRENT);
+    
+    header &operator=(const header&);
+    
+    virtual bstring render() const = 0;
+    virtual size_t  parse(const bstring&) = 0;
+    
+    virtual size_t  size() const = 0;
+    /*   */ size_t  data_size() const
+    { return __data_size; }
+    /*   */ bool    changed() const
+    { return __changed; }
+    virtual spec::version version() const
+    { return __version; }
+    /*   */ uint16  flags() const
+    { return __flags; }
+    /*   */ bool    test(uint16 flag) const
+    { return (this->flags() & flag) == flag; }
+    
+    virtual void    clear();
+    /*   */ bool    data_size(size_t);
+    virtual bool    version(spec::version);
+    /*   */ bool    flags(uint16);
+    /*   */ bool    add(uint16 f)
+    { return this->flags(this->flags() | f); }
+    /*   */ bool    remove(uint16 f)
+    { return this->flags(this->flags() & ~f); }
+    /*   */ bool    set(uint16 f, bool b)
+    { if (b) { return this->add(f); } return this->remove(f); }
 
-extern ID3_HeaderInfo ID3_VersionInfo[];
-
-class ID3_Header
-{
-public:
-  ID3_Header(void);
-  
-  virtual void   SetVersion(uchar ver, uchar rev);
-  virtual uchar  GetVersion() const;
-  virtual uchar  GetRevision() const;
-  virtual void   SetDataSize(size_t newSize);
-  virtual size_t GetDataSize() const;
-  virtual void   SetFlags(uint16 newFlags);
-  virtual void   AddFlags(uint16 newFlags);
-  virtual void   RemoveFlags(uint16 newFlags);
-  virtual uint16 GetFlags() const;
-  virtual void   Clear();
-  virtual size_t Size(void) = 0;
-  virtual size_t Render(uchar *buffer) = 0;
-
-  ID3_Header &operator=( const ID3_Header & );
-
-protected:
-  virtual void   Copy(const ID3_Header &);
-
-  uchar  __ucVersion;        // which version?
-  uchar  __ucRevision;       // which revision?
-  size_t __ulDataSize;       // how big is the data?
-  uint16 __ulFlags;          // header flags
-  ID3_HeaderInfo *__pInfo;   // the info about this version of the headers
+  protected:
+    spec::version   __version;     // version information
+    size_t          __data_size;    // the size of the data in bytes
+    uint16          __flags;        // header flags
+    bool            __changed;      // if the header has changed since it
+                                    // was constructed or rendered
+  };
 }
-;
-
-ID3_HeaderInfo *ID3_LookupHeaderInfo(uchar ver, uchar rev);
-
 #endif
 
 // $Log$
+// Revision 1.5  1999/12/27 06:11:33  scott
+// (ID3_VERSION, ID3_REVISION): Renamed to ID3v2_*
+// (class ID3_Header): Added declarations for GetVersion, GetRevision,
+// AddFlags, SetFlags, Clear, Copy, and operator= methods.  Changed
+// return type for Size and Render from luint to size_t.
+//
 // Revision 1.4  1999/12/26 16:40:13  scott
 // (class ID3_Header): Minor cleanup to interface.
 //

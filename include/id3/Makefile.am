@@ -11,26 +11,35 @@
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 the_headers =                   \
-  dll.h                         \
-  error.h                       \
-  externals.h                   \
+  common_ops.h                  \
+  constants.h                   \
+  conversion_ops.h              \
+  debug.h                       \
+  details.h                     \
+  enums.h                       \
   field.h                       \
   frame.h                       \
-  globals.h                     \
+  frame_header.h                \
   header.h                      \
-  header_frame.h                \
-  header_tag.h                  \
-  int28.h                       \
-  misc_support.h                \
+  lib.h                         \
   sized_types.h                 \
   tag.h                         \
+  tag_find.h                    \
+  tag_header.h                  \
   types.h                       \
-  version.h
+  uint28.h                      
+
+# EXTRA_DIST =
+
+
 
 id3includedir      = $(includedir)/id3
 id3include_HEADERS = $(the_headers)
 
 # $Log$
+# Revision 1.2  1999/12/01 19:11:30  scott
+# (EXTRA_DIST): Removed.  No extra files to distribute
+#
 # Revision 1.1  1999/12/01 18:09:37  scott
 # Initial revision.
 #

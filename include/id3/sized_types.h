@@ -1,23 +1,36 @@
+// id3lib: a C++ library for creating and manipulating id3v1/v2 tags
 // $Id$
-//  
-// This program is free software; you can distribute it and/or modify it under 
-// the terms discussed in the COPYING file, which should have been included  
-// with this distribution.                                                  
-//                                                                           
-// This program is distributed in the hope that it will be useful, but WITHOUT 
-// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
-// FITNESS FOR A PARTICULAR PURPOSE.  See the COPYING file for more details. 
-//                                                                           
-// The id3lib authors encourage improvements and optimisations to be sent to   
-// the id3lib coordinator.  Please see the README file for details on where  
-// to send such submissions. 
+
+// This library is free software; you can redistribute it and/or modify it
+// under the terms of the GNU Library General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or (at your
+// option) any later version.
+//
+// This library is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+// FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public
+// License for more details.
+//
+// You should have received a copy of the GNU Library General Public License
+// along with this library; if not, write to the Free Software Foundation,
+// Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+// The id3lib authors encourage improvements and optimisations to be sent to
+// the id3lib coordinator.  Please see the README file for details on where to
+// send such submissions.  See the AUTHORS file for a list of people who have
+// contributed to id3lib.  See the ChangeLog file for a list of changes to
+// id3lib.  These files are distributed with id3lib at
+// http://download.sourceforge.net/id3lib/
+
+#ifndef SIZED_TYPES_H
+#define SIZED_TYPES_H
 
 /* 
  * This file defines size-specific typedefs based on the macros defined in
  * limits.h
  */
 
-#include <limits.h>
+#include <climits>
 
 /* define our datatypes */
 
@@ -65,3 +78,7 @@ typedef short            int32;
 #else
 #error This machine has no 32-bit type
 #endif /* UINT_MAX == 0xfffffffful */
+
+#endif /* SIZED_TYPES_H */
+
+// $Log$
