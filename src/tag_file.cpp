@@ -345,6 +345,10 @@ luint ID3_Tag::Strip(const luint ulTagFlag)
 
 
 // $Log$
+// Revision 1.17  2000/04/17 02:31:35  eldamitri
+// Updated parameters of certain methods with const modifier to match
+// declaration.
+//
 // Revision 1.16  2000/04/08 04:41:38  eldamitri
 // Changed new ANSI-standard C++ include headers to old-style headers.
 // Fixed minor problems for windows.
