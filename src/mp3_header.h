@@ -33,11 +33,11 @@
 class Mp3Info
 {
 public:
-  Mp3Info();
-  ~Mp3Info();
+  Mp3Info() { _mp3_header_output = new Mp3_Headerinfo; };
+  ~Mp3Info() { this->Clean(); };
   void Clean();
     
-  Mp3_Headerinfo* GetMp3HeaderInfo();
+  const Mp3_Headerinfo* GetMp3HeaderInfo() const { return _mp3_header_output; };
   bool Parse(ID3_Reader&, size_t mp3size);
 
   Mpeg_Layers Layer() const { return _mp3_header_output->layer; };
