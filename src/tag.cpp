@@ -108,7 +108,7 @@ using namespace dami;
  **
  ** \code
  **   // use an std::auto_ptr here to handle object cleanup automatically
- **   ID3_Tag::Iterator* iter = myTag.createIterator();
+ **   ID3_Tag::Iterator* iter = myTag.CreateIterator();
  **   ID3_Frame* myFrame = NULL;
  **   while (NULL != (myFrame = iter->GetNext()))
  **   {
@@ -156,7 +156,7 @@ using namespace dami;
  **   // use an std::auto_ptr here to handle object cleanup automatically
  **   ID3_Frame::Iterator* iter = myFrame->CreateIterator();
  **   ID3_Field* myField = NULL;
- **   while (NULL != (myField = iter->GetNext())
+ **   while (NULL != (myField = iter->GetNext()))
  **   {
  **     // do something with myField
  **   }
