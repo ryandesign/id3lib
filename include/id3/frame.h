@@ -118,6 +118,7 @@ private:
   char        __sEncryptionID[256]; // encryption method used with this frame
   char        __sGroupingID[256];   // the group to which this frame belongs
   bool        __bCompression;       // should we try to compress?
+  bool        __bReadOnly;          // Is the tag read only?
   bool        __bHasChanged;        // frame changed since last parse/render?
   bitset      __auiFieldBits;       // which fields are present?
   ID3_FrameID __FrameID;            // what frame are we?
@@ -138,6 +139,9 @@ protected:
 ;
 
 // $Log$
+// Revision 1.4  1999/12/17 16:05:02  scott
+// Updated opening comment block.
+//
 // Revision 1.3  1999/12/09 02:45:46  scott
 // (class ID3_Frame): Added operator= method declaration.
 //
