@@ -1,5 +1,9 @@
 // $Id$
 
+#if defined(HAVE_CONFIG_H)
+# include "config.h"
+#endif
+
 #include <iostream.h>
 #include <id3/tag.h>
 #include <id3/misc_support.h>

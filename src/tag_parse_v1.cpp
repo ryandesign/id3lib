@@ -28,7 +28,7 @@
 #include <config.h>
 #endif
 
-#include "debug.h"
+
 #include "tag_impl.h"
 #include "helpers.h"
 #include "utils.h"

@@ -13,10 +13,8 @@
 //  terms.
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#  include <config.h>
 #endif
-
-#include <id3/debug.h>
 
 #include <iostream.h>
 #include <id3/tag.h>

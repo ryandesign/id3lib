@@ -46,7 +46,7 @@ size_t ID3_FieldImpl::Set(const uchar* data, size_t len)
   if (this->GetType() == ID3FTY_BINARY)
   {
     BString str(data, len);
-    size = min(len, this->SetBinary(str));
+    size = dami::min(len, this->SetBinary(str));
   }
   return size;
 }
@@ -70,7 +70,7 @@ size_t ID3_FieldImpl::SetBinary(BString data) //< data to assign to this field.
     }
     else
     {
-      _binary.assign(data, 0, min(size, fixed));
+      _binary.assign(data, 0, dami::min(size, fixed));
       if (size < fixed)
       {
         _binary.append(fixed - size, '\0');
@@ -121,7 +121,7 @@ size_t ID3_FieldImpl::Get(uchar *buffer,    //< Destination of retrieved string
   size_t bytes = 0;
   if (this->GetType() == ID3FTY_BINARY)
   {
-    bytes = min(max_bytes, this->Size());
+    bytes = dami::min(max_bytes, this->Size());
     if (NULL != buffer && bytes > 0)
     {
       ::memcpy(buffer, _binary.data(), bytes);

@@ -28,7 +28,7 @@
 #include <config.h> // Must include before zlib.h to compile on WinCE
 #endif
 
-#include "debug.h"
+
 
 #include <zlib.h>
 #include <string.h>
