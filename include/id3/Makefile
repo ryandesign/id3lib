@@ -85,9 +85,9 @@ NM = /usr/bin/nm -B
 OBJDUMP = @OBJDUMP@
 PACKAGE = id3lib
 RANLIB = ranlib
-VERSION = 3.6.0
+VERSION = 3.6.1
 lt_age = 6
-lt_rev = 0
+lt_rev = 1
 lt_ver = 9
 
 the_headers =    dll.h                           error.h                         externals.h                     field.h                         frame.h                         globals.h                       header.h                        header_frame.h                  header_tag.h                    int28.h                         misc_support.h                  sized_types.h                   tag.h                           types.h                         version.h
@@ -95,8 +95,6 @@ the_headers =    dll.h                           error.h                        
 
 id3includedir = $(includedir)/id3
 id3include_HEADERS = $(the_headers)
-
-EXTRA_DIST = ChangeLog
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../../config.h
 CONFIG_CLEAN_FILES = 
@@ -249,6 +247,9 @@ maintainer-clean-generic clean mostlyclean distclean maintainer-clean
 
 
 # $Log$
+# Revision 1.1  1999/12/01 18:09:37  scott
+# Initial revision.
+#
 # Revision 1.6  1999/11/30 20:08:16  scott
 # (the_headers): Added sized_headers.h
 # (the_sources): Added version.cpp
