@@ -109,7 +109,7 @@ typedef uint16                flags_t;
 #  define ID3_STRUCT(S) typedef struct _ ## S S; struct _ ## S
 #endif
 
-/**
+/** \enum ID3_TextEnc
  ** Enumeration of the types of text encodings: ascii or unicode
  **/
 ID3_ENUM(ID3_TextEnc)
@@ -288,31 +288,6 @@ ID3_ENUM(ID3_V1Lengths)
   ID3_V1_LEN_YEAR    =   4,
   ID3_V1_LEN_COMMENT =  30,
   ID3_V1_LEN_GENRE   =   1
-};
-
-/** A structure for storing the contents of an id3v1 tag.
- **
- ** @author Dirk Mahoney (dirk@id3.org)
- ** @author Scott Thomas Haug (scott@id3.org)
- ** @version $Id$
- ** @see ID3_Tag
- **/
-ID3_STRUCT(ID3V1_Tag)
-{
-  /** String for storing the "TAG" identifier. */
-  char sID     [1 + ID3_V1_LEN_ID];
-  /** String for storing the title */
-  char sTitle  [1 + ID3_V1_LEN_TITLE];
-  /** String for storing the artist */
-  char sArtist [1 + ID3_V1_LEN_ARTIST];
-  /** String for storing the album */
-  char sAlbum  [1 + ID3_V1_LEN_ALBUM];
-  /** String for storing the year */
-  char sYear   [1 + ID3_V1_LEN_YEAR];
-  /** String for storing the comment */
-  char sComment[1 + ID3_V1_LEN_COMMENT];
-  /** Byte for storing the genre */
-  uchar ucGenre;
 };
 
 ID3_ENUM(ID3_FieldFlags)

@@ -77,25 +77,11 @@ public:
   size_t     GetFileSize() const;
   const char* GetFileName() const;
   
-  /// Finds frame with given frame id
   ID3_Frame* Find(ID3_FrameID id) const;
-  
-  /// Finds frame with given frame id, fld id, and integer data
   ID3_Frame* Find(ID3_FrameID id, ID3_FieldID fld, uint32 data) const;
-  
-  /// Finds frame with given frame id, fld id, and ascii data
   ID3_Frame* Find(ID3_FrameID id, ID3_FieldID fld, const char*) const;
-  
-  /// Finds frame with given frame id, fld id, and unicode data
   ID3_Frame* Find(ID3_FrameID id, ID3_FieldID fld, const unicode_t*) const;
   
-  /** Returns the number of frames present in the tag object.
-   ** 
-   ** This includes only those frames that id3lib recognises.  This is used as
-   ** the upper bound on calls to the GetFrame() and operator[]() methods.
-   ** 
-   ** \return The number of frames present in the tag object.
-   **/
   size_t     NumFrames() const;
   ID3_Frame* GetFrameNum(index_t) const;
 
@@ -117,12 +103,9 @@ public:
   bool       HasLyrics() const;
   bool       HasV2Tag()  const;
   bool       HasV1Tag()  const;
-  //@{
-  /// Copies
-  ID3_Tag& operator<<(const ID3_Frame &);
-  /// Attaches a pointer to a frame
-  ID3_Tag& operator<<(const ID3_Frame *);
-  //@}
+
+  ID3_Tag&   operator<<(const ID3_Frame &);
+  ID3_Tag&   operator<<(const ID3_Frame *);
 };
 
 // deprecated!

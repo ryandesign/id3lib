@@ -42,7 +42,6 @@ public:
   ID3_Frame(ID3_FrameID id = ID3FID_NOFRAME);
   ID3_Frame(const ID3_Frame&);
 
-  /// Destructor.
   virtual ~ID3_Frame();
   
   void        Clear();
@@ -69,20 +68,7 @@ public:
   bool        SetSpec(ID3_V2Spec);
   ID3_V2Spec  GetSpec() const;
 
-  /** Sets the compression flag within the frame.  When the compression flag is
-   ** is set, compression will be attempted.  However, the frame might not
-   ** actually be compressed after it is rendered if the "compressed" data is
-   ** no smaller than the "uncompressed" data.
-   **/
   bool        SetCompression(bool b);
-  /** Returns whether or not the compression flag is set.  After parsing a tag,
-   ** this will indicate whether or not the frame was compressed.  After
-   ** rendering a tag, however, it does not actually indicate if the frame is
-   ** compressed rendering.  It only indicates whether or not compression was
-   ** attempted.  A frame will not be compressed, even whent the compression
-   ** flag is set, if the "compressed" data is no smaller than the
-   ** "uncompressed" data.
-   **/
   bool        GetCompression() const;
   size_t      GetDataSize() const;
 

@@ -831,7 +831,7 @@ static  ID3_FrameDef ID3_FrameDefs[] =
   {ID3FID_NOFRAME}
 };
   
-/** \class ID3_Field
+/** \class ID3_Field field.h id3/field.h
  ** \brief The representative class of an ID3v2 field.
  ** 
  ** As a general rule, you need never create an object of this type.  id3lib
