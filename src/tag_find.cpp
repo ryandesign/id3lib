@@ -37,11 +37,13 @@ ID3_Elem *ID3_Tag::Find(ID3_Frame *frame) const
   ID3_Elem *elem = NULL;
   
   for (ID3_Elem *cur = __pFrameList; NULL != cur; cur = cur->pNext)
+  {
     if (cur->pFrame == frame)
     {
       elem = cur;
       break;
     }
+  }
   
   return elem;
 }
@@ -52,7 +54,9 @@ ID3_Frame *ID3_Tag::Find(ID3_FrameID id)
   
   // reset the cursor if it isn't set
   if (NULL == __pFindCursor)
+  {
     __pFindCursor = __pFrameList;
+  }
 
   for (int iCount = 0; iCount < 2 && frame == NULL; iCount++)
   {
@@ -209,6 +213,9 @@ ID3_Frame *ID3_Tag::operator[](luint num) const
 }
 
 // $Log$
+// Revision 1.2  2000/04/18 22:13:15  eldamitri
+// Moved tag_find.cpp from src/id3/ to src/
+//
 // Revision 1.13  2000/04/10 16:58:05  eldamitri
 // Added inclusion of string.h
 //
