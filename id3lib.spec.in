@@ -75,12 +75,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-, root, root)
-%doc AUTHORS COPYING ChangeLog NEWS README THANKS TODO
+%doc AUTHORS COPYING ChangeLog HISTORY NEWS README THANKS TODO
 %{prefix}/lib/*.so.*
 
 %files devel
 %defattr(-, root, root)
-%doc AUTHORS COPYING ChangeLog NEWS README THANKS TODO
+%doc AUTHORS COPYING ChangeLog HISTORY NEWS README THANKS TODO
+%{prefix}/include/id3*.h
 %{prefix}/include/id3
 %{prefix}/lib/*.la
 %{prefix}/lib/*.a
@@ -88,15 +89,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %files examples
 %defattr(-, root, root)
-%doc AUTHORS COPYING ChangeLog NEWS README THANKS TODO
+%doc AUTHORS COPYING ChangeLog HISTORY NEWS README THANKS TODO
 %{prefix}/bin/id3*
 
 %files doc
 %defattr(-, root, root)
-%doc AUTHORS COPYING ChangeLog NEWS README THANKS TODO
+%doc AUTHORS COPYING ChangeLog HISTORY NEWS README THANKS TODO
 %doc doc/*.html doc/*.css doc/*.gif doc/*.jpg doc/*.php doc/*.ico doc/*.png 
-%doc doc/*.ps doc/html/*.html doc/html/*.gif doc/html/*.css
-%doc examples/*.cpp examples/*.h examples/*.tag examples/*.mp3
+%doc doc/html examples
 
 ##########################################################################
 %changelog
