@@ -76,6 +76,14 @@ ID3_C_VAR const int          ID3LIB_BINARY_AGE;
 #define ID3_TAGIDSIZE           (3)
 #define ID3_TAGHEADERSIZE       (10)
 
+/** String used for the description field of a comment tag converted from an
+ ** id3v1 tag to an id3v2 tag
+ **
+ ** \sa #ID3V1_Tag
+ **/
+#define STR_V1_COMMENT_DESC "ID3v1 Comment"
+
+
 typedef       unsigned char   uchar;
 typedef short   signed int    ssint;
 typedef short unsigned int    suint;
