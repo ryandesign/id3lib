@@ -35,7 +35,7 @@ const char *ID3_Name()
   return PACKAGE;
 }
 
-const char *ID3_Release()
+const char *ID3_Version()
 {
   return VERSION;
 }
@@ -45,22 +45,26 @@ const char *ID3_FullName()
   return ID3LIB_FULLNAME;
 }
 
-unsigned short ID3_Version()
+unsigned short ID3_Major()
 {
-  return ID3LIB_VERSION;
+  return ID3LIB_MAJOR_VERSION;
 }
 
-unsigned short ID3_Revision()
+unsigned short ID3_Minor()
 {
-  return ID3LIB_REVISION;
+  return ID3LIB_MINOR_VERSION;
 }
 
 unsigned short ID3_Patch()
 {
-  return ID3LIB_PATCH;
+  return ID3LIB_PATCH_VERSION;
 }
 
 // $Log$
+// Revision 1.4  2000/04/05 05:21:15  eldamitri
+// Updated initial comment information to reflect license, copyright
+// change.
+//
 // Revision 1.3  2000/01/04 15:42:49  eldamitri
 // For compilation with gcc 2.95.2 and better compatibility with ANSI/ISO
 // standard C++, updated, rearranged, and removed (where necessary)

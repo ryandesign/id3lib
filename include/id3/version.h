@@ -36,20 +36,24 @@
 */
 /// Returns the name of the library (i.e., "id3lib")
 const char *ID3_Name(void);
-/// Returns the library release (i.e., "3.6.0")
-const char *ID3_Release(void);
-/// Returns the full name of the library (i.e., "id3lib-3.6.0")
+/// Returns the library release (i.e., "3.0.6")
+const char *ID3_Version(void);
+/// Returns the full name of the library (i.e., "id3lib-3.0.6")
 const char *ID3_FullName(void);
 /// Returns the library version (i.e., 3)
-unsigned short ID3_Version(void);
-/// Returns the library revision (i.e., 6)
-unsigned short ID3_Revision(void);
-/// Returns the library patch (i.e., 0)
+unsigned short ID3_Major(void);
+/// Returns the library revision (i.e., 0)
+unsigned short ID3_Minor(void);
+/// Returns the library patch (i.e., 6)
 unsigned short ID3_Patch(void);
 
 #endif
 
 // $Log$
+// Revision 1.3  2000/04/05 05:20:52  eldamitri
+// Updated initial comment information to reflect license, copyright
+// change.
+//
 // Revision 1.2  1999/12/17 16:05:02  scott
 // Updated opening comment block.
 //
