@@ -67,8 +67,6 @@ AC_HAVE_FUNCS(
 )
 
 dnl Checks for typedefs, structures, and compiler characteristics.
-AC_C_CONST
-AC_C_INLINE
 AC_SIZE_T
 
 dnl
@@ -130,6 +128,10 @@ AC_OUTPUT(                      \
 )
 
 # $Log$
+# Revision 1.13  1999/12/27 06:15:35  scott
+# Changed release information from 3.6.2 to 3.0.6, to prepare for
+# future MusicMatch release to happen Real Soon Now.
+#
 # Revision 1.12  1999/12/13 05:26:20  scott
 # (AC_HAVE_HEADERS): Added check for sys/param.h.
 #
