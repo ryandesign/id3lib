@@ -115,7 +115,7 @@ luint ID3_Tag::Render(uchar *buffer)
 
       UnSync(tempz, newTagSize, &buffer[header.Size()],
              bytesUsed - header.Size());
-      header.SetFlags(ID3HF_UNSYNC);
+      header.SetUnsync(true);
 
       memcpy(&buffer[header.Size()], tempz, newTagSize);
       bytesUsed = newTagSize + header.Size();
