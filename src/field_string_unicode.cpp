@@ -220,7 +220,7 @@ size_t ID3_FieldImpl::Add(const unicode_t *str)
  **   
  ** \code
  **   unicode_t myBuffer[1024];
- **   size_t charsUsed = myFrame.Field(ID3FN_UNICODE).Get(buffer, 1024);
+ **   size_t charsUsed = myFrame.GetField(ID3FN_UNICODE)->Get(buffer, 1024);
  ** \endcode 
  **   
  ** \param buffer   Where the field's data is copied to
@@ -307,7 +307,7 @@ size_t ID3_FieldImpl::Get(unicode_t *buffer, size_t maxLength, index_t itemNum) 
 /** Returns the number of items in a text list.
  ** 
  ** \code
- **   size_t numItems = myFrame.Field(ID3FN_UNICODE).GetNumItems();
+ **   size_t numItems = myFrame.GetField(ID3FN_UNICODE)->GetNumItems();
  ** \endcode
  ** 
  ** \return The number of items in a text list.
