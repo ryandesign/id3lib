@@ -19,6 +19,7 @@
 #include "header.h"
 
 #define ID3_TAGID               "ID3"
+#define ID3_TAGIDSIZE           (3)
 #define ID3_TAGHEADERSIZE       (10)
 
 #define ID3HF_UNSYNC            (1 << 7)
@@ -28,16 +29,18 @@
 class ID3_TagHeader : public ID3_Header
 {
 public:
-  virtual luint Size(void);
-  virtual luint Render(uchar *buffer);
+  virtual size_t Size(void);
+  virtual size_t Render(uchar *buffer);
 };
 
-CDLLEXPORT
 lsint ID3_IsTagHeader(uchar header[ID3_TAGHEADERSIZE]);
 
 #endif
 
 // $Log$
+// Revision 1.3  1999/12/17 16:05:02  scott
+// Updated opening comment block.
+//
 // Revision 1.2  1999/12/02 22:45:28  scott
 // Changed all of the #include <id3/*> to #include "*" to help ensure that
 // the sources are searched for in the right places.
