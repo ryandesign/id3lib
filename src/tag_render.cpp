@@ -50,7 +50,8 @@ size_t RenderV1(const ID3_Tag& tag, uchar *buffer)
   // Sanity check our buffer
   if (NULL == buffer)
   {
-    ID3_THROW(ID3E_NoBuffer);
+    return 0;
+    //ID3_THROW(ID3E_NoBuffer);
   }
 
   // pCur is used to mark where to next write in the buffer
@@ -207,7 +208,8 @@ size_t ID3_Tag::RenderV2(uchar *buffer) const
       uchar* tempz = new uchar[newTagSize];
       if (NULL == tempz)
       {
-        ID3_THROW(ID3E_NoMemory);
+        return 0;
+        //ID3_THROW(ID3E_NoMemory);
       }
 
       ID3_UnSync(tempz, newTagSize, &buffer[hdr_size],
