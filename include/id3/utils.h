@@ -58,6 +58,12 @@ namespace dami
   }
 
   template<typename T>
+  const T& mid(const T& lo, const T& mid, const T& hi)
+  {
+    return max(lo, min(mid, hi));
+  }
+
+  template<typename T>
   T abs(const T& a)
   {
     return (a < T(0)) ? -a : a;
