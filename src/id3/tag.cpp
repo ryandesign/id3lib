@@ -65,12 +65,12 @@ void ID3_Tag::SetupTag(char *fileInfo)
   __bPadding        = true;
   __bExtendedHeader = true;
   __bFileWritable   = false;
-  __bHasV1Tag       = false;
   __ulFileSize      = 0;
   __ulOldTagSize    = 0;
   __ulExtraBytes    = 0;
+  __bHasV1Tag       = false;
 
- __sFileName        = NULL;
+  __sFileName[0]     = '\0';
   
   Clear();
   
@@ -86,10 +86,6 @@ void ID3_Tag::SetupTag(char *fileInfo)
 ID3_Tag::~ID3_Tag(void)
 {
   CloseFile();
-  if (NULL != __sFileName)
-  {
-    delete [] __sFileName;
-  }
     
   Clear();
   
@@ -389,6 +385,10 @@ ID3_Tag::operator=( const ID3_Tag &rTag )
 }
 
 // $Log$
+// Revision 1.9  1999/12/09 03:32:28  scott
+// (ID3_Tag): Added copy constructor implementation.
+// (operator=): Added implementation.
+//
 // Revision 1.8  1999/12/01 18:00:59  scott
 // Changed all of the #include <id3/*> to #include "*" to help ensure that
 // the sources are searched for in the right places (and to make compiling under
