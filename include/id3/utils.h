@@ -44,6 +44,11 @@ namespace id3
   int    ucscmp(const unicode_t *s1, const unicode_t *s2);
   int    ucsncmp(const unicode_t *s1, const unicode_t *s2, size_t len);
 
+  // these can be utility functions
+  size_t     ID3_GetUnSyncSize(uchar *, size_t);
+  void       ID3_UnSync(uchar *, size_t, const uchar *, size_t);
+  size_t     ID3_ReSync(uchar *, size_t);
+
 #if defined ID3_UNDEFINED
 }
 #endif  /* ID3_UNDEFINED */
