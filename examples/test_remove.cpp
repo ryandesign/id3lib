@@ -77,6 +77,12 @@ int main( int argc, char *argv[])
       frame.Field(ID3FN_DESCRIPTION).Set("");
       tag.AddFrame(frame);
 
+      frame.SetID(ID3FID_COMMENT);
+      frame.Field(ID3FN_LANGUAGE).Set("eng");
+      frame.Field(ID3FN_TEXT).Set("ID3v1 comment text?");
+      frame.Field(ID3FN_DESCRIPTION).Set(STR_V1_COMMENT_DESC);
+      tag.AddFrame(frame);
+
       tag.SetPadding(false);
       tag.Update(ID3TT_ID3V2);
 
