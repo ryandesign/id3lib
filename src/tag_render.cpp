@@ -168,7 +168,7 @@ luint ID3_Tag::Render(uchar *buffer)
    ** @return The (overestimated) number of bytes required to store a binary
    **         version of a tag
    **/
-luint ID3_Tag::Size(void) const
+luint ID3_Tag::Size() const
 {
   luint bytesUsed = 0;
   ID3_Elem *cur = __frames;
@@ -301,7 +301,7 @@ luint ID3_Tag::RenderV1(char *buffer)
   return ID3_V1_LEN;
 }
 
-void ID3_Tag::RenderV1ToHandle(void)
+void ID3_Tag::RenderV1ToHandle()
 {
   char sTag[ID3_V1_LEN];
   char sID[ID3_V1_LEN_ID];
@@ -348,7 +348,7 @@ void ID3_Tag::RenderV1ToHandle(void)
   __has_v1_tag = true;
 }
 
-void ID3_Tag::RenderV2ToHandle(void)
+void ID3_Tag::RenderV2ToHandle()
 {
   uchar *buffer;
   luint size = Size();
