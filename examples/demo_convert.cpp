@@ -147,7 +147,7 @@ int main( unsigned int argc, char *argv[])
         cout << argv[nIndex] << ": ";
 
         myTag.Clear();
-        myTag.Link(argv[nIndex]);
+        myTag.Link(argv[nIndex], ID3TT_ALL);
         myTag.SetPadding(bPadding);
 
         cout << "attempting ";

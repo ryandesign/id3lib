@@ -371,7 +371,7 @@ int main( unsigned int argc, char *argv[])
       {
         ID3_Tag myTag;
 
-        myTag.Link(argv[nIndex]);
+        myTag.Link(argv[nIndex], ID3TT_ALL);
         cout << endl << "*** Tag information for " << argv[nIndex] << endl;
         if (!bTestAssignment)
         {
