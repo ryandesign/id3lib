@@ -128,7 +128,7 @@ public:
   luint       Size();
   luint       Render(uchar *buffer);
   bool        Contains(ID3_FieldID fld)
-  { return BS_ISSET(__field_bitset, fld); }
+  { return BS_ISSET(__field_bitset, fld) > 0; }
   bool        SetSpec(ID3_V2Spec);
 
 protected:
