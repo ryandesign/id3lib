@@ -51,6 +51,7 @@ public:
   
   /* */ size_t        Size() const;
   /* */ size_t        Parse(const uchar*, size_t);
+  /* */ void          Parse(ID3_Reader&);
   /* */ size_t        Render(uchar*) const;
   /* */ bool          SetFrameID(ID3_FrameID id);
   /* */ ID3_FrameID   GetFrameID() const;

@@ -58,6 +58,7 @@ public:
   ID3_Frame  &operator=(const ID3_Frame &);
   bool        HasChanged() const;
   size_t      Parse(const uchar *buffer, size_t size);
+  void        Parse(ID3_Reader&);
   size_t      Size();
   size_t      Render(uchar *buffer) const;
   bool        Contains(ID3_FieldID fld) const
