@@ -165,6 +165,9 @@ size_t ID3_Tag::Parse(const uchar header[ID3_TagHeader::SIZE],
   // set the flag which says that the tag hasn't changed
   __changed = false;
 
+  // say we have v2 tags
+  __file_tags.add(ID3TT_ID3V2);
+    
   delete [] unsynced_data;
   
   return hdr_size + data_size;

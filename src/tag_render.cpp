@@ -501,6 +501,9 @@ void ID3_Tag::RenderV2ToHandle()
     __starting_bytes = size;
 #endif
   }
+
+  // make sure that the v2 flag is on
+  __file_tags.add(ID3TT_ID3V2);
         
   delete[] buffer;
     

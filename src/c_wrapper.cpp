@@ -138,23 +138,6 @@ extern "C"
     }
   }
   
-  
-  ID3_C_EXPORT 
-  void ID3Tag_SetCompression(ID3Tag *tag, bool comp) 
-  { 
-    try 
-    { 
-      if (tag) 
-      { 
-        ((ID3_Tag *) tag)->SetCompression(comp); 
-      } 
-    } 
-    catch (...) 
-    { 
-    } 
-  } 
-
-
   ID3_C_EXPORT
   void ID3Tag_SetPadding(ID3Tag *tag, bool pad)
   {

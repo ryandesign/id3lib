@@ -277,11 +277,16 @@ void ID3_Tag::ParseLyrics3()
       }
 
       delete[] text;
+
+      // if we got to here we must have some lyrics
+	  __file_tags.add(ID3TT_LYRICS);
     }
   
     else if (memcmp(&buffer[6], "LYRICS200", 9) == 0)
     {
       // we have a Lyrics3 v2.00 tag
+	  __file_tags.add(ID3TT_LYRICS);
+
       luint lyricsSize;
 
       ID3_Frame *pLyrFrame = NULL;
