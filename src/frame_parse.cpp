@@ -81,6 +81,7 @@ bool id3::v2::parseFields(ID3_Reader& rdr, ID3_FrameImpl& frame)
       continue; 
     }
     
+    ID3D_NOTICE( "ID3_FrameImpl::Parse(): setting enc to " << enc );
     fp->SetEncoding(enc);
     ID3_Reader::pos_type beg = rdr.getCur();
     et.setExitPos(beg);
