@@ -48,12 +48,14 @@ ID3_HeaderInfo *ID3_LookupHeaderInfo(uchar ver, uchar rev)
 {
   ID3_HeaderInfo *info = NULL;
   for (size_t i = 0; ID3_VersionInfo[i].ucVersion != 0; i++)
+  {
     if (ID3_VersionInfo[i].ucVersion  == ver &&
         ID3_VersionInfo[i].ucRevision == rev)
     {
       info = &ID3_VersionInfo[i];
       break;
     }
+  }
     
   return info;
 }
@@ -134,6 +136,9 @@ ID3_Header &ID3_Header::operator=( const ID3_Header& hdr )
 }
 
 // $Log$
+// Revision 1.2  2000/04/18 22:11:53  eldamitri
+// Moved header.cpp from src/id3/ to src/
+//
 // Revision 1.14  2000/04/10 16:57:18  eldamitri
 // (Copy): removed.
 // (operator=): Updated implementation so it isn't reliant on Copy.
