@@ -155,7 +155,6 @@ protected:
   bool        _ClearFields();
   void        _InitFields();
   void        _InitFieldBits();
-  void        _UpdateStringTypes();
   void        _UpdateFieldDeps();
   lsint       _FindField(ID3_FieldID name) const;
 
