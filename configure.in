@@ -212,9 +212,14 @@ AC_OUTPUT(                      \
   zlib/lib/Makefile             \
   zlib/prj/Makefile             \
   zlib/src/Makefile             \
+  id3com/Makefile               \
+  libprj/Makefile               \
 )
 
 # $Log$
+# Revision 1.18  2000/04/09 14:07:53  eldamitri
+# Added check for mkstemp.
+#
 # Revision 1.17  2000/04/08 04:49:54  eldamitri
 # Updated to version 3.7.0, per Kamran's (MusicMatch) suggestion.  Other
 # minor updates.
