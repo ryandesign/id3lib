@@ -218,7 +218,7 @@ static ID3_FieldDef ID3FD_LinkedInfo[] =
     ID3FN_NOFIELD                       // LINKED FIELD
   },
   {
-    ID3FN_TEXT,                         // FIELD NAME
+    ID3FN_ID,                           // FIELD NAME
     ID3FTY_ASCIISTRING,                 // FIELD TYPE
     3, 2, 0,                            // FIXED LEN, VERSION, REVISION
     ID3VC_LOWER,                        // VERSION CONTROL SCOPE
@@ -226,7 +226,7 @@ static ID3_FieldDef ID3FD_LinkedInfo[] =
     ID3FN_NOFIELD                       // LINKED FIELD
   },
   {
-    ID3FN_TEXT,                         // FIELD NAME
+    ID3FN_ID,                           // FIELD NAME
     ID3FTY_ASCIISTRING,                 // FIELD TYPE
     4, 3, 0,                            // FIXED LEN, VERSION, REVISION
     ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
@@ -424,7 +424,7 @@ static ID3_FieldDef ID3FD_Registration[] =
     ID3FN_NOFIELD                       // LINKED FIELD
   },
   {
-    ID3FN_SYMBOL,                       // FIELD NAME
+    ID3FN_ID,                           // FIELD NAME
     ID3FTY_INTEGER,                     // FIELD TYPE
     1, 3, 0,                            // FIXED LEN, VERSION, REVISION
     ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
@@ -926,6 +926,9 @@ ID3_Field::operator=( const ID3_Field &rField )
 }
 
 // $Log$
+// Revision 1.18  2000/04/09 22:37:34  eldamitri
+// Added implementation for DEFAULT.
+//
 // Revision 1.17  2000/04/08 04:35:48  eldamitri
 // Changed new ANSI-standard C++ include headers to old-style headers.
 // Fixed return bug in operator=.
