@@ -154,6 +154,8 @@ bool id3::v2::parse(ID3_TagImpl& tag, ID3_Reader& reader)
     ID3D_NOTICE( "id3::v2::parse(): parsing header failes" );
     return false;
   }
+  
+  tag.SetSpec(hdr.GetSpec());
 
   size_t dataSize = hdr.GetDataSize();
   ID3D_NOTICE( "ID3_TagImpl::Parse(ID3_Reader&): dataSize = " << dataSize);
