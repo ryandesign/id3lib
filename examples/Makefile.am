@@ -9,20 +9,20 @@
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 INCLUDES = -I$(top_srcdir)/include
-LDADD = $(top_builddir)/src/id3/libid3.la
+LDADD = $(top_builddir)/src/libid3.la
 
-check_PROGRAMS     = id3info id3convert id3tag
-id3info_SOURCES    = demo_info.cpp
-id3convert_SOURCES = demo_convert.cpp
-id3tag_SOURCES     = demo_tag.cpp
+bin_PROGRAMS       = uint28 lib frame tag file
+uint28_SOURCES     = test_uint28.cpp
+lib_SOURCES        = test_lib.cpp
+frame_SOURCES      = test_frame.cpp
+tag_SOURCES        = test_tag.cpp
+file_SOURCES       = test_file.cpp
 
 EXTRA_DIST =            \
-  demo_main.cpp         \
   jules.mp3             \
   jules-badtag.mp3      \
   jules-goodtag.mp3     \
   221-compressed.tag    \
   230-compressed.tag    \
   230-picture.tag       \
-  230-unicode.tag       \
-  readme.txt
+  230-unicode.tag
