@@ -35,6 +35,7 @@ int main( int argc, char *argv[])
     tag.Update(ID3TT_ID3V2);
 
     cerr << "removed " << ID3_RemoveArtists(&tag) << " artist frames" << endl;
+    cerr << "removed " << ID3_RemoveTitles(&tag) << " title frames" << endl;
     tag.Update();
   }   
   catch(const ID3_Error& err)
