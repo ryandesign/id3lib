@@ -141,13 +141,21 @@ int main( int argc, char *argv[])
   {
     char *sEmpty = "";
     if (sArtist)
+    {
       cout << "+++ Artist  = " << sArtist << endl;
+    }
     if (sAlbum)
+    {
       cout << "+++ Album   = " << sAlbum << endl;
+    }
     if (sSong)
+    {
       cout << "+++ Song    = " << sSong << endl;
+    }
     if (sYear)
+    {
       cout << "+++ Year    = " << sYear << endl;
+    }
     if (sComment)
     {
       cout << "+++ Comment = " << sComment << endl;
@@ -167,13 +175,17 @@ int main( int argc, char *argv[])
     {
       nTrack = atoi(sTrack);
       if (nTrack > 0)
+      {
         cout << "+++ Track   = " << nTrack;
+      }
     }
     if (sTotal)
     {
       nTotal = atoi(sTotal);
       if (nTrack > 0 && nTotal > 0)
+      {
         cout << "+++ Total   = " << sTotal << endl;
+      }
     }
     for (size_t nIndex = optind; nIndex < argc; nIndex++)
     {
@@ -189,21 +201,33 @@ int main( int argc, char *argv[])
         DisplayTags(cout, ulFlag);
 
         if (sArtist)
+        {
           ID3_AddArtist(&myTag, sArtist, true);
+        }
         if (sAlbum)
+        {
           ID3_AddAlbum(&myTag, sAlbum, true);
+        }
         if (sSong)
+        {
           ID3_AddTitle(&myTag, sSong, true);
+        }
         if (sYear)
+        {
           ID3_AddYear(&myTag, sYear, true);
+        }
         if (sComment)
         {
           ID3_AddComment(&myTag, sComment, sDesc, true);
         }
         if (nGenre > 0)
+        {
           ID3_AddGenre(&myTag, nGenre, true);
+        }
         if (nTrack > 0)
+        {
           ID3_AddTrack(&myTag, nTrack, nTotal, true);
+        }
         luint nTags = myTag.Update(ulFlag);
         cout << ", tagged ";
 
@@ -211,7 +235,7 @@ int main( int argc, char *argv[])
 
         cout << endl;
       }
-
+      
       catch(ID3_Error err)
       {
         cout << endl;
