@@ -26,14 +26,8 @@ else
 zlib_subdir = 
 endif
 
-if ID3_NEEDPOPT
-popt_subdir = popt
-else
-popt_subdir = 
-endif
-
-SUBDIRS =  . m4 $(popt_subdir) $(zlib_subdir) doc include src examples
-DIST_SUBDIRS = . m4 popt zlib doc include src examples
+SUBDIRS =  . m4 $(zlib_subdir) doc include src examples
+DIST_SUBDIRS = . m4 zlib doc include src examples
 
 INCLUDES = @ID3LIB_DEBUG_FLAGS@
 
@@ -72,7 +66,6 @@ release: config.h.win32 id3lib.spec
 	$(MAKE) $(AM_MAKEFLAGS) distcheck
 	GZIP=$(GZIP_ENV) $(TAR) zxf $(distdir).tar.gz
 	-cp -R id3com/ prj/ libprj/ delphi/ $(distdir)
-	-rm -rf $(distdir)/popt
 	-find $(distdir) -name "*~" -exec rm {} \;
 	-find $(distdir) -type d -name CVS -exec rm -r {} \;
 	-find $(distdir) -name .cvsignore -exec rm {} \;
