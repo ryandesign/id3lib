@@ -298,7 +298,7 @@ void ID3_Tag::ParseLyrics3()
         luint bytesToRead = lyricsSize - 11;
         uchar *buff2;
 
-        __extra_bytes += lyricsSize + 9 + 6;
+        __ending_bytes += lyricsSize + 9 + 6;
 
         buff2 = new uchar[bytesToRead];
         if (NULL == buff2)
