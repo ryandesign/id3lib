@@ -39,7 +39,7 @@ void ID3_Field::Set(luint newData)
 }
 
 
-luint ID3_Field::Get(void)
+luint ID3_Field::Get(void) const
 {
   return (luint) __sData;
 }
@@ -57,10 +57,14 @@ luint ID3_Field::ParseInteger(const uchar *buffer, const luint posn, const luint
     bytesUsed = 4;
     
     if (__lFixedLength != -1)
+    {
       bytesUsed = MIN(__lFixedLength, bytesUsed);
+    }
 
-    for(i = 0; i < bytesUsed; i++)
+    for (i = 0; i < bytesUsed; i++)
+    {
       temp |= (buffer[posn + i] << (((bytesUsed - i) - 1) * 8));
+    }
       
     Set(temp);
     __bHasChanged = false;
@@ -85,6 +89,11 @@ luint ID3_Field::RenderInteger(uchar *buffer)
 }
 
 // $Log$
+// Revision 1.8  1999/12/01 18:00:59  scott
+// Changed all of the #include <id3/*> to #include "*" to help ensure that
+// the sources are searched for in the right places (and to make compiling under
+// windows easier).
+//
 // Revision 1.7  1999/11/29 19:26:18  scott
 // Updated the leading license information of the file to reflect new maintainer.
 //
