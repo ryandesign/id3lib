@@ -117,16 +117,20 @@ int main( int argc, char *argv[])
         ID3_Tag myTag;
 
         if (bStrip)
+        {
           cout << "Stripping ";
+        }
         else
+        {
           cout << "Converting ";
+        }
         cout << argv[nIndex] << ": ";
 
+        myTag.Clear();
         myTag.Link(argv[nIndex]);
 
         cout << "attempting ";
         DisplayTags(cout, ulFlag);
-
         luint nTags;
 
         if (bStrip)
@@ -141,7 +145,6 @@ int main( int argc, char *argv[])
         }
 
         DisplayTags(cout, nTags);
-
         cout << endl;
       }
 
@@ -150,6 +153,7 @@ int main( int argc, char *argv[])
         cout << endl;
         cout << err.GetErrorFile() << " (" << err.GetErrorLine() << "): "
              << err.GetErrorType() << ": " << err.GetErrorDesc() << endl;
+        exit(1);
       }
     }
 
