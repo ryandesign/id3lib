@@ -125,7 +125,7 @@ protected:
   void       AddFrame(ID3_Frame *pNewFrame, bool bFreeWhenDone);
   void       AddFrames(ID3_Frame *newFrames, luint nFrames, bool freeWhenDone);
   void       SetupTag(char *fileInfo);
-  void       SetSpec(const ID3_V2Spec);
+  bool       SetSpec(ID3_V2Spec);
   ID3_V2Spec GetSpec() const;
   void       ClearList(ID3_Elem *list);
   void       DeleteElem(ID3_Elem *cur);

@@ -126,7 +126,7 @@ public:
   luint       Render(uchar *buffer);
   bool        Contains(ID3_FieldID fld)
   { return BS_ISSET(__auiFieldBits, fld); }
-  void        SetSpec(const ID3_V2Spec);
+  bool        SetSpec(ID3_V2Spec);
 
 protected:
   void        InitFields();
