@@ -176,6 +176,11 @@ ID3_Frame *ID3_Tag::Find(ID3_FrameID id, ID3_FieldID fld, const unicode_t *data)
     __cursor = __frames;
   }
 
+  if (NULL == data)
+  {
+    return frame;
+  }
+
   for (int iCount = 0; iCount < 2 && frame == NULL; iCount++)
   {
     // We want to cycle through the list to find the matching frame.  We
@@ -191,7 +196,6 @@ ID3_Frame *ID3_Tag::Find(ID3_FrameID id, ID3_FieldID fld, const unicode_t *data)
     for (ID3_Elem *cur = pStart; cur != pFinish; cur = cur->pNext)
     {
       if ((cur->pFrame != NULL) && (cur->pFrame->GetID() == id) &&
-          (data != NULL) && ucslen(data) > 0 && 
           cur->pFrame->Contains(fld))
       {
         size_t ulSize = cur->pFrame->Field(fld).Size();
