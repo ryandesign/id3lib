@@ -65,12 +65,11 @@ void ID3_Tag::SetupTag(char *fileInfo)
   __ulOldTagSize    = 0;
   __ulExtraBytes    = 0;
 
-  strcpy(__sFileName, "");
-  strcpy(__sTempName, "");
+ __sFileName        = NULL;
   
   Clear();
   
-  if (fileInfo)
+  if (NULL != fileInfo)
     Link(fileInfo);
     
   return ;
@@ -79,8 +78,9 @@ void ID3_Tag::SetupTag(char *fileInfo)
 
 ID3_Tag::~ID3_Tag(void)
 {
-  if (NULL != __fFileHandle)
-    fclose(__fFileHandle);
+  if (NULL != __sFileName)
+    delete [] __sFileName;
+  CloseFile();
     
   Clear();
   
@@ -105,7 +105,7 @@ void ID3_Tag::Clear(void)
     ClearList(__pBinaryList);
     __pBinaryList = NULL;
   }
-  
+
   __pFindCursor = NULL;
   __bHasChanged = true;
   
@@ -127,7 +127,7 @@ void ID3_Tag::DeleteElem(ID3_Elem *cur)
       
       if (cur->acBinary)
       {
-        delete[] cur->acBinary;
+        delete [] cur->acBinary;
         cur->acBinary = NULL;
       }
     }
@@ -158,6 +158,15 @@ void ID3_Tag::ClearList(ID3_Elem *list)
   return ;
 }
 
+void ID3_Tag::AddFrame(ID3_Frame *newFrame)
+{
+  AddFrame(newFrame, false);
+}
+
+void ID3_Tag::AddNewFrame(ID3_Frame *newFrame)
+{
+  AddFrame(newFrame, true);
+}
 
 void ID3_Tag::AddFrame(ID3_Frame *newFrame, bool freeWhenDone)
 {
@@ -183,6 +192,11 @@ void ID3_Tag::AddFrame(ID3_Frame *newFrame, bool freeWhenDone)
   return ;
 }
 
+
+void ID3_Tag::AddFrames(ID3_Frame *frames, luint numFrames)
+{
+  AddFrames(frames, numFrames, false);
+}
 
 void ID3_Tag::AddFrames(ID3_Frame *frames, luint numFrames, bool freeWhenDone)
 {
@@ -324,6 +338,12 @@ luint ID3_Tag::NumFrames(void) const
 }
 
 // $Log$
+// Revision 1.5  1999/11/15 20:20:17  scott
+// Added include for config.h.  Minor code cleanup.  Removed
+// assignments from if checks; first makes assignment, then checks
+// for appropriate value.  Made private member variable names more
+// descriptive.
+//
 // Revision 1.4  1999/11/04 04:15:55  scott
 // Added cvs Id and Log tags to beginning and end of file, respectively.
 //
