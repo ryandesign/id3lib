@@ -15,10 +15,10 @@ the_headers =                   \
   frame.h                       \
   globals.h                     \
   misc_support.h                \
-  sized_types.h                 \
-  spec.h                        \
   reader.h                      \
   readers.h                     \
+  sized_types.h                 \
+  spec.h                        \
   tag.h                         \
   writer.h                      \
   writers.h                     
@@ -36,8 +36,10 @@ noinst_HEADERS =                \
   header.h                      \
   header_frame.h                \
   header_tag.h                  \
+  helpers.h                     \
   io_decorators.h               \
   io_helpers.h                  \
   io_strings.h                  \
   strings.h                     \
+  tag_impl.h                    \
   utils.h                       
