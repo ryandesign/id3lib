@@ -294,20 +294,20 @@ ID3_STRUCT(ID3V1_Tag)
 ID3_ENUM(ID3_FieldFlags)
 {
   ID3FF_NONE       =      0,
-  ID3FF_NULL       = 1 << 0,
-  ID3FF_NULLDIVIDE = 1 << 1,
-  ID3FF_ADJUSTENC  = 1 << 2,
-  ID3FF_ADJUSTEDBY = 1 << 3
+  ID3FF_CSTR       = 1 << 0,
+  ID3FF_LIST       = 1 << 1,
+  ID3FF_ENCODABLE  = 1 << 2,
+  ID3FF_TEXTLIST   = ID3FF_CSTR | ID3FF_LIST | ID3FF_ENCODABLE
 };
 
 /** Enumeration of the types of field types */
 ID3_ENUM(ID3_FieldType)
 {
+  ID3FTY_NONE           = -1,
   ID3FTY_INTEGER        = 0,
-  ID3FTY_BITFIELD,
   ID3FTY_BINARY,
-  ID3FTY_ASCIISTRING,
-  ID3FTY_UNICODESTRING
+  ID3FTY_TEXTSTRING,
+  ID3FTY_NUMTYPES
 };
 
 /**
