@@ -132,9 +132,9 @@ luint ID3_Field::ParseASCIIString(const uchar *buffer, const luint posn, const l
   }
   else if (!(__ulFlags & ID3FF_NULL) || (__ulFlags & ID3FF_NULLDIVIDE))
   {
-    // Either the string is null terminated, or it is null terminated but also
-    // null divided.  In which case, we're assured this is the last field of
-    // of the frame, and we can claim the remaining bytes for ourselves
+    // If the string isn't null-terminated or if it is null divided, we're
+    // assured this is the last field of of the frame, and we can claim the
+    // remaining bytes for ourselves
     bytesUsed = buffSize - posn;
   }
   else
@@ -257,6 +257,11 @@ luint ID3_Field::RenderASCIIString(uchar *buffer)
 }
 
 // $Log$
+// Revision 1.12  1999/12/13 04:44:07  scott
+// (Get): Potential memory leaks plugged (thanks MusicMatch).
+// (RenderASCIIString): Bugfix for coversion from unicode to ascii string
+// (thanks MusicMatch).  Some code cleanup.
+//
 // Revision 1.11  1999/12/09 03:32:06  scott
 // (ParseASCIIString): Fixed bug which prevented correct parsing of fields
 // separated with NULL dividers (such as the involved people frame).
