@@ -121,9 +121,9 @@ namespace
   {
     String target;
     size_t source_size = source.size();
+    
 #if defined(ID3LIB_ICONV_OLDSTYLE)
-    char* source_str = new char[source.size() + 1];
-    strcpy(source.data(), source_str);
+    const char* source_str = source.data();
 #else
     char *source_str = new char[source.size()+1];
     source.copy(source_str, String::npos);
@@ -144,6 +144,9 @@ namespace
       if (nconv == (size_t) -1 && errno != EINVAL && errno != E2BIG)
       {
 // errno is probably EILSEQ here, which means either an invalid byte sequence or a valid but unconvertible byte sequence 
+#if !defined(ID3LIB_ICONV_OLDSTYLE)
+        delete [] source_str;
+#endif
         return target;
       }
       target.append(buf, ID3LIB_BUFSIZ - target_size);
@@ -151,7 +154,9 @@ namespace
       target_size = ID3LIB_BUFSIZ;
     }
     while (source_size > 0);
+#if !defined(ID3LIB_ICONV_OLDSTYLE)
     delete [] source_str;
+#endif
     return target;
   }
 
