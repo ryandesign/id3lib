@@ -1,18 +1,16 @@
 // $Id$
-
-//  The authors have released ID3Lib as Public Domain (PD) and claim no
-//  copyright, patent or other intellectual property protection in this work.
-//  This means that it may be modified, redistributed and used in commercial
-//  and non-commercial software and hardware without restrictions.  ID3Lib is
-//  distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either
-//  express or implied.
-//
-//  The ID3Lib authors encourage improvements and optimisations to be sent to
-//  the ID3Lib coordinator, currently Dirk Mahoney (dirk@id3.org).  Approved
-//  submissions may be altered, and will be included and released under these
-//  terms.
-//
-//  Mon Nov 23 18:34:01 1998
+// 
+// The authors have released ID3Lib as Public Domain (PD) and claim no
+// copyright, patent or other intellectual property protection in this work.
+// This means that it may be modified, redistributed and used in commercial
+// and non-commercial software and hardware without restrictions.  ID3Lib is
+// distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either
+// express or implied.
+// 
+// The ID3Lib authors encourage improvements and optimisations to be sent to
+// the ID3Lib coordinator, currently Dirk Mahoney (dirk@id3.org).  Approved
+// submissions may be altered, and will be included and released under these
+// terms.
 
 #ifndef ID3LIB_MISC_SUPPORT_H
 #define ID3LIB_MISC_SUPPORT_H
@@ -41,8 +39,15 @@ luint ID3_GetGenreNum(ID3_Tag *tag);
 bool  ID3_AddGenre(ID3_Tag *tag, luint ucGenre);
 char *ID3_GetLyrics(ID3_Tag *tag);
 bool  ID3_AddLyrics(ID3_Tag *tag, char *text);
-void  ID3_ASCIItoUnicode(wchar_t *unicode, const char *ascii, const luint len);
-void  ID3_UnicodeToASCII(char *ascii, const wchar_t *unicode, const luint len);
+
+void   mbstoucs(unicode_t *unicode, const char *ascii, const luint len);
+void   ucstombs(char *ascii, const unicode_t *unicode, const luint len);
+size_t ucslen(const unicode_t *unicode);
+void   ucscpy(unicode_t *dest, const unicode_t *src);
+void   ucsncpy(unicode_t *dest, const unicode_t *src, size_t len);
+int    ucscmp(const unicode_t *s1, const unicode_t *s2);
+int    ucsncmp(const unicode_t *s2, const unicode_t *s2, size_t len);
+
 char *ID3_GetString(const ID3_Frame *frame, const ID3_FieldID fldName);
 // in 'id3_tag_parse_v1.cpp'
 void ID3_RemoveTrailingSpaces(char *buffer, luint length);
@@ -50,6 +55,12 @@ void ID3_RemoveTrailingSpaces(char *buffer, luint length);
 #endif
 
 // $Log$
+// Revision 1.5  1999/11/19 18:59:09  scott
+// * misc_support.h: Added the function declarations for ID3_GetString,
+// ID3_GetArtist, ID3_GetAlbum, ID3_GetTitle, ID3_GetYear, ID3_AddYear,
+// ID3_GetComment, ID3_AddComment, ID3_GetTrack, ID3_GetTrackNum,
+// ID3_AddTrack, ID3_GetGenre, ID3_GetGenreNum, and ID3_GetLyrics.
+//
 // Revision 1.4  1999/11/04 04:15:55  scott
 // Added cvs Id and Log tags to beginning and end of file, respectively.
 //
