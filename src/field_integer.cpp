@@ -47,14 +47,13 @@
  **/
 void ID3_Field::Set(uint32 val)
 {
-  Clear();
-  
-  _data = (uchar *) val;  // Ack!  This is terrible!
-  _size = sizeof(uint32);
-  _type = ID3FTY_INTEGER;
-  _changed = true;
-  
-  return ;
+  if (this->GetType() == ID3FTY_INTEGER)
+  {
+    this->Clear();
+    
+    _integer = val;
+    _changed = true;
+  }
 }
 
 /** \fn uint32 ID3_Field::Get() const
@@ -73,14 +72,10 @@ size_t ID3_Field::ParseInteger(const uchar *buffer, size_t nSize)
 
   if (buffer != NULL && nSize > 0)
   {
-    nBytes = MIN(nSize, sizeof(uint32));
-    
-    if (_length > 0)
-    {
-      nBytes = MIN(_length, nBytes);
-    }
-
-    Set(ParseNumber(buffer, nBytes));
+    this->Clear();
+    size_t fixed = this->Size();
+    nBytes = (fixed > 0) ? MIN(nSize, fixed) : nSize;
+    this->Set(ParseNumber(buffer, nBytes));
     _changed = false;
   }
   
@@ -90,7 +85,7 @@ size_t ID3_Field::ParseInteger(const uchar *buffer, size_t nSize)
 
 size_t ID3_Field::RenderInteger(uchar *buffer) const
 {
-  size_t bytesUsed = RenderNumber(buffer, (uint32) _data, this->BinSize());
+  size_t bytesUsed = RenderNumber(buffer, _integer, this->Size());
   _changed = false;
   return bytesUsed;
 }
