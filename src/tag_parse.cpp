@@ -24,16 +24,16 @@
 // id3lib.  These files are distributed with id3lib at
 // http://download.sourceforge.net/id3lib/
 
+#if defined HAVE_CONFIG_H
+#include <config.h> // Must include before zlib.h to compile on WinCE
+#endif
+
 #include <string.h>
 #include <memory.h>
 #include <zlib.h>
 #include "tag.h"
 #include "uint28.h"
 #include "utils.h"
-
-#if defined HAVE_CONFIG_H
-#include <config.h>
-#endif
 
 size_t ID3_ParseFrames(ID3_Tag& tag, const uchar* const data, size_t size) 
 { 
