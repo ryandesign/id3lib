@@ -15,7 +15,6 @@ LTVERSION = @lt_ver@:@lt_rev@:@lt_age@
 INCLUDES = -I$(top_srcdir)/include/id3
 
 the_sources =                   \
-  dll_wrapper.cpp               \
   error.cpp                     \
   field.cpp                     \
   field_binary.cpp              \
@@ -40,6 +39,10 @@ the_sources =                   \
   tag_sync.cpp                  \
   version.cpp                   
 
+EXTRA_DIST =                    \
+  dll_wrapper.cpp               
+
+
 lib_LTLIBRARIES   = libid3.la 
 
 libid3_la_SOURCES = $(the_sources)
@@ -47,6 +50,9 @@ libid3_la_LIBADD  = -lz
 libid3_la_LDFLAGS = -version-info $(LTVERSION)
 
 # $Log$
+# Revision 1.8  1999/12/02 01:49:12  scott
+# Removed EXTRA_DIST (no more ChangeLog)
+#
 # Revision 1.7  1999/12/01 18:03:28  scott
 # (INCLUDES): Now points to new, toplevel include directory.
 # (the_headers, id3includedir, id3include_HEADERS): Removed.  Headers are
