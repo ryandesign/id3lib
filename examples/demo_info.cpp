@@ -439,6 +439,9 @@ int main( int argc, char *argv[])
 }
 
 // $Log$
+// Revision 1.7  2000/04/15 18:44:54  eldamitri
+// (PrintInformation): Renamed ID3FN_SYMBOL to ID3FN_ID
+//
 // Revision 1.6  1999/12/26 00:29:55  scott
 // (GetDescription): Reformatted.  Descriptions now match those from
 // www.id3.org.  Added descriptions for new frame id's.
