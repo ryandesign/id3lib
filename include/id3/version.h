@@ -38,6 +38,11 @@ unsigned short ID3_Patch(void);
 #endif
 
 // $Log$
+// Revision 1.8  1999/11/30 20:16:35  scott
+// Changed from preprocessor macros to functions.  Now changes to top
+// level configure.in with regards to version info will be reflected in
+// these functions without having to change this file.
+//
 // Revision 1.7  1999/11/29 19:26:18  scott
 // Updated the leading license information of the file to reflect new maintainer.
 //

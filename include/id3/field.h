@@ -416,6 +416,9 @@ ID3_FrameID   ID3_FindFrameID(const char *id);
 #endif
 
 // $Log$
+// Revision 1.10  1999/11/29 19:26:18  scott
+// Updated the leading license information of the file to reflect new maintainer.
+//
 // Revision 1.9  1999/11/29 19:05:41  scott
 // Updated documentation to work better with doc++ (probably doesn't work
 // well with kdoc anymore).

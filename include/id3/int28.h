@@ -12,32 +12,39 @@
 // submissions may be altered, and will be included and released under these
 // terms.
 
-#ifndef ID3LIB_HEADER_TAG_H
-#define ID3LIB_HEADER_TAG_H
+#ifndef ID3LIB_TYPES_28BITINT_H
+#define ID3LIB_TYPES_28BITINT_H
 
+#include <iostream.h>
 #include <id3/types.h>
-#include <id3/header.h>
 
-#define ID3_TAGID               "ID3"
-#define ID3_TAGHEADERSIZE       (10)
-
-#define ID3HF_UNSYNC            (1 << 7)
-#define ID3HF_EXTENDEDHEADER    (1 << 6)
-#define ID3HF_EXPERIMENTAL      (1 << 5)
-
-class ID3_TagHeader : public ID3_Header
+class int28
 {
 public:
-  virtual luint Size(void);
-  virtual luint Render(uchar *buffer);
-};
+  int28(luint val = 0);
+  int28(uchar *val);
+  
+  uchar operator[](luint posn);
+  friend ostream &operator<<(ostream& out, int28& val);
+  luint get(void);
+  
+  // *** PRIVATE INTERNAL DATA - DO NOT USE *** PRIVATE INTERNAL DATA - DO NOT USE ***
+  
+protected:
+  void set(luint val);
+  uchar value[sizeof(luint)]; // the integer stored as a uchar array
+}
+;
 
-CDLLEXPORT
-lsint ID3_IsTagHeader(uchar header[ID3_TAGHEADERSIZE]);
+ostream & operator<<(ostream& out, int28& val);
+istream & operator>>(istream& in, int28& val);
 
 #endif
 
 // $Log$
+// Revision 1.5  1999/11/29 19:26:18  scott
+// Updated the leading license information of the file to reflect new maintainer.
+//
 // Revision 1.4  1999/11/04 04:15:55  scott
 // Added cvs Id and Log tags to beginning and end of file, respectively.
 //

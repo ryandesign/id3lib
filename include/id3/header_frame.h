@@ -12,45 +12,40 @@
 // submissions may be altered, and will be included and released under these
 // terms.
 
-#ifndef ID3LIB_TYPES_H
-#define ID3LIB_TYPES_H
+#ifndef ID3LIB_HEADER_FRAME_H
+#define ID3LIB_HEADER_FRAME_H
 
-#include <id3/globals.h>
+#include <id3/types.h>
+#include <id3/header.h>
+#include <id3/header_tag.h>
+#include <id3/field.h>
 
-#ifdef __DLL
-#define DLLEXPORT       __declspec ( dllexport )
-#define CDLLEXPORT      extern "C" __declspec ( dllexport )
-#else
-#define DLLEXPORT
-#define CDLLEXPORT
-#endif
+#define ID3FL_TAGALTER    (1 << 15)
+#define ID3FL_FILEALTER   (1 << 14)
+#define ID3FL_SIGNED      (1 << 13)
+#define ID3FL_COMPRESSION (1 <<  7)
+#define ID3FL_ENCRYPTION  (1 <<  6)
+#define ID3FL_GROUPING    (1 <<  5)
 
-#define BS_SIZE (sizeof(luint)*8)
-#define BS_SET(v,x)   ((v)[(x) / BS_SIZE] |=  (1 << ((x) % BS_SIZE)))
-#define BS_CLEAR(v,x) ((v)[(x) / BS_SIZE] &= ~(1 << ((x) % BS_SIZE)))
-#define BS_ISSET(v,x) ((v)[(x) / BS_SIZE] &   (1 << ((x) % BS_SIZE)))
-
-#ifndef NULL
-#define NULL (0L)
-#endif
-
-#ifndef MIN
-inline lsint MIN(lsint x, lsint y)
+struct ID3_FrameAttr
 {
-  return x < y ? x : y;
-}
-#endif
+  char  sTextID[5];
+  luint ulSize;
+  luint ulFlags;
+};
 
-#ifndef MAX
-inline lsint MAX(lsint x, lsint y)
+class ID3_FrameHeader : public ID3_Header
 {
-  return x > y ? x : y;
+public:
+  virtual luint Size(void);
+  void SetFrameID(ID3_FrameID id);
+  luint GetFrameInfo(ID3_FrameAttr &attr, uchar *buffer);
+  virtual luint Render(uchar *buffer);
+  
+protected:
+  ID3_FrameID   __eFrameID;        // which frame are we the header for?
 }
-#endif
-
-// include other abstract types here because they
-// may depend on the types defined above
-#include <id3/int28.h>
+;
 
 #endif
 
@@ -58,8 +53,8 @@ inline lsint MAX(lsint x, lsint y)
 // Revision 1.6  1999/11/29 19:26:18  scott
 // Updated the leading license information of the file to reflect new maintainer.
 //
-// Revision 1.5  1999/11/25 19:24:24  scott
-// Removed typedefs, which are now included in the globas.h file.
+// Revision 1.5  1999/11/15 20:19:25  scott
+// Made variable names more descriptive.
 //
 // Revision 1.4  1999/11/04 04:15:55  scott
 // Added cvs Id and Log tags to beginning and end of file, respectively.

@@ -1,11 +1,4 @@
 // $Id$
-// 
-// The authors have released this file as Public Domain (PD) and claim no
-// copyright, patent or other intellectual property protection in this work.
-// This means that it may be modified, redistributed and used in commercial
-// and non-commercial software and hardware without restrictions.  ID3Lib is
-// distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either
-// express or implied.
 
 /* 
  * This file defines size-specific typedefs based on the macros defined in
