@@ -2601,6 +2601,8 @@ trap 'rm -fr `echo "\
   doc/man/Makefile              \
   doc/latex/Makefile            \
   doc/texinfo/Makefile          \
+  include/Makefile              \
+  include/id3/Makefile          \
   m4/Makefile                   \
   src/Makefile                  \
   src/id3/Makefile              \
@@ -2719,6 +2721,8 @@ CONFIG_FILES=\${CONFIG_FILES-"\
   doc/man/Makefile              \
   doc/latex/Makefile            \
   doc/texinfo/Makefile          \
+  include/Makefile              \
+  include/id3/Makefile          \
   m4/Makefile                   \
   src/Makefile                  \
   src/id3/Makefile              \
