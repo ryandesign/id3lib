@@ -16,7 +16,7 @@
 #include <config.h>
 #endif
 
-#include <id3/tag.h>
+#include "tag.h"
 
 luint ID3_Tag::s_ulInstances = 0;
 
@@ -336,6 +336,9 @@ luint ID3_Tag::NumFrames(void) const
 }
 
 // $Log$
+// Revision 1.7  1999/11/29 19:26:18  scott
+// Updated the leading license information of the file to reflect new maintainer.
+//
 // Revision 1.6  1999/11/25 18:24:27  scott
 // (SetupTag): Initialized sFileName to NULL rather than the empty string
 // to indicate no filename is present.

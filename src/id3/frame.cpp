@@ -17,7 +17,7 @@
 #endif
 
 #include <string.h>
-#include <id3/tag.h>
+#include "tag.h"
 
 ID3_Frame::ID3_Frame(ID3_FrameID id)
 {
@@ -269,6 +269,9 @@ bool ID3_Frame::HasChanged(void) const
 }
 
 // $Log$
+// Revision 1.6  1999/11/29 19:26:18  scott
+// Updated the leading license information of the file to reflect new maintainer.
+//
 // Revision 1.5  1999/11/15 20:17:04  scott
 // Added include for config.h.  Minor code cleanup.  Removed
 // assignments from if checks; first makes assignment, then checks

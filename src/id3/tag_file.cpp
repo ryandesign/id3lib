@@ -18,7 +18,7 @@
 
 #include <string.h>
 #include <unistd.h>
-#include <id3/tag.h>
+#include "tag.h"
 
 bool exists(char *name)
 {
@@ -265,6 +265,9 @@ luint ID3_Tag::Strip(const luint ulTagFlag)
 
 
 // $Log$
+// Revision 1.7  1999/11/29 19:26:18  scott
+// Updated the leading license information of the file to reflect new maintainer.
+//
 // Revision 1.6  1999/11/25 18:39:29  scott
 // (OpenLinkedFile): Removed method.  Replaced with CreateFile,
 // OpenFileForReading, and OpenFileForWriting.

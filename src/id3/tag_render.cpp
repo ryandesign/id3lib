@@ -18,8 +18,8 @@
 
 #include <string.h>
 #include <memory.h>
-#include <id3/tag.h>
-#include <id3/misc_support.h>
+#include "tag.h"
+#include "misc_support.h"
 #include <stdlib.h>
 
 luint ID3_Tag::Render(uchar *buffer)
@@ -364,6 +364,9 @@ luint ID3_Tag::PaddingSize(luint curSize) const
 
 
 // $Log$
+// Revision 1.8  1999/11/29 19:26:18  scott
+// Updated the leading license information of the file to reflect new maintainer.
+//
 // Revision 1.7  1999/11/25 18:51:34  scott
 // (Render): Replaced manual array initialization with call to memset.
 // (GenerateTempName): Removed method.  No longer used.

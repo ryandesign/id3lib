@@ -16,7 +16,7 @@
 #include <config.h>
 #endif
 
-#include <id3/int28.h>
+#include "int28.h"
 
 int28::int28(luint val)
 {
@@ -83,6 +83,9 @@ istream& operator>>(istream& in, int28& val)
 }
 
 // $Log$
+// Revision 1.6  1999/11/29 19:26:18  scott
+// Updated the leading license information of the file to reflect new maintainer.
+//
 // Revision 1.5  1999/11/15 20:19:47  scott
 // Added include for config.h. Changed some ints to luints to avoid
 // compiler warnings.

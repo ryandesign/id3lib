@@ -18,8 +18,8 @@
 
 #include <string.h>
 #include <stdlib.h>
-#include <id3/field.h>
-#include <id3/misc_support.h>
+#include "field.h"
+#include "misc_support.h"
 
 // this function is another way of using Set()
 
@@ -300,6 +300,9 @@ luint ID3_Field::RenderUnicodeString(uchar *buffer)
 }
 
 // $Log$
+// Revision 1.9  1999/11/29 19:26:18  scott
+// Updated the leading license information of the file to reflect new maintainer.
+//
 // Revision 1.8  1999/11/29 18:15:19  scott
 // (): Updated methods to use unicode_t instead of wchar_t.  unicode_t is
 // defined in globals.h.  The type unicode_t is more likely to be two

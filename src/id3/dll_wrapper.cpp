@@ -16,7 +16,7 @@
 #include <config.h>
 #endif
 
-#include <id3/tag.h>
+#include "tag.h"
 
 #ifdef __DLL
 
@@ -487,6 +487,9 @@ void ID3Field_ToFile(ID3_Field *field, char *fileName)
 #endif
 
 // $Log$
+// Revision 1.8  1999/11/29 19:26:18  scott
+// Updated the leading license information of the file to reflect new maintainer.
+//
 // Revision 1.7  1999/11/29 15:13:00  scott
 // Updated unicode function declarations to now pass unicode_t instead of
 // wchar_t.  unicode_t now defined in globals.h.

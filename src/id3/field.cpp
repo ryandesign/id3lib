@@ -17,7 +17,7 @@
 #endif
 
 #include <string.h>
-#include <id3/field.h>
+#include "field.h"
 
 static ID3_FieldDef ID3FD_URL[] =
 { 
@@ -692,6 +692,9 @@ ID3_Field::Render(uchar *buffer)
 }
 
 // $Log$
+// Revision 1.9  1999/11/29 19:26:18  scott
+// Updated the leading license information of the file to reflect new maintainer.
+//
 // Revision 1.8  1999/11/29 17:21:06  scott
 // Updated methods to use unicode_t instead of wchar_t.  unicode_t is
 // defined in globals.h.  The type unicode_t is more likely to be two

@@ -16,7 +16,7 @@
 #include <config.h>
 #endif
 
-#include <id3/field.h>
+#include "field.h"
 
 ID3_Field& ID3_Field::operator=(luint newData)
 {
@@ -85,6 +85,9 @@ luint ID3_Field::RenderInteger(uchar *buffer)
 }
 
 // $Log$
+// Revision 1.7  1999/11/29 19:26:18  scott
+// Updated the leading license information of the file to reflect new maintainer.
+//
 // Revision 1.6  1999/11/19 17:29:18  scott
 // (ParseInteger): Updated interface to make parameters const.
 //

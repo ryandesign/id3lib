@@ -16,7 +16,7 @@
 #include <config.h>
 #endif
 
-#include <id3/tag.h>
+#include "tag.h"
 
 // To be used when reading an ID3v2-tag
 // Transforms all FF 00 sequences into FF
@@ -129,6 +129,9 @@ void ID3_Tag::UnSync(uchar *destData, luint destSize, uchar *sourceData, luint s
 
 
 // $Log$
+// Revision 1.6  1999/11/29 19:26:18  scott
+// Updated the leading license information of the file to reflect new maintainer.
+//
 // Revision 1.5  1999/11/15 20:21:36  scott
 // Added include for config.h.  Minor code cleanup.  Removed
 // assignments from if checks; first makes assignment, then checks

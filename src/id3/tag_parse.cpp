@@ -19,7 +19,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <memory.h>
-#include <id3/tag.h>
+#include "tag.h"
 #include <zlib.h>
 
 ID3_Elem *ID3_Tag::GetLastElem(ID3_Elem *list)
@@ -391,6 +391,9 @@ luint ID3_Tag::ParseFromHandle(void)
 }
 
 // $Log$
+// Revision 1.8  1999/11/29 19:26:18  scott
+// Updated the leading license information of the file to reflect new maintainer.
+//
 // Revision 1.7  1999/11/25 18:41:29  scott
 // (ProcessBinaries): Minor code reorg.
 //

@@ -19,8 +19,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <memory.h>
-#include <id3/tag.h>
-#include <id3/misc_support.h>
+#include "tag.h"
+#include "misc_support.h"
 
 void ID3_RemoveTrailingSpaces(char *buffer, luint length)
 {
@@ -119,6 +119,9 @@ void ID3_Tag::ParseID3v1(void)
 }
 
 // $Log$
+// Revision 1.7  1999/11/29 19:26:18  scott
+// Updated the leading license information of the file to reflect new maintainer.
+//
 // Revision 1.6  1999/11/19 19:12:46  scott
 // (ID3_RemoveTrailingSpaces): Minor code cleanup.
 // (ParseID3v1): Massive recoding of method to make use of new functions

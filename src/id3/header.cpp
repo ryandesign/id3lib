@@ -18,8 +18,8 @@
 
 #include <string.h>
 #include <memory.h>
-#include <id3/header.h>
-#include <id3/error.h>
+#include "header.h"
+#include "error.h"
 
 ID3_HeaderInfo ID3_VersionInfo[] =
   {
@@ -77,6 +77,9 @@ void ID3_Header::SetFlags(luint newFlags)
 }
 
 // $Log$
+// Revision 1.6  1999/11/29 19:26:18  scott
+// Updated the leading license information of the file to reflect new maintainer.
+//
 // Revision 1.5  1999/11/15 20:18:46  scott
 // Added include for config.h.  Minor code cleanup.  Made private
 // member variable names more descriptive.  Fixed bug I introduced in

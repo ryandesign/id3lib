@@ -18,7 +18,7 @@
 
 #include <stdio.h>
 #include <memory.h>
-#include <id3/field.h>
+#include "field.h"
 
 
 void ID3_Field::Set(const uchar *newData, luint newSize)
@@ -144,6 +144,9 @@ luint ID3_Field::RenderBinary(uchar *buffer)
 
 
 // $Log$
+// Revision 1.7  1999/11/29 19:26:18  scott
+// Updated the leading license information of the file to reflect new maintainer.
+//
 // Revision 1.6  1999/11/19 17:28:13  scott
 // (Set): Updated interface to make parameters const.
 // (FromFile): Updated interface to make parameters const.

@@ -16,7 +16,7 @@
 #include <config.h>
 #endif
 
-#include <id3/misc_support.h>
+#include "misc_support.h"
 #include <stdlib.h>
 #include <ctype.h>
 
@@ -468,6 +468,10 @@ bool ID3_AddLyrics(ID3_Tag *tag, char *text)
 }
 
 // $Log$
+// Revision 1.11  1999/11/30 20:12:35  scott
+// No more SIZE_SPECIFIC_TYPES code.  No more code for wchar's.  Typedefs
+// in sized_types.h guarantee that unicode_t will be two bytes.
+//
 // Revision 1.10  1999/11/29 19:26:18  scott
 // Updated the leading license information of the file to reflect new maintainer.
 //

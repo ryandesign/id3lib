@@ -17,8 +17,8 @@
 #endif
 
 #include <stdlib.h>
-#include <id3/field.h>
-#include <id3/misc_support.h>
+#include "field.h"
+#include "misc_support.h"
 
 
 ID3_Field& ID3_Field::operator= (const char *string)
@@ -206,6 +206,9 @@ luint ID3_Field::RenderASCIIString(uchar *buffer)
 }
 
 // $Log$
+// Revision 1.9  1999/11/29 19:26:18  scott
+// Updated the leading license information of the file to reflect new maintainer.
+//
 // Revision 1.8  1999/11/29 17:23:16  scott
 // Updated methods to use unicode_t instead of wchar_t.  unicode_t is
 // defined in globals.h.  The type unicode_t is more likely to be two
