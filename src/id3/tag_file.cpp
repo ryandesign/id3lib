@@ -161,9 +161,12 @@ bool ID3_Tag::CloseFile(void)
   return bReturn;
 }
 
-luint ID3_Tag::Link(char *fileInfo)
+luint ID3_Tag::Link(char *fileInfo, bool parseID3v1, bool parseLyrics3)
 {
   luint posn = 0;
+  
+  __bParseID3v1 = parseID3v1;
+  __bParseLyrics3 = parseLyrics3;
   
   if (NULL == fileInfo)
   {
@@ -334,6 +337,10 @@ luint ID3_Tag::Strip(const luint ulTagFlag)
 
 
 // $Log$
+// Revision 1.14  2000/04/05 05:21:15  eldamitri
+// Updated initial comment information to reflect license, copyright
+// change.
+//
 // Revision 1.13  2000/01/04 15:42:49  eldamitri
 // For compilation with gcc 2.95.2 and better compatibility with ANSI/ISO
 // standard C++, updated, rearranged, and removed (where necessary)
