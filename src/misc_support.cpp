@@ -765,6 +765,7 @@ ID3_Frame* ID3_AddSyncLyrics(ID3_Tag *tag, const char *lang, const char *desc,
 
     pFrame->Field(ID3FN_LANGUAGE) = lang;
     pFrame->Field(ID3FN_DESCRIPTION) = desc;
+    pFrame->Field(ID3FN_TIMESTAMPFORMAT) = ID3TSF_MS;
     pFrame->Field(ID3FN_DATA).Set(text, textsize);
     tag->AttachFrame(pFrame);
   }
