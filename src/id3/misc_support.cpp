@@ -121,3 +121,7 @@ void ID3_AddLyrics(ID3_Tag *tag, char *text)
   
   return ;
 }
+
+/*
+$Log$
+*/
