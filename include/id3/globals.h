@@ -446,7 +446,7 @@ ID3_ENUM(Mp3_Crc)
   MP3CRC_OK = 1
 };
 
-ID3_STRUCT(Mp3_Header)
+ID3_STRUCT(Mp3_Headerinfo)
 {
   Mpeg_Layers layer;
   Mpeg_Version version;

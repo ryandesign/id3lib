@@ -341,6 +341,9 @@ int main( unsigned int argc, char * const argv[])
     ID3_Tag myTag;
     
     myTag.Link(filename, ID3TT_ALL);
+    Mp3_Headerinfo* mp3info;
+    mp3info = myTag.GetMp3HeaderInfo();
+
     cout << endl << "*** Tag information for " << filename << endl;
     if (!args.assign_given)
     {
@@ -352,6 +355,45 @@ int main( unsigned int argc, char * const argv[])
       ID3_Tag tmpTag(myTag);
       PrintInformation(tmpTag);
     }
+    if (mp3info)
+    {
+      cout << "*** mp3 info\n";
+
+      switch (mp3info->version)
+      {
+      case MPEGVERSION_2_5:
+        cout << "MPEG2.5/";
+        break;
+      case MPEGVERSION_2:
+        cout << "MPEG2/";
+        break;
+      case MPEGVERSION_1:
+        cout << "MPEG1/";
+        break;
+      default:
+        break;
+      }
+
+      switch (mp3info->layer)
+      {
+      case MPEGLAYER_III:
+        cout << "layer III\n";
+        break;
+      case MPEGLAYER_II:
+        cout << "layer II\n";
+        break;
+      case MPEGLAYER_I:
+        cout << "layer I\n";
+        break;
+      default:
+        break;
+      }
+
+      cout << "Bitrate: " << mp3info->bitrate/1000 << "KBps\n";
+      cout << "Frequency: " << mp3info->frequency/1000 << "KHz\n";
+    }
+
+
   }
 
   return 0;

@@ -37,7 +37,7 @@ public:
   ~Mp3Info();
   void Clean();
     
-  Mp3_Header *GetMp3Header();
+  Mp3_Headerinfo* GetMp3HeaderInfo();
   bool Parse(ID3_Reader&, size_t mp3size);
 
   Mpeg_Layers Layer() const { return _mp3_header_output->layer; };
@@ -79,7 +79,7 @@ private:
     unsigned char mode : 2;
   };
 
-  Mp3_Header *_mp3_header_output;
+  Mp3_Headerinfo* _mp3_header_output;
 }; //Info
 
 #endif /* _MP3_HEADER_H_ */

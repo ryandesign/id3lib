@@ -717,9 +717,9 @@ flags_t ID3_Tag::Update(flags_t flags)
  ** Can be run after Link(<filename>)
  **
  **/
-Mp3_Header* ID3_Tag::GetMp3Header() const
+Mp3_Headerinfo* ID3_Tag::GetMp3HeaderInfo() const
 {
-  return _impl->GetMp3Header();
+  return _impl->GetMp3HeaderInfo();
 }
 
 /** Strips the tag(s) from the attached file. The type of tag stripped
