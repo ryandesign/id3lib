@@ -189,7 +189,7 @@ size_t ParseID3v2(ID3_Tag& tag, fstream& file)
   {
     uchar* bin = new uchar[tagSize];
     file.read(bin, tagSize - ID3_TagHeader::SIZE);
-    if (file.gcount() != tagSize)
+    if (tagSize != (size_t)file.gcount())
     {
       // log this...
       //return 0;
