@@ -430,16 +430,4 @@ ID3_ENUM(ID3_TimeStampFormat)
 #  define NULL ((void*) 0)
 #endif
 
-#undef MAX
-#define MAX(a, b)  (((a) > (b)) ? (a) : (b))
-  
-#undef MIN
-#define MIN(a, b)  (((a) < (b)) ? (a) : (b))
-  
-#undef ABS
-#define ABS(a)   (((a) < 0) ? -(a) : (a))
-
-#undef CLAMP
-#define CLAMP(x, low, high)  (((x) > (high)) ? (high) : (((x) < (low)) ? (low) : (x)))
- 
 #endif /* _ID3LIB_GLOBALS_H_ */
