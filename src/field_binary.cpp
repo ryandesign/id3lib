@@ -137,9 +137,9 @@ ID3_Field::ParseBinary(const uchar *buffer, luint posn, size_t nSize)
 {
   size_t bytesUsed = nSize - posn;
   
-  if (__lFixedLength != -1)
+  if (__ulFixedLength > 0)
   {
-    bytesUsed = MIN(__lFixedLength, bytesUsed);
+    bytesUsed = MIN(__ulFixedLength, bytesUsed);
   }
     
   Set(&buffer[posn], bytesUsed);
@@ -166,6 +166,9 @@ ID3_Field::RenderBinary(uchar *buffer)
 
 
 // $Log$
+// Revision 1.2  2000/04/18 22:10:20  eldamitri
+// Moved field_binary.cpp from src/id3/ to src/
+//
 // Revision 1.13  2000/04/17 02:31:35  eldamitri
 // Updated parameters of certain methods with const modifier to match
 // declaration.

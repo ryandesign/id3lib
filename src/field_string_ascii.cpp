@@ -48,7 +48,7 @@ void ID3_Field::Set(const char *sString)
   if (sString != NULL)
   {
     Clear();
-    size_t nStrLen = (-1 == __lFixedLength) ? strlen(sString) : __lFixedLength;
+    size_t nStrLen = (0 == __ulFixedLength) ? strlen(sString) : __ulFixedLength;
     unicode_t *temp = new unicode_t[nStrLen + 1];
     if (NULL == temp)
     {
@@ -138,10 +138,10 @@ ID3_Field::ParseASCIIString(const uchar *buffer, luint posn, size_t nSize)
   size_t bytesUsed = 0;
   char *temp = NULL;
   
-  if (__lFixedLength != -1)
+  if (__ulFixedLength > 0)
   {
     // The string is of fixed length
-    bytesUsed = __lFixedLength;
+    bytesUsed = __ulFixedLength;
   }
   else if (!(__ulFlags & ID3FF_NULL) || (__ulFlags & ID3FF_NULLDIVIDE))
   {
@@ -245,6 +245,9 @@ luint ID3_Field::RenderASCIIString(uchar *buffer)
 }
 
 // $Log$
+// Revision 1.2  2000/04/18 22:10:56  eldamitri
+// Moved field_string_ascii.cpp from src/id3/ to src/
+//
 // Revision 1.20  2000/04/17 02:31:35  eldamitri
 // Updated parameters of certain methods with const modifier to match
 // declaration.

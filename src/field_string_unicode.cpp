@@ -48,7 +48,7 @@ ID3_Field& ID3_Field::operator= (const unicode_t *string)
 void ID3_Field::Set(const unicode_t *string)
 {
   luint nBytes =
-    (-1 == __lFixedLength) ? ucslen(string) : __lFixedLength;
+    (0 == __ulFixedLength) ? ucslen(string) : __ulFixedLength;
   
   // we can simply increment the nBytes count here because we just pilfer
   // the NULL which is present in the string which was passed to us
@@ -200,9 +200,9 @@ ID3_Field::ParseUnicodeString(const uchar *buffer, luint posn, size_t nSize)
 {
   size_t nBytes = 0;
   unicode_t *temp = NULL;
-  if (__lFixedLength != -1)
+  if (__ulFixedLength > 0)
   {
-    nBytes = __lFixedLength;
+    nBytes = __ulFixedLength;
   }
   else
   {
@@ -344,6 +344,9 @@ luint ID3_Field::RenderUnicodeString(uchar *buffer)
 }
 
 // $Log$
+// Revision 1.2  2000/04/18 22:11:08  eldamitri
+// Moved field_string_unicode.cpp from src/id3/ to src/
+//
 // Revision 1.16  2000/04/08 04:37:19  eldamitri
 // Changed new ANSI-standard C++ include headers to old-style headers.
 //
