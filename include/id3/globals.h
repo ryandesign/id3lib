@@ -84,8 +84,11 @@ typedef long           double ldoub;
 
 typedef uint32*               bitset;
 typedef uint16                unicode_t;
-typedef size_t                index_t;
 typedef uint16                flags_t;
+/* this needs to be done for compatibility with Sun Solaris */
+#if !defined index_t
+#define index_t               size_t
+#endif
 const unicode_t NULL_UNICODE = (unicode_t) '\0';
 
 /* These macros are used to make the C and C++ declarations for enums and
