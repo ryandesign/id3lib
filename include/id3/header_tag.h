@@ -1,3 +1,4 @@
+// -*- C++ -*-
 // $Id$
 
 // id3lib: a C++ library for creating and manipulating id3v1/v2 tags
@@ -46,7 +47,7 @@ public:
 
   bool   SetSpec(ID3_V2Spec);
   size_t Size() const;
-  size_t Render(uchar *buffer) const;
+  void Render(ID3_Writer&) const;
   bool Parse(ID3_Reader&);
   ID3_TagHeader& operator=(const ID3_TagHeader&hdr)
   { this->ID3_Header::operator=(hdr); return *this; }
@@ -65,6 +66,13 @@ public:
     return changed;
   }
   bool GetExtended() const { return _flags.test(EXTENDED); }
+  bool SetExperimental(bool b)
+  {
+    bool changed = _flags.set(EXPERIMENTAL, b);
+    _changed = _changed || changed;
+    return changed;
+  }
+  bool GetExperimental() const { return _flags.test(EXPERIMENTAL); }
 
   // id3v2 tag header signature:  $49 44 33 MM mm GG ss ss ss ss
   // MM = major version (will never be 0xFF)
