@@ -22,14 +22,14 @@
 // id3lib.  These files are distributed with id3lib at
 // http://download.sourceforge.net/id3lib/
 
+#if defined HAVE_CONFIG_H
+#  include <config.h>
+#endif
+
 #include "uint28.h"
 #include "readers.h"
 #include "reader_decorators.h"
 #include "writers.h"
-
-#if defined HAVE_CONFIG_H
-#  include <config.h>
-#endif
 
 #if defined HAVE_IOMANIP_H
 #  include "iomanip.h"
