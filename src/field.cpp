@@ -1009,7 +1009,7 @@ size_t ID3_FieldImpl::BinSize() const
     }
     if (enc == ID3TE_UNICODE)
     {
-      size *= 2;
+      size *= 2; // FIXME: I guess this is wrong
     }
   }
   return size;
@@ -1139,6 +1139,12 @@ void ID3_FieldImpl::Render(ID3_Writer& writer) const
   }
 }
 
+
+/** Copies the content of one field to another.
+ *  WOW, this is another strange conditional function.
+ *  It copies the content BUT only if the types match from the start.
+ *  Strange (Ralf)
+ */
 ID3_Field &
 ID3_FieldImpl::operator=( const ID3_Field &rhs )
 {
@@ -1172,6 +1178,12 @@ ID3_FieldImpl::operator=( const ID3_Field &rhs )
   return *this;
 }
 
+
+/** Sets the encoding of the underlaying text.
+ *  Please note that the id3-spec does not allow size-limited texts with encodings other than ASCII.
+ *  Also note that you should set the matching encoding field or because write operations are made
+ *  with the TEXT_ENC field value.
+ */
 bool ID3_FieldImpl::SetEncoding(ID3_TextEnc enc)
 {
   bool changed = this->IsEncodable() && (enc != this->GetEncoding()) &&
