@@ -131,10 +131,12 @@ protected:
   
   void       RenderV1ToHandle();
   void       RenderV2ToHandle();
-  size_t     ParseFromHandle();
-  void       ParseID3v1();
-  void       ParseLyrics3();
-  void       ParseMusicMatch();
+  void       ParseFromHandle(FILE*);
+  size_t     ParseID3v2(FILE*);
+  size_t     ParseID3v1(FILE*);
+  size_t     ParseLyrics3(FILE*);
+  size_t     ParseLyrics3v2(FILE*);
+  size_t     ParseMusicMatch(FILE*);
   
 private:
   ID3_TagHeader __hdr;          // information relevant to the tag header
