@@ -232,7 +232,7 @@ namespace id3
   bool exists(const char *name)
   {
     ifstream file(name, ios::nocreate);
-    return file.is_open();
+    return file.is_open() != 0;
   }
   
   ID3_Err ID3_CreateFile(const char* name, fstream& file)
