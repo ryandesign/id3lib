@@ -20,16 +20,34 @@
 #include "tag.h"
 
 ID3_Frame::ID3_Frame(ID3_FrameID id)
+  : __bHasChanged(false),
+    __auiFieldBits(NULL),
+    __ulNumFields(0),
+    __apFields(NULL)
 {
-  __ucVersion  = ID3_TAGVERSION;
-  __ucRevision = ID3_TAGREVISION;
-  __ulNumFields = 0;
-  __apFields = NULL;
-  __sGroupingID[0] = 0;
-  __sEncryptionID[0] = 0;
-  __bCompression = true;
-  __bReadOnly = false;
+  __sEncryptionID[0] = '\0';
+  __sGroupingID[0]   = '\0';
   
+  InitFieldBits();
+  SetID(id);
+}
+
+ID3_Frame::ID3_Frame(const ID3_FrameHeader &hdr)
+  : __bHasChanged(false),
+    __auiFieldBits(NULL),
+    __ulNumFields(0),
+    __apFields(NULL),
+    __FrmHdr(hdr)
+{
+  __sEncryptionID[0] = '\0';
+  __sGroupingID[0]   = '\0';
+  
+  InitFieldBits();
+  InitFields(__FrmHdr.GetFrameDef());
+}
+
+void ID3_Frame::InitFieldBits()
+{
   luint lWordsForFields =
     (((luint) ID3FN_LASTFIELDID) - 1) / (sizeof(luint) * 8);
   
@@ -37,7 +55,11 @@ ID3_Frame::ID3_Frame(ID3_FrameID id)
   {
     lWordsForFields++;
   }
-    
+   
+  if (__auiFieldBits != NULL)
+  {
+    delete [] __auiFieldBits;
+  }
   __auiFieldBits = new luint[lWordsForFields];
   if (NULL == __auiFieldBits)
   {
@@ -48,10 +70,7 @@ ID3_Frame::ID3_Frame(ID3_FrameID id)
   {
     __auiFieldBits[i] = 0;
   }
-    
-  SetID(id);
 }
-
 
 ID3_Frame::~ID3_Frame(void)
 {
@@ -66,7 +85,7 @@ ID3_Frame::~ID3_Frame(void)
 
 void ID3_Frame::Clear(void)
 {
-  if (__ulNumFields && __apFields)
+  if (__ulNumFields > 0 && NULL != __apFields)
   {
     for (luint i = 0; i < __ulNumFields; i++)
     {
@@ -75,88 +94,85 @@ void ID3_Frame::Clear(void)
       
     delete [] __apFields;
     
-    __apFields = NULL;
-    __ulNumFields = 0;
     __bHasChanged = true;
   }
-  
-  return ;
+
+  __FrmHdr.Clear();
+  __sEncryptionID[0] = '\0';
+  __sGroupingID[0]   = '\0';
+  __ulNumFields      = 0;
+  __apFields         = NULL;
 }
 
-
-void ID3_Frame::SetID(ID3_FrameID id)
+void ID3_Frame::InitFields(const ID3_FrameDef *info)
 {
-  ID3_FrameDef *info;
-  
-  Clear();
-  
-  if (id != ID3FID_NOFRAME)
+  if (NULL == info)
   {
-    info = ID3_FindFrameDef(id);
-    if (NULL == info)
-    {
-      ID3_THROW(ID3E_InvalidFrameID);
-    }
+    ID3_THROW(ID3E_InvalidFrameID);
+  }
+      
+  __ulNumFields = 0;
+      
+  while (info->aeFieldDefs[__ulNumFields].eID != ID3FN_NOFIELD)
+  {
+    __ulNumFields++;
+  }
+      
+  __apFields = new ID3_Field * [__ulNumFields];
+  if (NULL == __apFields)
+  {
+    ID3_THROW(ID3E_NoMemory);
+  }
 
-    __FrameID = id;
-      
-    __ulNumFields = 0;
-      
-    while (info->aeFieldDefs[__ulNumFields].eID != ID3FN_NOFIELD)
-    {
-      __ulNumFields++;
-    }
-      
-    __apFields = new ID3_Field * [__ulNumFields];
-    if (NULL == __apFields)
+  for (luint i = 0; i < __ulNumFields; i++)
+  {
+    __apFields[i] = new ID3_Field;
+    if (NULL == __apFields[i])
     {
       ID3_THROW(ID3E_NoMemory);
     }
 
-    for (luint i = 0; i < __ulNumFields; i++)
-    {
-      __apFields[i] = new ID3_Field;
-      if (NULL == __apFields[i])
-      {
-        ID3_THROW(ID3E_NoMemory);
-      }
-
-      __apFields[i]->__eName        = info->aeFieldDefs[i].eID;
-      __apFields[i]->__eType        = info->aeFieldDefs[i].eType;
-      __apFields[i]->__lFixedLength = info->aeFieldDefs[i].lFixedLength;
-      __apFields[i]->__ucIOVersion  = info->aeFieldDefs[i].ucVersion;
-      __apFields[i]->__ucIORevision = info->aeFieldDefs[i].ucRevision;
-      __apFields[i]->__eControl     = info->aeFieldDefs[i].eControl;
-      __apFields[i]->__ulFlags      = info->aeFieldDefs[i].ulFlags;
+    __apFields[i]->__eName        = info->aeFieldDefs[i].eID;
+    __apFields[i]->__eType        = info->aeFieldDefs[i].eType;
+    __apFields[i]->__lFixedLength = info->aeFieldDefs[i].lFixedLength;
+    __apFields[i]->__ucIOVersion  = info->aeFieldDefs[i].ucVersion;
+    __apFields[i]->__ucIORevision = info->aeFieldDefs[i].ucRevision;
+    __apFields[i]->__eControl     = info->aeFieldDefs[i].eControl;
+    __apFields[i]->__ulFlags      = info->aeFieldDefs[i].ulFlags;
             
-      // tell the frame that this field is present
-      BS_SET(__auiFieldBits, __apFields[i]->__eName);
-    }
-        
-    __bHasChanged = true;
+    // tell the frame that this field is present
+    BS_SET(__auiFieldBits, __apFields[i]->__eName);
   }
+        
+  __bHasChanged = true;
+}
+
+void ID3_Frame::SetID(ID3_FrameID id)
+{
+  Clear();
   
-  return ;
+  if (id != ID3FID_NOFRAME)
+  {
+    __FrmHdr.SetFrameID(id);
+    InitFields(__FrmHdr.GetFrameDef());
+  }
 }
 
 
 ID3_FrameID ID3_Frame::GetID(void) const
 {
-  return __FrameID;
+  return __FrmHdr.GetFrameID();
 }
 
 
 void ID3_Frame::SetVersion(uchar ver, uchar rev)
 {
-  if (__ucVersion != ver || __ucRevision != rev)
+  if (__FrmHdr.GetVersion() != ver || __FrmHdr.GetRevision() != rev)
   {
     __bHasChanged = true;
   }
-    
-  __ucVersion  = ver;
-  __ucRevision = rev;
   
-  return ;
+  __FrmHdr.SetVersion(ver, rev);
 }
 
 lsint ID3_Frame::FindField(ID3_FieldID fieldName) const
@@ -253,11 +269,7 @@ void ID3_Frame::UpdateStringTypes(void)
 luint ID3_Frame::Size(void)
 {
   luint bytesUsed = 0;
-  //float factor = 1.0;
-  ID3_FrameHeader header;
-  
-  header.SetVersion(__ucVersion, __ucRevision);
-  bytesUsed += header.Size();
+  bytesUsed += __FrmHdr.Size();
   
   if (strlen(__sEncryptionID))
   {
@@ -275,7 +287,7 @@ luint ID3_Frame::Size(void)
   
   for (luint i = 0; i < __ulNumFields; i++)
   {
-    __apFields[i]->SetVersion(__ucVersion, __ucRevision);
+    __apFields[i]->SetVersion(__FrmHdr.GetVersion(), __FrmHdr.GetRevision());
     bytesUsed += __apFields[i]->BinSize();
   }
   
@@ -316,6 +328,9 @@ ID3_Frame::operator=( const ID3_Frame &rFrame )
 }
 
 // $Log$
+// Revision 1.10  1999/12/26 15:10:48  scott
+// Minor reformatting.
+//
 // Revision 1.9  1999/12/17 16:13:04  scott
 // Updated opening comment block.
 //
