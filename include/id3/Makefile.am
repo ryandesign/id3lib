@@ -37,10 +37,9 @@ noinst_HEADERS =                \
   header.h                      \
   header_frame.h                \
   header_tag.h                  \
-  reader_decorators.h           \
-  readers_compressed.h          \
+  io_decorators.h               \
+  io_helpers.h                  \
+  io_strings.h                  \
   strings.h                     \
   uint28.h                      \
-  utils.h                       \
-  writer_decorators.h           \
-  writers_compressed.h          
+  utils.h                       
