@@ -65,7 +65,7 @@ ID3_Frame::ID3_Frame(ID3_FrameID id)
     __grouping_id('\0'),
     __bad_parse(false)
 {
-  
+  this->SetSpec(ID3V2_LATEST);
   this->_InitFieldBits();
   this->SetID(id);
 }
