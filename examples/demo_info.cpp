@@ -145,7 +145,6 @@ void PrintInformation(const ID3_Tag &myTag)
         }
         case ID3FID_INVOLVEDPEOPLE:
         {
-          // This isn't the right way to do it---will only get first person
           size_t nItems = myFrame->Field(ID3FN_TEXT).GetNumTextItems();
           for (size_t nIndex = 1; nIndex <= nItems; nIndex++)
           {
