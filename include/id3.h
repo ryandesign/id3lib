@@ -93,6 +93,6 @@ extern "C"
 
 #ifdef __cplusplus
 }
-#endif __cplusplus
+#endif /*__cplusplus*/
 
 #endif /* __ID3LIB_ID3H__ */
