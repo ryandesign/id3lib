@@ -28,7 +28,6 @@ id3include_HEADERS = $(the_headers)
 
 noinst_HEADERS =                \
   debug.h                       \
-  error.h                       \
   field_def.h                   \
   field_impl.h                  \
   flags.h                       \
