@@ -1,5 +1,5 @@
 /* zconf.h -- configuration of the zlib compression library
- * Copyright (C) 1995-1998 Jean-loup Gailly.
+ * Copyright (C) 1995-2002 Jean-loup Gailly.
  * For conditions of distribution and use, see copyright notice in zlib.h 
  */
 
@@ -247,9 +247,6 @@ typedef uLong FAR uLongf;
 #endif
 #ifndef z_off_t
 #  define  z_off_t long
-#endif
-#if defined(WINCE) && !defined(isgraph) // TODO: check for version <=2.11
-#  include <ctype2.h>           // NOTE: you must also link in ctype2.lib
 #endif
 
 /* MVS linker does not support external names larger than 8 bytes */
