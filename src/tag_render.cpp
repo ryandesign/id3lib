@@ -190,7 +190,7 @@ size_t ID3_Tag::RenderV2(uchar *buffer) const
   // set up the encryption and grouping IDs
     
   // ...
-  size_t frame_bytes = RenderFrames(&buffer[bytesUsed], __frames);
+  size_t frame_bytes = RenderFrames(&buffer[bytesUsed], _frames);
   if (frame_bytes == 0)
   {
     return 0;
@@ -282,7 +282,7 @@ size_t ID3_Tag::Size() const
   {
     return 0;
   }
-  ID3_Elem *cur = __frames;
+  ID3_Elem *cur = _frames;
   ID3_TagHeader hdr;
 
   hdr.SetSpec(this->GetSpec());
@@ -336,7 +336,7 @@ size_t ID3_Tag::PaddingSize(size_t curSize) const
   luint newSize = 0;
   
   // if padding is switched off or there is no attached file
-  if (! __is_padded || !this->GetPrependedBytes())
+  if (! _is_padded || !this->GetPrependedBytes())
   {
     return 0;
   }

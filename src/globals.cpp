@@ -30,21 +30,21 @@
 #include <config.h>
 #endif
 
-#ifdef __cplusplus
+#ifdef _cplusplus
 extern "C"
 {
 #endif
 
-  const char * const ID3LIB_NAME           = __ID3LIB_NAME;
-  const char * const ID3LIB_DATE           = __ID3LIB_DATE;
-  const char * const ID3LIB_VERSION        = __ID3LIB_VERSION;
-  const char * const ID3LIB_FULL_NAME      = __ID3LIB_FULLNAME;
-  const int          ID3LIB_MAJOR_VERSION  = __ID3LIB_MAJOR_VERSION;
-  const int          ID3LIB_MINOR_VERSION  = __ID3LIB_MINOR_VERSION;
-  const int          ID3LIB_PATCH_VERSION  = __ID3LIB_PATCH_VERSION;
-  const int          ID3LIB_INTERFACE_AGE  = __ID3LIB_INTERFACE_AGE;
-  const int          ID3LIB_BINARY_AGE     = __ID3LIB_BINARY_AGE;
+  const char * const ID3LIB_NAME           = _ID3LIB_NAME;
+  const char * const ID3LIB_DATE           = _ID3LIB_DATE;
+  const char * const ID3LIB_VERSION        = _ID3LIB_VERSION;
+  const char * const ID3LIB_FULL_NAME      = _ID3LIB_FULLNAME;
+  const int          ID3LIB_MAJOR_VERSION  = _ID3LIB_MAJOR_VERSION;
+  const int          ID3LIB_MINOR_VERSION  = _ID3LIB_MINOR_VERSION;
+  const int          ID3LIB_PATCH_VERSION  = _ID3LIB_PATCH_VERSION;
+  const int          ID3LIB_INTERFACE_AGE  = _ID3LIB_INTERFACE_AGE;
+  const int          ID3LIB_BINARY_AGE     = _ID3LIB_BINARY_AGE;
 
-#ifdef __cplusplus
+#ifdef _cplusplus
 }
 #endif

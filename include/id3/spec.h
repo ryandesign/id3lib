@@ -24,8 +24,8 @@
 // id3lib.  These files are distributed with id3lib at
 // http://download.sourceforge.net/id3lib/
 
-#ifndef __ID3LIB_SPEC_H__
-#define __ID3LIB_SPEC_H__
+#ifndef _ID3LIB_SPEC_H_
+#define _ID3LIB_SPEC_H_
 
 #include "globals.h"
 
@@ -54,4 +54,4 @@ public:
   }
 };
 
-#endif /* __ID3LIB_SPEC_H__ */
+#endif /* _ID3LIB_SPEC_H_ */

@@ -24,8 +24,8 @@
 // id3lib.  These files are distributed with id3lib at
 // http://download.sourceforge.net/id3lib/
 
-#ifndef __ID3LIB_INT28_H__
-#define __ID3LIB_INT28_H__
+#ifndef _ID3LIB_INT28_H_
+#define _ID3LIB_INT28_H_
 
 #include <iostream.h>
 #include "globals.h"
@@ -46,9 +46,9 @@ protected:
   void set(uchar val[sizeof(uint32)]);
 
 private:
-  uchar __acValue[sizeof(uint32)]; // the integer stored as a uchar array
-  uint32 __nValue;
+  uchar _acValue[sizeof(uint32)]; // the integer stored as a uchar array
+  uint32 _nValue;
 }
 ;
 
-#endif /* __ID3LIB_INT28_H__ */
+#endif /* _ID3LIB_INT28_H_ */

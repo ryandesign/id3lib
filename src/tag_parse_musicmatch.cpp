@@ -66,7 +66,7 @@ ID3_Frame* MM_ParseTextField(fstream& file, ID3_FrameID id, const char* desc = "
         continue;
       }
       char* len_str = new char[digits + 1];
-      sprintf(len_str, "%lu", len);
+      sprintf(len_str, "%lu", static_cast<long unsigned>(len));
       delete [] text;
       text = len_str;
     }
@@ -327,7 +327,7 @@ size_t ParseMusicMatch(ID3_Tag& tag, fstream& file)
   if (trk_num > 0)
   {
     char trk_str[5];
-    sprintf(trk_str, "%lu", trk_num);
+    sprintf(trk_str, "%lu", static_cast<unsigned long>(trk_num));
     ID3_Frame* frame = new ID3_Frame(ID3FID_TRACKNUM);
     if (frame)
     {

@@ -25,8 +25,8 @@
  * http://download.sourceforge.net/id3lib/
  */
 
-#ifndef __ID3LIB_ID3_H__
-#define __ID3LIB_ID3_H__
+#ifndef _ID3LIB_ID3_H_
+#define _ID3LIB_ID3_H_
 
 #include "id3/globals.h"
 
@@ -35,9 +35,9 @@ extern "C"
 {
 #endif /* __cplusplus */
 
-  typedef struct { char __dummy; } ID3Tag;
-  typedef struct { char __dummy; } ID3Frame;
-  typedef struct { char __dummy; } ID3Field;
+  typedef struct { char _dummy; } ID3Tag;
+  typedef struct { char _dummy; } ID3Frame;
+  typedef struct { char _dummy; } ID3Field;
 
   /* tag wrappers */
   ID3_C_EXPORT ID3Tag     *ID3Tag_New                  (void);
@@ -99,4 +99,4 @@ extern "C"
 }
 #endif /*__cplusplus*/
 
-#endif /* __ID3LIB_ID3_H__ */
+#endif /* _ID3LIB_ID3_H_ */

@@ -24,8 +24,8 @@
 // id3lib.  These files are distributed with id3lib at
 // http://download.sourceforge.net/id3lib/
 
-#ifndef __ID3LIB_MISC_SUPPORT_H__
-#define __ID3LIB_MISC_SUPPORT_H__
+#ifndef _ID3LIB_MISC_SUPPORT_H_
+#define _ID3LIB_MISC_SUPPORT_H_
 
 #include "tag.h"
 
@@ -96,4 +96,4 @@ ID3_Frame* ID3_GetSyncLyricsInfo(const ID3_Tag *tag, const char *lang,
 ID3_Frame* ID3_GetSyncLyrics(const ID3_Tag *tag, const char *lang, 
                              const char *desc, char *pData, size_t &size);
 
-#endif /* __ID3LIB_MISC_SUPPORT_H__ */
+#endif /* _ID3LIB_MISC_SUPPORT_H_ */

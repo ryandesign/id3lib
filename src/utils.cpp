@@ -237,7 +237,6 @@ namespace id3
   
   ID3_Err ID3_CreateFile(const char* name, fstream& file)
   {
-    size_t size = 0;
     if (file.is_open())
     {
       file.close();

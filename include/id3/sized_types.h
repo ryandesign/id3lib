@@ -30,8 +30,8 @@
  ** limits.h
  **/
 
-#ifndef __SIZED_TYPES_H__
-#define __SIZED_TYPES_H__ 
+#ifndef _SIZED_TYPES_H_
+#define _SIZED_TYPES_H_ 
 
 #include <limits.h>
 
@@ -82,5 +82,5 @@ typedef short            int32;
 #error This machine has no 32-bit type
 #endif /* UINT_MAX == 0xfffffffful */
 
-#endif /* __SIZED_TYPES_H__ */
+#endif /* _SIZED_TYPES_H_ */
 
