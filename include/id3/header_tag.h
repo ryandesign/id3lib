@@ -57,6 +57,7 @@ public:
     __changed = __changed || changed;
     return changed;
   }
+  bool GetUnsync() const { return __flags.test(UNSYNC); }
 
   // id3v2 tag header signature:  $49 44 33 MM mm GG ss ss ss ss
   // MM = major version (will never be 0xFF)
