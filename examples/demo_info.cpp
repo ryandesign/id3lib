@@ -325,19 +325,18 @@ int main( unsigned int argc, char * const argv[])
   }
 
 #if defined ID3_ENABLE_DEBUG
-  if (args.warning_given)
+  if (args.warning_flag)
   {
-    cout << "warnings turned on" << endl;
     ID3D_INIT_WARNING();
     ID3D_WARNING ( "warnings turned on" );
   }
-  if (args.notice_given)
+  if (args.notice_flag)
   {
-    cout << "notices turned on" << endl;
     ID3D_INIT_NOTICE();
     ID3D_NOTICE ( "notices turned on" );
   }
 #endif
+
 
   const char* filename = NULL;
   for (size_t i = 0; i < args.inputs_num; ++i)
