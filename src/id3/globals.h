@@ -15,13 +15,7 @@
 #ifndef __GLOBALS_H__
 #define __GLOBALS_H__
 
-#if defined HAVE_CONFIG_H
-#include <config.h>
-#endif
-
-#if !defined SIZE_SPECIFIC_TYPES
-#include <wchar.h>
-#endif
+#include <id3/sized_types.h>
 
 /// Shorthand type definition for unsigned char
 typedef       unsigned char   uchar;
@@ -38,13 +32,9 @@ typedef long           double ldoub;
 /// Shorthand type definition for a bitset
 typedef long  unsigned int *  bitset;
 /// Type representation of a 2-byte unicode character
-#if defined SIZE_SPECIFIC_TYPES
 typedef uint16                unicode_t;
 const unicode_t NULL_UNICODE = (unicode_t) '\0';
-#else
-typedef wchar_t               unicode_t;
-const unicode_t NULL_UNICODE = L'\0';
-#endif
+
 /**
  * Enumeration of the types of text encodings: ascii or unicode
  */
