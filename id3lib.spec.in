@@ -155,6 +155,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Fri Jun 23 2000 Scott Haug <scott@id3.org> 3.7.10-1
+- Version 3.7.10
+
 * Wed May 24 2000 Scott Haug <scott@id3.org> 3.7.9-1
 - Version 3.7.9
 
