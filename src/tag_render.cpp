@@ -104,8 +104,19 @@ size_t RenderV1(const ID3_Tag& tag, uchar *buffer)
   pCur = &pCur[ID3_V1_LEN_YEAR];
 
   // Write the COMMENT
+  // Find the comment with the description STR_V1_COMMENT_DESC
   sTemp = ID3_GetComment(&tag, STR_V1_COMMENT_DESC);
-  if (sTemp != NULL)
+  // If no such comment, find the comment with the description ""
+  if (!sTemp)
+  {
+    sTemp = ID3_GetComment(&tag, "");
+  }
+  // If no such comment, find the first comment in the tag
+  if (!sTemp)
+  {
+    sTemp = ID3_GetComment(&tag);
+  }
+  if (sTemp)
   {
     strncpy(pCur, sTemp, ID3_V1_LEN_COMMENT);
     delete [] sTemp;
