@@ -26,7 +26,6 @@
 
 #include <string.h>
 #include <stdio.h>
-#include "tag.h"
 
 #if defined WIN32
 #  include <windows.h>
@@ -66,6 +65,8 @@ static int truncate(const char *path, size_t length)
 #if defined HAVE_CONFIG_H
 #  include <config.h>
 #endif
+
+#include "tag.h"
 
 bool exists(const char *name)
 {
