@@ -484,7 +484,7 @@ void ID3_TagImpl::checkFrames()
     this->checkFrames();
 }
 
-void ID3_TagImpl::AttachFrame(ID3_Frame* frame)
+bool ID3_TagImpl::AttachFrame(ID3_Frame* frame)
 {
   ID3_Frame& testframe = *frame;
 
@@ -495,6 +495,7 @@ void ID3_TagImpl::AttachFrame(ID3_Frame* frame)
     _frames.push_back(frame);
     _cursor = _frames.begin();
     _changed = true;
+    return true;
   }
   else
   {
@@ -502,6 +503,7 @@ void ID3_TagImpl::AttachFrame(ID3_Frame* frame)
       delete frame;
     frame = NULL;
   }
+  return false;
 }
 
 
@@ -641,7 +643,7 @@ ID3_TagImpl::operator=( const ID3_Tag &rTag )
   const ID3_Frame* frame = NULL;
   while (NULL != (frame = iter->GetNext()))
   {
-    this->AttachFrame(new ID3_Frame(*frame));
+    this->AttachFrame(LEAKTESTNEW(ID3_Frame(*frame)));
   }
   delete iter;
   return *this;

@@ -86,7 +86,7 @@ public:
 
   void       AddFrame(const ID3_Frame&);
   void       AddFrame(const ID3_Frame*);
-  void       AttachFrame(ID3_Frame*);
+  bool       AttachFrame(ID3_Frame*);
   ID3_Frame* RemoveFrame(const ID3_Frame *);
 
   size_t     Parse(const uchar*, size_t);

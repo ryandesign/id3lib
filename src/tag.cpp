@@ -518,9 +518,9 @@ void ID3_Tag::AddFrame(const ID3_Frame* frame)
  **
  ** \param frame A pointer to the frame that is being added to the tag.
  **/
-void ID3_Tag::AttachFrame(ID3_Frame *frame)
+bool ID3_Tag::AttachFrame(ID3_Frame *frame)
 {
-  _impl->AttachFrame(frame);
+  return _impl->AttachFrame(frame);
 }
 
 

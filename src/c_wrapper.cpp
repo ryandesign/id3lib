@@ -118,13 +118,15 @@ extern "C"
     }
   }
 
-  ID3_C_EXPORT void CCONV
+  ID3_C_EXPORT bool CCONV
   ID3Tag_AttachFrame(ID3Tag *tag, ID3Frame *frame)
   {
+    bool b = false;
     if (tag)
     {
-      ID3_CATCH(reinterpret_cast<ID3_Tag *>(tag)->AttachFrame(reinterpret_cast<ID3_Frame *>(frame)));
+      ID3_CATCH(b = reinterpret_cast<ID3_Tag *>(tag)->AttachFrame(reinterpret_cast<ID3_Frame *>(frame)));
     }
+    return b;
   }
 
   ID3_C_EXPORT void CCONV

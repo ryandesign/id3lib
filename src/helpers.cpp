@@ -109,7 +109,7 @@ ID3_Frame* id3::v2::setFrameText(ID3_TagImpl& tag, ID3_FrameID id, String text)
   if (!frame)
   {
     frame = LEAKTESTNEW( ID3_Frame(id));
-    tag.AttachFrame(frame);
+    if(!tag.AttachFrame(frame)) return NULL;
   }
   frame->GetField(ID3FN_TEXT)->Set(text.c_str());
 
@@ -284,7 +284,7 @@ ID3_Frame* id3::v2::setComment(ID3_TagImpl& tag, String text, String desc,
   {
     ID3D_NOTICE( "id3::v2::setComment: creating new comment frame" );
     frame = LEAKTESTNEW( ID3_Frame(ID3FID_COMMENT));
-    tag.AttachFrame(frame);
+    if(!tag.AttachFrame(frame)) return NULL;
   }
   if (!frame)
   {
@@ -462,7 +462,7 @@ ID3_Frame* id3::v2::setLyrics(ID3_TagImpl& tag, String text, String desc,
   if (frame == NULL)
   {
     frame = LEAKTESTNEW( ID3_Frame(ID3FID_UNSYNCEDLYRICS));
-    tag.AttachFrame(frame);
+    if(!tag.AttachFrame(frame)) return NULL;
   }
   frame->GetField(ID3FN_LANGUAGE)->Set(lang.c_str());
   frame->GetField(ID3FN_DESCRIPTION)->Set(desc.c_str());
@@ -514,7 +514,7 @@ ID3_Frame* id3::v2::setSyncLyrics(ID3_TagImpl& tag, BString data,
   if (!frame)
   {
     frame = LEAKTESTNEW( ID3_Frame(ID3FID_SYNCEDLYRICS));
-    tag.AttachFrame(frame);
+    if(!tag.AttachFrame(frame)) return NULL;
   }
   frame->GetField(ID3FN_LANGUAGE)->Set(lang.c_str());
   frame->GetField(ID3FN_DESCRIPTION)->Set(desc.c_str());
