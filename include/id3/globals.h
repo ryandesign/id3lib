@@ -293,7 +293,7 @@ ID3_ENUM(ID3_V1Lengths)
 /** A structure for storing the contents of an id3v1 tag.
  **
  ** @author Dirk Mahoney (dirk@id3.org)
- ** @author Scott Thomas Haug (sth2@cs.wustl.edu)
+ ** @author Scott Thomas Haug (scott@id3.org)
  ** @version $Id$
  ** @see ID3_Tag
  **/
