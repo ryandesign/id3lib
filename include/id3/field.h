@@ -35,9 +35,8 @@ struct ID3_FieldDef
   ID3_FieldID   eID;
   ID3_FieldType eType;
   luint         ulFixedLength;
-  uchar         ucVersion;
-  uchar         ucRevision;
-  ID3_VerCtl    eControl;
+  ID3_V2Spec    eSpecBegin;
+  ID3_V2Spec    eSpecEnd;
   luint         ulFlags;
   ID3_FieldID   eLinkedField;
   static const ID3_FieldDef* DEFAULT;
@@ -345,12 +344,12 @@ public:
    **/
   void          ToFile(const char *sInfo);
   
-  ID3_Field    &operator=( const ID3_Field & );
+  ID3_Field&    operator=( const ID3_Field & );
 
 private:
   luint         BinSize(const bool withExtras = true);
   bool          HasChanged(void);
-  void          SetVersion(const uchar ver, const uchar rev);
+  void          SetSpec(ID3_V2Spec);
   luint         Render(uchar *buffer);
   luint         Parse(const uchar *buffer, const luint posn, const luint buffSize);
 
@@ -361,12 +360,10 @@ private:
   ID3_FieldID   __eName;           // the ID of this field
   ID3_FieldType __eType;           // what type is this field or should be
   luint         __ulFixedLength;   // length of field (fixed if positive)
-  uchar         __ucIOVersion;     // specific version
-  uchar         __ucIORevision;    // specific revision
-  ID3_VerCtl    __eControl;        // render if ver/rev is higher, or lower than frame::version, frame::revision?
+  ID3_V2Spec    __eSpecBegin;      // spec end
+  ID3_V2Spec    __eSpecEnd;        // spec begin
   luint         __ulFlags;         // special field flags
-  uchar         __ucVersion;       // the version being rendered/parsed
-  uchar         __ucRevision;      // the revision being rendered/parsed
+  ID3_V2Spec    __spec;            // the spec being rendered
   bool          __bHasChanged;     // field changed since last parse/render?
   uchar        *__sData;
   luint         __ulSize;
