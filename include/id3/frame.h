@@ -27,6 +27,7 @@
 #ifndef __ID3LIB_FRAME_H__
 #define __ID3LIB_FRAME_H__
 
+#include "spec.h"
 #include "field.h"
 #include "header_frame.h"
 
@@ -45,7 +46,7 @@ class ID3_Tag;
  ** @see ID3_Field
  ** @see ID3_Err
  **/
-class ID3_Frame
+class ID3_Frame : public ID3_Speccable
 {
   friend ID3_Tag;
 public:
@@ -126,7 +127,8 @@ protected:
   void        InitFieldBits(void);
   bool        HasChanged(void) const;
   void        Parse(uchar *buffer, luint size);
-  void        SetSpec(ID3_V2Spec);
+  void        SetSpec(const ID3_V2Spec);
+  ID3_V2Spec  GetSpec() const;
   void        UpdateStringTypes(void);
   void        UpdateFieldDeps(void);
   luint       Size(void);
