@@ -230,8 +230,6 @@ luint ID3_Tag::Link(const char *fileInfo, bool parseID3v1, bool parseLyrics3)
  **/
 luint ID3_Tag::Link(const char *fileInfo, const luint tag_types)
 {
-  luint posn = 0;
-  
   __tags_to_parse = tag_types;
   
   if (NULL == fileInfo)
@@ -266,9 +264,7 @@ luint ID3_Tag::Link(const char *fileInfo, const luint tag_types)
   // the file size represents the file size _without_ the beginning ID3v2 tag
   // info
   __file_size -= __orig_tag_size;
-  posn = __orig_tag_size;
-  
-  return posn;
+  return __orig_tag_size;
 }
 
 /** Renders the tag and writes it to the attached file; the type of tag
