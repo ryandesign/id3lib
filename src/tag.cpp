@@ -24,11 +24,23 @@
 // id3lib.  These files are distributed with id3lib at
 // http://download.sourceforge.net/id3lib/
 
-#include "tag.h"
-
 #if defined HAVE_CONFIG_H
 #include <config.h>
 #endif
+
+#if defined HAVE_SYS_PARAM_H
+#include <sys/param.h>
+#endif
+
+#include "tag.h"
+
+#ifdef  MAXPATHLEN
+#  define ID3_PATH_LENGTH   (MAXPATHLEN + 1)
+#elif   defined (PATH_MAX)
+#  define ID3_PATH_LENGTH   (PATH_MAX + 1)
+#else   /* !MAXPATHLEN */
+#  define ID3_PATH_LENGTH   (2048 + 1)
+#endif  /* !MAXPATHLEN && !PATH_MAX */
 
 luint ID3_Tag::s_ulInstances = 0;
 
@@ -66,6 +78,7 @@ ID3_Tag::ID3_Tag(const ID3_Tag &tag)
 
 void ID3_Tag::SetupTag(char *fileInfo)
 {
+  __sFileName       = new char[ID3_PATH_LENGTH];
   __ucVersion       = ID3v2_VERSION;
   __ucRevision      = ID3v2_REVISION;
   __pFrameList      = NULL;
@@ -107,6 +120,8 @@ ID3_Tag::~ID3_Tag(void)
   {
     // Do something here!
   }
+
+  delete [] __sFileName;
   
 }
 
@@ -397,6 +412,9 @@ ID3_Tag::operator=( const ID3_Tag &rTag )
 }
 
 // $Log$
+// Revision 1.2  2000/04/18 22:12:51  eldamitri
+// Moved tag.cpp from src/id3/ to src/
+//
 // Revision 1.14  2000/04/05 05:21:15  eldamitri
 // Updated initial comment information to reflect license, copyright
 // change.
