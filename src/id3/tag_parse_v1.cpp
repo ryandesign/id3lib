@@ -108,7 +108,7 @@ void ID3_Tag::ParseID3v1(void)
       ID3_RemoveTrailingSpaces(tagID3v1.sComment, LEN_V1_COMMENT - 1);
       ID3_AddTrack(this, tagID3v1.sComment[LEN_V1_COMMENT - 1]);
     }
-    ID3_AddComment(this, tagID3v1.sComment);
+    ID3_AddComment(this, tagID3v1.sComment, STR_V1_COMMENT_DESC);
       
     // the GENRE field/frame
     fread(&tagID3v1.ucGenre, 1, LEN_V1_GENRE, __fFileHandle);
@@ -119,6 +119,9 @@ void ID3_Tag::ParseID3v1(void)
 }
 
 // $Log$
+// Revision 1.9  1999/12/01 22:19:51  scott
+// (ParseID3v1): Minor fix for windows compatibility (thanks elrod).
+//
 // Revision 1.8  1999/12/01 18:00:59  scott
 // Changed all of the #include <id3/*> to #include "*" to help ensure that
 // the sources are searched for in the right places (and to make compiling under
