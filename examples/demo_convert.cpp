@@ -86,7 +86,7 @@ void DisplayTags(ostream &os, luint nTags)
 
 int main( unsigned int argc, char *argv[])
 {
-  int ulFlag = ID3TT_ID3;
+  flags_t ulFlag = ID3TT_ALL;
   int iOpt;
   bool bError = false;
   bool bStrip = false;
@@ -114,8 +114,8 @@ int main( unsigned int argc, char *argv[])
 
     switch (iOpt)
     {
-      case '1': ulFlag = ID3TT_ID3V1;        break;
-      case '2': ulFlag = ID3TT_ID3V2;        break;
+      case '1': ulFlag = ID3TT_ID3V1;   break;
+      case '2': ulFlag = ID3TT_ID3V2;   break;
       case 's': bStrip = true;          break;
       case 'v': PrintVersion(argv[0]);  exit (0);
       case 'h': PrintUsage(argv[0]);    exit (0);
