@@ -20,6 +20,7 @@
 #include <memory.h>
 #include "header_frame.h"
 #include "error.h"
+#include "misc_support.h"
 
 void ID3_FrameHeader::SetFrameID(ID3_FrameID id)
 {
@@ -31,7 +32,8 @@ void ID3_FrameHeader::SetFrameID(ID3_FrameID id)
 
 luint ID3_FrameHeader::Size(void)
 {
-  return __pInfo->ucFrameIDBytes + __pInfo->ucFrameSizeBytes + __pInfo->ucFrameFlagsBytes;
+  return __pInfo->ucFrameIDBytes + __pInfo->ucFrameSizeBytes + 
+    __pInfo->ucFrameFlagsBytes;
 }
 
 
@@ -48,15 +50,11 @@ luint ID3_FrameHeader::GetFrameInfo(ID3_FrameAttr &attr, uchar *buffer)
   
   attr.ulSize = 0;
   
-  for(i = 0; i < __pInfo->ucFrameSizeBytes; i++)
-    attr.ulSize |= buffer[posn + i] << ((__pInfo->ucFrameSizeBytes - 1 - i) * 8);
+  attr.ulSize = ParseNumber(&buffer[posn], __pInfo->ucFrameSizeBytes);
     
   posn += __pInfo->ucFrameSizeBytes;
   
-  attr.ulFlags = 0;
-  
-  for(i = 0; i < __pInfo->ucFrameFlagsBytes; i++)
-    attr.ulFlags |= buffer[posn + i] << ((__pInfo->ucFrameFlagsBytes - 1 - i) * 8);
+  attr.ulFlags = ParseNumber(&buffer[posn], __pInfo->ucFrameFlagsBytes);
     
   posn += __pInfo->ucFrameFlagsBytes;
   
@@ -73,26 +71,26 @@ luint ID3_FrameHeader::Render(uchar *buffer)
 
   frameDef = ID3_FindFrameDef(__eFrameID);
   if (NULL == frameDef)
+  {
     ID3_THROW(ID3E_InvalidFrameID);
+  }
 
   if(__pInfo->ucFrameIDBytes < strlen(frameDef->sLongTextID))
+  {
     textID = frameDef->sShortTextID;
+  }
   else
+  {
     textID = frameDef->sLongTextID;
+  }
     
   memcpy(&buffer[bytesUsed], (uchar *) textID, __pInfo->ucFrameIDBytes);
   bytesUsed += __pInfo->ucFrameIDBytes;
   
-  for(i = 0; i < __pInfo->ucFrameSizeBytes; i++)
-    buffer[bytesUsed + i] = 
-      (uchar)((__ulDataSize >> ((__pInfo->ucFrameSizeBytes - i - 1) * 8)) & 0xFF);
-    
+  RenderNumber(&buffer[bytesUsed], __ulDataSize, __pInfo->ucFrameSizeBytes);
   bytesUsed += __pInfo->ucFrameSizeBytes;
   
-  for(i = 0; i < __pInfo->ucFrameFlagsBytes; i++)
-    buffer[bytesUsed + i] = 
-      (uchar)((__ulFlags >> ((__pInfo->ucFrameFlagsBytes - i - 1) * 8)) & 0xFF);
-    
+  RenderNumber(&buffer[bytesUsed], __ulFlags, __pInfo->ucFrameFlagsBytes);
   bytesUsed += __pInfo->ucFrameFlagsBytes;
   
   return bytesUsed;
@@ -101,6 +99,9 @@ luint ID3_FrameHeader::Render(uchar *buffer)
 
 
 // $Log$
+// Revision 1.8  1999/12/17 16:13:04  scott
+// Updated opening comment block.
+//
 // Revision 1.7  1999/12/01 18:00:59  scott
 // Changed all of the #include <id3/*> to #include "*" to help ensure that
 // the sources are searched for in the right places (and to make compiling under
