@@ -306,3 +306,15 @@ String dami::toString(uint32 val)
   }
   return text;
 }
+
+WString dami::toWString(const unicode_t buf[], size_t len)
+{
+  WString str;
+  str.reserve(len);
+
+  for (size_t i = 0; i < len; ++i)
+  {
+    str += static_cast<WString::value_type>(buf[i]);
+  }
+  return str;
+}

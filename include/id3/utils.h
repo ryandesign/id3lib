@@ -73,6 +73,7 @@ namespace dami
   String renderNumber(uint32 val, size_t size = sizeof(uint32));
 
   String toString(uint32 val);
+  WString toWString(const unicode_t[], size_t);
   
   void   mbstoucs(unicode_t *unicode, const char *ascii, const size_t len);
   void   ucstombs(char *ascii, const unicode_t *unicode, const size_t len);
