@@ -188,6 +188,22 @@ extern "C"
 
 
   ID3_C_EXPORT
+  void ID3Tag_AttachFrame(ID3Tag *tag, ID3Frame *frame)
+  {
+    try
+    {
+      if (tag)
+      {
+        ((ID3_Tag *) tag)->AttachFrame((ID3_Frame *) frame);
+      }
+    }
+    catch (...)
+    {
+    }
+  }
+
+
+  ID3_C_EXPORT
   void ID3Tag_AddFrames(ID3Tag *tag, ID3Frame *frames, luint num)
   {
     try
