@@ -60,7 +60,7 @@ public:
    ** @see SetID
    **/
   ID3_Frame(ID3_FrameID id = ID3FID_NOFRAME);
-  ID3_Frame(const ID3_FrameHeader &);
+  ID3_Frame(const ID3_FrameHeader&);
   ID3_Frame(const ID3_Frame&);
 
   /// Destructor.
@@ -130,6 +130,9 @@ public:
   bool        Contains(ID3_FieldID fld)
   { return BS_ISSET(__field_bitset, fld) > 0; }
   bool        SetSpec(ID3_V2Spec);
+
+  bool        SetCompression(bool b)  { return __hdr.SetCompression(b); }
+  bool        GetCompression() const  { return __hdr.GetCompression(); }
 
 protected:
   void        InitFields();
