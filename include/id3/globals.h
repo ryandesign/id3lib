@@ -33,8 +33,9 @@
 #define __ID3LIB_GLOBALS_H__
 
 #if defined __cplusplus
-#include <iostream.h>
+#  include <iostream.h>
 #endif
+
 #include <stdlib.h>
 #include "sized_types.h"
 
@@ -57,8 +58,8 @@
 #ifndef __cplusplus
 
 typedef int bool;
-#define false (0)
-#define true (!false)
+#  define false (0)
+#  define true (!false)
 
 #endif /* __cplusplus */
 
@@ -87,7 +88,7 @@ typedef uint16                unicode_t;
 typedef uint16                flags_t;
 /* this needs to be done for compatibility with Sun Solaris */
 #if !defined index_t
-#define index_t               size_t
+#  define index_t               size_t
 #endif
 
 #define NULL_UNICODE ((unicode_t) '\0')
@@ -417,7 +418,7 @@ ID3_ENUM(ID3_TimeStampFormat)
 #endif /* !WIN32 */
 
 #ifndef NULL
-#define NULL ((void*) 0)
+#  define NULL ((void*) 0)
 #endif
 
 #undef MAX
