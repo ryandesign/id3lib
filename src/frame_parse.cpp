@@ -26,6 +26,7 @@
 
 #include <zlib.h>
 #include "frame.h"
+#include "utils.h"
 
 #if defined HAVE_CONFIG_H
 #include <config.h>
@@ -41,19 +42,36 @@ size_t ID3_Frame::Parse(const uchar * const buffer, size_t size)
     return 0;  
   }  
   
+  // data is the part of the frame buffer that appears after the header  
+  const uchar* data = &buffer[hdr_size]; 
   const size_t data_size = __hdr.GetDataSize();
-  const size_t extras = __hdr.GetExtrasSize();
+  size_t extras = 0;
   // how many bytes remain to be parsed 
   size_t remainder = data_size - MIN(extras, data_size);
   
-  // data is the part of the buffer that appears after the header  
-  const uchar* data = &buffer[hdr_size]; 
-  uchar* expanded_data = NULL;
-  
+  unsigned long expanded_size = 0;
+  if (__hdr.GetCompression())
+  {
+    expanded_size = ParseNumber(&data[extras]);
+    extras += sizeof(uint32);
+  }
+
+  if (__hdr.GetEncryption())
+  {
+    this->_SetEncryptionID(data[extras++]);
+  }
+
+  if (__hdr.GetGrouping())
+  {
+    this->_SetGroupingID(data[extras++]);
+  }
+
+  data += extras;
+
   // expand out the data if it's compressed 
+  uchar* expanded_data = NULL;
   if (__hdr.GetCompression())
   {  
-    unsigned long expanded_size = __hdr.GetExpandedSize();  
     expanded_data = new uchar[expanded_size];  
         
     uncompress(expanded_data, &expanded_size, data, remainder);  
