@@ -134,6 +134,10 @@ ID3_Header &ID3_Header::operator=( const ID3_Header& hdr )
 }
 
 // $Log$
+// Revision 1.14  2000/04/10 16:57:18  eldamitri
+// (Copy): removed.
+// (operator=): Updated implementation so it isn't reliant on Copy.
+//
 // Revision 1.13  2000/04/08 04:40:26  eldamitri
 // Changed new ANSI-standard C++ include headers to old-style headers.
 //
