@@ -191,10 +191,10 @@ void ID3Tag_Update(ID3_Tag *tag)
 
 
 CDLLEXPORT
-void ID3Tag_Strip(ID3_Tag *tag, bool v1Also)
+void ID3Tag_Strip(ID3_Tag *tag, luint ulTagFlags)
 {
   if (tag)
-    tag->Strip(v1Also);
+    tag->Strip(ulTagFlags);
     
   return ;
 }
@@ -489,6 +489,9 @@ void ID3Field_ToFile(ID3_Field *field, char *fileName)
 #endif
 
 // $Log$
+// Revision 1.5  1999/11/15 20:23:48  scott
+// Added include for config.h.
+//
 // Revision 1.4  1999/11/04 04:15:54  scott
 // Added cvs Id and Log tags to beginning and end of file, respectively.
 //
