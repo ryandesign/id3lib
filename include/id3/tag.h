@@ -116,6 +116,8 @@ public:
    **/
   bool HasLyrics() {return __has_v1_tag;};
 
+  static size_t IsV2Tag(const uchar*);
+
   /* Deprecated! */
   void       AddNewFrame(ID3_Frame* f) { this->AttachFrame(f); }
   luint      Link(char *fileInfo, bool parseID3v1, bool parseLyrics3);
@@ -177,4 +179,7 @@ ID3_Tag& operator<<(ID3_Tag&, const ID3_Frame &);
 ID3_Tag& operator<<(ID3_Tag&, const ID3_Frame *);
 //@}
 
-#endif
+// deprecated!
+lsint ID3_IsTagHeader(const uchar header[ID3_TAGHEADERSIZE]);
+
+#endif /* __ID3LIB_TAG_H__ */

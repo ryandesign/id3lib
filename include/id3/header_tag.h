@@ -74,10 +74,6 @@ public:
     SIZE           = 10
   };
   
-  static size_t IsHeader(const uchar*);
 };
-
-// deprecated!
-lsint ID3_IsTagHeader(const uchar header[ID3_TAGHEADERSIZE]);
 
 #endif /* __ID3LIB_HEADER_TAG_H__ */

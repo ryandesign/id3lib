@@ -33,6 +33,8 @@
 #endif
 
 #include "tag.h"
+#include "uint28.h"
+#include <string.h>
 
 #ifdef  MAXPATHLEN
 #  define ID3_PATH_LENGTH   (MAXPATHLEN + 1)
@@ -93,6 +95,40 @@
  **/
 
 luint ID3_Tag::__instances = 0;
+
+// Analyses a buffer to determine if we have a valid ID3v2 tag header.
+// If so, return the total number of bytes (including the header) to
+// read so we get all of the tag
+size_t ID3_Tag::IsV2Tag(const uchar* const data)
+{
+  lsint tagSize = 0;
+  
+  if (strncmp(ID3_TagHeader::ID, (char *)data, ID3_TagHeader::ID_SIZE) == 0 &&
+      data[ID3_TagHeader::MAJOR_OFFSET]    <  0xFF &&
+      data[ID3_TagHeader::MINOR_OFFSET]    <  0xFF &&
+      data[ID3_TagHeader::SIZE_OFFSET + 0] <  0x80 &&
+      data[ID3_TagHeader::SIZE_OFFSET + 1] <  0x80 &&
+      data[ID3_TagHeader::SIZE_OFFSET + 2] <  0x80 &&
+      data[ID3_TagHeader::SIZE_OFFSET + 3] <  0x80)
+  {
+    uint28 data_size(&data[ID3_TagHeader::SIZE_OFFSET]);
+    tagSize = data_size.to_uint32() + ID3_TagHeader::SIZE;
+  }
+  
+  return tagSize;
+}
+
+lsint ID3_IsTagHeader(const uchar data[ID3_TAGHEADERSIZE])
+{
+  size_t size = ID3_Tag::IsV2Tag(data);
+  
+  if (!size)
+  {
+    return -1;
+  }
+  
+  return size - ID3_TagHeader::SIZE;
+}
 
 /** Copies a frame to the tag.  The frame parameter can thus safely be deleted
  ** or allowed to go out of scope.
