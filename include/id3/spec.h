@@ -33,25 +33,4 @@ ID3_V2Spec ID3_VerRevToV2Spec(uchar ver, uchar rev);
 uchar      ID3_V2SpecToVer(ID3_V2Spec spec);
 uchar      ID3_V2SpecToRev(ID3_V2Spec spec);
 
-class ID3_Speccable
-{
-public:
-  virtual bool       SetSpec(ID3_V2Spec) = 0;
-  virtual ID3_V2Spec GetSpec() const = 0;
-
-  /* The following methods are deprecated */
-  virtual bool       SetVersion(uchar ver, uchar rev)
-  {
-    return this->SetSpec(ID3_VerRevToV2Spec(ver, rev));
-  }
-  virtual uchar      GetVersion() const
-  {
-    return ID3_V2SpecToVer(this->GetSpec());
-  }
-  virtual uchar      GetRevision() const
-  {
-    return ID3_V2SpecToRev(this->GetSpec());
-  }
-};
-
 #endif /* _ID3LIB_SPEC_H_ */
