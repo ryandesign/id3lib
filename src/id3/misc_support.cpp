@@ -102,7 +102,7 @@ bool ID3_AddArtist(ID3_Tag *tag, char *text)
 
     artistFrame->SetID(ID3FID_LEADARTIST);
     artistFrame->Field(ID3FN_TEXT) = text;
-    tag->AddFrame(artistFrame, true);
+    tag->AddNewFrame(artistFrame);
   }
   
   return bReturn;
@@ -135,7 +135,7 @@ bool ID3_AddAlbum(ID3_Tag *tag, char *text)
 
     albumFrame->SetID(ID3FID_ALBUM);
     albumFrame->Field(ID3FN_TEXT) = text;
-    tag->AddFrame(albumFrame, true);
+    tag->AddNewFrame(albumFrame);
 
     bReturn = true;
   }
@@ -170,7 +170,7 @@ bool ID3_AddTitle(ID3_Tag *tag, char *text)
 
     titleFrame->SetID(ID3FID_TITLE);
     titleFrame->Field(ID3FN_TEXT) = text;
-    tag->AddFrame(titleFrame, true);
+    tag->AddNewFrame(titleFrame);
 
     bReturn = true;
   }
@@ -205,7 +205,7 @@ bool ID3_AddYear(ID3_Tag *tag, char *text)
 
     yearFrame->SetID(ID3FID_YEAR);
     yearFrame->Field(ID3FN_TEXT) = text;
-    tag->AddFrame(yearFrame, true);
+    tag->AddNewFrame(yearFrame);
 
     bReturn = true;
   }
@@ -261,7 +261,7 @@ bool ID3_AddComment(ID3_Tag *tag, char *sComment)
       frame->Field(ID3FN_LANGUAGE) = "eng";
       frame->Field(ID3FN_DESCRIPTION) = STR_V1_COMMENT_DESC;
       frame->Field(ID3FN_TEXT) = sComment;
-      tag->AddFrame(frame, true);
+      tag->AddNewFrame(frame);
     }
   }
   return bReturn;
@@ -318,7 +318,7 @@ bool ID3_AddTrack(ID3_Tag *tag, uchar ucTrack, uchar ucTotal)
 
     trackFrame->SetID(ID3FID_TRACKNUM);
     trackFrame->Field(ID3FN_TEXT) = sTrack;
-    tag->AddFrame(trackFrame, true);
+    tag->AddNewFrame(trackFrame);
 
     delete [] sTrack;
     
@@ -382,7 +382,7 @@ bool ID3_AddGenre(ID3_Tag *tag, luint ucGenre)
 
     pFrame->SetID(ID3FID_CONTENTTYPE);
     pFrame->Field(ID3FN_TEXT) = sGenre;
-    tag->AddFrame(pFrame, true);
+    tag->AddNewFrame(pFrame);
 
     bReturn = true;
   }
@@ -418,7 +418,7 @@ bool ID3_AddLyrics(ID3_Tag *tag, char *text)
     lyricsFrame->SetID(ID3FID_UNSYNCEDLYRICS);
     lyricsFrame->Field(ID3FN_LANGUAGE) = "eng";
     lyricsFrame->Field(ID3FN_TEXT) = text;
-    tag->AddFrame(lyricsFrame, true);
+    tag->AddNewFrame(lyricsFrame);
     
     bReturn = true;
   }
@@ -427,6 +427,42 @@ bool ID3_AddLyrics(ID3_Tag *tag, char *text)
 }
 
 // $Log$
+// Revision 1.7  1999/11/19 18:53:16  scott
+// (ID3_ASCIItoUnicode): Updated interface to make parameters const.
+// Replaced content of the code with call to mbstowcs, a function defined
+// in wchar.h for converting from a regular string to a wchar string.  The
+// original code might be reinstated if another type is used to store
+// unicode characters.
+// (ID3_UnicodeToASCII): Updated interface to make parameters const.
+// Replaced content of the code with call to wcstombs, a function defined
+// in wchar.h for converting from a wchar string to a regular string.  The
+// original code might be reinstated if another type is used to store
+// unicode characters.
+// (ID3_GetString): Added.  Returns a dynamically-allocated copy of the
+// string contained in the frame/field parameters.
+// (ID3_GetArtist): Added.  Returns the artist as a string.  Will return
+// the LEADARTIST, the BAND, the CONDUCTOR, or the COMPOSER, whichever is
+// found first in that order.
+// (ID3_GetAlbum): Added.  Returns the album as a string.
+// (ID3_GetTitle): Added.  Returns the song title as a string.
+// (ID3_GetYear): Added.  Returns the year as a string.
+// (ID3_AddYear): Added.  Adds the year as a string to the frame.
+// (ID3_GetComment): Added.  Returns the first comment found as a string.
+// (ID3_AddComment): Added. Adds the comment as a string with the
+// description stored in STR_V1_COMMENT_DESC, currently "ID3v1_Comment".
+// Won't add if a tag with that or no description already exists.
+// (ID3_GetTrack): Added.  Returns the track number as a string.
+// (ID3_GetTrackNum): Added.  Returns the track number as an unsigned
+// integer.
+// (ID3_AddTrack): Added.  Adds the track number and track total as a
+// string in the form "N/T", where N is the track number and T is the
+// total.  If no total is indicated, then only the track number is added.
+// (ID3_GetGenre): Added.  Returns the genre as a string.
+// (ID3_GetGenreNum): Added. Returns the genre as a number.
+// (ID3_AddGenre): Added.  Adds the genre number as a string in the form
+// "(G)", where G is the genre number.
+// (ID3_GetLyrics): Added.  Gets the unsynced lyrics as a string.
+//
 // Revision 1.6  1999/11/15 20:20:01  scott
 // Added include for config.h.  Minor code cleanup.  Removed
 // assignments from if checks; first makes assignment, then checks
