@@ -71,6 +71,7 @@ ID3_C_EXPORT size_t     ID3_RemoveTracks(ID3_Tag*);
 ID3_C_EXPORT char*      ID3_GetGenre(const ID3_Tag*);
 ID3_C_EXPORT size_t     ID3_GetGenreNum(const ID3_Tag*);
 ID3_C_EXPORT ID3_Frame* ID3_AddGenre(ID3_Tag*, size_t ucGenre, bool replace = false);
+ID3_C_EXPORT ID3_Frame* ID3_AddGenre(ID3_Tag*, const char *, bool replace = false);
 ID3_C_EXPORT size_t     ID3_RemoveGenres(ID3_Tag*);
 
 ID3_C_EXPORT char*      ID3_GetLyrics(const ID3_Tag*);
