@@ -1,3 +1,4 @@
+// -*- C++ -*-
 // $Id$
 
 // id3lib: a C++ library for creating and manipulating id3v1/v2 tags
