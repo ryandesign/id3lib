@@ -34,7 +34,7 @@ struct ID3_FieldDef
 {
   ID3_FieldID   eID;
   ID3_FieldType eType;
-  lsint         lFixedLength;
+  luint         ulFixedLength;
   uchar         ucVersion;
   uchar         ucRevision;
   ID3_VerCtl    eControl;
@@ -360,7 +360,7 @@ private:
 
   ID3_FieldID   __eName;           // the ID of this field
   ID3_FieldType __eType;           // what type is this field or should be
-  lsint         __lFixedLength;    // length of field (fixed if positive)
+  luint         __ulFixedLength;   // length of field (fixed if positive)
   uchar         __ucIOVersion;     // specific version
   uchar         __ucIORevision;    // specific revision
   ID3_VerCtl    __eControl;        // render if ver/rev is higher, or lower than frame::version, frame::revision?
