@@ -20,7 +20,7 @@ EXTRA_DIST =                    \
 	id3lib.spec             \
         id3lib.spec.in          \
         reconf
-SUBDIRS = . m4 doc src include prj zlib id3com libprj
+SUBDIRS = . m4 doc src include prj zlib id3com libprj examples
 
 INCLUDES = @ID3LIB_DEBUG_FLAGS@
 
@@ -51,6 +51,11 @@ snapshot: config.h.win32
 	rm -rf $$ss_distdir
 
 # $Log$
+# Revision 1.12  2000/04/18 05:16:55  eldamitri
+# (EXTRA_DIST): Added HISTORY and id3lib.spec[.in]
+# (id3lib.spec): Added rule for generating from id3lib.spec.in
+# (release): Now depends on id3lib.spec
+#
 # Revision 1.11  2000/04/12 16:31:14  eldamitri
 # (SUBDIRS): Added id3com and libprj
 #
