@@ -1,5 +1,4 @@
 Makefile
-Makefile.in
 acconfig.h
 config.cache
 config.h
