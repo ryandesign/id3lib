@@ -109,8 +109,8 @@ struct ID3_FrameDef
     A Unicode string field also supports the <a href="#Get">Get</a>, <a
     href="#Set">Set</a>, <a href="#Add">Add</a>, and <a
     href="#operator">operator</a>= methods.  Without elaborating, the Unicode
-    methods behave exactly the same as their ASCII counterparts, taking unicode_t
-    pointers in place of char pointers.
+    methods behave exactly the same as their ASCII counterparts, taking
+    unicode_t pointers in place of char pointers.
     
     <p>
 
@@ -118,11 +118,11 @@ struct ID3_FrameDef
     when you set a field with an ASCII source type, it will be converted and
     stored internally as a Unicode string.  id3lib will handle all necessary
     conversions when parsing, rendering, and <a href="#Get">Get</a>ing.  If you
-    set a field as an ASCII string, then try to read the string into a unicode_t
-    buffer, id3lib will automatically convert the string into Unicode so this
-    will function as expected.  The same holds true in reverse.  Of course,
-    when converting from Unicode to ASCII, you will experience problems when
-    the Unicode string contains characters that don't map to ISO-8859-1.
+    set a field as an ASCII string, then try to read the string into a
+    unicode_t buffer, id3lib will automatically convert the string into Unicode
+    so this will function as expected.  The same holds true in reverse.  Of
+    course, when converting from Unicode to ASCII, you will experience problems
+    when the Unicode string contains characters that don't map to ISO-8859-1.
 
     <p>
 
@@ -147,7 +147,8 @@ struct ID3_FrameDef
     @version $Id$
     @see ID3_Tag
     @see ID3_Frame
-    @see ID3_Err */
+    @see ID3_Err 
+*/
 class ID3_Field
 {
   friend ID3_Frame;
@@ -418,6 +419,10 @@ ID3_FrameID   ID3_FindFrameID(const char *id);
 #endif
 
 // $Log$
+// Revision 1.3  1999/12/09 02:45:41  scott
+// (class ID3_Field): Added const to Get method.  Added operator= method
+// declaration.
+//
 // Revision 1.2  1999/12/02 22:45:28  scott
 // Changed all of the #include <id3/*> to #include "*" to help ensure that
 // the sources are searched for in the right places.
