@@ -50,7 +50,7 @@ char*      ID3_GetYear(const ID3_Tag*);
 ID3_Frame* ID3_AddYear(ID3_Tag*, const char*, bool replace = false);
 size_t     ID3_RemoveYears(ID3_Tag*);
 
-char*      ID3_GetComment(const ID3_Tag*);
+char*      ID3_GetComment(const ID3_Tag*, const char* desc = NULL);
 ID3_Frame* ID3_AddComment(ID3_Tag*, const char*, bool = false);
 ID3_Frame* ID3_AddComment(ID3_Tag*, const char*, const char*, bool = false);
 ID3_Frame* ID3_AddComment(ID3_Tag*, const char*, const char*, const char*, 
