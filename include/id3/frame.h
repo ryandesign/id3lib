@@ -122,9 +122,9 @@ public:
   const char* GetDescription() const;
   static const char* GetDescription(ID3_FrameID);
 
-  ID3_Frame  &operator=( const ID3_Frame &rFrame );
+  ID3_Frame  &operator=(const ID3_Frame &);
   bool        HasChanged() const;
-  void        Parse(uchar *buffer, luint size);
+  void        Parse(const uchar *buffer, luint size);
   luint       Size();
   luint       Render(uchar *buffer);
   bool        Contains(ID3_FieldID fld)

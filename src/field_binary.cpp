@@ -116,7 +116,7 @@ void ID3_Field::FromFile(const char *info)
 }
 
 
-void ID3_Field::ToFile(const char *info)
+void ID3_Field::ToFile(const char *info) const
 {
   if (NULL == info)
   {

@@ -432,7 +432,7 @@ void ID3_Tag::AddFrames(const ID3_Frame *frames, luint numFrames)
  ** \param pOldFrame A pointer to the frame that is to be removed from the
  **                  tag
  **/
-void ID3_Tag::RemoveFrame(ID3_Frame *frame)
+void ID3_Tag::RemoveFrame(const ID3_Frame *frame)
 {
   ID3_Elem *elem = Find(frame);
   if (NULL != elem)

@@ -95,7 +95,7 @@
    ** @return A pointer to the first frame found that has the given frame id,
    **         or NULL if no such frame.
    **/
-ID3_Elem *ID3_Tag::Find(ID3_Frame *frame) const
+ID3_Elem *ID3_Tag::Find(const ID3_Frame *frame) const
 {
   ID3_Elem *elem = NULL;
   
@@ -148,7 +148,7 @@ ID3_Frame *ID3_Tag::Find(ID3_FrameID id) const
   return frame;
 }
 
-ID3_Frame *ID3_Tag::Find(ID3_FrameID id, ID3_FieldID fld, char *data) const
+ID3_Frame *ID3_Tag::Find(ID3_FrameID id, ID3_FieldID fld, const char *data) const
 {
   ID3_Frame *frame = NULL;
   unicode_t *temp;
@@ -166,7 +166,7 @@ ID3_Frame *ID3_Tag::Find(ID3_FrameID id, ID3_FieldID fld, char *data) const
   return frame;
 }
 
-ID3_Frame *ID3_Tag::Find(ID3_FrameID id, ID3_FieldID fld, unicode_t *data) const
+ID3_Frame *ID3_Tag::Find(ID3_FrameID id, ID3_FieldID fld, const unicode_t *data) const
 {
   ID3_Frame *frame = NULL;
   

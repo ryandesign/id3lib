@@ -50,7 +50,7 @@ ID3_Elem* ID3_GetLastElem(ID3_Elem *list)
   return last;
 }
 
-void ID3_Tag::AddBinary(uchar *buffer, luint size)
+void ID3_Tag::AddBinary(const uchar *buffer, luint size)
 {
   if (0 == size)
   {
@@ -92,7 +92,7 @@ void ID3_Tag::AddBinary(uchar *buffer, luint size)
   return ;
 }
 
-void ID3_Tag::ExpandBinaries(uchar *buffer, luint size)
+void ID3_Tag::ExpandBinaries(const uchar *buffer, luint size)
 {
   ID3_FrameHeader frHeader;
   luint posn = 0;
@@ -319,11 +319,12 @@ void ID3_Tag::ProcessBinaries(ID3_FrameID whichFrame, bool attach)
    ** @param buffer The remainder of the tag (not including the data source) 
    **               read in from the data source.
    **/
-size_t ID3_Tag::Parse(uchar header[ID3_TAGHEADERSIZE], uchar *buffer)
+size_t ID3_Tag::Parse(const uchar header[ID3_TAGHEADERSIZE], const uchar *buffer)
 {
   luint tagSize = 0;
   uint28 temp = &header[6];
   luint posn = 0;
+  bool dynbuffer = false;
   ID3_V2Spec prev_spec = this->GetSpec();
   
   Clear();
@@ -333,7 +334,11 @@ size_t ID3_Tag::Parse(uchar header[ID3_TAGHEADERSIZE], uchar *buffer)
   
   if (header[5] & ID3_TagHeader::UNSYNC)
   {
-    tagSize = ReSync(buffer, tagSize);
+    uchar* data = new uchar[tagSize];
+    memcpy(data, buffer, tagSize);
+    tagSize = ReSync(data, tagSize);
+    buffer = data;
+    dynbuffer = true;
   }
   
   // okay, if we are ID3v2.2.1, then let's skip over the extended header for
@@ -384,6 +389,11 @@ size_t ID3_Tag::Parse(uchar header[ID3_TAGHEADERSIZE], uchar *buffer)
   
   // set the flag which says that the tag hasn't changed
   __changed = false;
+
+  if (dynbuffer)
+  {
+    delete [] buffer;
+  }
   
   return tagSize;
 }

@@ -869,13 +869,13 @@ ID3_Field::HasChanged(void)
 }
 
 luint
-ID3_Field::Size(void)
+ID3_Field::Size(void) const
 {
   return BinSize(false);
 }
 
 luint
-ID3_Field::BinSize(const bool withExtras)
+ID3_Field::BinSize(const bool withExtras) const
 {
   luint bytes   = 0;
 

@@ -31,7 +31,7 @@
 #include <config.h>
 #endif
 
-void ID3_Frame::Parse(uchar *buffer, luint size)
+void ID3_Frame::Parse(const uchar *buffer, luint size)
 {
   luint i;
   luint posn = 0;

@@ -172,7 +172,7 @@ luint ID3_Field::Get(unicode_t *buffer, const luint maxChars, const luint itemNu
 }
 
 
-luint ID3_Field::GetNumTextItems(void)
+luint ID3_Field::GetNumTextItems() const
 {
   luint numItems = 0;
   
