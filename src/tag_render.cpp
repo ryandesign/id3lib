@@ -152,22 +152,19 @@ size_t ID3_TagImpl::Size() const
   {
     return 0;
   }
-  ID3_Elem *cur = _frames;
   ID3_TagHeader hdr;
 
   hdr.SetSpec(this->GetSpec());
   size_t bytesUsed = hdr.Size();
   
   size_t frameBytes = 0;
-  while (cur)
+  for (const_iterator cur = _frames.begin(); cur != _frames.end(); ++cur)
   {
-    if (cur->pFrame)
+    if (*cur)
     {
-      cur->pFrame->SetSpec(this->GetSpec());
-      frameBytes += cur->pFrame->Size();
+      (*cur)->SetSpec(this->GetSpec());
+      frameBytes += (*cur)->Size();
     }
-    
-    cur = cur->pNext;
   }
   
   if (!frameBytes)
