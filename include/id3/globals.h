@@ -85,11 +85,7 @@ ID3_C_VAR const int          ID3LIB_BINARY_AGE;
 
 
 typedef       unsigned char   uchar;
-typedef short   signed int    ssint;
-typedef short unsigned int    suint;
-typedef long    signed int    lsint;
 typedef long  unsigned int    luint;
-typedef long           double ldoub;
 
 typedef uint16                unicode_t;
 typedef uint16                flags_t;
