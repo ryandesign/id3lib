@@ -353,8 +353,11 @@ public:
   { return __spec_begin <= spec && spec <= __spec_end; }
 
   ID3_FieldID   GetID() const { return __id; }
-  //bool          SetEncoding(ID3_TextEnc enc);
-  //ID3_TextEnc   GetEncoding() const { return __enc; }
+  ID3_FieldType GetType() const { return __type; }
+  bool          SetEncoding(ID3_TextEnc enc);
+  ID3_TextEnc   GetEncoding() const { return __enc; }
+  bool          IsEncodable() const { return __flags & ID3FF_ENCODABLE; }
+  
 
 private:
   luint         BinSize(bool withExtras = true) const;
@@ -376,6 +379,7 @@ private:
   bool          __changed;         // field changed since last parse/render?
   uchar        *__data;
   luint         __size;
+  ID3_TextEnc   __enc;             // encoding
 protected:
   luint RenderInteger(uchar *buffer);
   luint RenderASCIIString(uchar *buffer);
