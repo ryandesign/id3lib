@@ -303,7 +303,7 @@ size_t io::writeTrailingSpaces(ID3_Writer& writer, String buf, size_t len)
   writer.writeChars(buf.data(), size);
   for (; size < len; ++size)
   {
-    writer.writeChar(' ');
+    writer.writeChar('\0');
   }
   return writer.getCur() - beg;
 }
