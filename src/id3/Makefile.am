@@ -12,7 +12,7 @@
 
 LTVERSION = @lt_ver@:@lt_rev@:@lt_age@
 
-INCLUDES = -I$(srcdir)/..
+INCLUDES = -I$(top_srcdir)/include/id3
 
 the_sources =                   \
   dll_wrapper.cpp               \
@@ -40,33 +40,17 @@ the_sources =                   \
   tag_sync.cpp                  \
   version.cpp                   
 
-the_headers =                   \
-  dll.h                         \
-  error.h                       \
-  externals.h                   \
-  field.h                       \
-  frame.h                       \
-  globals.h                     \
-  header.h                      \
-  header_frame.h                \
-  header_tag.h                  \
-  int28.h                       \
-  misc_support.h                \
-  sized_types.h                 \
-  tag.h                         \
-  types.h                       \
-  version.h
-
 lib_LTLIBRARIES   = libid3.la 
 
 libid3_la_SOURCES = $(the_sources)
-# CXXFLAGS = -Wall
 libid3_la_LIBADD  = -lz
 libid3_la_LDFLAGS = -version-info $(LTVERSION)
-
-id3includedir      = $(includedir)/id3
-id3include_HEADERS = $(the_headers)
 
 EXTRA_DIST = ChangeLog
 
 # $Log$
+# Revision 1.6  1999/11/30 20:08:16  scott
+# (the_headers): Added sized_headers.h
+# (the_sources): Added version.cpp
+# (LTVERSION): Updated to make use of configure.in variables.
+#
