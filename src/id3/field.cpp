@@ -1,16 +1,16 @@
 // $Id$
 // 
-// The authors have released ID3Lib as Public Domain (PD) and claim no
-// copyright, patent or other intellectual property protection in this work.
-// This means that it may be modified, redistributed and used in commercial
-// and non-commercial software and hardware without restrictions.  ID3Lib is
-// distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either
-// express or implied.
-// 
-// The ID3Lib authors encourage improvements and optimisations to be sent to
-// the ID3Lib coordinator, currently Scott Haug (sth2@cs.wustl.edu).  Approved
-// submissions may be altered, and will be included and released under these
-// terms.
+// This program is free software; you can distribute it and/or modify it under
+// the terms discussed in the COPYING file, which should have been included
+// with this distribution.
+//  
+// This program is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+// FITNESS FOR A PARTICULAR PURPOSE.  See the COPYING file for more details.
+//  
+// The id3lib authors encourage improvements and optimisations to be sent to
+// the id3lib coordinator.  Please see the README file for details on where
+// to send such submissions.
 
 #if defined HAVE_CONFIG_H
 #include <config.h>
@@ -883,6 +883,17 @@ ID3_Field::operator=( const ID3_Field &rField )
 }
 
 // $Log$
+// Revision 1.12  1999/12/13 05:24:00  scott
+// (ID3FD_TermsOfUse): Added for defining USER frame.
+// (ID3FD_LinkedInfo): Added for defining LINK frame.
+// (): Added comments that detail which frames are defined and which
+// aren't.
+// (ID3_FrameDefs): Added definitions for the following new frames:
+// ID3FID_LINKEDINFO, ID3FID_BEATSPERMINUTE, ID3FID_PLAYLISTDELAY,
+// ID3FID_KEY, ID3FID_SONGLEN, ID3FID_ORIGYEAR, ID3FID_OWNER, ID3FID_SIZE,
+// ID3FID_ISRC, and ID3FID_TERMSOFUSE.  Also sorted the elements of the
+// FrameDefs array based on the long id field.
+//
 // Revision 1.11  1999/12/09 03:31:58  scott
 // (): Better comments of the ID3VC_HIGHER/ID3VC_LOWER section in the
 // field defs.
