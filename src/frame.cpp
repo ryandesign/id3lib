@@ -341,6 +341,10 @@ ID3_Frame::operator=( const ID3_Frame &rFrame )
 }
 
 // $Log$
+// Revision 1.14  2000/04/08 04:37:38  eldamitri
+// Changed new ANSI-standard C++ include headers to old-style headers.
+// Fixed return bug in operator=.
+//
 // Revision 1.13  2000/04/05 05:21:15  eldamitri
 // Updated initial comment information to reflect license, copyright
 // change.
