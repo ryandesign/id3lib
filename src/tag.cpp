@@ -286,8 +286,8 @@ using namespace dami;
  **
  ** \param name The filename of the mp3 file to link to
  **/
-ID3_Tag::ID3_Tag(const char *name)
-  : _impl(new ID3_TagImpl(name))
+ID3_Tag::ID3_Tag(const char *name, flags_t flags)
+  : _impl(new ID3_TagImpl(name, flags))
 {
 }
 

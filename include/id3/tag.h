@@ -66,7 +66,7 @@ public:
 
 public:
 
-  ID3_Tag(const char *name = NULL);
+  ID3_Tag(const char *name = NULL, flags_t = (flags_t) ID3TT_ALL);
   ID3_Tag(const ID3_Tag &tag);
   virtual ~ID3_Tag();
 

@@ -87,7 +87,7 @@ public:
   typedef Frames::iterator       iterator;
   typedef Frames::const_iterator const_iterator;
 public:
-  ID3_TagImpl(const char *name = NULL);
+  ID3_TagImpl(const char *name = NULL, flags_t = (flags_t) ID3TT_ALL);
   ID3_TagImpl(const ID3_Tag &tag);
   virtual ~ID3_TagImpl();
 
