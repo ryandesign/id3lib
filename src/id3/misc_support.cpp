@@ -44,6 +44,7 @@ size_t ucslen(const unicode_t *unicode)
     for (size_t size = 0; true; size++)
       if (NULL_UNICODE == unicode[size])
         return size;
+  return 0;
 }
 
 void ucscpy(unicode_t *dest, const unicode_t *src)
@@ -468,6 +469,11 @@ bool ID3_AddLyrics(ID3_Tag *tag, char *text)
 }
 
 // $Log$
+// Revision 1.12  1999/12/01 18:00:59  scott
+// Changed all of the #include <id3/*> to #include "*" to help ensure that
+// the sources are searched for in the right places (and to make compiling under
+// windows easier).
+//
 // Revision 1.11  1999/11/30 20:12:35  scott
 // No more SIZE_SPECIFIC_TYPES code.  No more code for wchar's.  Typedefs
 // in sized_types.h guarantee that unicode_t will be two bytes.
