@@ -52,7 +52,11 @@ id3lib_sources =                \
 lib_LTLIBRARIES   = libid3.la 
 
 libid3_la_SOURCES = $(id3lib_sources)
+if ID3_NEEDZLIB
+LDADD        = $(top_builddir)/zlib/src/libz.la
+else
 libid3_la_LIBADD  = -lz
+endif
 libid3_la_LDFLAGS = \
   -version-info $(LT_VERSION) \
   -release $(LT_RELEASE) \
