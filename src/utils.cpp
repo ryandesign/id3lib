@@ -166,11 +166,13 @@ String msconvert(String data, ID3_TextEnc sourceEnc, ID3_TextEnc targetEnc)
   if ( hResult != S_OK )
   {
     CoUninitialize();
+	delete dst;
     return oldconvert(data, sourceEnc, targetEnc);
   }
 
   CoUninitialize();
   target = (char*)dst;
+  delete dst;
   return target;
 }
 #endif //defined(HAVE_MS_CONVERT)
