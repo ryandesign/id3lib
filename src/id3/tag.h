@@ -36,16 +36,31 @@ struct ID3_Elem
   bool       bTagOwns;
 };
 
+const luint LEN_V1         = 128;
+const luint LEN_V1_ID      =   3;
+const luint LEN_V1_TITLE   =  30;
+const luint LEN_V1_ARTIST  =  30;
+const luint LEN_V1_ALBUM   =  30;
+const luint LEN_V1_YEAR    =   4;
+const luint LEN_V1_COMMENT =  30;
+const luint LEN_V1_GENRE   =   1;
+
 struct ID3V1_Tag
 {
-  char sID[3];
-  char sTitle[30];
-  char sArtist[30];
-  char sAlbum[30];
-  char sYear[4];
-  char sComment[30];
+  char sID     [1 + LEN_V1_ID];
+  char sTitle  [1 + LEN_V1_TITLE];
+  char sArtist [1 + LEN_V1_ARTIST];
+  char sAlbum  [1 + LEN_V1_ALBUM];
+  char sYear   [1 + LEN_V1_YEAR];
+  char sComment[1 + LEN_V1_COMMENT];
   uchar ucGenre;
 };
+
+const char * const STR_V1_COMMENT_DESC = "ID3v1_Comment";
+
+const luint V1_TAG = 1 << 0;
+const luint V2_TAG = 1 << 1;
+const luint BOTH_TAGS = V1_TAG | V2_TAG;
 
 class ID3_Tag
 {
@@ -66,8 +81,8 @@ public:
   luint      Size(void) const;
   void       Parse(uchar header[ID3_TAGHEADERSIZE], uchar *buffer);
   luint      Link(char *fileInfo);
-  void       Update(void);
-  void       Strip(bool v1Also = true);
+  void       Update(const luint ulTagFlag = V2_TAG);
+  void       Strip(const luint ulTagFlag = BOTH_TAGS);
   ID3_Frame *Find(ID3_FrameID id);
   ID3_Frame *Find(ID3_FrameID id, ID3_FieldID fld, luint data);
   ID3_Frame *Find(ID3_FrameID id, ID3_FieldID fld, char *data);
@@ -86,12 +101,13 @@ private:
   void      ProcessBinaries(ID3_FrameID whichFrame = ID3FID_NOFRAME, bool attach = true);  // this default means all frames
   void      RemoveFromList(ID3_Elem *which, ID3_Elem **list);
   ID3_Elem *GetLastElem(ID3_Elem *list);
-  ID3_Elem *Find(ID3_Frame *frame);
+  ID3_Elem *Find(ID3_Frame *frame) const;
   luint     PaddingSize(luint curSize) const;
   void      GenerateTempName(void);
   void      RenderExtHeader(uchar *buffer);
   void      OpenLinkedFile(void);
-  void      RenderToHandle(void);
+  void      RenderV1ToHandle(void);
+  void      RenderV2ToHandle(void);
   luint     ParseFromHandle(void);
   void      ParseID3v1(void);
   void      ParseLyrics3(void);
@@ -117,7 +133,7 @@ private:
   luint     __ulOldTagSize;    // the size of the old tag (if any)
   luint     __ulExtraBytes;    // extra bytes to strip from end of file (ID3v1 and Lyrics3 tags)
   bool      __bHasV1Tag;       // does the file have an ID3v1 tag attached?
-  static luint s_ulInstances;// how many ID3_Tag objects are floating around in this app?
+  static luint s_ulInstances;  // how many ID3_Tag objects are floating around in this app?
 }
 ;
 
@@ -127,6 +143,10 @@ ID3_Tag& operator<<(ID3_Tag& tag, ID3_Frame *frame);
 #endif
 
 // $Log$
+// Revision 1.6  1999/11/15 20:20:30  scott
+// Made variable names more descriptive.  Added const qualifier to
+// appropriate methods.
+//
 // Revision 1.5  1999/11/04 04:32:11  scott
 // Initial revision
 //
