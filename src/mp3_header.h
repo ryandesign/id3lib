@@ -58,6 +58,29 @@ public:
 
 private:
 
+#ifdef WORDS_BIGENDIAN
+  struct _mp3_header_internal //http://www.mp3-tech.org/programmer/frame_header.html
+  {
+    unsigned char frame_sync_a : 8; /* all bits should be set */
+    unsigned char frame_sync_b : 3; /* all bits should be set */
+
+    unsigned char id : 2;
+    unsigned char layer : 2;
+
+    unsigned char protection_bit : 1;
+    unsigned char bitrate_index : 4;
+    unsigned char frequency : 2;
+    unsigned char padding_bit : 1;
+    unsigned char private_bit : 1;
+
+    unsigned char mode : 2;
+    unsigned char mode_ext : 2;//only used in joint stereo
+
+    unsigned char copyright : 1;
+    unsigned char original : 1;
+    unsigned char emphasis : 2;
+  };
+#else // ! WORDS_BIGENDIAN
   struct _mp3_header_internal //http://www.mp3-tech.org/programmer/frame_header.html
   {
 //byte 1
@@ -79,6 +102,7 @@ private:
     unsigned char mode_ext : 2;//only used in joint stereo
     unsigned char mode : 2;
   };
+#endif // WORDS_BIGENDIAN
 
   Mp3_Headerinfo* _mp3_header_output;
 }; //Info
