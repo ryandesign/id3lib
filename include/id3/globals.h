@@ -141,10 +141,11 @@ ID3_ENUM(ID3_TagType)
   ID3TT_ID3V1   = 1 << 0,   /**< Represents an id3v1 or id3v1.1 tag */
   ID3TT_ID3V2   = 1 << 1,   /**< Represents an id3v2 tag */
   ID3TT_LYRICS  = 1 << 2,   /**< Represents a Lyrics tag */
+  ID3TT_MUSICMATCH = 1 << 3, /**< Represents a MusicMatch tag */
   /** Represents both id3 tags: id3v1 and id3v2 */
   ID3TT_ID3     = ID3TT_ID3V1 | ID3TT_ID3V2,
   /** Represents all possible types of tags */
-  ID3TT_ALL     = ID3TT_LYRICS | ID3TT_ID3
+  ID3TT_ALL     = ID3TT_MUSICMATCH | ID3TT_LYRICS | ID3TT_ID3
 };
 
 /**
