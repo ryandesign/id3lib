@@ -29,10 +29,6 @@
 
 #include "header.h"
 
-#define ID3_TAGID               "ID3"
-#define ID3_TAGIDSIZE           (3)
-#define ID3_TAGHEADERSIZE       (10)
-
 #define ID3HF_UNSYNC            (1 << 7)
 #define ID3HF_EXTENDEDHEADER    (1 << 6)
 #define ID3HF_EXPERIMENTAL      (1 << 5)
