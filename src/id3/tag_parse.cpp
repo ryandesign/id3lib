@@ -194,8 +194,6 @@ void ID3_Tag::ProcessBinaries(ID3_FrameID whichFrame, bool attach)
       if (NULL == frame)
         ID3_THROW(ID3E_NoMemory);
         
-      ID3_Elem *elem, *lastElem;
-      
       frame->SetID(id);
       
       try 
@@ -242,21 +240,21 @@ void ID3_Tag::ProcessBinaries(ID3_FrameID whichFrame, bool attach)
       {
         // if, after all is said and done, we are still supposed to attach our
         // newly parsed frame to the tag, do so
-        elem = new ID3_Elem;
+        ID3_Elem 
+          *elem     = new ID3_Elem, 
+          *lastElem = GetLastElem(__pFrameList);;
         if (NULL == elem)
           ID3_THROW(ID3E_NoMemory);
           
-        elem->pNext = NULL;
-        elem->pFrame = frame;
+        elem->pNext    = NULL;
+        elem->pFrame   = frame;
         elem->acBinary = NULL;
         elem->bTagOwns = true;
         
-        lastElem = GetLastElem(__pFrameList);
-        
-        if (lastElem)
-          lastElem->pNext = elem;
-        else
+        if (NULL == lastElem)
           __pFrameList = elem;
+        else
+          lastElem->pNext = elem;
       }
       
       ID3_Elem *temp = cur;
@@ -395,6 +393,14 @@ luint ID3_Tag::ParseFromHandle(void)
 }
 
 // $Log$
+// Revision 1.6  1999/11/16 22:50:37  scott
+// * tag_parse.cpp
+// (ProcessBinaries): Added try/catch block to catch any exceptions so
+// that the parser can carry on parsing the rest of the frames if any
+// particular frame is poorly encoded.  Need to add some sort of
+// mechanism to determine how many frames exist, how many have been
+// parsed correctly and how many have been parsed incorrectly.
+//
 // Revision 1.5  1999/11/15 20:20:55  scott
 // Added include for config.h.  Minor code cleanup.  Removed
 // assignments from if checks; first makes assignment, then checks
