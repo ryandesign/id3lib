@@ -112,24 +112,24 @@ bool id3::v1::parse(ID3_TagImpl& tag, ID3_Reader& reader)
   BString trackno = io::readBinary(reader, ID3_V1_LEN_COMMENT-28);
   if (trackno[0] == '\0')
   {
-	  if (trackno[1] != '\0')
-	  { //we've got a tracknumber
-        size_t track = trackno[1];
-        field = id3::v2::getTrack(tag);
-		if (field.size() == 0 || field == "00")
-		{
-          id3::v2::setTrack(tag, track, 0);
-		}
-        ID3D_NOTICE( "id3::v1::parse: track = \"" << track << "\"" );
- 
-        ID3D_NOTICE( "id3::v1::parse: comment length = \"" << comment.length() << "\"" );
-//        io::StringReader sr(comment);
-//        comment = io::readTrailingSpaces(sr, ID3_V1_LEN_COMMENT - 2);
-	  }
+    if (trackno[1] != '\0')
+    { //we've got a tracknumber
+      size_t track = trackno[1];
+      field = id3::v2::getTrack(tag);
+      if (field.size() == 0 || field == "00")
+      {
+        id3::v2::setTrack(tag, track, 0);
+      }
+      ID3D_NOTICE( "id3::v1::parse: track = \"" << track << "\"" );
+      ID3D_NOTICE( "id3::v1::parse: comment length = \"" << comment.length() << "\"" );
+    }
   }
   else
   {
-	  comment.append((const unsigned char)trackno.data(), 2);
+    if (trackno[1] == '\0' || trackno[1] == 0x20 && trackno[0] != '\0' && trackno[0] != 0x20)
+      comment.append((const unsigned char)trackno.data(), 1);
+    else if (trackno[1] != '\0' && trackno[1] != 0x20 && trackno[0] != '\0' && trackno[0] != 0x20)
+      comment.append((const unsigned char)trackno.data(), 2);
   }
   ID3D_NOTICE( "id3::v1::parse: comment = \"" << comment << "\"" );
   if (comment.size() > 0)
