@@ -27,7 +27,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include <stdio.h>
 #include "misc_support.h"
 
 #if defined HAVE_CONFIG_H
