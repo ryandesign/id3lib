@@ -94,6 +94,9 @@ luint ID3_Error::GetErrorLine(void) const
 
 
 // $Log$
+// Revision 1.13  2000/04/08 04:34:37  eldamitri
+// Changed new ANSI-standard C++ include headers to old-style headers.
+//
 // Revision 1.12  2000/04/05 05:21:15  eldamitri
 // Updated initial comment information to reflect license, copyright
 // change.
