@@ -125,8 +125,8 @@ protected:
   void        InitFields(const ID3_FrameDef *);
   void        InitFieldBits(void);
   bool        HasChanged(void) const;
-  void        SetVersion(uchar ver, uchar rev);
   void        Parse(uchar *buffer, luint size);
+  void        SetSpec(ID3_V2Spec);
   void        UpdateStringTypes(void);
   void        UpdateFieldDeps(void);
   luint       Size(void);
