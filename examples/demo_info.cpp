@@ -29,7 +29,6 @@
 #include <id3/misc_support.h>
 #include <id3/readers.h>
 #include <id3/io_helpers.h>
-#include <id3/error.h>
 
 #include "demo_info_options.h"
 
@@ -341,29 +340,19 @@ int main( unsigned int argc, char * const argv[])
   for (size_t i = 0; i < args.inputs_num; ++i)
   {
     filename = args.inputs[i];
-    try
+    ID3_Tag myTag;
+    
+    myTag.Link(filename, ID3TT_ALL);
+    cout << endl << "*** Tag information for " << filename << endl;
+    if (!args.assign_given)
     {
-      ID3_Tag myTag;
-      
-      myTag.Link(filename, ID3TT_ALL);
-      cout << endl << "*** Tag information for " << filename << endl;
-      if (!args.assign_given)
-      {
-        PrintInformation(myTag);
-      }
-      else
-      {
-        cout << "*** Testing assignment operator" << endl;
-        ID3_Tag tmpTag(myTag);
-        PrintInformation(tmpTag);
-      }
+      PrintInformation(myTag);
     }
-    catch(ID3_Error &err)
+    else
     {
-      ID3D_WARNING( err.GetErrorFile() << " ("  << 
-                    err.GetErrorLine() << "): " << 
-                    err.GetErrorType() << ": "  << 
-                    err.GetErrorDesc() );
+      cout << "*** Testing assignment operator" << endl;
+      ID3_Tag tmpTag(myTag);
+      PrintInformation(tmpTag);
     }
   }
 

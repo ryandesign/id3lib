@@ -30,7 +30,6 @@
 
 #include <stdlib.h>
 #include "field.h"
-#include "error.h"
 
 class ID3_FieldDef;
 class ID3_FrameDef;

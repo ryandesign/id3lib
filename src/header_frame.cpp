@@ -33,7 +33,6 @@
 #include <string.h>
 #include <memory.h>
 #include "header_frame.h"
-#include "error.h"
 #include "utils.h"
 #include "frame_def.h"
 #include "field_def.h"

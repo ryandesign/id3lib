@@ -20,7 +20,6 @@
 
 #include <iostream.h>
 #include <id3/tag.h>
-#include <id3/error.h>
 
 #include "demo_copy_options.h"
 
@@ -121,31 +120,20 @@ int main( unsigned int argc, char * const argv[])
   }
 
   const char *source = args.inputs[0], *dest = args.inputs[1];
-
-  try
-  {
-    ID3_Tag myTag;
-    
-    cout << "Parsing " << source << ": ";
-    
-    myTag.Clear();
-    myTag.Link(source, ID3TT_ALL);
-    
-    cout << "done.  Copying to " << dest << ": ";
-    
-    myTag.Link(dest, ID3TT_NONE);
-    myTag.Update(ulFlag);
-    
-    cout << "done" << endl;
-  }
   
-  catch(ID3_Error& err)
-  {
-    ID3D_WARNING( err.GetErrorFile() << " ("  << 
-                  err.GetErrorLine() << "): " << 
-                  err.GetErrorType() << ": "  << 
-                  err.GetErrorDesc() );
-  }
+  ID3_Tag myTag;
+  
+  cout << "Parsing " << source << ": ";
+  
+  myTag.Clear();
+  myTag.Link(source, ID3TT_ALL);
+  
+  cout << "done.  Copying to " << dest << ": ";
+  
+  myTag.Link(dest, ID3TT_NONE);
+  myTag.Update(ulFlag);
+  
+  cout << "done" << endl;
   
   return 0;
 }

@@ -32,10 +32,6 @@
 #ifndef _ID3LIB_GLOBALS_H_
 #define _ID3LIB_GLOBALS_H_
 
-#if defined __cplusplus
-#  include <iostream.h>
-#endif
-
 #include <stdlib.h>
 #include "sized_types.h"
 

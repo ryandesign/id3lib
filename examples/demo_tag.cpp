@@ -11,7 +11,6 @@
 #include <string.h>
 
 #include <id3/tag.h>
-#include <id3/error.h>
 #include <id3/misc_support.h>
 
 #include "demo_tag_options.h"
@@ -149,60 +148,49 @@ int main( unsigned int argc, char * const argv[])
   for (size_t i = 0; i < args.inputs_num; ++i)
   {
     filename = args.inputs[i];
-    try
-    {
-      ID3_Tag myTag;
-      
-      cout << "Tagging " << filename << ": ";
-      
-      myTag.Link(filename);
-      
-      cout << "attempting ";
-      DisplayTags(cout, ulFlag);
-      
-      if (args.artist_given)
-      {
-        ID3_AddArtist(&myTag, sArtist, true);
-      }
-      if (args.album_given)
-      {
-        ID3_AddAlbum(&myTag, sAlbum, true);
-      }
-      if (args.song_given)
-      {
-        ID3_AddTitle(&myTag, sTitle, true);
-      }
-      if (args.year_given)
-      {
-        ID3_AddYear(&myTag, sYear, true);
-      }
-      if (args.comment_given)
-      {
-        ID3_AddComment(&myTag, sComment, sDesc, true);
-      }
-      if (args.genre_given)
-      {
-        ID3_AddGenre(&myTag, nGenre, true);
-      }
-      if (args.track_given)
-      {
-        ID3_AddTrack(&myTag, nTrack, nTotal, true);
-      }
-      luint nTags = myTag.Update(ulFlag);
-      cout << ", tagged ";
-      
-      DisplayTags(cout, nTags);
-      
-      cout << endl;
-    }
+    ID3_Tag myTag;
     
-    catch(ID3_Error err)
+    cout << "Tagging " << filename << ": ";
+    
+    myTag.Link(filename);
+    
+    cout << "attempting ";
+    DisplayTags(cout, ulFlag);
+    
+    if (args.artist_given)
     {
-      ID3D_WARNING( err.GetErrorFile() << " ("  << 
-                    err.GetErrorLine() << "): " << 
-                    err.GetErrorType() << ": "  << 
-                    err.GetErrorDesc() );
+      ID3_AddArtist(&myTag, sArtist, true);
     }
+    if (args.album_given)
+    {
+      ID3_AddAlbum(&myTag, sAlbum, true);
+    }
+    if (args.song_given)
+    {
+      ID3_AddTitle(&myTag, sTitle, true);
+    }
+    if (args.year_given)
+    {
+      ID3_AddYear(&myTag, sYear, true);
+    }
+    if (args.comment_given)
+    {
+      ID3_AddComment(&myTag, sComment, sDesc, true);
+    }
+    if (args.genre_given)
+    {
+      ID3_AddGenre(&myTag, nGenre, true);
+    }
+    if (args.track_given)
+    {
+      ID3_AddTrack(&myTag, nTrack, nTotal, true);
+    }
+    luint nTags = myTag.Update(ulFlag);
+    cout << ", tagged ";
+    
+    DisplayTags(cout, nTags);
+    
+    cout << endl;
   }
 
   return 0;
