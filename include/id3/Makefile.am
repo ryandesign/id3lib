@@ -22,9 +22,11 @@ the_headers =                   \
   misc_support.h                \
   sized_types.h                 \
   spec.h                        \
-  tag.h                         \
-  uint28.h                      \
-  utils.h                       
+  tag.h
 
 id3includedir      = $(includedir)/id3
 id3include_HEADERS = $(the_headers)
+
+noinst_HEADERS = \
+  uint28.h       \
+  utils.h
