@@ -287,6 +287,7 @@ size_t ID3_Tag::ParseFrames(const uchar* const data, size_t size)
   for (const uchar* p = data; p < data_end && *p != '\0'; p += frame_size) 
   { 
     ID3_Frame* f = new ID3_Frame; 
+    f->SetSpec(__hdr.GetSpec());
     frame_size = f->Parse(p, data_end - p); 
     total_size += frame_size; 
      
