@@ -12,12 +12,12 @@
 // the id3lib coordinator.  Please see the README file for details on where
 // to send such submissions.
 
+#include <cstring>
+#include "error.h"
+
 #if defined HAVE_CONFIG_H
 #include <config.h>
 #endif
-
-#include <string.h>
-#include "error.h"
 
 static char *ID3_ErrorDescs[] =
 {
@@ -81,6 +81,9 @@ luint ID3_Error::GetErrorLine(void) const
 
 
 // $Log$
+// Revision 1.10  1999/12/17 16:13:03  scott
+// Updated opening comment block.
+//
 // Revision 1.9  1999/12/01 18:00:59  scott
 // Changed all of the #include <id3/*> to #include "*" to help ensure that
 // the sources are searched for in the right places (and to make compiling under

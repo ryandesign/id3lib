@@ -12,16 +12,16 @@
 // the id3lib coordinator.  Please see the README file for details on where
 // to send such submissions.
 
-#if defined HAVE_CONFIG_H
-#include <config.h>
-#endif
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 #include <memory.h>
 #include "tag.h"
 #include "misc_support.h"
+
+#if defined HAVE_CONFIG_H
+#include <config.h>
+#endif
 
 luint ID3_CRLFtoLF(char *buffer, luint size)
 {
@@ -250,6 +250,9 @@ void ID3_Tag::ParseLyrics3(void)
 }
 
 // $Log$
+// Revision 1.9  1999/12/17 16:13:04  scott
+// Updated opening comment block.
+//
 // Revision 1.8  1999/12/16 14:40:02  scott
 // (ID3_CRLFtoLF): Fixed memory allocation bug (thanks Alexander Voronin).
 //

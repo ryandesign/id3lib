@@ -12,12 +12,12 @@
 // the id3lib coordinator.  Please see the README file for details on where
 // to send such submissions.
 
+#include "tag.h"
+#include "misc_support.h"
+
 #if defined HAVE_CONFIG_H
 #include <config.h>
 #endif
-
-#include "tag.h"
-#include "misc_support.h"
 
 ID3_Elem *ID3_Tag::Find(ID3_Frame *frame) const
 {
@@ -196,6 +196,9 @@ ID3_Frame *ID3_Tag::operator[](luint num) const
 }
 
 // $Log$
+// Revision 1.10  1999/12/17 16:13:04  scott
+// Updated opening comment block.
+//
 // Revision 1.9  1999/12/01 18:00:59  scott
 // Changed all of the #include <id3/*> to #include "*" to help ensure that
 // the sources are searched for in the right places (and to make compiling under

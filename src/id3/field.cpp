@@ -12,12 +12,12 @@
 // the id3lib coordinator.  Please see the README file for details on where
 // to send such submissions.
 
+#include <cstring>
+#include "field.h"
+
 #if defined HAVE_CONFIG_H
 #include <config.h>
 #endif
-
-#include <string.h>
-#include "field.h"
 
 // This is used for unimplemented frames so that their data is preserved when
 // parsing and rendering
@@ -911,6 +911,14 @@ ID3_Field::operator=( const ID3_Field &rField )
 }
 
 // $Log$
+// Revision 1.14  1999/12/26 00:33:15  scott
+// (): Updated list of implemented and unimplemented frames to include
+// their id3lib frame id, id3v2.2 id, and www.id3.org description.
+// (ID3FD_Unimplemented): Added for unimplemented frames so that their
+// data is preseved when parsing and rendering.
+// (ID3_FrameDefs): Added entries for new frames, using
+// ID3FD_Unimplemented as frame definition.  Updated renamed entries.
+//
 // Revision 1.13  1999/12/17 16:13:03  scott
 // Updated opening comment block.
 //

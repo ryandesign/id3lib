@@ -12,14 +12,14 @@
 // the id3lib coordinator.  Please see the README file for details on where
 // to send such submissions.
 
-#if defined HAVE_CONFIG_H
-#include <config.h>
-#endif
-
-#include <string.h>
+#include <cstring>
 #include <memory.h>
 #include "header.h"
 #include "error.h"
+
+#if defined HAVE_CONFIG_H
+#include <config.h>
+#endif
 
 ID3_HeaderInfo ID3_VersionInfo[] =
   {
@@ -127,6 +127,17 @@ void ID3_Header::Copy(const ID3_Header &hdr)
 }
 
 // $Log$
+// Revision 1.10  1999/12/27 05:43:28  scott
+// (ID3_Header): Updated for new version constants.
+// (AddFlags): Added implementation.  Adds flag(s) to current flags.
+// (RemoveFlags): Added implementation.  Removes flag(s) from current
+// flags.
+// (GetVersion): Added implementation.  Returns version number of header.
+// (GetRevision): Added implementation.  Returns revision of header.
+// (Clear): Added implementation.  Clears contents of header.
+// (operator=): Added implementation. Assignment operator.
+// (Copy): Added implementation. Copies content of another header.
+//
 // Revision 1.9  1999/12/26 15:11:13  scott
 // (GetDataSize): Added implementation.
 // (GetFlags): Added implementation.

@@ -49,13 +49,12 @@ inline lsint MAX(lsint x, lsint y)
 }
 #endif
 
-// include other abstract types here because they
-// may depend on the types defined above
-#include "int28.h"
-
 #endif
 
 // $Log$
+// Revision 1.3  1999/12/17 16:05:02  scott
+// Updated opening comment block.
+//
 // Revision 1.2  1999/12/02 22:45:28  scott
 // Changed all of the #include <id3/*> to #include "*" to help ensure that
 // the sources are searched for in the right places.

@@ -12,6 +12,8 @@
 // the id3lib coordinator.  Please see the README file for details on where
 // to send such submissions.
 
+#include "version.h"
+
 #if defined HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -47,6 +49,9 @@ unsigned short ID3_Patch()
 }
 
 // $Log$
+// Revision 1.2  1999/12/17 16:13:04  scott
+// Updated opening comment block.
+//
 // Revision 1.1  1999/11/30 20:19:26  scott
 // Added.  Implements version functions declared in version.h.
 //

@@ -12,11 +12,11 @@
 // the id3lib coordinator.  Please see the README file for details on where
 // to send such submissions.
 
+#include "tag.h"
+
 #if defined HAVE_CONFIG_H
 #include <config.h>
 #endif
-
-#include "tag.h"
 
 // To be used when reading an ID3v2-tag
 // Transforms all FF 00 sequences into FF
@@ -100,6 +100,11 @@ void ID3_Tag::UnSync(uchar *pDestData, luint nDestSize, uchar *pSrcData, luint n
 
 
 // $Log$
+// Revision 1.8  1999/12/17 16:12:03  scott
+// Updated opening comment block.
+// (ShouldUnsync): Added for use with GetUnSyncSize and UnSync.
+// (ReSync, GetUnSyncSize, UnSync): Renamed variables.  Restructured code.
+//
 // Revision 1.7  1999/12/01 18:00:59  scott
 // Changed all of the #include <id3/*> to #include "*" to help ensure that
 // the sources are searched for in the right places (and to make compiling under

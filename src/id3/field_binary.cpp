@@ -12,14 +12,13 @@
 // the id3lib coordinator.  Please see the README file for details on where
 // to send such submissions.
 
-#if defined HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include <stdio.h>
 #include <memory.h>
 #include "field.h"
 
+#if defined HAVE_CONFIG_H
+#include <config.h>
+#endif
 
 void ID3_Field::Set(const uchar *newData, luint newSize)
 {
@@ -154,6 +153,9 @@ ID3_Field::RenderBinary(uchar *buffer)
 
 
 // $Log$
+// Revision 1.10  1999/12/26 15:10:48  scott
+// Minor reformatting.
+//
 // Revision 1.9  1999/12/17 16:13:03  scott
 // Updated opening comment block.
 //

@@ -12,13 +12,14 @@
 // the id3lib coordinator.  Please see the README file for details on where
 // to send such submissions.
 
+#include <cstdlib>
+#include <cctype>
+#include <cstdio>
+#include "misc_support.h"
+
 #if defined HAVE_CONFIG_H
 #include <config.h>
 #endif
-
-#include "misc_support.h"
-#include <stdlib.h>
-#include <ctype.h>
 
 // Extract a 32-bit number from a 4-byte character array
 size_t ParseNumber(const uchar *buffer, size_t size)
@@ -810,6 +811,12 @@ size_t ID3_RemoveLyrics(ID3_Tag *tag)
 }
 
 // $Log$
+// Revision 1.18  1999/12/26 15:11:51  scott
+// (ParseNumber): Defined.  Converts a character buffer up to 4 bytes in
+// size into its equivalent big-endian integer equivalent.
+// (RenderNumber): Defined.  Converts an integer into an equivalent
+// big-endian binary character array, up to 4 bytes in length.
+//
 // Revision 1.17  1999/12/17 16:13:04  scott
 // Updated opening comment block.
 //

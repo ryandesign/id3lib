@@ -15,16 +15,18 @@
 #ifndef ID3LIB_TAG_H
 #define ID3LIB_TAG_H
 
-#if defined HAVE_SYS_PARAM_H
-#include <sys/param.h>
-#endif
-
-#include <stdio.h>
+#include <cstdio>
 #include "types.h"
 #include "frame.h"
 #include "header_frame.h"
 #include "header_tag.h"
 #include "version.h"
+
+#if defined WIN32
+#define MAXPATHLEN 1024
+#else
+#include <sys/param.h>
+#endif
 
 struct ID3_Elem
 {
@@ -807,6 +809,9 @@ private:
 #endif
 
 // $Log$
+// Revision 1.5  1999/12/17 16:05:02  scott
+// Updated opening comment block.
+//
 // Revision 1.4  1999/12/13 04:23:25  scott
 // (): Include sys/param.h (if available) to define MAXPATHLEN.
 // (class ID3_Tag): Made private methods protected.  Changed __sFileName

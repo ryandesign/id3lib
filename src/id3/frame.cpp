@@ -12,12 +12,12 @@
 // the id3lib coordinator.  Please see the README file for details on where
 // to send such submissions.
 
+#include <cstring>
+#include "tag.h"
+
 #if defined HAVE_CONFIG_H
 #include <config.h>
 #endif
-
-#include <string.h>
-#include "tag.h"
 
 ID3_Frame::ID3_Frame(ID3_FrameID id)
   : __bHasChanged(false),
@@ -328,6 +328,18 @@ ID3_Frame::operator=( const ID3_Frame &rFrame )
 }
 
 // $Log$
+// Revision 1.11  1999/12/27 06:05:25  scott
+// (ID3_Frame): Added data member initialization list.  Updated to reflect
+// abstraction of field bits initialization.  Added new constructor which
+// accepts a frame header to copy into the frame.
+// (InitFieldBits): Added implementation.  Abstracted from the constuctor.
+// (Clear): Updated to reflect addition of new header data member.
+// Restructured method so it can be used in more situations.
+// (InitFields): Added implementation. Abstracted from the SetID method.
+// (SetID): Updated to reflect new method abstractions.
+// (GetID, SetVersion, Size): Updated to reflect new frame header data
+// member.
+//
 // Revision 1.10  1999/12/26 15:10:48  scott
 // Minor reformatting.
 //

@@ -12,12 +12,12 @@
 // the id3lib coordinator.  Please see the README file for details on where
 // to send such submissions.
 
+#include "int28.h"
+#include "misc_support.h"
+
 #if defined HAVE_CONFIG_H
 #include <config.h>
 #endif
-
-#include "int28.h"
-#include "misc_support.h"
 
 int28::int28(uint32 val)
 {
@@ -82,6 +82,10 @@ istream& operator>>(istream& in, int28& val)
 }
 
 // $Log$
+// Revision 1.9  1999/12/26 15:11:39  scott
+// (set): Now uses ParseNumber, defined in misc_support.  Restructured
+// code.
+//
 // Revision 1.8  1999/12/17 16:13:04  scott
 // Updated opening comment block.
 //

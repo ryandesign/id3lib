@@ -12,17 +12,43 @@
 // the id3lib coordinator.  Please see the README file for details on where
 // to send such submissions.
 
-#if defined HAVE_CONFIG_H
-#include <config.h>
-#endif
+#include <cstring>
+#include <iostream>
+#include <cstdio>
+#include "tag.h"
 
-#include <string.h>
-
-#if defined HAVE_UNISTD_H
+#if defined WIN32
+#include <windows.h>
+static int truncate(const char *path, off_t length)
+{
+  int result = -1;
+  HANDLE fh;
+  
+  fh = ::CreateFile(path,
+                    GENERIC_WRITE | GENERIC_READ,
+                    0,
+                    NULL,
+                    OPEN_EXISTING,
+                    FILE_ATTRIBUTE_NORMAL,
+                    NULL);
+  
+  if(INVALID_HANDLE_VALUE != fh)
+  {
+    SetFilePointer(fh, length, NULL, FILE_BEGIN);
+    SetEndOfFile(fh);
+    CloseHandle(fh);
+    result = 0;
+  }
+  
+  return result;
+}
+#else
 #include <unistd.h>
 #endif
 
-#include "tag.h"
+#if defined HAVE_CONFIG_H
+#include <config.h>
+#endif
 
 bool exists(const char *name)
 {
@@ -178,36 +204,6 @@ luint ID3_Tag::Update(luint ulTagFlag)
   return ulTags;
 }
 
-#if defined WIN32
-
-#include <windows.h>
-static int truncate(const char *path, off_t length)
-{
-  int result = -1;
-  HANDLE fh;
-  
-  fh = ::CreateFile(path,
-                    GENERIC_WRITE | GENERIC_READ,
-                    0,
-                    NULL,
-                    OPEN_EXISTING,
-                    FILE_ATTRIBUTE_NORMAL,
-                    NULL);
-  
-  if(INVALID_HANDLE_VALUE != fh)
-  {
-    SetFilePointer(fh, length, NULL, FILE_BEGIN);
-    SetEndOfFile(fh);
-    CloseHandle(fh);
-    result = 0;
-  }
-  
-  return result;
-}
-
-#endif
-
-
 luint ID3_Tag::Strip(const luint ulTagFlag)
 {
   luint ulTags = NO_TAG;
@@ -326,6 +322,9 @@ luint ID3_Tag::Strip(const luint ulTagFlag)
 
 
 // $Log$
+// Revision 1.12  1999/12/17 16:13:04  scott
+// Updated opening comment block.
+//
 // Revision 1.11  1999/12/13 04:44:23  scott
 // (exists): Add const qualifier to parameter.
 // (Link): Change to reflect new __sFileName type.

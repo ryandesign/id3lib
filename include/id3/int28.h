@@ -15,7 +15,7 @@
 #ifndef ID3LIB_TYPES_28BITINT_H
 #define ID3LIB_TYPES_28BITINT_H
 
-#include <iostream.h>
+#include <iostream>
 #include "types.h"
 
 class int28
@@ -42,6 +42,9 @@ private:
 #endif
 
 // $Log$
+// Revision 1.4  1999/12/26 16:40:23  scott
+// (class int28): Restructured.
+//
 // Revision 1.3  1999/12/17 16:05:02  scott
 // Updated opening comment block.
 //

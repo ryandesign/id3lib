@@ -15,7 +15,6 @@
 #ifndef ID3LIB_MISC_SUPPORT_H
 #define ID3LIB_MISC_SUPPORT_H
 
-#include <string.h>
 #include "types.h"
 #include "tag.h"
 
@@ -88,6 +87,11 @@ void ID3_RemoveTrailingSpaces(char *buffer, luint length);
 #endif
 
 // $Log$
+// Revision 1.7  1999/12/26 16:40:26  scott
+// (MASK): Defined macro for masking bits.
+// (): Added declarations for ParseNumber and RenderNumber, for converting
+// between character arrays and unsigned ints.
+//
 // Revision 1.6  1999/12/17 16:05:02  scott
 // Updated opening comment block.
 //

@@ -12,15 +12,15 @@
 // the id3lib coordinator.  Please see the README file for details on where
 // to send such submissions.
 
-#if defined HAVE_CONFIG_H
-#include <config.h>
-#endif
-
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
 #include <memory.h>
 #include "tag.h"
 #include "misc_support.h"
+
+#if defined HAVE_CONFIG_H
+#include <config.h>
+#endif
 
 void ID3_RemoveTrailingSpaces(char *buffer, luint length)
 {
@@ -140,6 +140,9 @@ void ID3_Tag::ParseID3v1(void)
 }
 
 // $Log$
+// Revision 1.12  1999/12/17 16:13:04  scott
+// Updated opening comment block.
+//
 // Revision 1.11  1999/12/16 14:40:31  scott
 // Fixed inclusion config.h (thanks Alexander Voronin).
 //

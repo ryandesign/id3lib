@@ -12,16 +12,17 @@
 // the id3lib coordinator.  Please see the README file for details on where
 // to send such submissions.
 
-#if defined HAVE_CONFIG_H
-#include <config.h>
-#endif
-
-#include <string.h>
+#include <cstdlib>
+#include <cstring>
+#include <cstdio>
+#include <fstream>
 #include <memory.h>
 #include "tag.h"
 #include "misc_support.h"
-#include <stdlib.h>
-#include <fstream.h>
+
+#if defined HAVE_CONFIG_H
+#include <config.h>
+#endif
 
 luint ID3_Tag::Render(uchar *buffer)
 {
@@ -403,6 +404,10 @@ luint ID3_Tag::PaddingSize(luint curSize) const
 
 
 // $Log$
+// Revision 1.16  1999/12/27 05:26:42  scott
+// (Render): Updated for new version constants and inclusion of header in
+// each frame.
+//
 // Revision 1.15  1999/12/26 00:33:32  scott
 // Minor comment change.
 //

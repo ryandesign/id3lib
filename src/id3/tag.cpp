@@ -12,11 +12,11 @@
 // the id3lib coordinator.  Please see the README file for details on where
 // to send such submissions.
 
+#include "tag.h"
+
 #if defined HAVE_CONFIG_H
 #include <config.h>
 #endif
-
-#include "tag.h"
 
 luint ID3_Tag::s_ulInstances = 0;
 
@@ -385,6 +385,9 @@ ID3_Tag::operator=( const ID3_Tag &rTag )
 }
 
 // $Log$
+// Revision 1.12  1999/12/27 05:30:03  scott
+// (SetupTag): Updated for new version constants.
+//
 // Revision 1.11  1999/12/17 16:13:04  scott
 // Updated opening comment block.
 //

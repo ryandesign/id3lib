@@ -12,14 +12,14 @@
 // the id3lib coordinator.  Please see the README file for details on where
 // to send such submissions.
 
+#include <cstring>
+#include <cstdlib>
+#include "field.h"
+#include "misc_support.h"
+
 #if defined HAVE_CONFIG_H
 #include <config.h>
 #endif
-
-#include <string.h>
-#include <stdlib.h>
-#include "field.h"
-#include "misc_support.h"
 
 // this function is another way of using Set()
 
@@ -332,6 +332,9 @@ luint ID3_Field::RenderUnicodeString(uchar *buffer)
 }
 
 // $Log$
+// Revision 1.13  1999/12/26 15:10:48  scott
+// Minor reformatting.
+//
 // Revision 1.12  1999/12/17 16:13:04  scott
 // Updated opening comment block.
 //

@@ -12,15 +12,16 @@
 // the id3lib coordinator.  Please see the README file for details on where
 // to send such submissions.
 
-#if defined HAVE_CONFIG_H
-#include <config.h>
-#endif
-
-#include <string.h>
+#include <cstring>
 #include <memory.h>
+#include "int28.h"
 #include "header_tag.h"
 #include "error.h"
 #include "misc_support.h"
+
+#if defined HAVE_CONFIG_H
+#include <config.h>
+#endif
 
 // Analyses a buffer to determine if we have a valid ID3v2 tag header.
 // If so, return the number of bytes (starting _after_ the header) to
@@ -98,6 +99,10 @@ size_t ID3_TagHeader::Render(uchar *buffer)
 }
 
 // $Log$
+// Revision 1.10  1999/12/27 05:32:13  scott
+// (Size, Render): Minor return type change.
+// (ID3_IsTagHeader): Updated for new version constants.
+//
 // Revision 1.9  1999/12/26 15:11:33  scott
 // (Render): Now uses RenderNumber, defined in misc_support.
 //

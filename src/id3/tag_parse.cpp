@@ -12,16 +12,17 @@
 // the id3lib coordinator.  Please see the README file for details on where
 // to send such submissions.
 
+#include <cstdio>
+#include <cstring>
+#include <memory.h>
+#include <zlib.h>
+#include "tag.h"
+#include "int28.h"
+#include "misc_support.h"
+
 #if defined HAVE_CONFIG_H
 #include <config.h>
 #endif
-
-#include <stdio.h>
-#include <string.h>
-#include <memory.h>
-#include "tag.h"
-#include <zlib.h>
-#include "misc_support.h"
 
 ID3_Elem *ID3_Tag::GetLastElem(ID3_Elem *list)
 {
@@ -409,6 +410,10 @@ luint ID3_Tag::ParseFromHandle(void)
 }
 
 // $Log$
+// Revision 1.13  1999/12/27 05:29:03  scott
+// (ExpandBinaries, ProcessBinaries): Moved header processing tasks to
+// the header object, now a member of ID3_Frame.
+//
 // Revision 1.12  1999/12/26 15:11:57  scott
 // (ExpandBinaries): Now uses ParseNumber, defined in misc_support.
 // (ProcessBinaries): Now uses ParseNumber, defined in misc_support.

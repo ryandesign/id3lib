@@ -12,12 +12,12 @@
 // the id3lib coordinator.  Please see the README file for details on where
 // to send such submissions.
 
+#include <zlib.h>
+#include "frame.h"
+
 #if defined HAVE_CONFIG_H
 #include <config.h>
 #endif
-
-#include "frame.h"
-#include <zlib.h>
 
 void ID3_Frame::Parse(uchar *buffer, luint size)
 {
@@ -44,6 +44,10 @@ void ID3_Frame::Parse(uchar *buffer, luint size)
 }
 
 // $Log$
+// Revision 1.10  1999/12/27 05:55:57  scott
+// (Parse): Moved header processing tasks to the header object, now a
+// member of ID3_Frame.
+//
 // Revision 1.9  1999/12/26 15:10:48  scott
 // Minor reformatting.
 //

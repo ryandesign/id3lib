@@ -12,17 +12,14 @@
 // the id3lib coordinator.  Please see the README file for details on where
 // to send such submissions.
 
+#include <cstring>
+#include "tag.h"
+
 #if defined HAVE_CONFIG_H
 #include <config.h>
 #endif
 
-#include "tag.h"
-
 #ifdef __DLL
-
-
-#include <string.h>
-
 
 struct ID3_VerInfo
 {
@@ -487,6 +484,9 @@ void ID3Field_ToFile(ID3_Field *field, char *fileName)
 #endif
 
 // $Log$
+// Revision 1.11  1999/12/17 16:13:03  scott
+// Updated opening comment block.
+//
 // Revision 1.10  1999/12/02 22:51:37  scott
 // Fixed config.h macros.
 //

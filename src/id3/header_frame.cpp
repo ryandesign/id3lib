@@ -12,15 +12,15 @@
 // the id3lib coordinator.  Please see the README file for details on where
 // to send such submissions.
 
-#if defined HAVE_CONFIG_H
-#include <config.h>
-#endif
-
-#include <string.h>
+#include <cstring>
 #include <memory.h>
 #include "header_frame.h"
 #include "error.h"
 #include "misc_support.h"
+
+#if defined HAVE_CONFIG_H
+#include <config.h>
+#endif
 
 ID3_FrameHeader::ID3_FrameHeader()
   : __pFrameDef(NULL)
@@ -159,6 +159,22 @@ void ID3_FrameHeader::Clear()
 }
 
 // $Log$
+// Revision 1.10  1999/12/27 05:40:24  scott
+// (ID3_FrameHeader): Added default constructor.
+// (SetFrameID): Modified to reflect internal representation change.  Now
+// searches and stores frame definition associated with the frame id.
+// (GetFrameInfo): Removed.
+// (Parse): Added implementation.  Based on former GetFrameInfo.
+// (Render): Modified to reflect internal representation change.
+// (GetTextID): Added implementation.  Gets text id associated with frame
+// header.
+// (Copy): Added implementation.  Copies another frame header.
+// (GetFrameID): Added implementation.  Gets frame id associated with
+// frame header.
+// (GetFrameDef): Added implementation.  Gets frame definition associated
+// with frame header.
+// (Clear): Added implementation.  Clears contents of frame header.
+//
 // Revision 1.9  1999/12/26 15:11:26  scott
 // (GetFrameInfo): Now uses ParseNumber, defined in misc_support.
 // (Render): Now uses RenderNumber, defined in misc_support.

@@ -15,7 +15,7 @@
 #ifndef ID3LIB_FIELD_H
 #define ID3LIB_FIELD_H
 
-#include <wchar.h>
+#include <cstdlib>
 #include "types.h"
 #include "error.h"
 
@@ -419,6 +419,9 @@ ID3_FrameID   ID3_FindFrameID(const char *id);
 #endif
 
 // $Log$
+// Revision 1.6  1999/12/26 16:40:04  scott
+// (class ID3_Field): Cleaned up interface to Parse* methods.
+//
 // Revision 1.5  1999/12/17 16:05:02  scott
 // Updated opening comment block.
 //

@@ -12,15 +12,15 @@
 // the id3lib coordinator.  Please see the README file for details on where
 // to send such submissions.
 
+#include <cstring>
+#include <memory.h>
+#include <zlib.h>
+#include "tag.h"
+#include "misc_support.h"
+
 #if defined HAVE_CONFIG_H
 #include <config.h>
 #endif
-
-#include <string.h>
-#include <memory.h>
-#include "tag.h"
-#include "misc_support.h"
-#include <zlib.h>
 
 luint ID3_Frame::Render(uchar *buffer)
 {
@@ -147,6 +147,11 @@ luint ID3_Frame::Render(uchar *buffer)
 }
 
 // $Log$
+// Revision 1.10  1999/12/27 05:48:00  scott
+// (Render): Moved header processing tasks to the header object, now a
+// member of ID3_Frame.  Similar changes made due to removal of redundant
+// information from frame object.
+//
 // Revision 1.9  1999/12/26 15:11:09  scott
 // (Render): Now uses RenderNumber, defined in misc_support.
 //

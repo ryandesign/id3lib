@@ -12,12 +12,12 @@
 // the id3lib coordinator.  Please see the README file for details on where
 // to send such submissions.
 
+#include "field.h"
+#include "misc_support.h"
+
 #if defined HAVE_CONFIG_H
 #include <config.h>
 #endif
-
-#include "field.h"
-#include "misc_support.h"
 
 ID3_Field& ID3_Field::operator=(luint newData)
 {
@@ -81,6 +81,10 @@ luint ID3_Field::RenderInteger(uchar *buffer)
 }
 
 // $Log$
+// Revision 1.11  1999/12/26 15:10:58  scott
+// (ParseInteger): Now uses ParseNumber, defined in misc_support.
+// (RenderInteger): Now uses RenderNumber, defined in misc_support.
+//
 // Revision 1.10  1999/12/17 16:13:04  scott
 // Updated opening comment block.
 //

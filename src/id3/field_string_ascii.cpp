@@ -12,14 +12,14 @@
 // the id3lib coordinator.  Please see the README file for details on where
 // to send such submissions.
 
-#if defined HAVE_CONFIG_H
-#include <config.h>
-#endif
-
-#include <stdlib.h>
+#include <cstring>
+#include <cstdlib>
 #include "field.h"
 #include "misc_support.h"
 
+#if defined HAVE_CONFIG_H
+#include <config.h>
+#endif
 
 ID3_Field& ID3_Field::operator= (const char *string)
 {
@@ -233,6 +233,9 @@ luint ID3_Field::RenderASCIIString(uchar *buffer)
 }
 
 // $Log$
+// Revision 1.16  1999/12/26 15:10:48  scott
+// Minor reformatting.
+//
 // Revision 1.15  1999/12/23 15:56:50  scott
 // (RenderASCIIString): Rewrote the function so that it doesn't create
 // temporary dynamic storage, and so that it copies the number of
