@@ -123,7 +123,7 @@ public:
   ID3_Frame  &operator=( const ID3_Frame &rFrame );
 
 protected:
-  void        InitFields(const ID3_FrameDef *);
+  void        InitFields();
   void        InitFieldBits(void);
   bool        HasChanged(void) const;
   void        Parse(uchar *buffer, luint size);
