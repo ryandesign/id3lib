@@ -13,12 +13,19 @@
 # require automake 1.4
 AUTOMAKE_OPTIONS = 1.4
 
-EXTRA_DIST = reconf config.win32
+EXTRA_DIST = reconf config.h.win32.in
 SUBDIRS = . m4 doc src include prj zlib
 
 INCLUDES = @ID3LIB_DEBUG_FLAGS@
 
+config.h.win32: $(top_builddir)/config.status $(top_srcdir)/config.h.win32.in 
+        cd $(top_builddir) && CONFIG_FILES=$@ CONFIG_HEADERS= $(SHELL) ./config.status 
+
 # $Log$
+# Revision 1.8  2000/04/06 19:36:48  eldamitri
+# * Makefile.am:
+# Put in version requirement for automake (1.4).
+#
 # Revision 1.7  1999/12/03 14:10:11  scott
 # (EXTRA_DIST): Added config.win32.
 #
