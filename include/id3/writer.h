@@ -37,7 +37,7 @@ class ID3_Writer
   typedef uint32 pos_type;
   typedef  int32 off_type;
   typedef  int16 int_type;
-  static const int_type END_OF_WRITER = -1;
+  static const int_type END_OF_WRITER;
   
   /** Close the writer.  Any further actions on the writer should fail. **/
   virtual void close() = 0;

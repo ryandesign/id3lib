@@ -74,8 +74,10 @@ namespace
                 ']' == reader.readChar());
     reader.setCur(cur);
     if (its)
+	{
       ID3D_NOTICE( "isTimeStamp(): found timestamp, cur = " << 
                    reader.getCur() );
+	}
     return its;
   }
   

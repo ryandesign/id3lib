@@ -138,7 +138,7 @@ bool ID3_FrameImpl::_ClearFields()
   }
   for (index_t fi = 0; fi < _num_fields; fi++)
   {
-    delete dynamic_cast<ID3_FieldImpl*>(_fields[fi]);
+    delete (ID3_FieldImpl*)_fields[fi];
   }
   
   delete [] _fields;

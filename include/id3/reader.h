@@ -37,7 +37,7 @@ class ID3_Reader
   typedef uint32 pos_type;
   typedef  int32 off_type;
   typedef  int16 int_type;
-  static const int_type END_OF_READER = -1;
+  static const int_type END_OF_READER;
   
   /** Close the reader.  Any further actions on the reader should fail.
    **/

@@ -49,7 +49,7 @@ void PrintUsage(const char *sName)
 
 void PrintVersion(const char *sName)
 {
-  cout << sName << " " << VERSION_NUMBER << endl;
+  cout << sName << " " << VERSION_NUMBER.c_str() << endl;
   cout << "Displays ID3 Tag Information - Written by Scott Thomas Haug" << endl;
   cout << "Uses " << ID3LIB_FULL_NAME << endl << endl;
 }
@@ -272,7 +272,7 @@ void PrintInformation(const ID3_Tag &myTag)
             ID3_MemoryReader mr(fld->GetBinary(), fld->BinSize());
             while (!mr.atEnd())
             {
-              cout << io::readString(mr);
+              cout << io::readString(mr).c_str();
               cout << " [" << io::readBENumber(mr, sizeof(uint32)) << " " 
                    << format << "] ";
             }

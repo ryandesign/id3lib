@@ -134,7 +134,7 @@ bool ID3_Frame::Parse(ID3_Reader& reader)
 
 void ID3_Frame::Render(ID3_Writer& writer) const
 {
-  return _impl->Render(writer);
+  _impl->Render(writer);
 }
 
 bool ID3_Frame::Contains(ID3_FieldID id) const

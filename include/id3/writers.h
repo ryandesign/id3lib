@@ -28,6 +28,7 @@
 #define _ID3LIB_WRITERS_H_
 
 #include <fstream.h>
+#include <string.h>
 #include "writer.h"
 
 class ID3_OStreamWriter : public ID3_Writer
@@ -69,12 +70,14 @@ class ID3_OStreamWriter : public ID3_Writer
 
 class ID3_OFStreamWriter : public ID3_OStreamWriter
 {
+  ofstream& _file;
  public:
-  ID3_OFStreamWriter(ofstream& writer) : ID3_OStreamWriter(writer) { ; }
+  ID3_OFStreamWriter(ofstream& writer) 
+    : ID3_OStreamWriter(writer), _file(writer) { ; }
     
   virtual void close() 
   { 
-    dynamic_cast<ofstream&>(this->getWriter()).close(); 
+    _file.close();
   }
 };
   
@@ -117,12 +120,14 @@ class ID3_IOStreamWriter : public ID3_Writer
 
 class ID3_FStreamWriter : public ID3_IOStreamWriter
 {
+  fstream& _file;
  public:
-  ID3_FStreamWriter(fstream& writer) : ID3_IOStreamWriter(writer) { ; }
+  ID3_FStreamWriter(fstream& writer) 
+    : ID3_IOStreamWriter(writer), _file(writer) { ; }
     
   virtual void close() 
   { 
-    dynamic_cast<fstream&>(this->getWriter()).close(); 
+    _file.close();
   }
 };
   

@@ -168,7 +168,7 @@ bool id3::v2::parse(ID3_TagImpl& tag, ID3_Reader& reader)
   if (!hdr.GetUnsync())
   {
     tag.SetUnsync(false);
-    ::parseFrames(tag, wr);
+    parseFrames(tag, wr);
   }
   else
   {
@@ -184,7 +184,7 @@ bool id3::v2::parse(ID3_TagImpl& tag, ID3_Reader& reader)
     ID3D_NOTICE( "ID3_TagImpl::Parse(ID3_Reader&): unsync beg = " << ur.getBeg() );
     ID3D_NOTICE( "ID3_TagImpl::Parse(ID3_Reader&): unsync cur = " << ur.getCur() );
     ID3D_NOTICE( "ID3_TagImpl::Parse(ID3_Reader&): unsync end = " << ur.getEnd() );
-    ::parseFrames(tag, sr);
+    parseFrames(tag, sr);
   }
 
   return true;
@@ -193,7 +193,7 @@ bool id3::v2::parse(ID3_TagImpl& tag, ID3_Reader& reader)
 void ID3_TagImpl::ParseFile()
 {
   ifstream file;
-  if (ID3E_NoError != ::openReadableFile(this->GetFileName(), file))
+  if (ID3E_NoError != openReadableFile(this->GetFileName(), file))
   {
     // log this...
     return;
@@ -203,7 +203,7 @@ void ID3_TagImpl::ParseFile()
   wr.setBeg(wr.getCur());
 
   _file_tags.clear();
-  _file_size = ::getFileSize(file);
+  _file_size = getFileSize(file);
 
   ID3_Reader::pos_type beg  = wr.getBeg();
   ID3_Reader::pos_type cur  = wr.getCur();

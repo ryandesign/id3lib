@@ -183,7 +183,7 @@ ID3_Frame *ID3_TagImpl::Find(ID3_FrameID id, ID3_FieldID fldID, const unicode_t 
           continue;
         }
 
-        if (::ucscmp(fld->GetUnicodeText(), data) == 0)
+        if (ucscmp(fld->GetUnicodeText(), data) == 0)
         {
           // We've found a valid frame.  Set cursor to be the next element
           frame = cur->pFrame;

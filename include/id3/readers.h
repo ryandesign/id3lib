@@ -73,12 +73,14 @@ class ID3_IStreamReader : public ID3_Reader
   
 class ID3_IFStreamReader : public ID3_IStreamReader
 {
+  ifstream& _file;
  public:
-  ID3_IFStreamReader(ifstream& reader) : ID3_IStreamReader(reader) { ; }
+  ID3_IFStreamReader(ifstream& reader)
+    : ID3_IStreamReader(reader), _file(reader) { ; }
     
   virtual void close() 
   { 
-    dynamic_cast<ifstream&>(this->getReader()).close(); 
+    _file.close();
   }
 };
   

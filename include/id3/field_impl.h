@@ -31,8 +31,8 @@
 #include <stdlib.h>
 #include "field.h"
 
-class ID3_FieldDef;
-class ID3_FrameDef;
+struct ID3_FieldDef;
+struct ID3_FrameDef;
 class ID3_Frame;
 class ID3_Reader;
 

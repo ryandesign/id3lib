@@ -1273,14 +1273,14 @@ bool ID3_FieldImpl::SetEncoding(ID3_TextEnc enc)
       {
         unicode_t* unicode = _unicode;
         _ascii = new char[size];
-        ::ucstombs(_ascii, unicode, size);
+        ucstombs(_ascii, unicode, size);
         delete [] unicode;
       }
       else if (_enc == ID3TE_ASCII && enc == ID3TE_UNICODE)
       {
         char* ascii = _ascii;
         _unicode = new unicode_t[size];
-        ::mbstoucs(_unicode, ascii, size);
+        mbstoucs(_unicode, ascii, size);
         delete [] ascii;
       }
     }

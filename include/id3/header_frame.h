@@ -30,7 +30,7 @@
 #include "header.h"
 #include "field.h"
 
-class ID3_FrameDef;
+struct ID3_FrameDef;
 
 class ID3_FrameHeader : public ID3_Header
 {

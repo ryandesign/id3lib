@@ -29,7 +29,7 @@
 
 #include "globals.h"
 
-class ID3_FieldDef;
+struct ID3_FieldDef;
 
 // Structure used for defining how frames are defined internally.
 struct ID3_FrameDef
