@@ -19,25 +19,45 @@
 #include "types.h"
 #include "tag.h"
 
-// in 'id3_misc_support.cpp'
-char *ID3_GetArtist(ID3_Tag *tag);
-bool  ID3_AddArtist(ID3_Tag *tag, char *text);
-char *ID3_GetAlbum(ID3_Tag *tag);
-bool  ID3_AddAlbum(ID3_Tag *tag, char *text);
-char *ID3_GetTitle(ID3_Tag *tag);
-bool  ID3_AddTitle(ID3_Tag *tag, char *text);
-char *ID3_GetYear(ID3_Tag *tag);
-bool  ID3_AddYear(ID3_Tag *tag, char *text);
-char *ID3_GetComment(ID3_Tag *tag);
-bool  ID3_AddComment(ID3_Tag *tag, char *text);
-char *ID3_GetTrack(ID3_Tag *tag);
-luint ID3_GetTrackNum(ID3_Tag *tag);
-bool  ID3_AddTrack(ID3_Tag *tag, uchar ucTrack, uchar ucTotal = 0);
-char *ID3_GetGenre(ID3_Tag *tag);
-luint ID3_GetGenreNum(ID3_Tag *tag);
-bool  ID3_AddGenre(ID3_Tag *tag, luint ucGenre);
-char *ID3_GetLyrics(ID3_Tag *tag);
-bool  ID3_AddLyrics(ID3_Tag *tag, char *text);
+// defined in 'id3_misc_support.cpp'
+// these are 'convenience functions,' to make using the library easier for the 
+// most common of operations
+char  *ID3_GetArtist(ID3_Tag *tag);
+bool   ID3_AddArtist(ID3_Tag *tag, const char *text, bool bReplace = false);
+size_t ID3_RemoveArtists(ID3_Tag *tag);
+
+char  *ID3_GetAlbum(ID3_Tag *tag);
+bool   ID3_AddAlbum(ID3_Tag *tag, const char *text, bool bReplace = false);
+size_t ID3_RemoveAlbums(ID3_Tag *tag);
+
+char  *ID3_GetTitle(ID3_Tag *tag);
+bool   ID3_AddTitle(ID3_Tag *tag, const char *text, bool bReplace = false);
+size_t ID3_RemoveTitles(ID3_Tag *tag);
+
+char  *ID3_GetYear(ID3_Tag *tag);
+bool   ID3_AddYear(ID3_Tag *tag, const char *text, bool bReplace = false);
+size_t ID3_RemoveYears(ID3_Tag *tag);
+
+char  *ID3_GetComment(ID3_Tag *tag);
+bool   ID3_AddComment(ID3_Tag *tag, const char *text,
+                      const char *sDescription = "", bool bReplace = false);
+size_t ID3_RemoveComments(ID3_Tag *tag, const char *sDescription = NULL);
+
+char  *ID3_GetTrack(ID3_Tag *tag);
+luint  ID3_GetTrackNum(ID3_Tag *tag);
+bool   ID3_AddTrack(ID3_Tag *tag, uchar ucTrack, uchar ucTotal = 0,
+                    bool bReplace = false);
+bool   ID3_AddTrack(ID3_Tag *tag, uchar ucTrack, bool bReplace);
+size_t ID3_RemoveTracks(ID3_Tag *tag);
+
+char  *ID3_GetGenre(ID3_Tag *tag);
+luint  ID3_GetGenreNum(ID3_Tag *tag);
+bool   ID3_AddGenre(ID3_Tag *tag, luint ucGenre, bool bReplace = false);
+size_t ID3_RemoveGenres(ID3_Tag *tag);
+
+char  *ID3_GetLyrics(ID3_Tag *tag);
+bool   ID3_AddLyrics(ID3_Tag *tag, const char *text, bool bReplace = false);
+size_t ID3_RemoveLyrics(ID3_Tag *tag);
 
 void   mbstoucs(unicode_t *unicode, const char *ascii, const luint len);
 void   ucstombs(char *ascii, const unicode_t *unicode, const luint len);
@@ -54,6 +74,10 @@ void ID3_RemoveTrailingSpaces(char *buffer, luint length);
 #endif
 
 // $Log$
+// Revision 1.3  1999/12/02 22:45:28  scott
+// Changed all of the #include <id3/*> to #include "*" to help ensure that
+// the sources are searched for in the right places.
+//
 // Revision 1.2  1999/12/01 22:10:02  scott
 // Minor declaraction problem (thanks, elrod).
 //
