@@ -23,7 +23,6 @@ int main( int argc, char *argv[])
     frame.Field(ID3FN_DESCRIPTION).Set("compression example");
     frame.Field(ID3FN_TEXT).Set("This sample user text frame came from an ID3v2-3.0 tag.  The frame has the 'compression' bit set in it's frame header.  This is the new method for compressing frames, which supercedes the 2.01 Compressed Data Metaframe.");
     frame.SetCompression(true);
-    cerr << "compression = " << frame.GetCompression() << endl;
     tag.AddFrame(frame);
 
     tag.SetPadding(false);
