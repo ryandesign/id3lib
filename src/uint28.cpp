@@ -23,8 +23,8 @@
 // http://download.sourceforge.net/id3lib/
 
 #include "uint28.h"
-#include <cstring>
-#include <iomanip>
+#include <string.h>
+#include <iomanip.h>
 
 #if defined HAVE_CONFIG_H
 #include <config.h>
@@ -37,6 +37,7 @@ uint28& uint28::operator=(const uchar* const data)
   {
     __value = (__value << 7) | static_cast<uint32>(data[i]) & MASK7;
   }
+  return *this;
 }
 
 void uint28::Render(uchar* data) const
@@ -67,7 +68,7 @@ ostream& operator<<(ostream& os, uint28& val)
 istream& operator>>(istream& in, uint28& val)
 {
   uchar data[sizeof(uint32) + 1];
-  in >> std::setw(sizeof(uint32) + 1) >> data;
+  in >> setw(sizeof(uint32) + 1) >> data;
   val = data;
   return in;
 }
