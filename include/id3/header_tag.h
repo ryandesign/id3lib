@@ -63,7 +63,7 @@ public:
   // mm = minor version (will never be 0xFF)
   // ff = flags byte 
   // ss = size bytes (less than $80)
-  static const char* const ID             = "ID3";
+  static const char* const ID;
   enum
   {
     ID_SIZE        = 3,
