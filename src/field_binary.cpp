@@ -157,13 +157,15 @@ void ID3_FieldImpl::ToFile(const char *info //< Destination filename
 }
 
 
-void ID3_FieldImpl::ParseBinary(ID3_Reader& reader)
+bool ID3_FieldImpl::ParseBinary(ID3_Reader& reader)
 {
   // copy the remaining bytes, unless we're fixed length, in which case copy
   // the minimum of the remaining bytes vs. the fixed length
   id3::BinaryReader br(reader);
   id3::bstring binary = br.getBinary();
   this->Set(binary.data(), binary.size());
+  _changed = false;
+  return true;
 }
 
 
