@@ -24,14 +24,14 @@
 // id3lib.  These files are distributed with id3lib at
 // http://download.sourceforge.net/id3lib/
 
-#include <cstring>
-#include <iostream>
-#include <cstdio>
+#include <string.h>
+#include <iostream.h>
+#include <stdio.h>
 #include "tag.h"
 
 #if defined WIN32
-#include <windows.h>
-static int truncate(const char *path, off_t length)
+#  include <windows.h>
+static int truncate(const char *path, size_t length)
 {
   int result = -1;
   HANDLE fh;
@@ -54,12 +54,18 @@ static int truncate(const char *path, off_t length)
   
   return result;
 }
+
+// prevents a weird error I was getting compiling this under windows
+#  if defined CreateFile
+#    undef CreateFile
+#  endif
+
 #else
-#include <unistd.h>
+#  include <unistd.h>
 #endif
 
 #if defined HAVE_CONFIG_H
-#include <config.h>
+#  include <config.h>
 #endif
 
 bool exists(const char *name)
@@ -81,6 +87,8 @@ bool exists(const char *name)
     
   return doesExist;
 }
+
+
 
 void ID3_Tag::CreateFile(void)
 {
@@ -337,6 +345,10 @@ luint ID3_Tag::Strip(const luint ulTagFlag)
 
 
 // $Log$
+// Revision 1.15  2000/04/07 04:34:28  eldamitri
+// Added optional parameters to Link to make parsing of id3v1/lyrics3
+// tags optional.
+//
 // Revision 1.14  2000/04/05 05:21:15  eldamitri
 // Updated initial comment information to reflect license, copyright
 // change.
