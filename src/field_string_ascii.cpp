@@ -245,6 +245,10 @@ luint ID3_Field::RenderASCIIString(uchar *buffer)
 }
 
 // $Log$
+// Revision 1.20  2000/04/17 02:31:35  eldamitri
+// Updated parameters of certain methods with const modifier to match
+// declaration.
+//
 // Revision 1.19  2000/04/08 04:37:19  eldamitri
 // Changed new ANSI-standard C++ include headers to old-style headers.
 //
