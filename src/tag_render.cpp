@@ -450,6 +450,10 @@ luint ID3_Tag::PaddingSize(luint curSize) const
 
 
 // $Log$
+// Revision 1.20  2000/04/09 14:03:18  eldamitri
+// (RenderV2ToHandle): Changed conditional from '#if defined WIN32' to
+// '#if !defined HAVE_MKSTEMP'.
+//
 // Revision 1.19  2000/04/08 04:44:37  eldamitri
 // Changed new ANSI-standard C++ include headers to old-style headers.
 // (RenderV2ToHandle): Added conditional code for rendering in windows.
