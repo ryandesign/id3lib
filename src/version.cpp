@@ -61,6 +61,10 @@ unsigned short ID3_Patch()
 }
 
 // $Log$
+// Revision 1.5  2000/04/07 04:40:36  eldamitri
+// Changed the version functions to reflect the name change of release
+// and revision to major and minor.
+//
 // Revision 1.4  2000/04/05 05:21:15  eldamitri
 // Updated initial comment information to reflect license, copyright
 // change.
