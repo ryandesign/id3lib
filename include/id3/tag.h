@@ -85,6 +85,7 @@ public:
   size_t     Render(ID3_Writer&, ID3_TagType = ID3TT_ID3V2) const;
 
   size_t     Link(const char *fileInfo, flags_t = (flags_t) ID3TT_ALL);
+  size_t     Link(ID3_Reader &reader, flags_t = (flags_t) ID3TT_ALL);
   flags_t    Update(flags_t = (flags_t) ID3TT_ALL);
   flags_t    Strip(flags_t = (flags_t) ID3TT_ALL);
 

@@ -104,6 +104,7 @@ public:
   ID3_Frame* RemoveFrame(const ID3_Frame *);
 
   size_t     Link(const char *fileInfo, flags_t = (flags_t) ID3TT_ALL);
+  size_t     Link(ID3_Reader &reader, flags_t = (flags_t) ID3TT_ALL);
   flags_t    Update(flags_t = (flags_t) ID3TT_ALL);
   flags_t    Strip(flags_t = (flags_t) ID3TT_ALL);
 
@@ -150,6 +151,7 @@ protected:
   void       RenderExtHeader(uchar *);
 
   void       ParseFile();
+  void       ParseReader(ID3_Reader &reader);
 
 private:
   ID3_TagHeader _hdr;          // information relevant to the tag header
@@ -174,3 +176,4 @@ private:
 size_t     ID3_GetDataSize(const ID3_TagImpl&);
 
 #endif /* _ID3LIB_TAG_IMPL_H_ */
+

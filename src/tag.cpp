@@ -706,6 +706,14 @@ size_t ID3_Tag::Link(const char *fileInfo, flags_t flags)
   return _impl->Link(fileInfo, flags);
 }
 
+/**
+ ** Same as above, but takes a ID3_Reader as argument.
+ */
+size_t ID3_Tag::Link(ID3_Reader &reader, flags_t flags)
+{
+  return _impl->Link(reader, flags);
+}
+
 flags_t ID3_Tag::Update(flags_t flags)
 {
   return _impl->Update(flags);
