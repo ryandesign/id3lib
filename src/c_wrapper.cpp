@@ -25,8 +25,10 @@
 // http://download.sourceforge.net/id3lib/
 
 #include <string.h>
-#include "tag.h"
 #include "id3.h"
+#include "tag.h"
+#include "frame.h"
+#include "field.h"
 
 #if defined HAVE_CONFIG_H
 #include <config.h>
