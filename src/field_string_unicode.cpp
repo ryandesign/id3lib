@@ -297,18 +297,16 @@ size_t ID3_Field::RenderUnicodeString(uchar *buffer) const
   
   if (NULL != __data && __size && nBytes)
   {
-    unicode_t *ourString = (unicode_t *) & buffer[sizeof(unicode_t)];
-    
     // we render at sizeof(unicode_t) bytes into the buffer because we make
     // room for the Unicode BOM
     memcpy(&buffer[sizeof(unicode_t)], (uchar *) __data, 
            nBytes - sizeof(unicode_t));
     
-    index_t i;
+    unicode_t *ourString = (unicode_t *) &buffer[sizeof(unicode_t)];
     // now we convert the internal dividers to what they are supposed to be
-    for (i = 0; i < nBytes; i++)
+    for (index_t i = sizeof(unicode_t); i < this->Size(); i++)
     {
-      if (ourString[i] == 1)
+      if (ourString[i] == 0x01)
       {
         unicode_t sub = L'/';
         
@@ -316,7 +314,7 @@ size_t ID3_Field::RenderUnicodeString(uchar *buffer) const
         {
           sub = L'\0';
         }
-          
+        
         ourString[i] = sub;
       }
     }
