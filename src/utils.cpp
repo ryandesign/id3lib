@@ -35,7 +35,6 @@
 
 #include "utils.h"
 
-using namespace std;
 using namespace dami;
 
 size_t dami::renderNumber(uchar *buffer, uint32 val, size_t size)
