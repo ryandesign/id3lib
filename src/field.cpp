@@ -28,6 +28,8 @@
 #include <config.h>
 #endif
 
+#include "debug.h"
+
 #include <string.h>
 
 #include "field_impl.h"
@@ -1121,19 +1123,20 @@ size_t ID3_FieldImpl::Parse(const uchar *buffer, size_t buffSize)
   return mr.getCur() - beg;
 }
 
-void ID3_FieldImpl::Parse(ID3_Reader& reader)
+bool ID3_FieldImpl::Parse(ID3_Reader& reader)
 {
+  bool success = false;
   switch (this->GetType())
   {
     case ID3FTY_INTEGER:
     {
-      this->ParseInteger(reader);
+      success = this->ParseInteger(reader);
       break;
     }
         
     case ID3FTY_BINARY:
     {
-      this->ParseBinary(reader);
+      success = this->ParseBinary(reader);
       break;
     }
         
@@ -1141,21 +1144,22 @@ void ID3_FieldImpl::Parse(ID3_Reader& reader)
     {
       if (this->GetEncoding() == ID3TE_UNICODE)
       {
-        this->ParseUnicodeString(reader);
+        success = this->ParseUnicodeString(reader);
       }
       else
       {
-        this->ParseASCIIString(reader);
+        success = this->ParseASCIIString(reader);
       }
       break;
     }
 
     default:
     {
-      ID3_THROW(ID3E_UnknownFieldType);
+      ID3D_WARNING( "ID3_FieldImpl::Parse(): unknown field type" );
       break;
     }
   }
+  return success;
 }
 
 ID3_FrameDef* ID3_FindFrameDef(ID3_FrameID id)
@@ -1213,7 +1217,7 @@ size_t ID3_FieldImpl::Render(uchar *buffer) const
       break;
         
     default:
-      ID3_THROW (ID3E_UnknownFieldType);
+      ID3D_WARNING ( "ID3D_FieldImpl::Render(): unknown field type" );
       break;
   }
     
