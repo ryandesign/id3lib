@@ -116,23 +116,6 @@ size_t ID3_FrameHeader::Parse(const uchar *buffer, size_t size)
   __flags.add(ParseNumber(&buffer[index], __info->frame_bytes_flags));
   index += __info->frame_bytes_flags;
   
-  // Parse the extras that can be appeded to a header before the data
-  if (__flags.test(COMPRESSION))
-  {
-    this->SetExpandedSize(ParseNumber(&buffer[index]));
-    index += sizeof(uint32);
-  }
-
-  if (__flags.test(ENCRYPTION))
-  {
-    __encryption_id = buffer[index++];
-  }
-
-  if (__flags.test(GROUPING))
-  {
-    __grouping_id = buffer[index++];
-  }
-
   return index;
 }
 
@@ -158,10 +141,10 @@ size_t ID3_FrameHeader::Render(uchar *buffer) const
 
   memcpy(&buffer[size], (uchar *) text_id, __info->frame_bytes_id);
   size += __info->frame_bytes_id;
-    
+  
   size += RenderNumber(&buffer[size], __data_size, __info->frame_bytes_size);
   size += RenderNumber(&buffer[size], __flags.get(), __info->frame_bytes_flags);
-
+  
   return size;
 }
 
