@@ -190,7 +190,7 @@ String dami::convert(String data, ID3_TextEnc sourceEnc, ID3_TextEnc targetEnc)
     target = ucstombs(data);
   }
 #else
-  if (sourceEnc != targetEnc)
+  if ((sourceEnc != targetEnc) && (data.size() > 0 ))
   {
     const char* targetFormat = getFormat(targetEnc);
     const char* sourceFormat = getFormat(sourceEnc);
