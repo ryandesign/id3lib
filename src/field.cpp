@@ -687,7 +687,8 @@ static ID3_FieldDef ID3FD_Volume[] =
 // SYLT  SLT  ID3FID_SYNCEDLYRICS      Synchronized lyric/text
 // SYTC  STC  ID3FID_SYNCEDTEMPO       Synchronized tempo codes
 //       CRM  ID3FID_METACRYPTO        Encrypted meta frame
-
+by the way i noticed that the "description" fields are out of whack in fields.cpp
+in ID3_FrameDef from PCNT to PRIV.
 static  ID3_FrameDef ID3_FrameDefs[] =
 {
   //                          short  long      tag    file
@@ -706,10 +707,10 @@ static  ID3_FrameDef ID3_FrameDefs[] =
   {ID3FID_CDID,              "MCI", "MCDI", 0, false, false, NULL, ID3FD_Unimplemented, "Music CD identifier"},
   {ID3FID_MPEGLOOKUP,        "MLL", "MLLT", 0, false, true,  NULL, ID3FD_Unimplemented, "MPEG location lookup table"},
   {ID3FID_OWNERSHIP,         ""   , "OWNE", 0, false, false, NULL, ID3FD_Unimplemented, "Ownership frame"},
-  {ID3FID_PLAYCOUNTER,       "CNT", "PCNT", 0, false, false, NULL, ID3FD_PlayCounter,   "Private frame"},
-  {ID3FID_POPULARIMETER,     "POP", "POPM", 0, false, false, NULL, ID3FD_Popularimeter, "Play counter"},
-  {ID3FID_POSITIONSYNC,      ""   , "POSS", 0, false, true,  NULL, ID3FD_Unimplemented, "Popularimeter"},
-  {ID3FID_PRIVATE,           ""   , "PRIV", 0, false, false, NULL, ID3FD_Private,       "Position synchronisation frame"},
+  {ID3FID_PLAYCOUNTER,       "CNT", "PCNT", 0, false, false, NULL, ID3FD_PlayCounter,   "Play counter"},
+  {ID3FID_POPULARIMETER,     "POP", "POPM", 0, false, false, NULL, ID3FD_Popularimeter, "Popularimeter"},
+  {ID3FID_POSITIONSYNC,      ""   , "POSS", 0, false, true,  NULL, ID3FD_Unimplemented, "Position synchronisation frame"},
+  {ID3FID_PRIVATE,           ""   , "PRIV", 0, false, false, NULL, ID3FD_Private,       "Private frame"},
   {ID3FID_BUFFERSIZE,        "BUF", "RBUF", 0, false, false, NULL, ID3FD_Unimplemented, "Recommended buffer size"},
   {ID3FID_VOLUMEADJ,         "RVA", "RVAD", 0, false, true,  NULL, ID3FD_Unimplemented, "Relative volume adjustment"},
   {ID3FID_REVERB,            "REV", "RVRB", 0, false, false, NULL, ID3FD_Unimplemented, "Reverb"},
