@@ -30,7 +30,6 @@ the_sources =                   \
   header.cpp                    \
   header_frame.cpp              \
   header_tag.cpp                \
-  int28.cpp                     \
   misc_support.cpp              \
   spec.cpp                      \
   tag.cpp                       \
@@ -40,7 +39,9 @@ the_sources =                   \
   tag_parse_lyrics3.cpp         \
   tag_parse_v1.cpp              \
   tag_render.cpp                \
-  tag_sync.cpp
+  tag_sync.cpp                  \
+  uint28.cpp                    \
+  utils.cpp                     
 
 lib_LTLIBRARIES   = libid3.la 
 
