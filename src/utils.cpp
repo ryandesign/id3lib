@@ -210,7 +210,7 @@ namespace
 #if defined(ID3LIB_ICONV_OLDSTYLE)
     const char* source_str = source.data();
 #else
-    char *source_str = LEAKTESTNEWSIZED(char, source.size()+1);
+    char *source_str = new char [source.size()+1];
     source.copy(source_str, String::npos);
     source_str[source.length()] = 0;
 #endif
