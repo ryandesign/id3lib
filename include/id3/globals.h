@@ -539,7 +539,7 @@ ID3_STRUCT(Mp3_Headerinfo)
 
 #define ID3_NR_OF_V1_GENRES 148
 
-static char* ID3_v1_genre_description[ID3_NR_OF_V1_GENRES] =
+static const char *ID3_v1_genre_description[ID3_NR_OF_V1_GENRES] =
 {
   "Blues",             //0
   "Classic Rock",      //1
