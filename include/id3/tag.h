@@ -30,6 +30,7 @@
 #include <stdio.h>
 #include "header_tag.h"
 #include "frame.h"
+#include "field.h"
 #include "spec.h"
 #include "error.h"
 
