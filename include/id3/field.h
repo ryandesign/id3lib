@@ -356,7 +356,7 @@ public:
   ID3_FieldType GetType() const { return __type; }
   bool          SetEncoding(ID3_TextEnc enc);
   ID3_TextEnc   GetEncoding() const { return __enc; }
-  bool          IsEncodable() const { return __flags & ID3FF_ENCODABLE; }
+  bool          IsEncodable() const { return (__flags & ID3FF_ENCODABLE) > 0; }
   
 
 private:
