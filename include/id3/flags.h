@@ -32,7 +32,7 @@
 class ID3_Flags
 {
 public:
-  typedef uint16 TYPE;
+  typedef flags_t TYPE;
 
   ID3_Flags() : __f(0) { ; }
   virtual ~ID3_Flags() { ; }
