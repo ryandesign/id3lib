@@ -33,6 +33,8 @@
 #include "spec.h"
 #include "error.h"
 
+class ID3_Reader;
+
 struct ID3_Elem
 {
   virtual ~ID3_Elem() { if (pFrame) { delete pFrame; } }
@@ -68,6 +70,7 @@ public:
   void       AttachFrame(ID3_Frame*);
   ID3_Frame* RemoveFrame(const ID3_Frame *);
   
+  void       Parse(ID3_Reader& reader);
   size_t     Parse(const uchar*, size_t);
   size_t     Parse(const uchar header[ID3_TAGHEADERSIZE], const uchar *buffer);
   size_t     Render(uchar*, ID3_TagType = ID3TT_ID3V2) const;
