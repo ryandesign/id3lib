@@ -39,17 +39,19 @@ class ID3_Header
 public:
   ID3_Header(void);
   
-  void SetVersion(uchar ver, uchar rev);
-  void SetDataSize(luint newSize);
-  void SetFlags(luint newFlags);
-  virtual luint Size(void) = 0;
-  virtual luint Render(uchar *buffer) = 0;
+  virtual void   SetVersion(uchar ver, uchar rev);
+  virtual void   SetDataSize(size_t newSize);
+  virtual size_t GetDataSize() const;
+  virtual void   SetFlags(uint16 newFlags);
+  virtual uint16 GetFlags() const;
+  virtual luint  Size(void) = 0;
+  virtual luint  Render(uchar *buffer) = 0;
   
 protected:
   uchar __ucVersion;        // which version?
   uchar __ucRevision;       // which revision?
-  luint __ulDataSize;       // how big is the data?
-  luint __ulFlags;          // tag flags
+  size_t __ulDataSize;       // how big is the data?
+  uint16 __ulFlags;          // header flags
   ID3_HeaderInfo *__pInfo;  // the info about this version of the headers
 }
 ;
@@ -59,6 +61,9 @@ ID3_HeaderInfo *ID3_LookupHeaderInfo(uchar ver, uchar rev);
 #endif
 
 // $Log$
+// Revision 1.3  1999/12/17 16:05:02  scott
+// Updated opening comment block.
+//
 // Revision 1.2  1999/12/02 22:45:28  scott
 // Changed all of the #include <id3/*> to #include "*" to help ensure that
 // the sources are searched for in the right places.
