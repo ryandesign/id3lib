@@ -233,7 +233,7 @@ public:
   size_t      Get(char *buffer, ///< Where to copy the data
                   size_t,       ///< Maximum number of characters to copy
                   index_t = 1   ///< The item number to retrieve
-                  );
+                  ) const;
 
   /** For fields which support this feature, adds a string to the list of
    ** strings currently in the field.
@@ -291,7 +291,7 @@ public:
    **                 people frame, the item number to retrieve.
    ** \sa #Get
    **/
-  size_t         Get(unicode_t *buffer, size_t, index_t = 1);
+  size_t        Get(unicode_t *buffer, size_t, index_t = 1) const;
   /** For fields which support this feature, adds a string to the list of
    ** strings currently in the field.
    ** 
@@ -323,7 +323,7 @@ public:
    ** \param buffer Where to copy the contents of the field.
    ** \param length The number of bytes in the buffer
    **/
-  void          Get(uchar *buffer, size_t length);
+  void          Get(uchar *buffer, size_t length) const;
   /** Copies binary data from the file specified to the field.
    ** 
    ** \code
