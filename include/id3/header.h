@@ -1,3 +1,4 @@
+// -*- C++ -*-
 // $Id$
 
 // id3lib: a C++ library for creating and manipulating id3v1/v2 tags
@@ -29,9 +30,9 @@
 
 #include "spec.h"
 #include "flags.h"
-#include "reader.h"
 
 class ID3_Reader;
+class ID3_Writer;
 
 class ID3_Header : public ID3_Speccable
 {
@@ -82,8 +83,7 @@ public:
   }
   virtual size_t     Size() const = 0;
   
-  virtual size_t     Render(uchar* buffer) const = 0;
-  //virtual size_t     Parse(const uchar*, size_t) = 0;
+  virtual void       Render(ID3_Writer&) const = 0;
   virtual bool       Parse(ID3_Reader&) = 0;
 
   ID3_Header &operator=( const ID3_Header &rhs)
