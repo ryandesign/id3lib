@@ -23,7 +23,6 @@ INCLUDES = \
 
 id3lib_sources =                \
   c_wrapper.cpp                 \
-  error.cpp                     \
   field.cpp                     \
   field_binary.cpp              \
   field_integer.cpp             \
