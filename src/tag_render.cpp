@@ -139,7 +139,7 @@ void id3::v2::render(ID3_Writer& writer, const ID3_TagImpl& tag)
 
   for (size_t i = 0; i < nPadding; ++i)
   {
-    if (writer.writeChar('\0') == END_OF_WRITER)
+    if (writer.writeChar('\0') == ID3_Writer::END_OF_WRITER)
     {
       break;
     }
