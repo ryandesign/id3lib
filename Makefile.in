@@ -105,6 +105,7 @@ OBJDUMP = @OBJDUMP@
 PACKAGE = @PACKAGE@
 RANLIB = @RANLIB@
 VERSION = @VERSION@
+cxxflags_set = @cxxflags_set@
 
 AUTOMAKE_OPTIONS = 1.4
 
