@@ -132,6 +132,12 @@ luint ID3_Field::ParseASCIIString(uchar *buffer, luint posn, luint buffSize)
   }
   if (bytesUsed > 0)
   {
+    // Sanity check our indices and sizes before we start copying memory
+    if ((bytesUsed > buffSize) || (posn + bytesUsed > buffSize))
+    {
+      ID3_THROW_DESC(ID3E_BadData, "field information invalid");
+    }
+
     temp = new char[bytesUsed + 1];
     if (NULL == temp)
       ID3_THROW(ID3E_NoMemory);
@@ -199,6 +205,12 @@ luint ID3_Field::RenderASCIIString(uchar *buffer)
 }
 
 // $Log$
+// Revision 1.5  1999/11/15 20:16:15  scott
+// Added include for config.h.  Minor code cleanup.  Removed
+// assignments from if checks; first makes assignment, then checks
+// for appropriate value.  Made private member variable names more
+// descriptive.
+//
 // Revision 1.4  1999/11/04 04:15:54  scott
 // Added cvs Id and Log tags to beginning and end of file, respectively.
 //
