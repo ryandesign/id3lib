@@ -263,7 +263,7 @@ ID3_Field::ParseUnicodeString(const uchar *buffer, size_t nSize)
       */
       if (temp[0] == 0xFEFF)
       {
-        for (index_t i = loc; i < (int) ucslen(temp); i++)
+        for (index_t i = loc; i < ucslen(temp); i++)
         {
           uchar
             u1 = ((uchar *)(&temp[i]))[0],
