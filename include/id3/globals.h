@@ -32,9 +32,11 @@
 #ifndef __ID3LIB_GLOBALS_H__
 #define __ID3LIB_GLOBALS_H__
 
+#if defined __cplusplus
+#include <iostream.h>
+#endif
 #include <stdlib.h>
 #include "sized_types.h"
-#include <iostream.h>
 
 /* id3lib version.
  * we prefix variable declarations so they can
