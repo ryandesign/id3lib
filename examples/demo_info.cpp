@@ -150,12 +150,12 @@ void PrintInformation(const ID3_Tag &myTag)
         case ID3FID_INVOLVEDPEOPLE:
         {
           size_t nItems = myFrame->Field(ID3FN_TEXT).GetNumTextItems();
-          for (size_t nIndex = 1; nIndex <= nItems; nIndex++)
+          for (size_t nIndex = 0; nIndex < nItems; nIndex++)
           {
             char *sPeople = ID3_GetString(myFrame, ID3FN_TEXT, nIndex);
             cout << sPeople;
             delete [] sPeople;
-            if (nIndex < nItems)
+            if (nIndex + 1 < nItems)
             {
               cout << ", ";
             }
