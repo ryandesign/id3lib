@@ -30,18 +30,18 @@ lsint ID3_IsTagHeader(uchar header[ID3_TAGHEADERSIZE])
 {
   lsint tagSize = -1;
   
-  if (memcmp("ID3", header, 3) == 0)
-    if (header[3] <= ID3_TAGVERSION)
-    {
-      int28 temp = &header[6];
-      tagSize = temp.get();
-    }
+  if ((memcmp(ID3_TAGID, header, ID3_TAGIDSIZE) == 0) &&
+      (header[ID3_TAGIDSIZE] <= ID3v2_VERSION))
+  {
+    int28 temp = &header[6];
+    tagSize = temp.get();
+  }
     
   return tagSize;
 }
 
 
-luint ID3_TagHeader::Size(void)
+size_t ID3_TagHeader::Size(void)
 {
   size_t bytesUsed = ID3_TAGHEADERSIZE;
   
@@ -54,7 +54,7 @@ luint ID3_TagHeader::Size(void)
 }
 
 
-luint ID3_TagHeader::Render(uchar *buffer)
+size_t ID3_TagHeader::Render(uchar *buffer)
 {
   size_t bytesUsed = 0;
   
@@ -98,6 +98,9 @@ luint ID3_TagHeader::Render(uchar *buffer)
 }
 
 // $Log$
+// Revision 1.9  1999/12/26 15:11:33  scott
+// (Render): Now uses RenderNumber, defined in misc_support.
+//
 // Revision 1.8  1999/12/17 16:13:04  scott
 // Updated opening comment block.
 //
