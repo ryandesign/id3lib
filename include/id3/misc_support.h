@@ -76,12 +76,12 @@ ID3_Frame* ID3_AddLyricist(ID3_Tag *, const char *, bool replace = false);
 size_t     ID3_RemoveLyricist(ID3_Tag*);
 
 ID3_Frame* ID3_AddSyncLyrics(ID3_Tag *tag, const char *lang, const char *desc,
-                             const char *text, luint textsize, 
+                             const uchar *text, luint textsize, 
                              bool bReplace = false);
-ID3_Frame* ID3_GetSyncLyricsInfo(ID3_Tag *tag, const char *lang, 
-                                 const char *desc, char *pstampformat, 
-                                 char *ptype, luint *psize);
-ID3_Frame* ID3_GetSyncLyrics(ID3_Tag *tag, const char *lang, const char *desc,
-                             char *pData, luint *psize);
+ID3_Frame* ID3_GetSyncLyricsInfo(const ID3_Tag *tag, const char *lang, 
+                                 const char *desc, char &stampformat, 
+                                 char &type, luint &size);
+ID3_Frame* ID3_GetSyncLyrics(const ID3_Tag *tag, const char *lang, 
+                             const char *desc, char *pData, luint &size);
 
 #endif /* __ID3LIB_MISC_SUPPORT_H__ */
