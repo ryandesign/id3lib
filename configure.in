@@ -14,8 +14,8 @@ AC_INIT(reconf)
 AM_CONFIG_HEADER(config.h)
 
 id3lib_version=3
-id3lib_revision=6
-id3lib_patch=2
+id3lib_revision=0
+id3lib_patch=6
 
 id3lib_release=$id3lib_version.$id3lib_revision.$id3lib_patch
 id3lib_name=id3lib
@@ -130,6 +130,9 @@ AC_OUTPUT(                      \
 )
 
 # $Log$
+# Revision 1.12  1999/12/13 05:26:20  scott
+# (AC_HAVE_HEADERS): Added check for sys/param.h.
+#
 # Revision 1.11  1999/12/03 00:47:51  scott
 # (id3lib_patch): Upped to 2 for new release 3.6.2
 # (AC_OUTPUT): Added Makefiles for prj and zlib and its subdirs
