@@ -31,7 +31,8 @@ enum ID3_Err
   ID3E_TagAlreadyAttached,
   ID3E_InvalidTagVersion,
   ID3E_NoFile,
-  ID3E_zlibError
+  ID3E_zlibError,
+  ID3E_BadData
 };
 
 class ID3_Error
@@ -58,6 +59,12 @@ private:
 #endif
 
 // $Log$
+// Revision 1.5  1999/11/15 20:15:13  scott
+// Made constructor public.  Added new interface to error reporting
+// to allow for more descriptive error messages (this should still be
+// worked on).  Made private member variable names more descriptive.
+// Added const qualifier to appropriate methods.
+//
 // Revision 1.4  1999/11/04 04:32:11  scott
 // Initial revision
 //
