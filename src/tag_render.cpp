@@ -392,6 +392,7 @@ void ID3_Tag::RenderV2ToHandle(void)
   else
   {
 #if !defined HAVE_MKSTEMP
+    // This section is for Windows folk
 
     FILE *tempOut = tmpfile();
     if (NULL == tempOut)
@@ -411,7 +412,7 @@ void ID3_Tag::RenderV2ToHandle(void)
     }
     
     rewind(tempOut);
-    freopen(__sFileName, "w+", __fFileHandle);
+    freopen(__sFileName, "wb+", __fFileHandle);
     
     while (!feof(tempOut))
     {
@@ -516,6 +517,10 @@ luint ID3_Tag::PaddingSize(luint curSize) const
 
 
 // $Log$
+// Revision 1.7  2000/04/26 15:48:34  eldamitri
+// (PaddingSize): Fix for padding logic, thanks to John Adcock for the
+// patch.
+//
 // Revision 1.6  2000/04/26 03:42:52  eldamitri
 // - Replaced version/revision uchar combination with ID3_V2Spec enums
 // - Deprecated {Get,Set}Version, GetRevision for {Get,Set}Spec
