@@ -30,13 +30,12 @@
 
 #include "frame.h"
 #include "field.h"
-#include "spec.h"
 
 class ID3_Reader;
 class ID3_Writer;
 class ID3_TagImpl;
 
-class ID3_Tag : public ID3_Speccable
+class ID3_Tag
 {
   ID3_TagImpl* _impl;
 public:
