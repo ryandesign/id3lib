@@ -2,6 +2,7 @@ $Id$
 
 2000-09-07 Version 3.7.13
 
+* id3com is broken; maintainer has disappeared; anyone care to fix it?
 * Complete reimplementation of ID3_Field: cleaner, safer, faster, clearer, more
   efficient
 * Much more robust MusicMatch parsing
