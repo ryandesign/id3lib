@@ -1,359 +1,448 @@
+// id3lib: a C++ library for creating and manipulating id3v1/v2 tags
 // $Id$
-// 
-// This program is free software; you can distribute it and/or modify it under
-// the terms discussed in the COPYING file, which should have been included
-// with this distribution.
-//  
-// This program is distributed in the hope that it will be useful, but WITHOUT
-// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-// FITNESS FOR A PARTICULAR PURPOSE.  See the COPYING file for more details.
-//  
-// The id3lib authors encourage improvements and optimisations to be sent to
-// the id3lib coordinator.  Please see the README file for details on where
-// to send such submissions.
 
-#include <cstring>
-#include "tag.h"
+// This library is free software; you can redistribute it and/or modify it
+// under the terms of the GNU Library General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or (at your
+// option) any later version.
+//
+// This library is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+// FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public
+// License for more details.
+//
+// You should have received a copy of the GNU Library General Public License
+// along with this library; if not, write to the Free Software Foundation,
+// Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+// The id3lib authors encourage improvements and optimisations to be sent to
+// the id3lib coordinator.  Please see the README file for details on where to
+// send such submissions.  See the AUTHORS file for a list of people who have
+// contributed to id3lib.  See the ChangeLog file for a list of changes to
+// id3lib.  These files are distributed with id3lib at
+// http://download.sourceforge.net/id3lib/
+
+#include <zlib.h>
+#include "frame.h"
+#include "debug.h"
 
 #if defined HAVE_CONFIG_H
 #include <config.h>
 #endif
 
-ID3_Frame::ID3_Frame(ID3_FrameID id)
-  : __bHasChanged(false),
-    __auiFieldBits(NULL),
-    __ulNumFields(0),
-    __apFields(NULL)
+namespace id3
 {
-  __sEncryptionID[0] = '\0';
-  __sGroupingID[0]   = '\0';
-  
-  InitFieldBits();
-  SetID(id);
-}
-
-ID3_Frame::ID3_Frame(const ID3_FrameHeader &hdr)
-  : __bHasChanged(false),
-    __auiFieldBits(NULL),
-    __ulNumFields(0),
-    __apFields(NULL),
-    __FrmHdr(hdr)
-{
-  __sEncryptionID[0] = '\0';
-  __sGroupingID[0]   = '\0';
-  
-  InitFieldBits();
-  InitFields(__FrmHdr.GetFrameDef());
-}
-
-void ID3_Frame::InitFieldBits()
-{
-  luint lWordsForFields =
-    (((luint) ID3FN_LASTFIELDID) - 1) / (sizeof(luint) * 8);
-  
-  if ((((luint) ID3FN_LASTFIELDID) - 1) % (sizeof(luint) * 8) != 0)
+  /** Default constructor; accepts as a default parameter the type of frame
+   ** to create.
+   **
+   ** The parameter which will internally set the frame's structure.
+   ** 
+   ** @param id The type of frame to create
+   ** @see frame::id
+   ** @see id(frame::id)
+   **/
+  frame::frame(frm::id id, spec::version v)
+    : __hdr(frame_header(v)),
+      __fields(fields()),
+      __bad_parse(false)
   {
-    lWordsForFields++;
-  }
-   
-  if (__auiFieldBits != NULL)
-  {
-    delete [] __auiFieldBits;
-  }
-  __auiFieldBits = new luint[lWordsForFields];
-  if (NULL == __auiFieldBits)
-  {
-    ID3_THROW(ID3E_NoMemory);
+    this->_id(id); // this will end up calling _make_fields
+    __changed = false;
   }
 
-  for (luint i = 0; i < lWordsForFields; i++)
+  frame::frame(spec::version v)
+    : __hdr(frame_header(v)),
+      __fields(fields()),
+      __bad_parse(false)
   {
-    __auiFieldBits[i] = 0;
+    this->_id(frm::NOFRAME); // this will end up calling _make_fields
+    __changed = false;
   }
-}
 
-ID3_Frame::~ID3_Frame(void)
-{
-  Clear();
-  
-  if (__auiFieldBits != NULL)
+  frame::frame(const frame& f)
   {
-    delete [] __auiFieldBits;
+    *this = f;
   }
-}
 
-
-void ID3_Frame::Clear(void)
-{
-  if (__ulNumFields > 0 && NULL != __apFields)
+  frame::~frame(void)
   {
-    for (luint i = 0; i < __ulNumFields; i++)
+    this->_clear_fields();
+  }
+
+
+  frame&
+  frame::operator=(const frame& rhs)
+  {
+    if (this != &rhs)
     {
-      delete __apFields[i];
-    }
-      
-    delete [] __apFields;
-    
-    __bHasChanged = true;
-  }
-
-  __FrmHdr.Clear();
-  __sEncryptionID[0] = '\0';
-  __sGroupingID[0]   = '\0';
-  __ulNumFields      = 0;
-  __apFields         = NULL;
-}
-
-void ID3_Frame::InitFields(const ID3_FrameDef *info)
-{
-  if (NULL == info)
-  {
-    ID3_THROW(ID3E_InvalidFrameID);
-  }
-      
-  __ulNumFields = 0;
-      
-  while (info->aeFieldDefs[__ulNumFields].eID != ID3FN_NOFIELD)
-  {
-    __ulNumFields++;
-  }
-      
-  __apFields = new ID3_Field * [__ulNumFields];
-  if (NULL == __apFields)
-  {
-    ID3_THROW(ID3E_NoMemory);
-  }
-
-  for (luint i = 0; i < __ulNumFields; i++)
-  {
-    __apFields[i] = new ID3_Field;
-    if (NULL == __apFields[i])
-    {
-      ID3_THROW(ID3E_NoMemory);
-    }
-
-    __apFields[i]->__eName        = info->aeFieldDefs[i].eID;
-    __apFields[i]->__eType        = info->aeFieldDefs[i].eType;
-    __apFields[i]->__lFixedLength = info->aeFieldDefs[i].lFixedLength;
-    __apFields[i]->__ucIOVersion  = info->aeFieldDefs[i].ucVersion;
-    __apFields[i]->__ucIORevision = info->aeFieldDefs[i].ucRevision;
-    __apFields[i]->__eControl     = info->aeFieldDefs[i].eControl;
-    __apFields[i]->__ulFlags      = info->aeFieldDefs[i].ulFlags;
-            
-    // tell the frame that this field is present
-    BS_SET(__auiFieldBits, __apFields[i]->__eName);
-  }
-        
-  __bHasChanged = true;
-}
-
-void ID3_Frame::SetID(ID3_FrameID id)
-{
-  Clear();
-  
-  if (id != ID3FID_NOFRAME)
-  {
-    __FrmHdr.SetFrameID(id);
-    InitFields(__FrmHdr.GetFrameDef());
-  }
-}
-
-
-ID3_FrameID ID3_Frame::GetID(void) const
-{
-  return __FrmHdr.GetFrameID();
-}
-
-
-void ID3_Frame::SetVersion(uchar ver, uchar rev)
-{
-  if (__FrmHdr.GetVersion() != ver || __FrmHdr.GetRevision() != rev)
-  {
-    __bHasChanged = true;
-  }
-  
-  __FrmHdr.SetVersion(ver, rev);
-}
-
-lsint ID3_Frame::FindField(ID3_FieldID fieldName) const
-{
-  
-  if (BS_ISSET(__auiFieldBits, fieldName))
-  {
-    for (lsint num = 0; num < (lsint) __ulNumFields; num++)
-    {
-      if (__apFields[num]->__eName == fieldName)
+      this->_clear_fields();
+      __hdr.assign(rhs.__hdr);
+      __bad_parse   = false;
+      __changed     = true;
+      for (const_iterator fi = rhs.begin(); fi != rhs.end(); ++fi)
       {
-        return num;
+        this->_add((*fi)->clone());
       }
     }
+    return *this;
   }
-
-  return -1;
-}
-
-ID3_Field& ID3_Frame::Field(ID3_FieldID fieldName) const
-{
-  lsint fieldNum = FindField(fieldName);
   
-  if (fieldNum < 0)
+  bstring frame::render() const
   {
-    ID3_THROW(ID3E_FieldNotFound);
-  }
+    bstring data;
+    bool compressed = false;
     
-  return *__apFields[fieldNum];
-}
-
-void ID3_Frame::UpdateFieldDeps(void)
-{
-  for (luint i = 0; i < __ulNumFields; i++)
-  {
-    if (__apFields[i]->__ulFlags & ID3FF_ADJUSTEDBY)
+    frame f = *this;
+    frame_header hdr = this->hdr();
+    
+    // Currently, if a frame is read only but one of its fields has changed,
+    // the read only status of the frame is removed.
+    if (hdr.test(frame_header::READONLY) && this->changed())
     {
-      switch(__apFields[i]->__eType)
+      hdr.add(frame_header::READONLY);
+    }
+    
+    for (iterator p = f.begin(); p != f.end(); ++p)
+    {
+      data += (*p)->render();
+    }
+    
+    // if we can compress frames individually and we have been asked to
+    // compress the frames
+    if (hdr.test(frame_header::COMPRESSION) && hdr.version() >= spec::VER_3_0)
+    {
+      unsigned long new_size = data.size() + (data.size() / 10);
+      uchar* raw_data = new uchar[new_size];
+      
+      if (compress(raw_data, &new_size, data.data(), data.size()) != Z_OK)
       {
-        case ID3FTY_BITFIELD:
+        //ID3_THROW(ID3E_zlibError);
+        throw;
+      }
+      
+      // if the compression actually saves space
+      if ((new_size + sizeof(uint32)) < data.size())
+      {
+        data.assign(raw_data, new_size);
+      }
+      
+      delete [] raw_data;
+    }
+    else
+    {
+      // Currently, if a frame is read-only and it was previously compressed 
+      // but now isn't, the read-only status of the frame is removed.
+      if (hdr.test(frame_header::READONLY) && 
+          hdr.test(frame_header::COMPRESSION))
+      {
+        hdr.remove(frame_header::READONLY);
+      }
+      hdr.remove(frame_header::COMPRESSION);
+    }
+    
+    hdr.data_size(data.size());
+    
+    return hdr.render() + data;
+  }
+
+  size_t frame::parse(const bstring& buffer)
+  {
+    __bad_parse = false;
+    size_t hdr_size = __hdr.parse(buffer);
+    size_t data_size = __hdr.data_size() - __hdr.extras_size();
+
+    if (!hdr_size)
+    {
+      return 0;
+    }
+
+    // data is the part of the buffer that appears after the header
+    bstring data = buffer.substr(hdr_size, data_size);
+    
+    // expand out the data if it's compressed
+    if (__hdr.test(frame_header::COMPRESSION))
+    {
+      unsigned long expanded_size = __hdr.expanded_size();
+      uchar* raw_data = new uchar[expanded_size];
+      
+      uncompress(raw_data, &expanded_size, data.data(), data.size());
+      data.assign(raw_data, expanded_size);
+      delete [] raw_data;
+    }
+    
+    // set the type of frame based on the parsed header
+    this->_id(__hdr.id());
+    try
+    {
+      fld::encoding enc = fld::ASCII;
+      // parse the frame's fields
+      for (iterator p = this->begin(); p != this->end(); ++p)
+      {
+        field& f = **p;
+        f.encoding(enc);
+        data.erase(0, f.parse(data));
+        if (f.id() == fld::TEXTENC)
         {
-          //luint value = 0;
-          
-          // now find the field on which this field is dependent and get a
-          // copy of the value of that field.  then adjust the fixedLength of
-          // this field to that value / 8.
-          break;
+          enc = static_cast<fld::encoding>(f.integer());
         }
-        
-        default:
-          break;
       }
     }
-  }
-  
-  return ;
-}
-
-
-void ID3_Frame::UpdateStringTypes(void)
-{
-  for (luint i = 0; i < __ulNumFields; i++)
-  {
-    if (__apFields[i]->__ulFlags & ID3FF_ADJUSTENC)
+    catch (...)
     {
-      ID3_TextEnc enc;
-      ID3_FieldType newType;
-      
-      enc = (ID3_TextEnc) Field(ID3FN_TEXTENC).Get();
-      
-      switch(enc)
-      {
-        case ID3TE_ASCII:
-          newType = ID3FTY_ASCIISTRING;
-          break;
-          
-        case ID3TE_UNICODE:
-          newType = ID3FTY_UNICODESTRING;
-          break;
-          
-        default:
-          newType = ID3FTY_ASCIISTRING;
-          break;
-      }
-      
-      __apFields[i]->__eType = newType;
+      cerr << "*** parsing error!" << endl;
+      // There's been an error in the parsing of the frame.
+      __bad_parse = true;
     }
-  }
-  
-  return ;
-}
-
-
-luint ID3_Frame::Size(void)
-{
-  luint bytesUsed = 0;
-  bytesUsed += __FrmHdr.Size();
-  
-  if (strlen(__sEncryptionID))
-  {
-    bytesUsed++;
-  }
     
-  if (strlen(__sGroupingID))
-  {
-    bytesUsed++;
-  }
+    __changed = false;
     
-  // this call is to tell the string fields what they should be rendered/parsed
-  // as (ASCII or Unicode)
-  UpdateStringTypes();
-  
-  for (luint i = 0; i < __ulNumFields; i++)
-  {
-    __apFields[i]->SetVersion(__FrmHdr.GetVersion(), __FrmHdr.GetRevision());
-    bytesUsed += __apFields[i]->BinSize();
+    return std::min(hdr_size + data_size, buffer.size());
   }
-  
-  return bytesUsed;
-}
 
-
-bool ID3_Frame::HasChanged(void) const
-{
-  bool changed = __bHasChanged;
-  
-  if (! changed)
+  /** Returns the type of frame that the object represents.
+   **    
+   ** Useful in conjunction with tag's find() method
+   **   
+   ** @returns The type, or id, of the frame
+   ** @see tag::find()
+   **/
+  frm::id frame::id() const
   {
-    for (luint i = 0; i < __ulNumFields && !changed; i++)
+    return __hdr.id();
+  }
+
+
+  size_t frame::size() const
+  {
+    size_t size = __hdr.size();
+    
+    for (const_iterator p = this->begin(); p != this->end(); ++p)
     {
-      changed = __apFields[i]->HasChanged();
+      size += (*p)->size();
     }
+    
+    return size;
   }
   
-  return changed;
-}
-
-ID3_Frame &
-ID3_Frame::operator=( const ID3_Frame &rFrame )
-{
-  if (this != &rFrame)
+  /**
+   **/
+  bool frame::contains(fld::id id) const
   {
-    ID3_FrameID eID = rFrame.GetID();
-    SetID(eID);
-    for (size_t nIndex = 0; nIndex < __ulNumFields; nIndex++)
+    return __bits.test(id);
+  }
+
+  /** Returns a reference to the frame's internal field indicated by the
+   ** parameter.
+   ** 
+   ** A list of fields that are in given frames appears in id3/field.cpp.  This
+   ** method returns a reference to the field in question so that the result
+   ** can be used as though it were a field itself.
+   **
+   ** \code
+   **   const id3::field&  f   = my_frame.get(id3::fld::TEXTENC);
+   **   id3::fld::encoding enc = static_cast<id3::fld::encoding>(f.integer());
+   ** \endcode
+   **
+   ** @param name The name of the field to be retrieved
+   ** @returns A reference to the desired field
+   **/
+  field& frame::get(fld::id id) const
+  {
+    if (this->contains(id))
     {
-      if (rFrame.__apFields[nIndex] != NULL)
+      for (vector<field *>::const_iterator p = __fields.begin(); 
+           p != __fields.end(); ++p)
       {
-        *(__apFields[nIndex]) = *(rFrame.__apFields[nIndex]);
+        if ((*p)->id() == id)
+        {
+          return **p;
+        }
       }
     }
+    //ID3_THROW(ID3E_FieldNotFound);
+    throw;
+  }
+
+  spec::version frame::version() const
+  {
+    return __hdr.version();
+  }
+
+  frame_header frame::hdr() const
+  {
+    return __hdr;
+  }
+
+  /** Returns the read-only status of the current frame.  Currently, a 
+   ** read-only frame can be altered.  However, 
+   ** 
+   ** @returns true if the frame is read-only; false otherwise
+   **/
+  bool frame::read_only() const
+  {
+    return __hdr.test(frame_header::READONLY);
+  }
+  
+  bool frame::compression() const
+  {
+    return __hdr.test(frame_header::COMPRESSION);
+  }
+  
+  bool frame::changed() const
+  {
+    if (__changed)
+    {
+      return true;
+    }
+
+    for (const_iterator p = this->begin(); p != this->end(); ++p)
+    {
+      if ((*p)->changed())
+      {
+        return true;
+      }
+    }
+  
+    return false;
+  }
+
+  bool frame::bad_parse() const
+  {
+    return __bad_parse;
+  }
+
+  /** Clears the frame of all data and resets the frame such that it can take
+   ** on the form of any id3v2 frame that id3lib supports.
+   ** 
+   ** @see tag::clear
+   */
+  void frame::clear()
+  {
+    this->_clear_fields();
+    __hdr.id(frm::NOFRAME);
+    __changed = true;
+    __bad_parse = false;
+  }
+
+  void frame::_clear_fields()
+  {
+    for (iterator vi = this->begin(); vi != this->end(); ++vi)
+    {
+      delete *vi;
+    }
+    __fields.clear();
+    __bits.reset();
+  }
+
+  bool frame::encoding(fld::encoding enc)
+  {
+    bool changed = false;
+    for (iterator p = this->begin(); p != this->end(); ++p)
+    {
+      changed = (*p)->encoding(enc) || changed;
+    }
+    __changed = changed || __changed;
+  }
+  
+  /** Establishes the internal structure of an frame object so that it
+   ** represents the id3v2 frame indicated by the parameter
+   **      
+   ** Given an frame::id (a list of which is found in id3/frame.h),
+   ** id(frame::id) will structure the object according to the frame you wish
+   ** to implement.
+   **   
+   ** Either using this call or via the constructor, this must be the first
+   ** command performed on an frame object.
+   **   
+   ** \code
+   **   my_frame.id(id3::frm::TITLE);
+   ** \endcode
+   **   
+   ** @param id The type of frame this frame should be set to
+   ** @see frame::id()
+   **/
+  bool frame::id(frm::id id)
+  {
+    bool changed = (this->id() != id);
+    if (changed)
+    {
+      this->_id(id);
+      __changed = true;
+    }
+    return changed;
+  }
+
+  void frame::_id(frm::id id)
+  {
+    this->_clear_fields();
+    __hdr.id(id);
+    this->_make_fields();
+  }
+  
+  bool frame::version(spec::version v)
+  {
+    bool changed = v != __hdr.version();
+    if (changed)
+    {
+      __hdr.version(v);
+      __changed = true;
+    }
+    return changed;
+  }
+
+  bool frame::compression(bool b)
+  {
+    return __hdr.set(frame_header::COMPRESSION, b);
+  }
+
+  bool frame::read_only(bool b)
+  {
+    return __hdr.set(frame_header::READONLY, b);
+  }
+
+  frame::iterator frame::begin()
+  {
+    return __fields.begin();
+  }
+
+  frame::const_iterator frame::begin() const
+  {
+    return __fields.begin();
+  }
+
+  frame::iterator frame::end()
+  {
+    return __fields.end();
+  }
+
+  frame::const_iterator frame::end() const
+  {
+    return __fields.end();
+  }
+
+  void frame::_make_fields()
+  {
+    this->_clear_fields();
+    for (const field::def* f = __hdr.fields(); f && fld::NOFIELD != f->id; ++f)
+    {
+      this->_add(field::make(*f));
+    }
+  }
+
+  void frame::_add(field* pf)
+  {
+    if (!pf)
+    {
+      throw;
+    }
+    __bits.set(pf->id());
+    __fields.push_back(pf);
+    __changed = true;
   }
 }
 
 // $Log$
 // Revision 1.12  2000/01/04 15:42:49  eldamitri
-// * include/id3/field.h:
-// * include/id3/int28.h:
-// * include/id3/misc_support.h:
-// * include/id3/tag.h:
-// * include/id3/types.h:
-// * src/id3/dll_wrapper.cpp
-// * src/id3/error.cpp
-// * src/id3/field.cpp
-// * src/id3/field_binary.cpp
-// * src/id3/field_integer.cpp
-// * src/id3/field_string_ascii.cpp
-// * src/id3/field_string_unicode.cpp
-// * src/id3/frame.cpp
-// * src/id3/frame_parse.cpp
-// * src/id3/frame_render.cpp
-// * src/id3/header.cpp
-// * src/id3/header_frame.cpp
-// * src/id3/header_tag.cpp
-// * src/id3/int28.cpp
-// * src/id3/misc_support.cpp
-// * src/id3/tag.cpp
-// * src/id3/tag_file.cpp:
-// * src/id3/tag_find.cpp:
-// * src/id3/tag_parse.cpp:
-// * src/id3/tag_parse_lyrics3.cpp:
 // For compilation with gcc 2.95.2 and better compatibility with ANSI/ISO
 // standard C++, updated, rearranged, and removed (where necessary)
 // #include directives.

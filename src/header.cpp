@@ -1,164 +1,105 @@
+// id3lib: a C++ library for creating and manipulating id3v1/v2 tags
 // $Id$
-// 
-// This program is free software; you can distribute it and/or modify it under
-// the terms discussed in the COPYING file, which should have been included
-// with this distribution.
-//  
-// This program is distributed in the hope that it will be useful, but WITHOUT
-// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-// FITNESS FOR A PARTICULAR PURPOSE.  See the COPYING file for more details.
-//  
-// The id3lib authors encourage improvements and optimisations to be sent to
-// the id3lib coordinator.  Please see the README file for details on where
-// to send such submissions.
 
-#include <cstring>
-#include <memory.h>
+// This library is free software; you can redistribute it and/or modify it
+// under the terms of the GNU Library General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or (at your
+// option) any later version.
+//
+// This library is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+// FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public
+// License for more details.
+//
+// You should have received a copy of the GNU Library General Public License
+// along with this library; if not, write to the Free Software Foundation,
+// Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+// The id3lib authors encourage improvements and optimisations to be sent to
+// the id3lib coordinator.  Please see the README file for details on where to
+// send such submissions.  See the AUTHORS file for a list of people who have
+// contributed to id3lib.  See the ChangeLog file for a list of changes to
+// id3lib.  These files are distributed with id3lib at
+// http://download.sourceforge.net/id3lib/
+
 #include "header.h"
-#include "error.h"
 
 #if defined HAVE_CONFIG_H
 #include <config.h>
 #endif
 
-ID3_HeaderInfo ID3_VersionInfo[] =
+namespace id3
+{
+  header::header(spec::version v)
+    : __data_size(0),
+      __flags(0),
+      __changed(false),
+      __version(v)
   {
-    //         SIZEOF SIZEOF SIZEOF EXT    EXT  EXPERIM
-    // VER REV FRID   FRSZ   FRFL   HEADER SIZE BIT
-    {  2,  0,  3,     3,     0,     false, 0,   false },
-    {  2,  1,  3,     3,     0,     true,  8,   true },
-    {  3,  0,  4,     4,     2,     false, 10,  false },
-    {  0 }
-  };
-  
-  
-ID3_HeaderInfo *ID3_LookupHeaderInfo(uchar ver, uchar rev)
-{
-  ID3_HeaderInfo *info = NULL;
-  for (size_t i = 0; ID3_VersionInfo[i].ucVersion != 0; i++)
-    if (ID3_VersionInfo[i].ucVersion  == ver &&
-        ID3_VersionInfo[i].ucRevision == rev)
-    {
-      info = &ID3_VersionInfo[i];
-      break;
-    }
-    
-  return info;
-}
-
-ID3_Header::ID3_Header(void)
-{
-  SetVersion(ID3v2_VERSION, ID3v2_REVISION);
-  __ulDataSize = 0;
-  __ulFlags = 0;
-}
-
-void ID3_Header::SetVersion(uchar ver, uchar rev)
-{
-  __ucVersion = ver;
-  __ucRevision = rev;
-  __pInfo = ID3_LookupHeaderInfo(__ucVersion, __ucRevision);
-}
-
-void ID3_Header::SetDataSize(size_t newSize)
-{
-  __ulDataSize = newSize;
-}
-
-size_t ID3_Header::GetDataSize() const
-{
-  return __ulDataSize;
-}
-
-void ID3_Header::SetFlags(uint16 newFlags)
-{
-  __ulFlags = newFlags;
-}
-
-void ID3_Header::AddFlags(uint16 newFlags)
-{
-  __ulFlags |= newFlags;
-}
-
-void ID3_Header::RemoveFlags(uint16 newFlags)
-{
-  __ulFlags &= ~newFlags;
-}
-
-uint16 ID3_Header::GetFlags() const
-{
-  return __ulFlags;
-}
-
-uchar ID3_Header::GetVersion() const
-{
-  return __ucVersion;
-}
-
-uchar ID3_Header::GetRevision() const
-{
-  return __ucRevision;
-}
-
-void ID3_Header::Clear()
-{
-  __ucVersion = 0;
-  __ucRevision = 0;
-  __ulDataSize = 0;
-  __ulFlags = 0;
-  //__pInfo = 0;
-}
-
-ID3_Header &ID3_Header::operator=( const ID3_Header &hdr )
-{
-  Copy(hdr);
-  return *this;
-}
-
-void ID3_Header::Copy(const ID3_Header &hdr)
-{
-  if (this != &hdr)
-  {
-    SetVersion(hdr.GetVersion(), hdr.GetRevision());
-    SetDataSize(hdr.GetDataSize());
-    SetFlags(hdr.GetFlags());
-    __pInfo = hdr.__pInfo;
   }
+
+  header &header::operator=( const header &hdr )
+  {
+    if (this != &hdr)
+    {
+      this->version(hdr.version());
+      this->data_size(hdr.data_size());
+      this->flags(hdr.flags());
+    }
+    return *this;
+  }
+
+  // Candidate to be made into a helper function (unless SetFlags isn't public)
+  void header::clear()
+  {
+    this->version(spec::CURRENT);
+    this->data_size(0);
+    this->flags(0);
+  }
+
+  bool header::data_size(size_t size)
+  {
+    bool changed = __data_size != size;
+    if (changed)
+    {
+      __data_size = size;
+      __changed = true;
+    }
+    return changed;
+  }
+
+  bool header::version(spec::version version)
+  {
+    bool changed = version != __version;
+    if (changed)
+    {
+      __version = version;
+      __changed = true;
+    }
+    return changed;
+  }
+
+  bool header::flags(uint16 flags)
+  {
+    bool changed = __flags != flags;
+    if (changed)
+    {
+      __flags = flags;
+      __changed = true;
+    }
+    return changed;
+  }
+  
 }
 
 // $Log$
 // Revision 1.11  2000/01/04 15:42:49  eldamitri
-// * include/id3/field.h:
-// * include/id3/int28.h:
-// * include/id3/misc_support.h:
-// * include/id3/tag.h:
-// * include/id3/types.h:
-// * src/id3/dll_wrapper.cpp
-// * src/id3/error.cpp
-// * src/id3/field.cpp
-// * src/id3/field_binary.cpp
-// * src/id3/field_integer.cpp
-// * src/id3/field_string_ascii.cpp
-// * src/id3/field_string_unicode.cpp
-// * src/id3/frame.cpp
-// * src/id3/frame_parse.cpp
-// * src/id3/frame_render.cpp
-// * src/id3/header.cpp
-// * src/id3/header_frame.cpp
-// * src/id3/header_tag.cpp
-// * src/id3/int28.cpp
-// * src/id3/misc_support.cpp
-// * src/id3/tag.cpp
-// * src/id3/tag_file.cpp:
-// * src/id3/tag_find.cpp:
-// * src/id3/tag_parse.cpp:
-// * src/id3/tag_parse_lyrics3.cpp:
 // For compilation with gcc 2.95.2 and better compatibility with ANSI/ISO
 // standard C++, updated, rearranged, and removed (where necessary)
 // #include directives.
 //
 // Revision 1.10  1999/12/27 05:43:28  scott
-// (ID3_Header): Updated for new version constants.
+// (header): Updated for new version constants.
 // (AddFlags): Added implementation.  Adds flag(s) to current flags.
 // (RemoveFlags): Added implementation.  Removes flag(s) from current
 // flags.

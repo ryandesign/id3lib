@@ -1,942 +1,475 @@
+// id3lib: a C++ library for creating and manipulating id3v1/v2 tags
 // $Id$
-// 
-// This program is free software; you can distribute it and/or modify it under
-// the terms discussed in the COPYING file, which should have been included
-// with this distribution.
-//  
-// This program is distributed in the hope that it will be useful, but WITHOUT
-// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-// FITNESS FOR A PARTICULAR PURPOSE.  See the COPYING file for more details.
-//  
-// The id3lib authors encourage improvements and optimisations to be sent to
-// the id3lib coordinator.  Please see the README file for details on where
-// to send such submissions.
 
-#include <cstring>
+// This library is free software; you can redistribute it and/or modify it
+// under the terms of the GNU Library General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or (at your
+// option) any later version.
+//
+// This library is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+// FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public
+// License for more details.
+//
+// You should have received a copy of the GNU Library General Public License
+// along with this library; if not, write to the Free Software Foundation,
+// Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+// The id3lib authors encourage improvements and optimisations to be sent to
+// the id3lib coordinator.  Please see the README file for details on where to
+// send such submissions.  See the AUTHORS file for a list of people who have
+// contributed to id3lib.  See the ChangeLog file for a list of changes to
+// id3lib.  These files are distributed with id3lib at
+// http://download.sourceforge.net/id3lib/
+
 #include "field.h"
+#include "conversion_ops.h"
 
 #if defined HAVE_CONFIG_H
 #include <config.h>
 #endif
 
-// This is used for unimplemented frames so that their data is preserved when
-// parsing and rendering
-static ID3_FieldDef ID3FD_Unimplemented[] =
+namespace id3
 {
+  field* field::make(const field::def& def)
   {
-    ID3FN_DATA,                         // FIELD NAME
-    ID3FTY_BINARY,                      // FIELD TYPE
-    -1, 2, 0,                           // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NONE,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  }
-};
-
-static ID3_FieldDef ID3FD_URL[] =
-{ 
-  {
-    ID3FN_URL,                          // FIELD NAME
-    ID3FTY_ASCIISTRING,                 // FIELD TYPE
-    -1, 2, 0,                           // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NONE,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  { ID3FN_NOFIELD }
-};
-  
-static ID3_FieldDef ID3FD_UserURL[] =
-{
-  {
-    ID3FN_TEXTENC,                      // FIELD NAME        
-    ID3FTY_INTEGER,                     // FIELD TYPE
-    1, 2, 0,                            // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NONE,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  {
-    ID3FN_DESCRIPTION,                  // FIELD NAME
-    ID3FTY_ASCIISTRING,                 // FIELD TYPE
-    -1, 2, 0,                           // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NULL | ID3FF_ADJUSTENC,       // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  {
-    ID3FN_URL,                          // FIELD NAME
-    ID3FTY_ASCIISTRING,                 // FIELD TYPE
-    -1, 2, 0,                           // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NONE,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  { ID3FN_NOFIELD }
-};
-  
-static ID3_FieldDef ID3FD_Text[] =
-{
-  {
-    ID3FN_TEXTENC,                      // FIELD NAME
-    ID3FTY_INTEGER,                     // FIELD TYPE
-    1, 2, 0,                            // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NONE,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  {
-    ID3FN_TEXT,                         // FIELD NAME
-    ID3FTY_ASCIISTRING,                 // FIELD TYPE
-    -1, 2, 0,                           // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_ADJUSTENC,                    // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  { ID3FN_NOFIELD }
-};
-  
-  
-static ID3_FieldDef ID3FD_UserText[] =
-{
-  {
-    ID3FN_TEXTENC,                      // FIELD NAME
-    ID3FTY_INTEGER,                     // FIELD TYPE
-    1, 2, 0,                            // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NONE,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  {
-    ID3FN_DESCRIPTION,                  // FIELD NAME
-    ID3FTY_ASCIISTRING,                 // FIELD TYPE
-    -1, 2, 0,                           // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NULL | ID3FF_ADJUSTENC,       // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  {
-    ID3FN_TEXT,                         // FIELD NAME
-    ID3FTY_ASCIISTRING,                 // FIELD TYPE
-    -1, 2, 0,                           // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_ADJUSTENC,                    // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  { ID3FN_NOFIELD }
-};
-  
-  
-static ID3_FieldDef ID3FD_GeneralText[] =
-{
-  {
-    ID3FN_TEXTENC,                      // FIELD NAME
-    ID3FTY_INTEGER,                     // FIELD TYPE
-    1, 2, 0,                            // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NONE,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  {
-    ID3FN_LANGUAGE,                     // FIELD NAME
-    ID3FTY_ASCIISTRING,                 // FIELD TYPE
-    3, 2, 0,                            // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NONE,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  {
-    ID3FN_DESCRIPTION,                  // FIELD NAME
-    ID3FTY_ASCIISTRING,                 // FIELD TYPE
-    -1, 2, 0,                           // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NULL | ID3FF_ADJUSTENC,       // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  {
-    ID3FN_TEXT,                         // FIELD NAME
-    ID3FTY_ASCIISTRING,                 // FIELD TYPE
-    -1, 2, 0,                           // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_ADJUSTENC,                    // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  { ID3FN_NOFIELD }
-};
-
-static ID3_FieldDef ID3FD_TermsOfUse[] =
-{
-  {
-    ID3FN_TEXTENC,                      // FIELD NAME
-    ID3FTY_INTEGER,                     // FIELD TYPE
-    1, 3, 0,                            // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NONE,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  {
-    ID3FN_LANGUAGE,                     // FIELD NAME
-    ID3FTY_ASCIISTRING,                 // FIELD TYPE
-    3, 3, 0,                            // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NONE,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  {
-    ID3FN_TEXT,                         // FIELD NAME
-    ID3FTY_ASCIISTRING,                 // FIELD TYPE
-    -1, 3, 0,                           // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_ADJUSTENC,                    // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  { ID3FN_NOFIELD }
-};
-
-static ID3_FieldDef ID3FD_LinkedInfo[] =
-{
-  {
-    ID3FN_DATA,                         // FIELD NAME
-    ID3FTY_INTEGER,                     // FIELD TYPE
-    3, 2, 0,                            // FIXED LEN, VERSION, REVISION
-    ID3VC_LOWER,                        // VERSION CONTROL SCOPE
-    ID3FF_NONE,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  {
-    ID3FN_TEXT,                         // FIELD NAME
-    ID3FTY_ASCIISTRING,                 // FIELD TYPE
-    3, 2, 0,                            // FIXED LEN, VERSION, REVISION
-    ID3VC_LOWER,                        // VERSION CONTROL SCOPE
-    ID3FF_NONE,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  {
-    ID3FN_TEXT,                         // FIELD NAME
-    ID3FTY_ASCIISTRING,                 // FIELD TYPE
-    4, 3, 0,                            // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NONE,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  {
-    ID3FN_URL,                          // FIELD NAME
-    ID3FTY_ASCIISTRING,                 // FIELD TYPE
-    -1, 2, 0,                           // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NULL,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  {
-    ID3FN_TEXT,                         // FIELD NAME
-    ID3FTY_ASCIISTRING,                 // FIELD TYPE
-    -1, 2, 0,                           // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NONE,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  { ID3FN_NOFIELD }
-};
-
-static ID3_FieldDef ID3FD_Picture[] =
-{
-  {
-    ID3FN_TEXTENC,                      // FIELD NAME
-    ID3FTY_INTEGER,                     // FIELD TYPE
-    1, 2, 0,                            // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NONE,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  {
-    ID3FN_IMAGEFORMAT,                  // FIELD NAME
-    ID3FTY_ASCIISTRING,                 // FIELD TYPE
-    3, 2, 0,                            // FIXED LEN, VERSION, REVISION
-    ID3VC_LOWER,                        // VERSION CONTROL SCOPE
-    ID3FF_NONE,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  {
-    ID3FN_MIMETYPE,                     // FIELD NAME
-    ID3FTY_ASCIISTRING,                 // FIELD TYPE
-    -1, 3, 0,                           // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NULL,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  {
-    ID3FN_PICTURETYPE,                  // FIELD NAME
-    ID3FTY_INTEGER,                     // FIELD TYPE
-    1, 2, 0,                            // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NONE,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  {
-    ID3FN_DESCRIPTION,                  // FIELD NAME
-    ID3FTY_ASCIISTRING,                 // FIELD TYPE
-    -1, 2, 0,                           // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NULL | ID3FF_ADJUSTENC,       // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  {
-    ID3FN_DATA,                         // FIELD NAME
-    ID3FTY_BINARY,                      // FIELD TYPE
-    -1, 2, 0,                           // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NONE,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  { ID3FN_NOFIELD }
-};
-  
-static ID3_FieldDef ID3FD_GEO[] =
-{
-  {
-    ID3FN_TEXTENC,                      // FIELD NAME
-    ID3FTY_INTEGER,                     // FIELD TYPE
-    1, 2, 0,                            // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NONE,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  {
-    ID3FN_MIMETYPE,                     // FIELD NAME
-    ID3FTY_ASCIISTRING,                 // FIELD TYPE
-    -1, 2, 0,                           // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NULL,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  {
-    ID3FN_FILENAME,                     // FIELD NAME
-    ID3FTY_ASCIISTRING,                 // FIELD TYPE
-    -1, 2, 0,                           // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NULL | ID3FF_ADJUSTENC,       // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  {
-    ID3FN_DESCRIPTION,                  // FIELD NAME
-    ID3FTY_ASCIISTRING,                 // FIELD TYPE
-    -1, 2, 0,                           // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NULL | ID3FF_ADJUSTENC,       // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  {
-    ID3FN_DATA,                         // FIELD NAME
-    ID3FTY_BINARY,                      // FIELD TYPE
-    -1, 2, 0,                           // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NONE,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  { ID3FN_NOFIELD }
-};
-  
-static ID3_FieldDef ID3FD_UFI[] =
-{
-  {
-    ID3FN_OWNER,                        // FIELD NAME
-    ID3FTY_ASCIISTRING,                 // FIELD TYPE
-    -1, 2, 0,                           // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NULL,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  {
-    ID3FN_DATA,                         // FIELD NAME
-    ID3FTY_BINARY,                      // FIELD TYPE
-    -1, 2, 0,                           // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NONE,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  { ID3FN_NOFIELD }
-};
-  
-static ID3_FieldDef ID3FD_PlayCounter[] =
-{
-  {
-    ID3FN_COUNTER,                      // FIELD NAME
-    ID3FTY_INTEGER,                     // FIELD TYPE
-    4, 2, 0,                            // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NONE,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  { ID3FN_NOFIELD }
-};
-  
-static ID3_FieldDef ID3FD_Popularimeter[] =
-{
-  {
-    ID3FN_EMAIL,                        // FIELD NAME
-    ID3FTY_ASCIISTRING,                 // FIELD TYPE
-    -1, 2, 0,                           // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NULL,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  {
-    ID3FN_RATING,                       // FIELD NAME
-    ID3FTY_INTEGER,                     // FIELD TYPE
-    1, 2, 0,                            // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NONE,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  {
-    ID3FN_COUNTER,                      // FIELD NAME
-    ID3FTY_INTEGER,                     // FIELD TYPE
-    4, 2, 0,                            // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NONE,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  { ID3FN_NOFIELD }
-};
-  
-static ID3_FieldDef ID3FD_Registration[] =
-{
-  {
-    ID3FN_OWNER,                        // FIELD NAME
-    ID3FTY_ASCIISTRING,                 // FIELD TYPE
-    -1, 3, 0,                           // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NULL,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  {
-    ID3FN_SYMBOL,                       // FIELD NAME
-    ID3FTY_INTEGER,                     // FIELD TYPE
-    1, 3, 0,                            // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NONE,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  {
-    ID3FN_DATA,                         // FIELD NAME
-    ID3FTY_BINARY,                      // FIELD TYPE
-    -1, 3, 0,                           // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NONE,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  { ID3FN_NOFIELD }
-};
-  
-static ID3_FieldDef ID3FD_InvolvedPeople[] =
-{
-  {
-    ID3FN_TEXTENC,                      // FIELD NAME
-    ID3FTY_INTEGER,                     // FIELD TYPE
-    1, 2, 0,                            // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NONE,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  {
-    ID3FN_TEXT,                         // FIELD NAME
-    ID3FTY_ASCIISTRING,                 // FIELD TYPE
-    -1, 2, 0,                           // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NULL | ID3FF_NULLDIVIDE | ID3FF_ADJUSTENC, // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  { ID3FN_NOFIELD }
-};
-/*
- * Currently unused
- */
-#if defined __UNDEFINED__
-static ID3_FieldDef ID3FD_Volume[] =
-{
-  {
-    ID3FN_VOLUMEADJ,                    // FIELD NAME
-    ID3FTY_INTEGER,                     // FIELD TYPE
-    1, 2, 0,                            // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NONE,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  {
-    ID3FN_NUMBITS,                      // FIELD NAME
-    ID3FTY_INTEGER,                     // FIELD TYPE
-    1, 2, 0,                            // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_NONE,                         // FLAGS
-    ID3FN_NOFIELD                       // LINKED FIELD
-  },
-  {
-    ID3FN_VOLCHGRIGHT,                  // FIELD NAME
-    ID3FTY_BITFIELD,                    // FIELD TYPE
-    -1, 2, 0,                           // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_ADJUSTEDBY,                   // FLAGS
-    ID3FN_NUMBITS                       // LINKED FIELD
-  },
-  {
-    ID3FN_VOLCHGLEFT,                   // FIELD NAME
-    ID3FTY_BITFIELD,                    // FIELD TYPE
-    -1, 2, 0,                           // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_ADJUSTEDBY,                   // FLAGS
-    ID3FN_NUMBITS                       // LINKED FIELD
-  },
-  {
-    ID3FN_PEAKVOLRIGHT,                 // FIELD NAME
-    ID3FTY_BITFIELD,                    // FIELD TYPE
-    -1, 2, 0,                           // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_ADJUSTEDBY,                   // FLAGS
-    ID3FN_NUMBITS                       // LINKED FIELD
-  },
-  {
-    ID3FN_PEAKVOLLEFT,                  // FIELD NAME
-    ID3FTY_BITFIELD,                    // FIELD TYPE
-    -1, 2, 0,                           // FIXED LEN, VERSION, REVISION
-    ID3VC_HIGHER,                       // VERSION CONTROL SCOPE
-    ID3FF_ADJUSTEDBY,                   // FLAGS
-    ID3FN_NUMBITS                       // LINKED FIELD
-  },
-  { ID3FN_NOFIELD }
-};
-#endif /* __UNEFINED__ */
-
-// **** Currently Implemented Frames
-// APIC  PIC  ID3FID_PICTURE           Attached picture
-// COMM  COM  ID3FID_COMMENT           Comments
-// ENCR       ID3FID_CRYPTOREG         Encryption method registration
-// GEOB  GEO  ID3FID_GENERALOBJECT     General encapsulated object
-// GRID       ID3FID_GROUPINGREG       Group identification registration
-// IPLS  IPL  ID3FID_INVOLVEDPEOPLE    Involved people list
-// LINK  LNK  ID3FID_LINKEDINFO        Linked information
-// PCNT  CNT  ID3FID_PLAYCOUNTER       Play counter
-// POPM  POP  ID3FID_POPULARIMETER     Popularimeter
-// TALB  TAL  ID3FID_ALBUM             Album/Movie/Show title
-// TBPM  TBP  ID3FID_BPM               BPM (beats per minute)
-// TCOM  TCM  ID3FID_COMPOSER          Composer
-// TCON  TCO  ID3FID_CONTENTTYPE       Content type
-// TCOP  TCR  ID3FID_COPYRIGHT         Copyright message
-// TDAT  TDA  ID3FID_DATE              Date
-// TDLY  TDY  ID3FID_PLAYLISTDELAY     Playlist delay
-// TENC  TEN  ID3FID_ENCODEDBY         Encoded by
-// TEXT  TXT  ID3FID_LYRICIST          Lyricist/Text writer
-// TFLT  TFT  ID3FID_FILETYPE          File type
-// TIME  TKE  ID3FID_TIME              Time
-// TIT1  TIM  ID3FID_CONTENTGROUP      Content group description
-// TIT2  TT1  ID3FID_TITLE             Title/songname/content description
-// TIT3  TT2  ID3FID_SUBTITLE          Subtitle/Description refinement
-// TKEY  TT3  ID3FID_INITIALKEY        Initial key
-// TLAN  TLA  ID3FID_LANGUAGE          Language(s)
-// TLEN  TLE  ID3FID_SONGLEN           Length
-// TMED  TMT  ID3FID_MEDIATYPE         Media type
-// TOAL  TOT  ID3FID_ORIGALBUM         Original album/movie/show title
-// TOFN  TOF  ID3FID_ORIGFILENAME      Original filename
-// TOLY  TOL  ID3FID_ORIGLYRICIST      Original lyricist(s)/text writer(s)
-// TOPE  TOA  ID3FID_ORIGARTIST        Original artist(s)/performer(s)
-// TORY  TOR  ID3FID_ORIGYEAR          Original release year
-// TOWN       ID3FID_FILEOWNER         File owner/licensee
-// TPE1  TP1  ID3FID_LEADARTIST        Lead performer(s)/Soloist(s)
-// TPE2  TP2  ID3FID_BAND              Band/orchestra/accompaniment
-// TPE3  TP3  ID3FID_CONDUCTOR         Conductor/performer refinement
-// TPE4  TP4  ID3FID_MIXARTIST         Interpreted, remixed, or otherwise modified
-// TPOS  TPA  ID3FID_PARTINSET         Part of a set
-// TPUB  TPB  ID3FID_PUBLISHER         Publisher
-// TRCK  TRK  ID3FID_TRACKNUM          Track number/Position in set
-// TRDA  TRD  ID3FID_RECORDINGDATES    Recording dates
-// TRSN  TRN  ID3FID_NETRADIOSTATION   Internet radio station name
-// TRSO  TRO  ID3FID_NETRADIOOWNER     Internet radio station owner
-// TSIZ  TSI  ID3FID_SIZE              Size
-// TSRC  TRC  ID3FID_ISRC              ISRC (international standard recording code)
-// TSSE  TSS  ID3FID_ENCODERSETTINGS   Software/Hardware and encoding settings
-// TXXX  TXX  ID3FID_USERTEXT          User defined text information
-// TYER  TYE  ID3FID_YEAR              Year
-// UFID  UFI  ID3FID_UNIQUEFILEID      Unique file identifier
-// USER       ID3FID_TERMSOFUSE        Terms of use
-// USLT  ULT  ID3FID_UNSYNCEDLYRICS    Unsynchronized lyric/text transcription
-// WCOM  WCM  ID3FID_WWWCOMMERCIALINFO Commercial information
-// WCOP  WCM  ID3FID_WWWCOPYRIGHT      Copyright/Legal infromation
-// WOAF  WCP  ID3FID_WWWAUDIOFILE      Official audio file webpage
-// WOAR  WAF  ID3FID_WWWARTIST         Official artist/performer webpage
-// WOAS  WAR  ID3FID_WWWAUDIOSOURCE    Official audio source webpage
-// WORS  WAS  ID3FID_WWWRADIOPAGE      Official internet radio station homepage
-// WPAY  WRA  ID3FID_WWWPAYMENT        Payment
-// WPUB  WPY  ID3FID_WWWPUBLISHER      Official publisher webpage
-// WXXX  WXX  ID3FID_WWWUSER           User defined URL link
-
-// **** Currently unimplemented frames
-// AENC  CRA  ID3FID_AUDIOCRYPTO       Audio encryption
-// COMR       ID3FID_COMMERCIAL        Commercial frame
-// EQUA  EQU  ID3FID_EQUALIZATION      Equalization
-// ETCO  ETC  ID3FID_EVENTTIMING       Event timing codes
-// MCDI  MCI  ID3FID_CDID              Music CD identifier
-// MLLT  MLL  ID3FID_MPEGLOOKUP        MPEG location lookup table
-// OWNE       ID3FID_OWNERSHIP         Ownership frame
-// POSS       ID3FID_POSITIONSYNC      Position synchronisation frame
-// PRIV       ID3FID_PRIVATE           Private frame
-// RBUF  BUF  ID3FID_BUFFERSIZE        Recommended buffer size
-// RVAD  RVA  ID3FID_VOLUMEADJ         Relative volume adjustment
-// RVRB  REV  ID3FID_REVERB            Reverb
-// SYLT  SLT  ID3FID_SYNCEDLYRICS      Synchronized lyric/text
-// SYTC  STC  ID3FID_SYNCEDTEMPO       Synchronized tempo codes
-//       CRM  ID3FID_METACRYPTO        Encrypted meta frame
-
-static  ID3_FrameDef ID3_FrameDefs[] =
-{
-  //                          short  long      tag    file
-  // frame id                 id     id    pri discrd discrd handler field defs
-  {ID3FID_AUDIOCRYPTO,       "CRA", "AENC", 0, false, false, NULL, ID3FD_Unimplemented},
-  {ID3FID_PICTURE,           "PIC", "APIC", 0, false, false, NULL, ID3FD_Picture},
-  {ID3FID_COMMENT,           "COM", "COMM", 0, false, false, NULL, ID3FD_GeneralText},
-  {ID3FID_COMMERCIAL,        "   ", "COMR", 0, false, false, NULL, ID3FD_Unimplemented},
-  {ID3FID_CRYPTOREG,         "   ", "ENCR", 0, false, false, NULL, ID3FD_Registration},
-  {ID3FID_EQUALIZATION,      "EQU", "EQUA", 0, false, true,  NULL, ID3FD_Unimplemented},
-  {ID3FID_EVENTTIMING,       "ETC", "ETCO", 0, false, true,  NULL, ID3FD_Unimplemented},
-  {ID3FID_GENERALOBJECT,     "GEO", "GEOB", 0, false, false, NULL, ID3FD_GEO},
-  {ID3FID_GROUPINGREG,       "   ", "GRID", 0, false, false, NULL, ID3FD_Registration},
-  {ID3FID_INVOLVEDPEOPLE,    "IPL", "IPLS", 0, false, false, NULL, ID3FD_InvolvedPeople},
-  {ID3FID_LINKEDINFO,        "LNK", "LINK", 0, false, false, NULL, ID3FD_LinkedInfo},
-  {ID3FID_CDID,              "MCI", "MCDI", 0, false, false, NULL, ID3FD_Unimplemented},
-  {ID3FID_MPEGLOOKUP,        "MLL", "MLLT", 0, false, true,  NULL, ID3FD_Unimplemented},
-  {ID3FID_OWNERSHIP,         "   ", "OWNE", 0, false, false, NULL, ID3FD_Unimplemented},
-  {ID3FID_PLAYCOUNTER,       "CNT", "PCNT", 0, false, false, NULL, ID3FD_PlayCounter},
-  {ID3FID_POPULARIMETER,     "POP", "POPM", 0, false, false, NULL, ID3FD_Popularimeter},
-  {ID3FID_POSITIONSYNC,      "   ", "POSS", 0, false, true,  NULL, ID3FD_Unimplemented},
-  {ID3FID_PRIVATE,           "   ", "PRIV", 0, false, false, NULL, ID3FD_Unimplemented},
-  {ID3FID_BUFFERSIZE,        "BUF", "RBUF", 0, false, false, NULL, ID3FD_Unimplemented},
-  {ID3FID_VOLUMEADJ,         "RVA", "RVAD", 0, false, true,  NULL, ID3FD_Unimplemented},
-  {ID3FID_REVERB,            "REV", "RVRB", 0, false, false, NULL, ID3FD_Unimplemented},
-  {ID3FID_SYNCEDLYRICS,      "SLT", "SYLT", 0, false, true,  NULL, ID3FD_Unimplemented},
-  {ID3FID_SYNCEDTEMPO,       "STC", "SYTC", 0, false, true,  NULL, ID3FD_Unimplemented},
-  {ID3FID_ALBUM,             "TAL", "TALB", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_BPM,               "TBP", "TBPM", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_COMPOSER,          "TCM", "TCOM", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_CONTENTTYPE,       "TCO", "TCON", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_COPYRIGHT,         "TCR", "TCOP", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_DATE,              "TDA", "TDAT", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_PLAYLISTDELAY,     "TDY", "TDLY", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_ENCODEDBY,         "TEN", "TENC", 0, false, true,  NULL, ID3FD_Text},
-  {ID3FID_LYRICIST,          "TXT", "TEXT", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_FILETYPE,          "TFT", "TFLT", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_INITIALKEY,        "TKE", "TKEY", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_TIME,              "TIM", "TIME", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_CONTENTGROUP,      "TT1", "TIT1", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_TITLE,             "TT2", "TIT2", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_SUBTITLE,          "TT3", "TIT3", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_LANGUAGE,          "TLA", "TLAN", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_SONGLEN,           "TLE", "TLEN", 0, false, true,  NULL, ID3FD_Text},
-  {ID3FID_MEDIATYPE,         "TMT", "TMED", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_ORIGALBUM,         "TOT", "TOAL", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_ORIGFILENAME,      "TOF", "TOFN", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_ORIGLYRICIST,      "TOL", "TOLY", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_ORIGARTIST,        "TOA", "TOPE", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_ORIGYEAR,          "TOR", "TORY", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_FILEOWNER,         "   ", "TOWN", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_LEADARTIST,        "TP1", "TPE1", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_BAND,              "TP2", "TPE2", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_CONDUCTOR,         "TP3", "TPE3", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_MIXARTIST,         "TP4", "TPE4", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_PARTINSET,         "TPA", "TPOS", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_PUBLISHER,         "TPB", "TPUB", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_TRACKNUM,          "TRK", "TRCK", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_RECORDINGDATES,    "TRD", "TRDA", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_NETRADIOSTATION,   "TRN", "TRSN", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_NETRADIOOWNER,     "TRO", "TRSO", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_SIZE,              "TSI", "TSIZ", 0, false, true,  NULL, ID3FD_Text},
-  {ID3FID_ISRC,              "TRC", "TSRC", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_ENCODERSETTINGS,   "TSS", "TSSE", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_USERTEXT,          "TXX", "TXXX", 0, false, false, NULL, ID3FD_UserText},
-  {ID3FID_YEAR,              "TYE", "TYER", 0, false, false, NULL, ID3FD_Text},
-  {ID3FID_UNIQUEFILEID,      "UFI", "UFID", 0, false, false, NULL, ID3FD_UFI},
-  {ID3FID_TERMSOFUSE,        "   ", "USER", 0, false, false, NULL, ID3FD_TermsOfUse},
-  {ID3FID_UNSYNCEDLYRICS,    "ULT", "USLT", 0, false, false, NULL, ID3FD_GeneralText},
-  {ID3FID_WWWCOMMERCIALINFO, "WCM", "WCOM", 0, false, false, NULL, ID3FD_URL},
-  {ID3FID_WWWCOPYRIGHT,      "WCP", "WCOP", 0, false, false, NULL, ID3FD_URL},
-  {ID3FID_WWWAUDIOFILE,      "WAF", "WOAF", 0, false, false, NULL, ID3FD_URL},
-  {ID3FID_WWWARTIST,         "WAR", "WOAR", 0, false, false, NULL, ID3FD_URL},
-  {ID3FID_WWWAUDIOSOURCE,    "WAS", "WOAS", 0, false, false, NULL, ID3FD_URL},
-  {ID3FID_WWWRADIOPAGE,      "WRA", "WORS", 0, false, false, NULL, ID3FD_URL},
-  {ID3FID_WWWPAYMENT,        "WPY", "WPAY", 0, false, false, NULL, ID3FD_URL},
-  {ID3FID_WWWPUBLISHER,      "WPB", "WPUB", 0, false, false, NULL, ID3FD_URL},
-  {ID3FID_WWWUSER,           "WXX", "WXXX", 0, false, false, NULL, ID3FD_UserURL},
-  {ID3FID_METACRYPTO,        "CRM", "    ", 0, false, false, NULL, ID3FD_Unimplemented},
-  {ID3FID_NOFRAME}
-};
-  
-ID3_Field::ID3_Field(void)
-{
-  __eName   = ID3FN_NOFIELD;
-  __eType   = ID3FTY_INTEGER;
-  __sData   = NULL;
-  __ulSize  = 0;
-  __ulFlags = 0;
-  
-  Clear();
-}
-
-ID3_Field::~ID3_Field(void)
-{
-  Clear();
-}
-
-void
-ID3_Field::Clear(void)
-{
-  if (__sData != NULL && __ulSize > 0 && __eType != ID3FTY_INTEGER)
-  {
-    delete[] __sData;
-  }
-    
-  __eType       = ID3FTY_INTEGER;
-  __sData       = NULL;
-  __ulSize      = sizeof (luint);
-  __bHasChanged = true;
-  
-  return ;
-}
-
-void
-ID3_Field::SetVersion(uchar ver, uchar rev)
-{
-  // If the version or revision has changed, set the hasChanged flag
-  __bHasChanged = (__bHasChanged || __ucVersion != ver || __ucRevision != rev);
-
-  __ucVersion = ver;
-  __ucRevision = rev;
-  
-  return ;
-}
-
-bool
-ID3_Field::HasChanged(void)
-{
-  return __bHasChanged;
-}
-
-luint
-ID3_Field::Size(void)
-{
-  return BinSize(false);
-}
-
-luint
-ID3_Field::BinSize(bool withExtras)
-{
-  luint bytes   = 0;
-
-  if ((__eControl == ID3VC_HIGHER &&
-       __ucVersion >= __ucIOVersion && __ucRevision >= __ucIORevision) ||
-      (__ucVersion <= __ucIOVersion && __ucRevision <= __ucIORevision))
-  {
-    bytes = __ulSize;
-    
-    // check to see if we are within the legal limit for this field -1 means
-    // arbitrary length field
-    if (__lFixedLength != -1)
+    switch (def.type)
     {
-      bytes = __lFixedLength;
+      case fld::BINARY:
+        return new binary_field(def);
+      case fld::INTEGER:
+        return new integer_field(def);
+      case fld::TEXTSTRING:
+        return new text_field(def);
     }
-    else if (withExtras)
+    
+    return NULL;
+  }
+
+  /** Renders the contents of the field to a binary string
+   **
+   ** @return A binary string representing the field
+   **/
+  bstring field::render() const
+  {
+    __changed = false;
+    // make sure this field in the current spec
+    if (!this->in_scope(spec::CURRENT))
     {
-      if (NULL == __sData && __ulSize > 0)
-      {
-        bytes = (__ulFlags & ID3FF_NULL) ? sizeof(unicode_t) : 0;
-      }
+      return bstring();
+    }
+    
+    // call the protected render method defined in subclasses
+    bstring data = this->_render();
+    // if the field is of fixed length, resize the rendered data appropriately.
+    // this way, subclasses need not concern themselves with making sure 
+    // they're within the confines of a fixed length field
+    if (__def.fixed_size)
+    {
+      data.resize(__def.fixed_size);
+    }
+    return data;
+  }
+  
+  /** Initializes the field based on the contents of \c data
+   **
+   ** @param data The binary string to parse
+   ** @return The number of characters parsed from data.
+   **/
+  size_t field::parse(const bstring& data)
+  {
+    __changed = false;
+    // make sure this field is in scope
+    if (!this->in_scope(this->version()))
+    {
+      return 0;
+    }
+    // make sure we're not parsing more characters than this field can handle.
+    // this way, subclasses need not concern themselves with making sure 
+    // they're within the confines of a fixed length field
+    bstring new_data = data;
+    if (__def.fixed_size)
+    {
+      new_data.resize(__def.fixed_size);
+    }
+    return this->_parse(new_data);
+  }
+  
+  bool field::version(spec::version v)
+  {
+    bool changed = (v != __version);
+    if (changed)
+    {
+      __version = v;
+      __changed = true;
+    }
+    return changed;
+  }
+  
+  bool field::encoding(fld::encoding e)
+  {
+    bool changed = this->is_encodable() && (e != this->encoding()) &&
+      (e > fld::NOENCODING && e < fld::NUMENCODINGS);
+    if (changed)
+    {
+      this->_encoding(e);
+      __changed = true;
+    }
+    return changed;
+  }
       
-      // if we are a Unicode string, add 2 bytes for the BOM (but only if there
-      // is a string to render - regardless of NULL)
-      if (__eType == ID3FTY_UNICODESTRING && __sData != NULL && __ulSize > 0)
-      {
-        bytes += sizeof(unicode_t);
-      }
-        
-      // if we are an ASCII string, divide by sizeof(unicode_t) because
-      // internally we store the string as Unicode, so the ASCII version will
-      // only be half as long
-      if (__eType == ID3FTY_ASCIISTRING)
-      {
-        bytes /= sizeof(unicode_t);
-      }
-    }
-    else if (__eType == ID3FTY_UNICODESTRING || __eType == ID3FTY_ASCIISTRING)
+  fld::type field::type() const
+  {
+    return __def.type;
+  }
+  
+  fld::id field::id() const
+  {
+    return __def.id;
+  }
+  
+  /** Returns the size (in bytes) of the rendered field.
+   **
+   ** \code
+   **   size_t size = my_frame.get(id3::fld::DATA).size();
+   ** \endcode
+   ** 
+   ** This does not return the number of characters in a represented string.
+   ** To determine the number of characters of the represented string, call
+   ** the size method on the result of calling ascii(int) or unicode(int)
+   **
+   ** @return The size of the field, in bytes
+   **/
+  size_t field::size() const
+  {
+    // make sure we're in scope
+    if (!this->in_scope())
     {
-      // because it seems that the application called us via ID3_Field::Size()
-      // we are going to return the number of characters, not bytes.  since we
-      // store every string internally as unicode, we will divide the 'bytes'
-      // variable by the size of a unicode character (should be two bytes)
-      // because Unicode strings have twice as many bytes as they do characters
-      bytes /= sizeof(unicode_t);
+      return 0;
+    }
+    // make sure we don't have a fixed length
+    if (__def.fixed_size)
+    {
+      return __def.fixed_size;
+    }
+    // call the protected size method implemented in subclasses
+    return this->_size();
+  }
+  
+  spec::version field::version() const
+  {
+    return __version;
+  }
+
+  fld::encoding field::encoding() const
+  {
+    return fld::NOENCODING;
+  }
+
+  bool field::changed() const
+  {
+    return __changed;
+  }
+  
+  /** Whether or not this field will be rendered or parsed, given the current
+   ** version of the field.
+   ** @return true if the field is in scope, false otherwise.
+   **/
+  bool field::in_scope(spec::version v) const
+  {
+    return 
+      (fld::HIGHER == __def.scope && v >= __def.version) ||
+      (fld::LOWER  == __def.scope && v <= __def.version);
+  }
+  
+  bool field::is_integer() const
+  {
+    return false;
+  }
+  
+  bool field::is_binary() const
+  {
+    return false;
+  }
+  
+  bool field::is_text() const
+  {
+    return false;
+  }
+  
+  bool field::is_list() const
+  {
+    return __def.flags & fld::LIST;
+  }
+  
+  bool field::is_cstr() const
+  {
+    return __def.flags & fld::CSTR;
+  }
+  
+  bool field::is_encodable() const
+  {
+    return __def.flags & fld::ENCODABLE;
+  }
+
+  size_t field::fixed_size() const
+  {
+    return __def.fixed_size;
+  }
+
+  /** A shortcut for the assign method.
+   ** 
+   ** \code
+   **   my_frame.get(id3::fld::PICTURETYPE) = 0x0B;
+   ** \endcode
+   ** 
+   ** @param data The data to assign this field to.
+   ** @see assign
+   **/
+  field& field::operator=(const uint32 data)
+  {
+    this->assign(data);
+    return *this;
+  }
+  
+  /** Assigns the value of the field to the specified integer.
+   ** 
+   ** @param data The data to assign this field to.
+   **/
+  void field::assign(const uint32 data) 
+  {
+    __changed = this->_assign(data) || __changed;
+  }
+  
+  bool field::_assign(const uint32)
+  {
+    return false;
+  }
+  
+  /** Returns the value of the integer field.
+   ** 
+   ** \code
+   **   uint32 pic = my_frame.get(id3::fld::PICTURETYPE).integer();
+   ** \endcode
+   ** 
+   ** @return The value of the integer field
+   **/
+  uint32 field::integer() const 
+  { 
+    return uint32(); 
+  }
+  
+  /** Returns the number of items in a text list.
+   **      
+   ** \code
+   **   size_t num_items = my_frame.get(id3::fld::TEXT).num_items();
+   ** \endcode
+   ** 
+   ** @return The number of items in a text list.
+   **/
+  size_t field::num_items() const
+  {
+    return 1;
+  }
+  
+  /** Shortcut for the assign operator.
+   ** 
+   ** @param data The string to assign this field to
+   ** @see field::assign(const string&)
+   **/
+  field& field::operator=(const string& data)
+  {
+    this->assign(data);
+    return *this;
+  }
+  
+  /** Copies the supplied string to the field.
+   **   
+   ** \code
+   **   my_frame.get(id3::fld::TEXT).assign("ID3Lib is very cool!");
+   ** \endcode
+   **/
+  void field::assign(const string& data)
+  {
+    if (this->is_text())
+    {
+      //__frame.encoding(field::ASCII);
+      __changed = this->_assign(to_wstring(data)) || __changed;
     }
   }
   
-  return bytes;
-}
-
-luint
-ID3_Field::Parse(const uchar *buffer, const luint posn, const luint buffSize)
-{
-  luint bytesUsed       = 0;
-
-  if ((__eControl == ID3VC_HIGHER &&
-       __ucVersion >= __ucIOVersion && __ucRevision >= __ucIORevision) ||
-      (__ucVersion <= __ucIOVersion && __ucRevision <= __ucIORevision))
+  /** Returns the contents of the field as an ascii string.  If the field isn't
+   ** a string field, the empty string is returned.
+   **
+   ** \code
+   **   id3::string data = my_frame.get(id3::fld::TEXT).ascii();
+   ** \endcode
+   ** 
+   ** The optional parameter is used for accessing the elements of a text list.
+   ** If no parameter is given, the entire text is returned.  If a nonnegative
+   ** integer is given as a parameter, the specific string at the given
+   ** (0-based) index is returned.  See field::add for more details.  If the
+   ** index given doesn't pertain to any element in the list, the empty string
+   ** is returned.
+   **
+   ** \code
+   **   id3::string data = my_frame.get(id3::fld::TEXT).ascii(2);
+   ** \endcode
+   **
+   ** The above example returns the third string element of the text list.
+   **
+   ** @param item For fields with multiple entries, the item number to retrieve
+   ** @see field::add(int)
+   **/
+  string field::ascii(int item) const
   {
-    switch (__eType)
+    return to_string(this->unicode(item));
+  }
+  
+  /** For fields which support this feature, adds a string to the list of
+   ** strings currently in the field.
+   ** 
+   ** This is useful with frames such as the involved people list, composer,
+   ** and part-of-set.  You can use the num_items() method to find out how many
+   ** such items are in a list.
+   **
+   ** \code
+   **   my_frame.get(id3::fld::TEXT).add("this is a test");
+   ** \endcode
+   **
+   ** @param data The string to add to this field 
+   **/
+  void field::add(const string& data)
+  {
+    if (this->is_text())
     {
-      case ID3FTY_INTEGER:
-        bytesUsed = ParseInteger(buffer, posn, buffSize);
-        break;
-        
-      case ID3FTY_BINARY:
-        bytesUsed = ParseBinary( buffer, posn, buffSize);
-        break;
-        
-      case ID3FTY_ASCIISTRING:
-        bytesUsed = ParseASCIIString(buffer, posn, buffSize);
-        break;
-        
-      case ID3FTY_UNICODESTRING:
-        bytesUsed = ParseUnicodeString(buffer, posn, buffSize);
-        break;
-        
-      default:
-        ID3_THROW(ID3E_UnknownFieldType);
-        break;
+      __changed = true;
+      //__frame.encoding(field::ASCII);
+      this->_add(to_wstring(data));
     }
   }
   
-  return bytesUsed;
-}
-
-ID3_FrameDef *
-ID3_FindFrameDef(const ID3_FrameID id)
-{
-  ID3_FrameDef  *info   = NULL;
-
-  for (luint cur = 0; ID3_FrameDefs[cur].eID != ID3FID_NOFRAME; cur++)
-  {
-    if (ID3_FrameDefs[cur].eID == id)
-    {
-      info = &ID3_FrameDefs[cur];
-      break;
-    }
+  /** Shortcut for the assign operator.
+   **  
+   ** Peforms similarly as the ASCII assignment operator, taking a unicode
+   ** string as a parameter rather than an ascii string.
+   **
+   ** @see add(const string&)
+   **/
+  field& field::operator= (const wstring& data)
+  { 
+    this->assign(data);
+    return *this;
   }
-    
-  return info;
-}
-
-ID3_FrameID
-ID3_FindFrameID(const char *id)
-{
-  ID3_FrameID fid = ID3FID_NOFRAME;
   
-  for (luint cur = 0; ID3_FrameDefs[cur].eID != ID3FID_NOFRAME; cur++)
+  /** Copies the supplied unicode string to the field.
+   **
+   ** Peforms similarly as the ASCII assign(const string&) method,
+   ** taking a unicode string as a parameter rather than an ascii string.
+   ** 
+   ** @param data The unicode string to assign this field to.
+   ** @see add(const wstring&)
+   **/
+  void field::assign(const wstring& data)
   {
-    if (((strcmp(ID3_FrameDefs[cur].sShortTextID, id) == 0) &&
-         strlen(id) == 3) ||
-        ((strcmp(ID3_FrameDefs[cur].sLongTextID,  id) == 0) &&
-         strlen(id) == 4))
+    if (this->is_text())
     {
-      fid = ID3_FrameDefs[cur].eID;
-      break;
+      //__frame.encoding(field::UNICODE);
+      __changed = this->_assign(data) || __changed;
     }
   }
   
-  return fid;
-}
+  bool field::_assign(const wstring&)
+  {
+    return false; // do nothing by default
+  }
 
-luint
-ID3_Field::Render(uchar *buffer)
-{
-  luint bytesUsed = 0;
+  /** Returns the field's contents as a wstring. For fields with multiple text 
+   ** entries, the optional third parameter indicates which of the entries to
+   ** return.
+   ** 
+   ** Peforms similarly as the ascii method, returning a unicode string rather
+   ** than an ascii string.
+   ** 
+   ** \code
+   **   id3::wstring data = my_frame.get(id3::fld::TEXT).unicode();
+   ** \endcode
+   **
+   ** @param item For fields with multiple entries, the item number to retrieve
+   ** @see ascii(int)
+   **/
+  wstring field::unicode(int item) const
+  {
+    return wstring();
+  }
+
+  /** For fields which support this feature, adds a string to the list of
+   ** strings currently in the field.
+   ** 
+   ** Peforms similarly as the ASCII add(int) method, taking a unicode string
+   ** as a parameter rather than an ascii string.
+   **/
+  void field::add(const wstring& data)
+  {
+    if (this->is_text())
+    {
+      __changed = true;
+      //__frame.encoding(field::UNICODE);
+      this->_add(data);
+    }
+  }
   
-  if ((__eControl == ID3VC_HIGHER &&
-       __ucVersion >= __ucIOVersion && __ucRevision >= __ucIORevision) ||
-      (__ucVersion <= __ucIOVersion && __ucRevision <= __ucIORevision))
+  void field::_add(const wstring&)
   {
-    switch (__eType) 
-    {
-      case ID3FTY_INTEGER:
-        bytesUsed = RenderInteger(buffer);
-        break;
-        
-      case ID3FTY_BINARY:
-        bytesUsed = RenderBinary(buffer);
-        break;
-        
-      case ID3FTY_ASCIISTRING:
-        bytesUsed = RenderASCIIString(buffer);
-        break;
-        
-      case ID3FTY_UNICODESTRING:
-        bytesUsed = RenderUnicodeString(buffer);
-        break;
-        
-      default:
-        ID3_THROW (ID3E_UnknownFieldType);
-        break;
-    }
+    ; // do nothing by default
   }
-    
-  return bytesUsed;
-}
+  
+  field& field::operator=(const bstring& data)
+  {
+    this->assign(data);
+    return *this;
+  }
+  
+  /** Copies the supplied binary string to the field.
+   ** 
+   ** @param data The data to assign to this field.
+   **/
+  void field::assign(const bstring& data)
+  {
+    __changed = this->_assign(data) || __changed;
+  }
+  
+  bool field::_assign(const bstring&)
+  {
+    return false;
+  }
 
-ID3_Field &
-ID3_Field::operator=( const ID3_Field &rField )
-{
-  if (this != &rField)
+  /** Copies the field's internal string to the buffer.
+   **
+   ** It copies the data in the field into the buffer, for as many bytes as the
+   ** field contains, or the size of buffer, whichever is smaller.
+   **
+   ** \code
+   **   id3::bstring data = my_frame.get(id3::fld::DATA).binary();
+   ** \endcode
+   **
+   ** @return A binary string
+   **/
+  bstring field::binary() const
   {
-    if ((__eControl == ID3VC_HIGHER &&
-         __ucVersion >= __ucIOVersion && __ucRevision >= __ucIORevision) ||
-        (__ucVersion <= __ucIOVersion && __ucRevision <= __ucIORevision))
-    {
-      switch (__eType)
-      {
-        case ID3FTY_INTEGER:
-          *this = rField.Get();
-          break;
-        case ID3FTY_BITFIELD:
-        case ID3FTY_ASCIISTRING:
-        case ID3FTY_UNICODESTRING:
-        case ID3FTY_BINARY:
-          Set(rField.__sData, rField.__ulSize);
-          break;
-      }
-    }
+    return bstring();
   }
+  
+  ostream& operator<<(ostream& os, const field& fld)
+  {
+    os << fld.render();
+    return os;
+  }
+  
 }
 
 // $Log$
 // Revision 1.15  2000/01/04 15:42:49  eldamitri
-// * include/id3/field.h:
-// * include/id3/int28.h:
-// * include/id3/misc_support.h:
-// * include/id3/tag.h:
-// * include/id3/types.h:
-// * src/id3/dll_wrapper.cpp
-// * src/id3/error.cpp
-// * src/id3/field.cpp
-// * src/id3/field_binary.cpp
-// * src/id3/field_integer.cpp
-// * src/id3/field_string_ascii.cpp
-// * src/id3/field_string_unicode.cpp
-// * src/id3/frame.cpp
-// * src/id3/frame_parse.cpp
-// * src/id3/frame_render.cpp
-// * src/id3/header.cpp
-// * src/id3/header_frame.cpp
-// * src/id3/header_tag.cpp
-// * src/id3/int28.cpp
-// * src/id3/misc_support.cpp
-// * src/id3/tag.cpp
-// * src/id3/tag_file.cpp:
-// * src/id3/tag_find.cpp:
-// * src/id3/tag_parse.cpp:
-// * src/id3/tag_parse_lyrics3.cpp:
 // For compilation with gcc 2.95.2 and better compatibility with ANSI/ISO
 // standard C++, updated, rearranged, and removed (where necessary)
 // #include directives.
@@ -993,7 +526,7 @@ ID3_Field::operator=( const ID3_Field &rField )
 // * field.cpp (Render): Minor reformatting.
 //
 // Revision 1.5  1999/11/15 20:15:25  scott
-// Added include for config.h.  Replaced LU_NULL with ID3FF_NONE for
+// Added include for config.h.  Replaced LU_NULL with field::NONE for
 // more consistency in flag naming.  Blocked out the ID3FD_Volume
 // array definition since it is currently unused.  Reformatted
 // ID3_FrameDefs for easier reading (although most lines are more
