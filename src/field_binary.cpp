@@ -140,17 +140,12 @@ void ID3_Field::ToFile(const char *info) const
 
 
 size_t
-ID3_Field::ParseBinary(const uchar *buffer, luint posn, size_t nSize)
+ID3_Field::ParseBinary(const uchar *buffer, size_t nSize)
 {
-  size_t bytesUsed = nSize - posn;
-  
-  if (__length > 0)
-  {
-    bytesUsed = MIN(__length, bytesUsed);
-  }
-    
-  Set(&buffer[posn], bytesUsed);
-  
+  // copy the remaining bytes, unless we're fixed length, in which case copy
+  // the minimum of the remaining bytes vs. the fixed length
+  size_t bytesUsed = (__length > 0 ? MIN(nSize, __length) : nSize);
+  this->Set(buffer, bytesUsed);
   __changed = false;
   
   return bytesUsed;
