@@ -311,7 +311,7 @@ void PrintInformation(ID3_Tag &myTag)
         {
           char *sOwner = ID3_GetString(myFrame, ID3FN_OWNER);
           size_t 
-            nSymbol = myFrame->Field(ID3FN_SYMBOL).Get(),
+            nSymbol = myFrame->Field(ID3FN_ID).Get(),
             nDataSize = myFrame->Field(ID3FN_DATA).Size();
           cout << "(" << nSymbol << "): " << sOwner
                << ", " << nDataSize << " bytes";
@@ -439,6 +439,12 @@ int main( int argc, char *argv[])
 }
 
 // $Log$
+// Revision 1.6  1999/12/26 00:29:55  scott
+// (GetDescription): Reformatted.  Descriptions now match those from
+// www.id3.org.  Added descriptions for new frame id's.
+// (PrintInformation): Updated for added frames.  Now handles
+// unimplemented frames.
+//
 // Revision 1.5  1999/12/23 15:56:26  scott
 // Added check and include for config.h.
 //
