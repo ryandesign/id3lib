@@ -24,10 +24,9 @@
 // id3lib.  These files are distributed with id3lib at
 // http://download.sourceforge.net/id3lib/
 
-#ifndef ID3LIB_HEADER_TAG_H
-#define ID3LIB_HEADER_TAG_H
+#ifndef __ID3LIB_HEADER_TAG_H__
+#define __ID3LIB_HEADER_TAG_H__
 
-#include "types.h"
 #include "header.h"
 
 #define ID3_TAGID               "ID3"
@@ -48,30 +47,4 @@ public:
 
 lsint ID3_IsTagHeader(uchar header[ID3_TAGHEADERSIZE]);
 
-#endif
-
-// $Log$
-// Revision 1.5  2000/04/05 05:20:52  eldamitri
-// Updated initial comment information to reflect license, copyright
-// change.
-//
-// Revision 1.4  1999/12/27 06:06:54  scott
-// (ID3_TAGIDSIZE): Added constant.
-// (class ID3_TagHeader): Minor return type changes for Size and Render.
-//
-// Revision 1.3  1999/12/17 16:05:02  scott
-// Updated opening comment block.
-//
-// Revision 1.2  1999/12/02 22:45:28  scott
-// Changed all of the #include <id3/*> to #include "*" to help ensure that
-// the sources are searched for in the right places.
-//
-// Revision 1.1  1999/12/01 17:16:06  scott
-// moved from src/id3 to include/id3
-//
-// Revision 1.5  1999/11/29 19:26:18  scott
-// Updated the leading license information of the file to reflect new maintainer.
-//
-// Revision 1.4  1999/11/04 04:15:55  scott
-// Added cvs Id and Log tags to beginning and end of file, respectively.
-//
+#endif /* __ID3LIB_HEADER_TAG_H__ */

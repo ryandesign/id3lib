@@ -24,7 +24,9 @@
 // id3lib.  These files are distributed with id3lib at
 // http://download.sourceforge.net/id3lib/
 
-#include "types.h"
+#ifndef __ID3LIB_FRAME_H__
+#define __ID3LIB_FRAME_H__
+
 #include "field.h"
 #include "header_frame.h"
 
@@ -141,55 +143,4 @@ private:
 }
 ;
 
-// $Log$
-// Revision 1.8  2000/04/10 20:17:35  eldamitri
-// Updated comments for use with doxygen.
-//
-// Revision 1.7  2000/04/05 05:20:52  eldamitri
-// Updated initial comment information to reflect license, copyright
-// change.
-//
-// Revision 1.6  1999/12/27 06:14:22  scott
-// (class ID3_Frame): Added declaration for constructor which accepts a
-// frame header to copy.  Removed redundant data members that are now
-// encapsulated within new frame header member.  Added declaration for
-// new methods InitFields and InitFieldBits.
-//
-// Revision 1.5  1999/12/26 16:40:08  scott
-// (class ID3_Frame): Added bReadOnly property.
-//
-// Revision 1.4  1999/12/17 16:05:02  scott
-// Updated opening comment block.
-//
-// Revision 1.3  1999/12/09 02:45:46  scott
-// (class ID3_Frame): Added operator= method declaration.
-//
-// Revision 1.2  1999/12/02 22:45:28  scott
-// Changed all of the #include <id3/*> to #include "*" to help ensure that
-// the sources are searched for in the right places.
-//
-// Revision 1.1  1999/12/01 17:16:02  scott
-// moved from src/id3 to include/id3
-//
-// Revision 1.9  1999/11/29 19:26:18  scott
-// Updated the leading license information of the file to reflect new maintainer.
-//
-// Revision 1.8  1999/11/29 19:06:50  scott
-// Updated documentation to work better with doc++ (probably doesn't work
-// well with kdoc anymore).
-//
-// Revision 1.7  1999/11/25 19:15:15  scott
-// Added doc++/kdoc/javadoc-like documentation, mostly transcribed
-// from Dirk's ID3Lib Documentation MSWord doc.
-//
-// Revision 1.6  1999/11/15 20:18:11  scott
-// Made ID3_Tag a friend of ID3_Frame to allow access to the private
-// members in ID3_Frame.  Made variable names more descriptive.
-// Added const qualifier to appropriate methods.
-//
-// Revision 1.5  1999/11/04 04:32:11  scott
-// Initial revision
-//
-// Revision 1.4  1999/11/04 04:15:54  scott
-// Added cvs Id and Log tags to beginning and end of file, respectively.
-//
+#endif /* __ID3LIB_FRAME_H__ */
