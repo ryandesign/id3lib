@@ -344,6 +344,9 @@ luint ID3_Field::RenderUnicodeString(uchar *buffer)
 }
 
 // $Log$
+// Revision 1.16  2000/04/08 04:37:19  eldamitri
+// Changed new ANSI-standard C++ include headers to old-style headers.
+//
 // Revision 1.15  2000/04/05 05:21:15  eldamitri
 // Updated initial comment information to reflect license, copyright
 // change.
