@@ -86,7 +86,7 @@ public:
   
   void       Clear();
   bool       HasChanged() const;
-  bool       SetChanged(bool b) { _changed = b; }
+  void       SetChanged(bool b) { _changed = b; }
   size_t     Size() const;
   
   bool       SetUnsync(bool);
