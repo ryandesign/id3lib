@@ -324,6 +324,7 @@ size_t RenderV2ToFile(const ID3_TagImpl& tag, fstream& file)
 #endif //defined(HAVE_SYS_STAT_H)
 
 //    file = tmpOut;
+    file.clear();//to clear the eof mark
     err = openWritableFile(filename, file);
     if (err != ID3E_NoError)
     {
