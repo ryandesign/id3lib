@@ -15,7 +15,6 @@
 #ifndef ID3LIB_MISC_SUPPORT_H
 #define ID3LIB_MISC_SUPPORT_H
 
-#include <wchar.h>
 #include <string.h>
 #include <id3/types.h>
 #include <id3/tag.h>
@@ -55,6 +54,9 @@ void ID3_RemoveTrailingSpaces(char *buffer, luint length);
 #endif
 
 // $Log$
+// Revision 1.7  1999/11/29 19:26:18  scott
+// Updated the leading license information of the file to reflect new maintainer.
+//
 // Revision 1.6  1999/11/29 19:17:33  scott
 // Renamed ID3_ASCIItoUnicode to mbstoucs.  Renamed ID3_UnicodeToASCII to
 // ucstombs.  Added declarations for ucslen, ucscpy, ucsncpy, ucscmp, and
