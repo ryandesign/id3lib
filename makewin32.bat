@@ -1,3 +1,4 @@
+REM $Id$
 @echo off
 
 REM Comments, bugs go to johan@linkdata.se
