@@ -33,7 +33,7 @@
 #include <config.h>
 #endif
 
-void ID3_Field::Set(const uchar *newData, luint newSize)
+void ID3_Field::Set(const uchar *newData, const luint newSize)
 {
   Clear();
   
@@ -56,7 +56,7 @@ void ID3_Field::Set(const uchar *newData, luint newSize)
 }
 
 
-void ID3_Field::Get(uchar *buffer, luint buffLength)
+void ID3_Field::Get(uchar *buffer, const luint buffLength)
 {
   if (NULL == buffer)
   {
@@ -166,6 +166,10 @@ ID3_Field::RenderBinary(uchar *buffer)
 
 
 // $Log$
+// Revision 1.12  2000/04/05 05:21:15  eldamitri
+// Updated initial comment information to reflect license, copyright
+// change.
+//
 // Revision 1.11  2000/01/04 15:42:49  eldamitri
 // For compilation with gcc 2.95.2 and better compatibility with ANSI/ISO
 // standard C++, updated, rearranged, and removed (where necessary)

@@ -69,7 +69,7 @@ void ID3_Field::Set(const char *sString)
 
 // the ::Get() function for ASCII
 
-luint ID3_Field::Get(char *buffer, luint maxLength, luint itemNum)
+luint ID3_Field::Get(char *buffer, const luint maxLength, const luint itemNum)
 {
   luint bytesUsed = 0;
   unicode_t *temp;
@@ -245,6 +245,9 @@ luint ID3_Field::RenderASCIIString(uchar *buffer)
 }
 
 // $Log$
+// Revision 1.19  2000/04/08 04:37:19  eldamitri
+// Changed new ANSI-standard C++ include headers to old-style headers.
+//
 // Revision 1.18  2000/04/05 05:21:15  eldamitri
 // Updated initial comment information to reflect license, copyright
 // change.

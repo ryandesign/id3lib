@@ -206,7 +206,7 @@ luint ID3_Tag::Link(char *fileInfo, bool parseID3v1, bool parseLyrics3)
   return posn;
 }
 
-luint ID3_Tag::Update(luint ulTagFlag)
+luint ID3_Tag::Update(const luint ulTagFlag)
 {
   OpenFileForWriting();
   luint ulTags = NO_TAG;
@@ -345,6 +345,10 @@ luint ID3_Tag::Strip(const luint ulTagFlag)
 
 
 // $Log$
+// Revision 1.16  2000/04/08 04:41:38  eldamitri
+// Changed new ANSI-standard C++ include headers to old-style headers.
+// Fixed minor problems for windows.
+//
 // Revision 1.15  2000/04/07 04:34:28  eldamitri
 // Added optional parameters to Link to make parsing of id3v1/lyrics3
 // tags optional.

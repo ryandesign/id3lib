@@ -31,7 +31,7 @@
 #include <config.h>
 #endif
 
-ID3_Field& ID3_Field::operator=(luint newData)
+ID3_Field& ID3_Field::operator=(const luint newData)
 {
   Set(newData);
   
@@ -39,7 +39,7 @@ ID3_Field& ID3_Field::operator=(luint newData)
 }
 
 
-void ID3_Field::Set(luint newData)
+void ID3_Field::Set(const luint newData)
 {
   Clear();
   
@@ -93,6 +93,10 @@ luint ID3_Field::RenderInteger(uchar *buffer)
 }
 
 // $Log$
+// Revision 1.13  2000/04/05 05:21:15  eldamitri
+// Updated initial comment information to reflect license, copyright
+// change.
+//
 // Revision 1.12  2000/01/04 15:42:49  eldamitri
 // For compilation with gcc 2.95.2 and better compatibility with ANSI/ISO
 // standard C++, updated, rearranged, and removed (where necessary)
