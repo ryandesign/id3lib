@@ -147,7 +147,6 @@ private:
   
   // file-related member variables
   char*      __file_name;       // name of the file we are linked to
-  FILE*      __file_handle;     // a handle to the file we are linked to
   size_t     __file_size;       // the size of the file (without any tag(s))
   size_t     __prepended_bytes; // number of tag bytes at start of file
   size_t     __appended_bytes;  // number of tag bytes at end of file
