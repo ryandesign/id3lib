@@ -111,7 +111,7 @@ AUTOMAKE_OPTIONS = 1.4
 
 EXTRA_DIST =  	HISTORY                         config.h.win32                  config.h.win32.in       	id3lib.spec                     id3lib.spec.in                  reconf
 
-SUBDIRS = . m4 doc src include zlib examples
+SUBDIRS = . m4 zlib doc include src examples
 
 INCLUDES = @ID3LIB_DEBUG_FLAGS@
 
