@@ -282,7 +282,8 @@ ID3_ENUM(ID3_FrameID)
   /* WPUB */ ID3FID_WWWPUBLISHER,      /**< Official publisher webpage */
   /* WXXX */ ID3FID_WWWUSER,           /**< User defined URL link */
   /*      */ ID3FID_METACRYPTO,        /**< Encrypted meta frame (id3v2.2.x) */
-  /*      */ ID3FID_METACOMPRESSION    /**< Compressed meta frame (id3v2.2.1) */
+  /*      */ ID3FID_METACOMPRESSION,   /**< Compressed meta frame (id3v2.2.1) */
+  /* >>>> */ ID3FID_LASTFRAMEID        /**< Last field placeholder */
 };
 
 ID3_ENUM(ID3_V1Lengths)

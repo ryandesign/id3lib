@@ -144,6 +144,7 @@ protected:
   
 };
 
+
 // Ack! Not for public use
 ID3_FrameDef *ID3_FindFrameDef(ID3_FrameID id);
 ID3_FrameID   ID3_FindFrameID(const char *id);

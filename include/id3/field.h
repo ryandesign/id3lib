@@ -93,4 +93,20 @@ protected:
   ID3_Field() { };
 };
 
+class ID3_CPP_EXPORT ID3_FrameInfo
+{
+
+public:
+  ID3_FrameInfo() {};
+  ~ID3_FrameInfo() {};
+  char *ShortName(ID3_FrameID frameid);
+  char *LongName(ID3_FrameID frameid);
+  const char *Description(ID3_FrameID frameid);
+  int MaxFrameID();
+  int NumFields(ID3_FrameID frameid);
+  ID3_FieldType FieldType(ID3_FrameID frameid, int fieldnum);
+  size_t FieldSize(ID3_FrameID frameid, int fieldnum);
+  flags_t FieldFlags(ID3_FrameID frameid, int fieldnum);
+};
+
 #endif /* _ID3LIB_FIELD_H_ */
