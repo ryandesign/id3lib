@@ -15,7 +15,6 @@
 #ifndef ID3LIB_TAG_H
 #define ID3LIB_TAG_H
 
-#include <wchar.h>
 #include <stdio.h>
 #include "types.h"
 #include "frame.h"
@@ -196,8 +195,14 @@ public:
       <a href="#Update"><code>Update</code></a> method on the tag (if you
       choose to <code>Update</code> at all).
 
-      @param name The filename of the mp3 file to link to */
+      @param name The filename of the mp3 file to link to
+  */
   ID3_Tag(char *name = NULL);
+  /** Standard copy constructor.
+
+      @param tag What is copied into this tag
+  */
+  ID3_Tag(const ID3_Tag &tag);
   ~ID3_Tag(void);
   
   /** Clears the object and disassociates it from any files.
@@ -746,6 +751,8 @@ public:
   */
   ID3_Frame *operator[](luint nIndex) const;
   
+  ID3_Tag &operator=( const ID3_Tag &rTag );
+
 private:
   void      AddFrame(ID3_Frame *pNewFrame, bool bFreeWhenDone);
   void      AddFrames(ID3_Frame *newFrames, luint nFrames, bool freeWhenDone);
@@ -774,11 +781,11 @@ private:
   void      UnSync(uchar *destData, luint destSize, uchar *sourceData, luint sourceSize);
   luint     ReSync(uchar *binarySourceData, luint sourceSize);
 
-  uchar     __ucVersion;      // what version tag?
-  uchar     __ucRevision;     // what revision tag?
-  ID3_Elem *__pFrameList; // the list of known frames currently attached to this tag
-  ID3_Elem *__pBinaryList;// the list of yet-to-be-parsed frames currently attached to this tag
-  ID3_Elem *__pFindCursor;// on which element in the frameList are we currently positioned?
+  uchar     __ucVersion;       // what version tag?
+  uchar     __ucRevision;      // what revision tag?
+  ID3_Elem *__pFrameList;      // the list of known frames currently attached to this tag
+  ID3_Elem *__pBinaryList;     // the list of yet-to-be-parsed frames currently attached to this tag
+  ID3_Elem *__pFindCursor;     // on which element in the frameList are we currently positioned?
   bool      __bSyncOn;         // should we unsync this tag when rendering?
   bool      __bCompression;    // should we compress frames when rendering?
   bool      __bPadding;        // add padding to tags?
@@ -798,6 +805,10 @@ private:
 #endif
 
 // $Log$
+// Revision 1.2  1999/12/02 22:45:28  scott
+// Changed all of the #include <id3/*> to #include "*" to help ensure that
+// the sources are searched for in the right places.
+//
 // Revision 1.1  1999/12/01 17:16:10  scott
 // moved from src/id3 to include/id3
 //
