@@ -144,6 +144,7 @@ void ID3_Tag::ProcessBinaries(ID3_FrameID whichFrame, bool attach)
     luint expandedSize = 0;
     uchar groupingID = 0;
     uchar encryptionID = 0;
+    bool bShouldAttach = attach;
     
     posn = frHeader.GetFrameInfo(attr, cur->acBinary);
     
@@ -197,28 +198,42 @@ void ID3_Tag::ProcessBinaries(ID3_FrameID whichFrame, bool attach)
       
       frame->SetID(id);
       
-      if (NULL == expBin)
+      try 
       {
-        frame->Parse(&cur->acBinary[posn], attr.ulSize - extras);
+        if (NULL == expBin)
+        {
+          frame->Parse(&cur->acBinary[posn], attr.ulSize - extras);
+        }
+        else
+        {
+          frame->Parse(expBin, expandedSize);
+          delete[] expBin;
+        }
+        
+        // here is where we call a special handler for this frame type if one
+        // is specified in the frame definition
+        {
+          ID3_FrameDef *frameInfo;
+        
+          frameInfo = ID3_FindFrameDef(id);
+        
+          if (frameInfo != NULL && frameInfo->parseHandler != NULL)
+            bShouldAttach = frameInfo->parseHandler(frame);
+        }
       }
-      else
+      catch (ID3_Error err)
       {
-        frame->Parse(expBin, expandedSize);
-        delete[] expBin;
-      }
-        
-      // here is where we call a special handler for this frame type if one is
-      // specified in the frame definition
-      {
-        ID3_FrameDef *frameInfo;
-        
-        frameInfo = ID3_FindFrameDef(id);
-        
-        if (frameInfo != NULL && frameInfo->parseHandler)
-          attach = frameInfo->parseHandler(frame);
+        // There's been an error in the parsing of the frame.  It shouldn't be
+        // attached.
+        // This should be logged somehow so that the user can determine how
+        // many frames were parsed correctly and how many weren't
+        // cerr << "xxx Error occurred: " << err.GetErrorDesc() << endl;
+        bShouldAttach = false;
+        if (NULL != expBin)
+          delete [] expBin;
       }
       
-      if (!attach)
+      if (!bShouldAttach)
       {
         // if not, delete it
         delete frame;
@@ -380,6 +395,12 @@ luint ID3_Tag::ParseFromHandle(void)
 }
 
 // $Log$
+// Revision 1.5  1999/11/15 20:20:55  scott
+// Added include for config.h.  Minor code cleanup.  Removed
+// assignments from if checks; first makes assignment, then checks
+// for appropriate value.  Made private member variable names more
+// descriptive.
+//
 // Revision 1.4  1999/11/04 04:15:55  scott
 // Added cvs Id and Log tags to beginning and end of file, respectively.
 //
