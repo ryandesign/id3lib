@@ -39,7 +39,7 @@ class ID3_Reader;
 
 class ID3_FieldImpl : public ID3_Field
 {
-  friend class ID3_Frame;
+  friend class ID3_FrameImpl;
 public:
   ~ID3_FieldImpl();
   
