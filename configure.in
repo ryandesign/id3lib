@@ -33,9 +33,9 @@ AC_DIVERT_PUSH(AC_DIVERSION_NOTICE)dnl
 #
 ID3LIB_MAJOR_VERSION=3
 ID3LIB_MINOR_VERSION=7
-ID3LIB_PATCH_VERSION=6
+ID3LIB_PATCH_VERSION=7
 ID3LIB_INTERFACE_AGE=0
-ID3LIB_BINARY_AGE=0
+ID3LIB_BINARY_AGE=1
 ID3LIB_VERSION=$ID3LIB_MAJOR_VERSION.$ID3LIB_MINOR_VERSION.$ID3LIB_PATCH_VERSION
 AC_DIVERT_POP()dnl
 
@@ -200,14 +200,14 @@ AC_DEFINE_UNQUOTED(__ID3_COMPILED_WITH_DEBUGGING, "${enable_debug}")
 AC_OUTPUT(                      \
   Makefile                      \
   doc/Makefile                  \
-  examples/Makefile             \
-  include/Makefile              \
-  include/id3/Makefile          \
   m4/Makefile                   \
-  src/Makefile                  \
   zlib/Makefile                 \
   zlib/include/Makefile         \
   zlib/lib/Makefile             \
   zlib/prj/Makefile             \
   zlib/src/Makefile             \
+  include/Makefile              \
+  include/id3/Makefile          \
+  src/Makefile                  \
+  examples/Makefile             \
 )
