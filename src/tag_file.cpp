@@ -298,6 +298,7 @@ flags_t ID3_Tag::Update(flags_t ulTagFlag)
     RenderV1ToHandle();
     tags |= ID3TT_ID3V1;
   }
+  CloseFile();
   return tags;
 }
 
