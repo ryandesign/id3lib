@@ -34,17 +34,18 @@ main( int argc, char *argv[] )
   filename = argv[1];
   printf("*** Reading %s\n", filename);
   
-  if (my_tag = ID3Tag_New())
+  if ((my_tag = ID3Tag_New()) != NULL)
   {
-    luint frm_size = ID3Tag_Link(my_tag, filename);
     ID3Frame *my_frame;
-    if (my_frame = ID3Tag_FindFrameWithID(my_tag, ID3FID_TITLE))
+
+    (void) ID3Tag_Link(my_tag, filename);
+    if ((my_frame = ID3Tag_FindFrameWithID(my_tag, ID3FID_TITLE)) != NULL)
     {
       ID3Field *my_field;
-      if (my_field = ID3Frame_GetField(my_frame, ID3FN_TEXT))
+      if ((my_field = ID3Frame_GetField(my_frame, ID3FN_TEXT)) != NULL)
       {
         char title[1024];
-        luint num_chars = ID3Field_GetASCII(my_field, title, 1024, 1);
+        (void) ID3Field_GetASCII(my_field, title, 1024, 1);
         printf("Title: %s\n", title);
       }
       else
