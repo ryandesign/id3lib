@@ -54,8 +54,8 @@ ID3_Tag::ID3_Tag(const ID3_Tag &tag)
 
 void ID3_Tag::SetupTag(char *fileInfo)
 {
-  __ucVersion       = ID3_TAGVERSION;
-  __ucRevision      = ID3_TAGREVISION;
+  __ucVersion       = ID3v2_VERSION;
+  __ucRevision      = ID3v2_REVISION;
   __pFrameList      = NULL;
   __pBinaryList     = NULL;
   __pFindCursor     = NULL;
@@ -385,6 +385,9 @@ ID3_Tag::operator=( const ID3_Tag &rTag )
 }
 
 // $Log$
+// Revision 1.11  1999/12/17 16:13:04  scott
+// Updated opening comment block.
+//
 // Revision 1.10  1999/12/13 04:44:17  scott
 // (SetupTag, ~ID3_Tag): Slight changes to reflect new __sFileName type.
 //
