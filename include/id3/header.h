@@ -44,6 +44,7 @@ public:
   };
 
   ID3_Header() 
+    : __spec (ID3V2_UNKNOWN)
   { 
     this->Clear();
     __changed = false;
