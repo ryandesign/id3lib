@@ -17,8 +17,8 @@
 
 #include "types.h"
 
-#define ID3_TAGVERSION  (3)
-#define ID3_TAGREVISION (0)
+#define ID3v2_VERSION  (3)
+#define ID3v2_REVISION (0)
 
 struct ID3_HeaderInfo
 {
@@ -40,19 +40,28 @@ public:
   ID3_Header(void);
   
   virtual void   SetVersion(uchar ver, uchar rev);
+  virtual uchar  GetVersion() const;
+  virtual uchar  GetRevision() const;
   virtual void   SetDataSize(size_t newSize);
   virtual size_t GetDataSize() const;
   virtual void   SetFlags(uint16 newFlags);
+  virtual void   AddFlags(uint16 newFlags);
+  virtual void   RemoveFlags(uint16 newFlags);
   virtual uint16 GetFlags() const;
-  virtual luint  Size(void) = 0;
-  virtual luint  Render(uchar *buffer) = 0;
-  
+  virtual void   Clear();
+  virtual size_t Size(void) = 0;
+  virtual size_t Render(uchar *buffer) = 0;
+
+  ID3_Header &operator=( const ID3_Header & );
+
 protected:
-  uchar __ucVersion;        // which version?
-  uchar __ucRevision;       // which revision?
+  virtual void   Copy(const ID3_Header &);
+
+  uchar  __ucVersion;        // which version?
+  uchar  __ucRevision;       // which revision?
   size_t __ulDataSize;       // how big is the data?
   uint16 __ulFlags;          // header flags
-  ID3_HeaderInfo *__pInfo;  // the info about this version of the headers
+  ID3_HeaderInfo *__pInfo;   // the info about this version of the headers
 }
 ;
 
@@ -61,6 +70,9 @@ ID3_HeaderInfo *ID3_LookupHeaderInfo(uchar ver, uchar rev);
 #endif
 
 // $Log$
+// Revision 1.4  1999/12/26 16:40:13  scott
+// (class ID3_Header): Minor cleanup to interface.
+//
 // Revision 1.3  1999/12/17 16:05:02  scott
 // Updated opening comment block.
 //
