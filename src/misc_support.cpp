@@ -575,11 +575,7 @@ bool ID3_HasPicture(const ID3_Tag* tag)
     ID3_Frame* frame = tag->Find(ID3FID_PICTURE);
     if (frame != NULL)
     {
-      ID3_Field* myField = frame->GetField(ID3FN_DATA);
-      if (myField != NULL)
-        return true;
-      else
-        return false;
+      return frame->GetField(ID3FN_DATA) != NULL;
     }
     else return false;
   }
