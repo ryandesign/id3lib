@@ -8,7 +8,7 @@
 // express or implied.
 // 
 // The ID3Lib authors encourage improvements and optimisations to be sent to
-// the ID3Lib coordinator, currently Dirk Mahoney (dirk@id3.org).  Approved
+// the ID3Lib coordinator, currently Scott Haug (sth2@cs.wustl.edu).  Approved
 // submissions may be altered, and will be included and released under these
 // terms.
 
@@ -500,6 +500,18 @@ bool ID3_AddLyrics(ID3_Tag *tag, char *text)
 }
 
 // $Log$
+// Revision 1.9  1999/11/29 18:56:37  scott
+// (): Made includsion of wchar.h dependant on SIZE_SPECIFIC_TYPES.
+// Put in compile-time checks to compile differently based on the
+// definition of unicode_t.
+// (mbstoucs): Renamed from ID3_ASCIItoUnicode.
+// (ucstombs): Renamed from ID3_UnicodeToASCII.
+// (ucslen): Added.  Returns the length of a unicode character string.
+// (ucscpy): Added.  Copies one unicode string to another.
+// (ucsncpy): Added.  Copies n chars from one unicode string to another.
+// (ucscmp): Added.  Compares two unicode strings.
+// (ucsncmp): Added.  Compares the first n chars of two unicode strings.
+//
 // Revision 1.8  1999/11/25 18:52:40  scott
 // * misc_support.cpp: Replaced every call to AddFrame with AddNewFrame.
 //

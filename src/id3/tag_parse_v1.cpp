@@ -1,18 +1,16 @@
 // $Id$
-
-//  The authors have released ID3Lib as Public Domain (PD) and claim no
-//  copyright, patent or other intellectual property protection in this work.
-//  This means that it may be modified, redistributed and used in commercial
-//  and non-commercial software and hardware without restrictions.  ID3Lib is
-//  distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either
-//  express or implied.
-//
-//  The ID3Lib authors encourage improvements and optimisations to be sent to
-//  the ID3Lib coordinator, currently Dirk Mahoney (dirk@id3.org).  Approved
-//  submissions may be altered, and will be included and released under these
-//  terms.
-//
-//  Mon Nov 23 18:34:01 1998
+// 
+// The authors have released ID3Lib as Public Domain (PD) and claim no
+// copyright, patent or other intellectual property protection in this work.
+// This means that it may be modified, redistributed and used in commercial
+// and non-commercial software and hardware without restrictions.  ID3Lib is
+// distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either
+// express or implied.
+// 
+// The ID3Lib authors encourage improvements and optimisations to be sent to
+// the ID3Lib coordinator, currently Scott Haug (sth2@cs.wustl.edu).  Approved
+// submissions may be altered, and will be included and released under these
+// terms.
 
 #if HAVE_CONFIG_H
 #include <config.h>
@@ -121,6 +119,11 @@ void ID3_Tag::ParseID3v1(void)
 }
 
 // $Log$
+// Revision 1.6  1999/11/19 19:12:46  scott
+// (ID3_RemoveTrailingSpaces): Minor code cleanup.
+// (ParseID3v1): Massive recoding of method to make use of new functions
+// defined in misc_support.  Simplifies flow of method.
+//
 // Revision 1.5  1999/11/15 20:21:15  scott
 // Added include for config.h.  Minor code cleanup.  Removed
 // assignments from if checks; first makes assignment, then checks

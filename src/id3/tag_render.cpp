@@ -1,18 +1,16 @@
 // $Id$
-
-//  The authors have released ID3Lib as Public Domain (PD) and claim no
-//  copyright, patent or other intellectual property protection in this work.
-//  This means that it may be modified, redistributed and used in commercial
-//  and non-commercial software and hardware without restrictions.  ID3Lib is
-//  distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either
-//  express or implied.
-//
-//  The ID3Lib authors encourage improvements and optimisations to be sent to
-//  the ID3Lib coordinator, currently Dirk Mahoney (dirk@id3.org).  Approved
-//  submissions may be altered, and will be included and released under these
-//  terms.
-//
-//  Mon Nov 23 18:34:01 1998
+// 
+// The authors have released ID3Lib as Public Domain (PD) and claim no
+// copyright, patent or other intellectual property protection in this work.
+// This means that it may be modified, redistributed and used in commercial
+// and non-commercial software and hardware without restrictions.  ID3Lib is
+// distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either
+// express or implied.
+// 
+// The ID3Lib authors encourage improvements and optimisations to be sent to
+// the ID3Lib coordinator, currently Scott Haug (sth2@cs.wustl.edu).  Approved
+// submissions may be altered, and will be included and released under these
+// terms.
 
 #if defined HAVE_CONFIG_H
 #include <config.h>
@@ -366,6 +364,22 @@ luint ID3_Tag::PaddingSize(luint curSize) const
 
 
 // $Log$
+// Revision 1.7  1999/11/25 18:51:34  scott
+// (Render): Replaced manual array initialization with call to memset.
+// (GenerateTempName): Removed method.  No longer used.
+// (RenderV1): New method.  Renders an id3v1 tag to an array.
+// (RenderV1ToHandle): Moved work of writing tag to array to RenderV1.
+// (RenderV2ToHandle): Rather than generating a temporary file name with
+// mktemp (or similar) and opening that file name to a temporary file,
+// we now use tmpfile to create a temporary file directly.  Unfortunately,
+// this means we can't just rename the tempfile to the original file
+// when all the copying is done, so we have to perform a second copy from
+// the temp file back to the original.  This makes the code less efficient
+// but more portable, as we rely on tmpfile for knowing where to create
+// the temporary file.  To improve, we'll need to figure out a portable
+// mechanism for creating temporary files (i.e., resolve the differences
+// between /tmp/ and C:\temp\).
+//
 // Revision 1.6  1999/11/19 19:27:27  scott
 // (RenderV1ToHandle): Added.  Adds or overwrites an id3v1 tag to a file
 // handle.  Needs testing.

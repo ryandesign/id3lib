@@ -8,7 +8,7 @@
 // express or implied.
 // 
 // The ID3Lib authors encourage improvements and optimisations to be sent to
-// the ID3Lib coordinator, currently Dirk Mahoney (dirk@id3.org).  Approved
+// the ID3Lib coordinator, currently Scott Haug (sth2@cs.wustl.edu).  Approved
 // submissions may be altered, and will be included and released under these
 // terms.
 
@@ -55,6 +55,11 @@ void ID3_RemoveTrailingSpaces(char *buffer, luint length);
 #endif
 
 // $Log$
+// Revision 1.6  1999/11/29 19:17:33  scott
+// Renamed ID3_ASCIItoUnicode to mbstoucs.  Renamed ID3_UnicodeToASCII to
+// ucstombs.  Added declarations for ucslen, ucscpy, ucsncpy, ucscmp, and
+// ucsncmp.
+//
 // Revision 1.5  1999/11/19 18:59:09  scott
 // * misc_support.h: Added the function declarations for ID3_GetString,
 // ID3_GetArtist, ID3_GetAlbum, ID3_GetTitle, ID3_GetYear, ID3_AddYear,

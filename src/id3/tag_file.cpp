@@ -1,18 +1,16 @@
 // $Id$
-
-//  The authors have released ID3Lib as Public Domain (PD) and claim no
-//  copyright, patent or other intellectual property protection in this work.
-//  This means that it may be modified, redistributed and used in commercial
-//  and non-commercial software and hardware without restrictions.  ID3Lib is
-//  distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either
-//  express or implied.
-//
-//  The ID3Lib authors encourage improvements and optimisations to be sent to
-//  the ID3Lib coordinator, currently Dirk Mahoney (dirk@id3.org).  Approved
-//  submissions may be altered, and will be included and released under these
-//  terms.
-//
-//  Mon Nov 23 18:34:01 1998
+// 
+// The authors have released ID3Lib as Public Domain (PD) and claim no
+// copyright, patent or other intellectual property protection in this work.
+// This means that it may be modified, redistributed and used in commercial
+// and non-commercial software and hardware without restrictions.  ID3Lib is
+// distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either
+// express or implied.
+// 
+// The ID3Lib authors encourage improvements and optimisations to be sent to
+// the ID3Lib coordinator, currently Scott Haug (sth2@cs.wustl.edu).  Approved
+// submissions may be altered, and will be included and released under these
+// terms.
 
 #if defined HAVE_CONFIG_H
 #include <config.h>
@@ -267,6 +265,30 @@ luint ID3_Tag::Strip(const luint ulTagFlag)
 
 
 // $Log$
+// Revision 1.6  1999/11/25 18:39:29  scott
+// (OpenLinkedFile): Removed method.  Replaced with CreateFile,
+// OpenFileForReading, and OpenFileForWriting.
+// (CreateFile): New method.  Creates a new file with file name sFileName.
+// Throws if unable to.
+// (OpenFileForWriting): New method.  Opens a file with write permissions.
+// Throws if unable to.
+// (OpenFileForReading): New method.  Opens a file with read permissions.
+// Throws if unable to.
+// (CloseFile): New method.  Closes a file.  Returns true if successful,
+// false otherwise.
+// (Link): Now dynamically allocate sFileName.  Make use of new method
+// OpenFileForReading rather than OpenLinkedFile.  Closes the file
+// when done.
+// (Update): Now returns a flag indicating which tags were actually
+// written.  Calls OpenFileForWriting to open the file appropriately.
+// Closes the file when done.
+// (Strip): Now returns a flag indicating which tags were actually
+// written.  Now strips a file "in place," by copying the non-stripped
+// information to the beginning of the file and using ftruncate to chop
+// off the rest.  Prevents having to create a temporary file.  Calls
+// OpenFileForWriting to open the file appropriately.  Closes the file
+// when done.
+//
 // Revision 1.5  1999/11/19 19:09:12  scott
 // (Update): Changed parameter to be a flag which indicates which type of
 // tag to update, either V1_TAG, V2_TAG, or BOTH_TAGS.  Updated method to

@@ -8,7 +8,7 @@
 // express or implied.
 //
 // The ID3Lib authors encourage improvements and optimisations to be sent to
-// the ID3Lib coordinator, currently Dirk Mahoney (dirk@id3.org).  Approved
+// the ID3Lib coordinator, currently Scott Haug (sth2@cs.wustl.edu).  Approved
 // submissions may be altered, and will be included and released under these
 // terms.
 
@@ -416,6 +416,10 @@ ID3_FrameID   ID3_FindFrameID(const char *id);
 #endif
 
 // $Log$
+// Revision 1.9  1999/11/29 19:05:41  scott
+// Updated documentation to work better with doc++ (probably doesn't work
+// well with kdoc anymore).
+//
 // Revision 1.8  1999/11/25 19:11:40  scott
 // Added doc++/kdoc/javadoc-like documentation, mostly transcribed
 // from Dirk's ID3Lib Documentation MSWord doc.

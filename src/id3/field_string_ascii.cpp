@@ -8,7 +8,7 @@
 // express or implied.
 //
 // The ID3Lib authors encourage improvements and optimisations to be sent to
-// the ID3Lib coordinator, currently Dirk Mahoney (dirk@id3.org).  Approved
+// the ID3Lib coordinator, currently Scott Haug (sth2@cs.wustl.edu).  Approved
 // submissions may be altered, and will be included and released under these
 // terms.
 
@@ -206,6 +206,12 @@ luint ID3_Field::RenderASCIIString(uchar *buffer)
 }
 
 // $Log$
+// Revision 1.8  1999/11/29 17:23:16  scott
+// Updated methods to use unicode_t instead of wchar_t.  unicode_t is
+// defined in globals.h.  The type unicode_t is more likely to be two
+// bytes on every platform.  Updated calls to unicode methods to more
+// general methods defined in misc_support.cpp.
+//
 // Revision 1.7  1999/11/19 17:34:44  scott
 // (operator=): Updated interface to make parameters const.
 // (Set): Updated interface to make parameters const.  Bug fix for fixed

@@ -1,18 +1,16 @@
 // $Id$
-
-//  The authors have released ID3Lib as Public Domain (PD) and claim no
-//  copyright, patent or other intellectual property protection in this work.
-//  This means that it may be modified, redistributed and used in commercial
-//  and non-commercial software and hardware without restrictions.  ID3Lib is
-//  distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either
-//  express or implied.
-//
-//  The ID3Lib authors encourage improvements and optimisations to be sent to
-//  the ID3Lib coordinator, currently Dirk Mahoney (dirk@id3.org).  Approved
-//  submissions may be altered, and will be included and released under these
-//  terms.
-//
-//  Mon Nov 23 18:34:01 1998
+// 
+// The authors have released ID3Lib as Public Domain (PD) and claim no
+// copyright, patent or other intellectual property protection in this work.
+// This means that it may be modified, redistributed and used in commercial
+// and non-commercial software and hardware without restrictions.  ID3Lib is
+// distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either
+// express or implied.
+// 
+// The ID3Lib authors encourage improvements and optimisations to be sent to
+// the ID3Lib coordinator, currently Scott Haug (sth2@cs.wustl.edu).  Approved
+// submissions may be altered, and will be included and released under these
+// terms.
 
 #if defined HAVE_CONFIG_H
 #include <config.h>
@@ -338,6 +336,17 @@ luint ID3_Tag::NumFrames(void) const
 }
 
 // $Log$
+// Revision 1.6  1999/11/25 18:24:27  scott
+// (SetupTag): Initialized sFileName to NULL rather than the empty string
+// to indicate no filename is present.
+// (ID3_Tag): Deleted sFileName if allocated.  Added call to CloseFile.
+// (AddFrame): Modified to reflect change in interface.  AddFrame now adds
+// a frame without taking responsibility for deallocating the memory when
+// the tag goes out of scope.
+// (AddNewFrame): New method.  AddNewFrame adds a frame and takes
+// responsibility for deallocating the frame when the tag goes out of
+// scope.
+//
 // Revision 1.5  1999/11/15 20:20:17  scott
 // Added include for config.h.  Minor code cleanup.  Removed
 // assignments from if checks; first makes assignment, then checks

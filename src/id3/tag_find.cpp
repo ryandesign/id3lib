@@ -8,7 +8,7 @@
 // express or implied.
 // 
 // The ID3Lib authors encourage improvements and optimisations to be sent to
-// the ID3Lib coordinator, currently Dirk Mahoney (dirk@id3.org).  Approved
+// the ID3Lib coordinator, currently Scott Haug (sth2@cs.wustl.edu).  Approved
 // submissions may be altered, and will be included and released under these
 // terms.
 
@@ -196,6 +196,12 @@ ID3_Frame *ID3_Tag::operator[](luint num) const
 }
 
 // $Log$
+// Revision 1.7  1999/11/29 18:47:37  scott
+// (): Updated methods to use unicode_t instead of wchar_t.  unicode_t is
+// defined in globals.h.  The type unicode_t is more likely to be two
+// bytes on every platform.  Updated calls to unicode methods to more
+// general methods defined in misc_support.cpp.
+//
 // Revision 1.6  1999/11/19 19:10:14  scott
 // * tag_find.cpp (Find): Add const qualifier.
 //

@@ -8,7 +8,7 @@
 // express or implied.
 // 
 // The ID3Lib authors encourage improvements and optimisations to be sent to
-// the ID3Lib coordinator, currently Dirk Mahoney (dirk@id3.org).  Approved
+// the ID3Lib coordinator, currently Scott Haug (sth2@cs.wustl.edu).  Approved
 // submissions may be altered, and will be included and released under these
 // terms.
 
@@ -43,6 +43,10 @@ const char  ID3LIB_DATE[]      = "$Date$";
 #endif
 
 // $Log$
+// Revision 1.6  1999/11/29 19:13:51  scott
+// Updated documentation to work better with doc++ (probably doesn't work
+// well with kdoc anymore).  Updated the constants.
+//
 // Revision 1.5  1999/11/25 19:25:46  scott
 // Added doc++/kdoc/javadoc-like documentation.  Replaced #define's with
 // const's.
