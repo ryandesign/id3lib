@@ -64,6 +64,7 @@ namespace dami
       size_t     removeYears(ID3_TagImpl&);
       
       String     getComment(const ID3_TagImpl&, String desc);
+      String     getV1Comment(const ID3_TagImpl&);
       ID3_Frame* setComment(ID3_TagImpl&, String, String, String);
       size_t     removeComments(ID3_TagImpl&, String);
       size_t     removeAllComments(ID3_TagImpl&);
