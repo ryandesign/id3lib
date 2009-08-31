@@ -34,6 +34,7 @@
 #include "id3/id3lib_strings.h"
 
 using namespace dami;
+using namespace std;
 
 typedef const char* LPCTSTR;
 

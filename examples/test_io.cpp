@@ -36,6 +36,7 @@
 #include <id3/utils.h>
 
 using namespace dami;
+using namespace std;
 
 int
 main(size_t argc, const char** argv)
