@@ -40,6 +40,8 @@
 #endif
 
 #include <string>
+#include <cstring>
+
 
 #if (defined(__GNUC__) && (__GNUC__ >= 3) || (defined(_MSC_VER) && _MSC_VER > 1000))
 // The code for this specialization was taken from gcc's

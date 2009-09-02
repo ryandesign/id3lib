@@ -973,7 +973,7 @@ char* chartest(char** input)
 //  ID3_Frame* bli = LEAKTESTNEW(ID3_Frame, 0);
   char* tmpchars = "ba";
   iSize = sizeof(char);
-  iSize = sizeof(ID3_Frame);
+  iSize = sizeof(ID3_Frame); // TODO reassigning value to iSize (???)
   char* genre = *input;
   input = &tmpchars;
   return genre;

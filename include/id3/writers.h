@@ -41,7 +41,7 @@
 
 #include "id3/writer.h"
 #include "id3/id3lib_streams.h"
-//#include <string.h>
+#include <cstring>
 
 class ID3_CPP_EXPORT ID3_OStreamWriter : public ID3_Writer
 {
