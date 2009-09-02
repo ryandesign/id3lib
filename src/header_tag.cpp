@@ -54,7 +54,7 @@ size_t ID3_TagHeader::Size() const
 {
   size_t bytesUsed = ID3_TagHeader::SIZE;
 
-  if (_info->is_extended)
+  if (_info && _info->is_extended)
   {
     bytesUsed += _info->extended_bytes;
   }
