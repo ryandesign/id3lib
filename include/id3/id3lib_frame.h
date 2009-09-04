@@ -55,12 +55,14 @@ public:
   {
   public:
     virtual ID3_Field*       GetNext()       = 0;
+    virtual ~Iterator() {};
   };
 
   class ConstIterator
   {
   public:
     virtual const ID3_Field* GetNext()       = 0;
+    virtual ~ConstIterator() {};
   };
 
 public:

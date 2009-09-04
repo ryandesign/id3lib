@@ -56,12 +56,14 @@ public:
   {
   public:
     virtual ID3_Frame*       GetNext()       = 0;
+    virtual ~Iterator() {};
   };
 
   class ConstIterator
   {
   public:
     virtual const ID3_Frame* GetNext()       = 0;
+    virtual ~ConstIterator() {};
   };
 
 public:
